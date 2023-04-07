@@ -1,13 +1,12 @@
 import Layout from "../components/ui/Layout";
 import Header from "../components/ui/Header";
+import Carousel from "../components/ui/Carousel";
 
 const MainPage = () => {
   return (
     <Layout>
       <Header />
-      <div className="">1</div>
-      <div className="">1</div>
-      <div className="">1</div>
+      <Carousel />
     </Layout>
   );
 };
