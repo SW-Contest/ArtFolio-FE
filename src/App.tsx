@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Test1 from "./Test1";
-import Test2 from "./Test2";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/test1" element={<Test1 />} />
-      <Route path="/test2" element={<Test2 />} />
-    </Routes>
+    <div className="flex justify-center w-screen h-screen bg-gray-100">
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+    </div>
   );
 }
 
