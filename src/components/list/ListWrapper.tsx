@@ -80,7 +80,6 @@ const ListWrapper = () => {
   const [sort, setSort] = useState("전체"); // 전체,인기
 
   const changeSortHandler = (changeSort: string) => {
-    console.log("클릭!");
     setSort(changeSort);
   };
 

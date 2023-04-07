@@ -44,7 +44,7 @@ const ListBox = (props: ListBoxProps) => {
   };
 
   const clickHandler = () => {
-    navigate(`/list/${props.id}`);
+    navigate(`/auction/${props.id}`);
   };
 
   return (
@@ -53,8 +53,8 @@ const ListBox = (props: ListBoxProps) => {
       className="flex flex-col h-60  rounded-lg w-44 mb-4"
     >
       <img
-        className="flex grow object-cover rounded-lg w-full "
-        src="/src/assets/img/penguin.jpeg"
+        className="flex  object-cover rounded-lg w-full h-[132px]"
+        src="/src/assets/img/cat.jpeg"
       />
       <p className=" font-semibold text-sm truncate">{props.artist}</p>
       <p className="w-full font-normal text-sm mb-1 truncate">{props.title}</p>
