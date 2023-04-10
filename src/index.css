@@ -6,11 +6,21 @@
   display: none;
 }
 
-.swiper {
+/* 배너 캐러셀 */
+.bannerSwiper {
   display: flex;
   flex-shrink: 0;
   width: 100%;
   height: 150px;
+  background-color: white;
+}
+
+/* 디테일 페이지 캐러셀 */
+.detailSwiper {
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+  height: 300px;
   background-color: white;
 }
 
