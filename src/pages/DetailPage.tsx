@@ -2,6 +2,7 @@ import Layout from "../components/ui/Layout";
 import { useParams } from "react-router-dom";
 import Header from "../components/ui/Header";
 import { dummyItems } from "../components/list/ListWrapper";
+import DetailCarousel from "../components/detail/DetailCarousel";
 
 const DetailPage = () => {
   const id = Number(useParams().id);
@@ -11,10 +12,7 @@ const DetailPage = () => {
   return (
     <Layout>
       <Header />
-      <img
-        className="flex shrink-0 object-contain w-full h-80"
-        src="/src/assets/img/penguin.jpeg"
-      />
+      <DetailCarousel />
       <section className="p-2">
         <p className=" font-bold text-sm truncate">{item.artist}</p>
         <p className="w-full font-normal text-sm mb-1 truncate">{item.title}</p>
