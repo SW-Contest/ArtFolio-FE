@@ -5,11 +5,55 @@ import { dummyItems } from "../components/list/ListWrapper";
 import DetailCarousel from "../components/detail/DetailCarousel";
 import BidButton from "../components/detail/BidButton";
 import OutlineButton from "../components/ui/OutlineButton";
+import { useEffect, useState, useRef } from "react";
+import * as StompJs from "@stomp/stompjs";
 
 const DetailPage = () => {
   const id = Number(useParams().id);
 
   const item = dummyItems.filter((item) => item.id === id)[0];
+
+  const client = useRef<any>({});
+
+  const connect = () => {
+    client.current = new StompJs.Client({
+      brokerURL: "ws://3.37.192.223:8080/test",
+      onConnect: () => {
+        console.log("success");
+        subscribe();
+      },
+    });
+    client.current.activate();
+  };
+
+  const publish = () => {
+    if (!client.current.connected) return;
+
+    client.current.publish({
+      destination: "/pub/price",
+      body: JSON.stringify({
+        auctionId: 1,
+        curPrice: 1000,
+      }),
+    });
+  };
+
+  const subscribe = () => {
+    client.current.subscribe("/sub/channel/" + 1, (body: any) => {
+      const json_body = JSON.parse(body.body);
+      console.log(json_body);
+    });
+  };
+
+  const disconnect = () => {
+    client.current.deactivate();
+  };
+
+  useEffect(() => {
+    connect();
+
+    return () => disconnect();
+  }, []);
 
   return (
     <Layout>
@@ -101,7 +145,7 @@ const DetailPage = () => {
         </article>
       </section>
       <footer className="shrink-0 sticky bottom-0 z-50 flex justify-center items-center w-[400px] h-20 bg-white border-t">
-        <BidButton>100,000</BidButton>
+        <BidButton onClick={publish}>100,000</BidButton>
       </footer>
     </Layout>
   );
