@@ -9,7 +9,7 @@ const OutlineButton = (props: OutlineButtonProps) => {
   return (
     <button
       onClick={props.onClick}
-      className="bg-white p-2 rounded-xl w-full h-12 border text-sm"
+      className="px-6 py-2 text-sm bg-white rounded-xl"
       type="button"
     >
       {props.children}
