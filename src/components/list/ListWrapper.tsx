@@ -11,6 +11,10 @@ const ListWrapper = () => {
   const [list, setList] = useState<ListBoxProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("전체"); // 전체,인기
+  const [observe, unObserve] = useIntersectionObserver(() => {
+    console.log("스크롤!");
+    setIsLoading(true);
+  });
 
   const getList = async () => {
     const res = await axios.get("rt_auction/list");
