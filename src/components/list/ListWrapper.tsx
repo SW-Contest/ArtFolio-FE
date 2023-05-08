@@ -86,12 +86,15 @@ const ListWrapper = () => {
   return (
     <section className="flex flex-col w-full p-3">
       <div className="flex gap-4 mb-3">
-        <ListButton sort={sort} name="전체" onClick={changeSortHandler}>
+        <p className=" font-Pretendard font-semibold">
+          아트폴리오에서 경매 중인 작품
+        </p>
+        {/* <ListButton sort={sort} name="전체" onClick={changeSortHandler}>
           전체
         </ListButton>
         <ListButton sort={sort} name="인기" onClick={changeSortHandler}>
           인기
-        </ListButton>
+        </ListButton> */}
       </div>
       <div className="flex w-full flex-wrap justify-between">
         {dummyItems.map((item, index) => (
