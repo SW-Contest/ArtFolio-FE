@@ -1,88 +1,30 @@
 import ListButton from "./ListButton";
 import ListBox from "./ListBox";
 import { useState, useRef, useEffect } from "react";
-import { ListBoxProps } from "./ListBox";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import { ListBoxProps } from "../../mocks/dummyList";
+import axios from "Axios";
 
-export const dummyItems: ListBoxProps[] = [
-  {
-    id: 1,
-    artist: "Vincent van Gogh",
-    title: "Starry Night",
-    curPrice: 5000,
-    timeLeft: new Date("2023-04-05T03:24:00"),
-  },
-  {
-    id: 2,
-    artist: "Pablo Picasso",
-    title: "Les Demoiselles d'Avignon",
-    curPrice: 7000,
-    timeLeft: new Date("2023-04-04T10:00:00"),
-  },
-  {
-    id: 3,
-    artist: "Leonardo da Vinci",
-    title: "Mona Lisa",
-    curPrice: 10000,
-    timeLeft: new Date("2023-04-05T16:30:00"),
-  },
-  {
-    id: 4,
-    artist: "Claude Monet",
-    title: "Water Lilies",
-    curPrice: 3000,
-    timeLeft: new Date("2023-04-06T09:45:00"),
-  },
-  {
-    id: 5,
-    artist: "Edvard Munch",
-    title: "The Scream",
-    curPrice: 8000,
-    timeLeft: new Date("2023-04-05T21:15:00"),
-  },
-  {
-    id: 6,
-    artist: "Salvador Dali",
-    title: "The Persistence of Memory",
-    curPrice: 9000,
-    timeLeft: new Date("2023-04-04T12:00:00"),
-  },
-  {
-    id: 7,
-    artist: "Michelangelo",
-    title: "David",
-    curPrice: 12000,
-    timeLeft: new Date("2023-04-06T18:00:00"),
-  },
-  {
-    id: 8,
-    artist: "Rembrandt",
-    title: "Night Watch",
-    curPrice: 6000,
-    timeLeft: new Date("2023-04-07T08:30:00"),
-  },
-  {
-    id: 9,
-    artist: "Gustav Klimt",
-    title: "The Kiss",
-    curPrice: 4000,
-    timeLeft: new Date("2023-04-05T14:45:00"),
-  },
-  {
-    id: 10,
-    artist: "Henri Matisse",
-    title: "Dance",
-    curPrice: 2500,
-    timeLeft: new Date("2023-04-07T19:30:00"),
-  },
-];
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 const ListWrapper = () => {
   const infScroll = useRef(null);
+  const [list, setList] = useState<ListBoxProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("전체"); // 전체,인기
   const [observe, unObserve] = useIntersectionObserver(() => {
     console.log("스크롤!");
+    setIsLoading(true);
+  });
+
+  const getList = async () => {
+    const res = await axios.get("rt_auction/list");
+    setList((prev) => [...prev, ...res.data]);
+    setIsLoading(false);
+  };
+
+  const [observe, unObserve] = useIntersectionObserver(() => {
+    console.log("로딩!");
+    getList();
     setIsLoading(true);
   });
 
@@ -107,7 +49,7 @@ const ListWrapper = () => {
         </ListButton> */}
       </div>
       <div className="flex w-full flex-wrap justify-between">
-        {dummyItems.map((item, index) => (
+        {list?.map((item, index) => (
           <ListBox key={index} {...item} />
         ))}
       </div>

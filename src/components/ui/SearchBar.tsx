@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchBar = () => {
   return (
-    <section className="relative flex items-center justify-center w-full p-3 h-20 bg-af-darkGray font-Pretendard">
+    <section className="relative flex shrink-0 items-center justify-center w-full p-3 h-20 bg-af-darkGray font-Pretendard">
       <div className=" left-5 absolute pointer-events-none">
         <svg
           aria-hidden="true"
