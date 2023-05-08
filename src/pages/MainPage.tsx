@@ -6,7 +6,7 @@ import ListWrapper from "../components/list/ListWrapper";
 const MainPage = () => {
   return (
     <Layout>
-      <Header />
+      {/* <Header /> */}
       <Carousel />
       <ListWrapper />
     </Layout>

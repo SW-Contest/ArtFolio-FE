@@ -6,13 +6,20 @@
   display: none;
 }
 
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css");
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  font-style: normal;
+}
+
 /* 배너 캐러셀 */
 .bannerSwiper {
   display: flex;
   flex-shrink: 0;
   width: 100%;
   height: 150px;
-  background-color: white;
+  @apply bg-af-darkGray;
 }
 
 /* 디테일 페이지 캐러셀 */
@@ -28,7 +35,7 @@
   height: 100%;
   text-align: center;
   font-size: 18px;
-  background: beige;
+  @apply bg-af-darkGray;
 
   /* Center slide text vertically */
   display: flex;
