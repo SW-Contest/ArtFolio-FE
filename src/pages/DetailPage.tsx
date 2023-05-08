@@ -1,7 +1,7 @@
 import Layout from "../components/ui/Layout";
 import { useParams } from "react-router-dom";
 import Header from "../components/ui/Header";
-import { dummyItems } from "../components/list/ListWrapper";
+import { dummyItems } from "../mocks/dummyList";
 import DetailCarousel from "../components/detail/DetailCarousel";
 import BidButton from "../components/detail/BidButton";
 import OutlineButton from "../components/ui/OutlineButton";
@@ -13,9 +13,9 @@ import RoundedButton from "../components/ui/RoundedButton";
 import DetailFooter from "../components/detail/DetailFooter";
 
 const DetailPage = () => {
-  const id = Number(useParams().id);
+  const auctionId = Number(useParams().auctionId);
 
-  const item = dummyItems.filter((item) => item.id === id)[0];
+  const item = dummyItems.filter((item) => item.auctionId === auctionId)[0];
 
   const client = useRef<any>({});
 
@@ -63,11 +63,11 @@ const DetailPage = () => {
     <Layout>
       <Header />
       <DetailCarousel />
-      <section className="flex flex-col p-2 font-Pretendard mb-6">
+      <section className="flex flex-col p-2 font-Pretendard ">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{item.title}</p>
           <p className="text-xl font-bold text-af-hotPink ">
-            {item.curPrice}원
+            {item.currentPrice}원
           </p>
         </article>
 

@@ -21,7 +21,7 @@ const DetailFooter = (props: DetailFooterProps) => {
           initial={{ height: "10rem" }}
           animate={{ height: "2.5rem" }}
           transition={{ duration: 0.2 }}
-          className="flex flex-col shrink-0 absolute bottom-0 z-50  items-center w-[400px] h-10 bg-af-brightGray rounded-t-3xl gap-2"
+          className="flex flex-col shrink-0 sticky bottom-0 z-50  items-center w-[400px] h-10 bg-af-brightGray rounded-t-3xl gap-2 "
         >
           <OutlineButton onClick={changeCollapsedHandler}>
             <BsChevronCompactUp size={24} />
@@ -32,7 +32,7 @@ const DetailFooter = (props: DetailFooterProps) => {
           initial={{ height: "2.5rem" }}
           animate={{ height: "10rem" }}
           transition={{ duration: 0.2 }}
-          className="flex flex-col shrink-0 absolute bottom-0 z-50  items-center w-[400px] h-40 bg-af-brightGray rounded-t-3xl gap-2"
+          className="flex flex-col shrink-0 sticky bottom-0 z-50  items-center w-[400px] h-40 bg-af-brightGray rounded-t-3xl gap-2 "
         >
           <OutlineButton onClick={changeCollapsedHandler}>
             <BsChevronCompactDown size={24} />

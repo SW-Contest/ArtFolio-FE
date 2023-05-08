@@ -1,50 +1,43 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-export interface ListBoxProps {
-  id: number;
-  artist: string;
-  title: string;
-  curPrice: number;
-  timeLeft: Date;
-}
+import { ListBoxProps } from "../../mocks/dummyList";
 
 const ListBox = (props: ListBoxProps) => {
   const navigate = useNavigate();
   const [time, setTime] = useState("");
 
-  useEffect(() => {
-    tick();
-    const timeId = setInterval(() => tick(), 1000);
+  // useEffect(() => {
+  //   tick();
+  //   const timeId = setInterval(() => tick(), 1000);
 
-    return () => {
-      clearInterval(timeId);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timeId);
+  //   };
+  // }, []);
 
-  const getTimeLeft = () => {
-    const curTime = new Date();
-    const timeDiff = Math.abs(curTime.getTime() - props.timeLeft.getTime());
-    let hours: string | number = Math.floor(timeDiff / 3600000);
-    let minutes: string | number = Math.floor((timeDiff % 3600000) / 60000);
-    let seconds: string | number = Math.floor((timeDiff % 60000) / 1000);
+  // const getTimeLeft = () => {
+  //   const curTime = new Date();
+  //   const timeDiff = Math.abs(curTime.getTime() - props.timeLeft.getTime());
+  //   let hours: string | number = Math.floor(timeDiff / 3600000);
+  //   let minutes: string | number = Math.floor((timeDiff % 3600000) / 60000);
+  //   let seconds: string | number = Math.floor((timeDiff % 60000) / 1000);
 
-    if (minutes < 10) minutes = `0${minutes}`;
-    if (seconds < 10) seconds = `0${seconds}`;
-    if (hours < 10) hours = `0${hours}`;
+  //   if (minutes < 10) minutes = `0${minutes}`;
+  //   if (seconds < 10) seconds = `0${seconds}`;
+  //   if (hours < 10) hours = `0${hours}`;
 
-    const timeLeft = hours + ":" + minutes + ":" + seconds;
+  //   const timeLeft = hours + ":" + minutes + ":" + seconds;
 
-    return timeLeft;
-  };
+  //   return timeLeft;
+  // };
 
-  const tick = () => {
-    setTime(() => getTimeLeft());
-  };
+  // const tick = () => {
+  //   setTime(() => getTimeLeft());
+  // };
 
   const clickHandler = () => {
-    navigate(`/auction/${props.id}`);
+    navigate(`/auction/${props.auctionId}`);
   };
 
   return (
@@ -65,7 +58,9 @@ const ListBox = (props: ListBoxProps) => {
         </p>
         <div className="flex gap-1">
           <p className="mb-1 text-xs font-normal text-white ">현재가</p>
-          <p className="text-xs font-normal text-white ">{props.curPrice}원</p>
+          <p className="text-xs font-normal text-white ">
+            {props.currentPrice}원
+          </p>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ function App() {
     <div className="flex justify-center w-screen h-screen bg-gray-100">
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/auction/:id" element={<DetailPage />} />
+        <Route path="/auction/:auctionId" element={<DetailPage />} />
       </Routes>
     </div>
   );
