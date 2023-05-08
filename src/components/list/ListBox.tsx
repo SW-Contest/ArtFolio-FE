@@ -50,17 +50,24 @@ const ListBox = (props: ListBoxProps) => {
   return (
     <div
       onClick={clickHandler}
-      className="flex flex-col h-60  rounded-lg w-44 mb-4"
+      className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box"
     >
       <img
-        className="flex  object-cover rounded-lg w-full h-[132px]"
+        className="flex object-cover w-full h-full rounded-lg "
         src="/src/assets/img/cat.jpeg"
       />
-      <p className=" font-semibold text-sm truncate">{props.artist}</p>
-      <p className="w-full font-normal text-sm mb-1 truncate">{props.title}</p>
-      <p className=" font-semibold text-sm">{props.curPrice}원</p>
-      <p className=" font-normal text-xs text-gray-400 mb-1">현재가</p>
-      <p className=" font-bold text-center">{time}</p>
+      <div className="absolute flex flex-col justify-end w-full h-full p-2 font-Pretendard">
+        <p className="text-sm font-semibold text-white truncate ">
+          {props.artist}
+        </p>
+        <p className="mb-1 text-sm font-semibold text-white truncate">
+          {props.title}
+        </p>
+        <div className="flex gap-1">
+          <p className="mb-1 text-xs font-normal text-white ">현재가</p>
+          <p className="text-xs font-normal text-white ">{props.curPrice}원</p>
+        </div>
+      </div>
     </div>
   );
 };

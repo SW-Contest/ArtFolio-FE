@@ -49,3 +49,19 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* 그라데이션 */
+.list-box::before {
+  content: ""; /* create a pseudo-element for the gradient */
+  position: absolute; /* position the gradient within the div */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  @apply rounded-lg;
+}

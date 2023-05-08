@@ -10,10 +10,10 @@ const Carousel = () => {
   return (
     <>
       <Swiper
-        spaceBetween={10}
+        spaceBetween={0}
         centeredSlides={true}
-        slidesPerView={1.2}
-        loop={true}
+        slidesPerView={1}
+        // loop={true}
         pagination={{
           clickable: true,
         }}
@@ -24,9 +24,6 @@ const Carousel = () => {
         </SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
       </Swiper>
     </>
   );
