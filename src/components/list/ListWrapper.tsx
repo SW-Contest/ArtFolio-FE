@@ -1,20 +1,16 @@
 import ListButton from "./ListButton";
 import ListBox from "./ListBox";
 import { useState, useRef, useEffect } from "react";
-import { ListBoxProps } from "../../mocks/dummyList";
+import { auctionListProps } from "../../mocks/dummyList";
 import axios from "Axios";
 
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 const ListWrapper = () => {
   const infScroll = useRef(null);
-  const [list, setList] = useState<ListBoxProps[]>([]);
+  const [list, setList] = useState<auctionListProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("전체"); // 전체,인기
-  const [observe, unObserve] = useIntersectionObserver(() => {
-    console.log("스크롤!");
-    setIsLoading(true);
-  });
 
   const getList = async () => {
     const res = await axios.get("rt_auction/list");
