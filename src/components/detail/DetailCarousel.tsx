@@ -5,7 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const DetailCarousel = () => {
+import SlideImage from "./SlideImage";
+
+interface DetailCarouselProps {
+  photoPaths?: string[];
+}
+const DetailCarousel = (props: DetailCarouselProps) => {
   return (
     <>
       <Swiper
@@ -18,42 +23,14 @@ const DetailCarousel = () => {
         }}
         className="detailSwiper"
       >
-        <SwiperSlide>
-          <img
-            className="flex shrink-0 object-contain w-full h-80"
-            src="/src/assets/img/penguin.jpeg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="flex shrink-0 object-contain w-full h-80"
-            src="/src/assets/img/cat.jpeg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="flex shrink-0 object-contain w-full h-80"
-            src="/src/assets/img/penguin.jpeg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="flex shrink-0 object-contain w-full h-80"
-            src="/src/assets/img/cat.jpeg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="flex shrink-0 object-contain w-full h-80"
-            src="/src/assets/img/penguin.jpeg"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            className="flex shrink-0 object-contain w-full h-80"
-            src="/src/assets/img/cat.jpeg"
-          />
-        </SwiperSlide>
+        {props.photoPaths?.map((photo, index) => (
+          <SwiperSlide key={index}>
+            <img
+              className="flex shrink-0 object-contain w-full h-80"
+              src={photo}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
