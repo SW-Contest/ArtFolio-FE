@@ -1,7 +1,8 @@
 import ListButton from "./ListButton";
 import ListBox from "./ListBox";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ListBoxProps } from "./ListBox";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 export const dummyItems: ListBoxProps[] = [
   {
@@ -77,11 +78,25 @@ export const dummyItems: ListBoxProps[] = [
 ];
 
 const ListWrapper = () => {
+  const infScroll = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("전체"); // 전체,인기
+  const [observe, unObserve] = useIntersectionObserver(() => {
+    console.log("스크롤!");
+    setIsLoading(true);
+  });
 
   const changeSortHandler = (changeSort: string) => {
     setSort(changeSort);
   };
+
+  useEffect(() => {
+    if (isLoading === false) observe(infScroll.current);
+
+    return () => {
+      unObserve(infScroll.current);
+    };
+  }, [isLoading]);
 
   return (
     <section className="flex flex-col w-full p-3 font-Pretendard">
@@ -99,6 +114,7 @@ const ListWrapper = () => {
           <ListBox key={index} {...item} />
         ))}
       </div>
+      <div ref={infScroll} className="w-full h-5" />
     </section>
   );
 };
