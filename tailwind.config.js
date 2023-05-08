@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         "af-darkGray": "#131313",
+        "af-dimGray": "#323232",
         "af-hotPink": "#FF008A",
         "af-lightGray": "#E6E6E6",
         "af-brightGray": "#F5F5F5",

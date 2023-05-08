@@ -10,7 +10,7 @@ import * as StompJs from "@stomp/stompjs";
 import UserIcon from "../components/ui/UserIcon";
 import CircleButton from "../components/ui/CircleButton";
 import RoundedButton from "../components/ui/RoundedButton";
-import { BsChevronCompactDown } from "react-icons/bs";
+import DetailFooter from "../components/detail/DetailFooter";
 
 const DetailPage = () => {
   const id = Number(useParams().id);
@@ -63,7 +63,7 @@ const DetailPage = () => {
     <Layout>
       <Header />
       <DetailCarousel />
-      <section className="flex flex-col p-2 font-Pretendard">
+      <section className="flex flex-col p-2 font-Pretendard mb-6">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{item.title}</p>
           <p className="text-xl font-bold text-af-hotPink ">
@@ -127,17 +127,7 @@ const DetailPage = () => {
           </div>
         </article>
       </section>
-      <footer className="flex flex-col shrink-0 sticky bottom-0 z-50  items-center w-[400px] h-40 bg-af-brightGray rounded-t-3xl gap-3">
-        <BsChevronCompactDown size={24} />
-        <p className="text-xl font-semibold  text-af-hotPink">
-          현재 n명이 작품 경매에 참여하고 있어요!
-        </p>
-
-        <div className="flex w-1/2">
-          <RoundedButton>입찰하기</RoundedButton>
-        </div>
-        {/* <BidButton onClick={publish}>100,000</BidButton> */}
-      </footer>
+      <DetailFooter />
     </Layout>
   );
 };
