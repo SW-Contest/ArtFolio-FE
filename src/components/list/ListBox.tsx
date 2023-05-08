@@ -50,13 +50,13 @@ const ListBox = (props: ListBoxProps) => {
   return (
     <div
       onClick={clickHandler}
-      className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box"
+      className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
       <img
         className="flex object-cover w-full h-full rounded-lg "
         src="/src/assets/img/cat.jpeg"
       />
-      <div className="absolute flex flex-col justify-end w-full h-full p-2 font-Pretendard">
+      <div className="absolute flex flex-col justify-end w-full h-full p-2 ">
         <p className="text-sm font-semibold text-white truncate ">
           {props.artist}
         </p>

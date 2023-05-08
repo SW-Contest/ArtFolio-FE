@@ -84,11 +84,9 @@ const ListWrapper = () => {
   };
 
   return (
-    <section className="flex flex-col w-full p-3">
+    <section className="flex flex-col w-full p-3 font-Pretendard">
       <div className="flex gap-4 mb-3">
-        <p className=" font-Pretendard font-semibold">
-          아트폴리오에서 경매 중인 작품
-        </p>
+        <p className="font-semibold">아트폴리오에서 경매 중인 작품</p>
         {/* <ListButton sort={sort} name="전체" onClick={changeSortHandler}>
           전체
         </ListButton>
