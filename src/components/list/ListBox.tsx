@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ListBoxProps } from "../../mocks/dummyList";
+import { auctionListProps } from "../../mocks/dummyList";
 
-const ListBox = (props: ListBoxProps) => {
+const ListBox = (props: auctionListProps) => {
   const navigate = useNavigate();
   const [time, setTime] = useState("");
 

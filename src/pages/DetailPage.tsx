@@ -3,13 +3,11 @@ import { useParams } from "react-router-dom";
 import Header from "../components/ui/Header";
 import { dummyDetail } from "../mocks/dummyList";
 import DetailCarousel from "../components/detail/DetailCarousel";
-import BidButton from "../components/detail/BidButton";
-import OutlineButton from "../components/ui/OutlineButton";
+
 import { useEffect, useState, useRef } from "react";
 import * as StompJs from "@stomp/stompjs";
 import UserIcon from "../components/ui/UserIcon";
-import CircleButton from "../components/ui/CircleButton";
-import RoundedButton from "../components/ui/RoundedButton";
+
 import DetailFooter from "../components/detail/DetailFooter";
 
 const DetailPage = () => {
@@ -63,7 +61,7 @@ const DetailPage = () => {
     <Layout>
       <Header />
       <DetailCarousel photoPaths={item.photoPaths} />
-      <section className="flex flex-col p-2 font-Pretendard mb-40">
+      <section className="flex flex-col p-2 mb-40 font-Pretendard">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{item.artPieceTitle}</p>
           <p className="text-xl font-bold text-af-hotPink ">
@@ -78,7 +76,10 @@ const DetailPage = () => {
 
             <p className="text-xs font-light">최근 거래 작품 n</p>
           </div>
-          <CircleButton>작가 Home</CircleButton>
+          {/* <CircleButton>작가 Home</CircleButton> */}
+          <button className="border-0 rounded-full btn btn-sm bg-af-hotPink hover:bg-af-hotPink">
+            작가 Home
+          </button>
         </article>
 
         <article className="mb-4">
@@ -110,8 +111,34 @@ const DetailPage = () => {
           </section>
 
           <div className="flex justify-center w-full">
-            <OutlineButton>전체보기 {">"}</OutlineButton>
+            <label htmlFor="my-modal-4" className="btn btn-ghost">
+              전체보기 {">"}
+            </label>
           </div>
+
+          {/* 모달 내용 */}
+          <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+          <label htmlFor="my-modal-4" className="cursor-pointer modal">
+            <label className="modal-box relative w-[350px]" htmlFor="">
+              <p className="mb-2 text-sm font-semibold">경매 내역</p>
+              <div className="flex justify-between py-1 border-b">
+                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
+                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+            </label>
+          </label>
         </article>
       </section>
       <DetailFooter />
