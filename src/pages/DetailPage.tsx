@@ -13,7 +13,7 @@ import DetailFooter from "../components/detail/DetailFooter";
 const DetailPage = () => {
   const auctionId = Number(useParams().auctionId);
 
-  const item = dummyDetail.filter((item) => item.auctionId === auctionId)[0];
+  const item = dummyDetail;
 
   const client = useRef<any>({});
 

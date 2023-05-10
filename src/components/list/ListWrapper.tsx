@@ -13,8 +13,10 @@ const ListWrapper = () => {
   const [sort, setSort] = useState("전체"); // 전체,인기
 
   const getList = async () => {
-    const res = await axios.get("rt_auction/list");
-    setList((prev) => [...prev, ...res.data]);
+    // const res = await axios.get("http://20.249.220.42:8080/rt_auction/list");
+    const res = await axios.get("/rt_auction/list");
+    console.log(res.data);
+    setList((prev) => [...prev, ...res.data.data]);
     setIsLoading(false);
   };
 
