@@ -50,6 +50,69 @@ export const dummyDetail: auctionDetailProps = {
 };
 
 export const dummyItems: auctionListProps = {
+  isLast: false,
+  pageSize: 10,
+  pageNumber: 0,
+  dataSize: 6,
+  data: [
+    {
+      auctionId: 1,
+      like: 0,
+      artist: "Vincent van Gogh",
+      artPieceTitle: "Starry Night",
+      auctionTitle: "Starry Night",
+      currentPrice: 5000,
+      tumbnailPath: "",
+    },
+    {
+      auctionId: 2,
+      like: 0,
+      artist: "Pablo Picasso",
+      artPieceTitle: "Les Demoiselles d'Avignon",
+      auctionTitle: "Picasso's Masterpiece",
+      currentPrice: 7500,
+      tumbnailPath: "",
+    },
+    {
+      auctionId: 3,
+      like: 0,
+      artist: "Claude Monet",
+      artPieceTitle: "Water Lilies",
+      auctionTitle: "Impressionist Landscape",
+      currentPrice: 3000,
+      tumbnailPath: "",
+    },
+    {
+      auctionId: 4,
+      like: 0,
+      artist: "Salvador Dali",
+      artPieceTitle: "The Persistence of Memory",
+      auctionTitle: "Surrealist Timepiece",
+      currentPrice: 10000,
+      tumbnailPath: "",
+    },
+    {
+      auctionId: 5,
+      like: 0,
+      artist: "Edvard Munch",
+      artPieceTitle: "The Scream",
+      auctionTitle: "Expressionist Classic",
+      currentPrice: 8000,
+      tumbnailPath: "",
+    },
+    {
+      auctionId: 6,
+      like: 0,
+      artist: "Leonardo da Vinci",
+      artPieceTitle: "Mona Lisa",
+      auctionTitle: "Renaissance Beauty",
+      currentPrice: 12000,
+      tumbnailPath: "",
+    },
+  ],
+};
+
+export const dummyItems2: auctionListProps = {
   isLast: true,
   pageSize: 10,
   pageNumber: 1,

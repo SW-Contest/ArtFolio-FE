@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stomp/stompjs": "^7.0.0",
+    "@tanstack/react-query": "^4.29.5",
     "axios": "^1.4.0",
     "daisyui": "^2.51.6",
     "framer-motion": "^10.12.8",
