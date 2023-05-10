@@ -3,6 +3,7 @@ import ListBox from "./ListBox";
 import { useState, useRef, useEffect } from "react";
 import { auctionListProps } from "../../mocks/dummyList";
 import axios from "Axios";
+import useListState from "../../store/store";
 
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
@@ -11,12 +12,14 @@ const ListWrapper = () => {
   const [list, setList] = useState<auctionListProps[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [sort, setSort] = useState("전체"); // 전체,인기
+  const { pageNumber, increasePageNumber } = useListState((state) => state);
 
   const getList = async () => {
     // const res = await axios.get("http://20.249.220.42:8080/rt_auction/list");
     const res = await axios.get("/rt_auction/list");
     console.log(res.data);
     setList((prev) => [...prev, ...res.data.data]);
+    increasePageNumber();
     setIsLoading(false);
   };
 
@@ -38,7 +41,9 @@ const ListWrapper = () => {
   return (
     <section className="flex flex-col w-full p-3 font-Pretendard">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">아트폴리오에서 경매 중인 작품</p>
+        <p className="font-semibold">
+          아트폴리오에서 경매 중인 작품 {pageNumber}
+        </p>
         {/* <ListButton sort={sort} name="전체" onClick={changeSortHandler}>
           전체
         </ListButton>
