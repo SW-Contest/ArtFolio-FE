@@ -4,7 +4,9 @@ import { BsChevronCompactDown, BsChevronCompactUp } from "react-icons/bs";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-interface DetailFooterProps {}
+interface DetailFooterProps {
+  onClick: () => void;
+}
 
 const DetailFooter = (props: DetailFooterProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -42,11 +44,13 @@ const DetailFooter = (props: DetailFooterProps) => {
           </p>
 
           <div className="flex w-1/2 justify-center">
-            <button className="btn bg-af-hotPink hover:bg-af-hotPink w-full border-0">
+            <button
+              onClick={props.onClick}
+              className="btn bg-af-hotPink hover:bg-af-hotPink w-full border-0"
+            >
               입찰하기
             </button>
           </div>
-          {/* <BidButton onClick={publish}>100,000</BidButton> */}
         </motion.footer>
       )}
     </>

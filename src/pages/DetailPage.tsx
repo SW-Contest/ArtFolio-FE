@@ -13,6 +13,11 @@ import ApexCharts from "react-apexcharts";
 
 const DetailPage = () => {
   const auctionId = Number(useParams().auctionId);
+  const [dummyAuction, setDummyAuction] = useState<any>([
+    [new Date().getTime(), 0],
+  ]);
+
+  const [chartData, setChartData] = useState<any>([]);
 
   const item = dummyDetail;
 
@@ -52,11 +57,25 @@ const DetailPage = () => {
     client.current.deactivate();
   };
 
-  useEffect(() => {
-    connect();
+  // useEffect(() => {
+  //   connect();
 
-    return () => disconnect();
-  }, []);
+  //   return () => disconnect();
+  // }, []);
+
+  const dummyButtonHandler = () => {
+    const new_auction = [new Date().getTime(), dummyAuction.length + 1];
+    setDummyAuction((prev: any) => [...prev, new_auction]);
+  };
+
+  useEffect(() => {
+    if (dummyAuction.length < 6) {
+      setChartData(dummyAuction);
+    } else {
+      const lastSix = dummyAuction.slice(-6);
+      setChartData(lastSix);
+    }
+  }, [dummyAuction]);
 
   return (
     <Layout>
@@ -138,18 +157,77 @@ const DetailPage = () => {
             </label>
           </label>
         </article>
+        {/* TODO: marker ping effect 구현  */}
         <ApexCharts
-          type="line"
-          series={[
-            { name: "오늘의 기온", data: [19, 26, 20, 9] },
-            { name: "내일의 기온", data: [30, 26, 34, 10] },
-          ]}
+          type="area"
+          series={[{ data: chartData, color: "#FF008A" }]}
           options={{
-            chart: { height: 500, width: 500, toolbar: { show: false } },
+            fill: {
+              type: "gradient",
+              gradient: { opacityFrom: 0.9, opacityTo: 0.3 },
+            },
+            // 격자 없앰
+            grid: {
+              show: false,
+            },
+            // 데이터 값 표시
+            dataLabels: {
+              enabled: false,
+            },
+            // 그래프 모양
+            stroke: { curve: "smooth", colors: ["#FF008A"] },
+            // x 축
+            xaxis: { labels: { format: "dd일 hh:mm" }, type: "datetime" },
+
+            // 마커
+            markers: {
+              onClick: undefined,
+              onDblClick: undefined,
+              fillOpacity: 0.8,
+              discrete: [
+                {
+                  seriesIndex: 0,
+                  dataPointIndex: 0,
+                  fillColor: "#FF008A",
+                  strokeColor: "#FF008A",
+                  size: 5,
+                  shape: "circle",
+                },
+                {
+                  seriesIndex: 0,
+                  dataPointIndex: 5,
+                  fillColor: "#FF008A",
+                  strokeColor: "#FF008A",
+                  size: 5,
+                  shape: "circle",
+                },
+              ],
+            },
+
+            // 호버 시 툴팁
+            tooltip: {
+              enabled: false,
+            },
+
+            chart: {
+              zoom: {
+                enabled: false,
+              },
+              animations: {
+                enabled: true,
+
+                dynamicAnimation: {
+                  speed: 500,
+                },
+              },
+              height: 500,
+              width: 500,
+              toolbar: { show: false },
+            },
           }}
         ></ApexCharts>
       </section>
-      <DetailFooter />
+      <DetailFooter onClick={dummyButtonHandler} />
     </Layout>
   );
 };
