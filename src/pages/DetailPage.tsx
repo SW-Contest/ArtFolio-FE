@@ -9,6 +9,7 @@ import * as StompJs from "@stomp/stompjs";
 import UserIcon from "../components/ui/UserIcon";
 
 import DetailFooter from "../components/detail/DetailFooter";
+import ApexCharts from "react-apexcharts";
 
 const DetailPage = () => {
   const auctionId = Number(useParams().auctionId);
@@ -68,7 +69,6 @@ const DetailPage = () => {
             {item.auctionStartPrice}원
           </p>
         </article>
-
         <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray">
           <UserIcon url="/src/assets/img/cat.jpeg" />
           <div className="flex flex-col justify-between grow">
@@ -81,14 +81,12 @@ const DetailPage = () => {
             작가 Home
           </button>
         </article>
-
         <article className="mb-4">
           <p className="mb-2 text-sm font-semibold">작품 설명</p>
           <p className="w-full mb-1 text-sm font-normal ">
             {item.auctionContent}
           </p>
         </article>
-
         <article className="mb-4">
           <section className="w-full mb-4">
             <p className="mb-2 text-sm font-semibold">경매 내역</p>
@@ -140,6 +138,16 @@ const DetailPage = () => {
             </label>
           </label>
         </article>
+        <ApexCharts
+          type="line"
+          series={[
+            { name: "오늘의 기온", data: [19, 26, 20, 9] },
+            { name: "내일의 기온", data: [30, 26, 34, 10] },
+          ]}
+          options={{
+            chart: { height: 500, width: 500, toolbar: { show: false } },
+          }}
+        ></ApexCharts>
       </section>
       <DetailFooter />
     </Layout>
