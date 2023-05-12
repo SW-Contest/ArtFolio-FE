@@ -23,6 +23,7 @@ interface ChartDataProps {
 }
 
 const DetailPage = () => {
+  const [bidder, setBidder] = useState(1);
   const auctionId = Number(useParams().auctionId);
   const [dummyAuction, setDummyAuction] = useState<AuctionProps[]>([
     { x: new Date(), y: 0 },
@@ -42,7 +43,7 @@ const DetailPage = () => {
 
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://3.37.192.223:8080/test",
+      brokerURL: "ws://20.249.220.42:8080/sock",
       onConnect: () => {
         console.log("success");
         subscribe();
@@ -57,17 +58,21 @@ const DetailPage = () => {
     client.current.publish({
       destination: "/pub/price",
       body: JSON.stringify({
-        auctionId: 1,
-        curPrice: 1000,
+        auctionId: "1e47fdfc-4d18-4b9a-955e-e2e3396ea540",
+        bidderId: bidder,
+        price: 10000 + bidder,
       }),
     });
   };
 
   const subscribe = () => {
-    client.current?.subscribe("/sub/channel/" + 1, (body: any) => {
-      const json_body = JSON.parse(body.body);
-      console.log(json_body);
-    });
+    client.current?.subscribe(
+      "/sub/channel/" + "1e47fdfc-4d18-4b9a-955e-e2e3396ea540",
+      (body: any) => {
+        const json_body = JSON.parse(body.body);
+        console.log(json_body);
+      }
+    );
   };
 
   const disconnect = () => {
@@ -100,10 +105,17 @@ const DetailPage = () => {
     }
   }, [dummyAuction]);
 
+  // 웹소켓 테스트용 bidder 변경 함수
+  const tempBidderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBidder(Number(e.target.value));
+  };
+
   return (
     <Layout>
       <Header />
       <DetailCarousel photoPaths={item.photoPaths} />
+      {/* <input onChange={tempBidderChangeHandler} />
+      <button onClick={() => console.log(bidder)}>확인</button> */}
       <section className="flex flex-col p-2 mb-40 font-Pretendard">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{item.artPieceTitle}</p>
