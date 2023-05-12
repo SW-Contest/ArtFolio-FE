@@ -9,15 +9,22 @@ import * as StompJs from "@stomp/stompjs";
 import UserIcon from "../components/ui/UserIcon";
 
 import DetailFooter from "../components/detail/DetailFooter";
-import ApexCharts from "react-apexcharts";
+import { ResponsiveLine } from "@nivo/line";
 
 const DetailPage = () => {
   const auctionId = Number(useParams().auctionId);
   const [dummyAuction, setDummyAuction] = useState<any>([
-    [new Date().getTime(), 0],
+    { x: new Date(), y: 0 },
   ]);
 
   const [chartData, setChartData] = useState<any>([]);
+  const [chartData2, setChartData2] = useState<any>([
+    {
+      id: "charts",
+      color: "",
+      data: [],
+    },
+  ]);
 
   const item = dummyDetail;
 
@@ -64,16 +71,22 @@ const DetailPage = () => {
   // }, []);
 
   const dummyButtonHandler = () => {
-    const new_auction = [new Date().getTime(), dummyAuction.length + 1];
+    const new_auction = {
+      x: new Date(),
+      y: dummyAuction.length,
+    };
     setDummyAuction((prev: any) => [...prev, new_auction]);
   };
 
   useEffect(() => {
-    if (dummyAuction.length < 6) {
-      setChartData(dummyAuction);
+    if (dummyAuction.length < 7) {
+      setChartData2((prev: any) => [{ ...prev[0], data: [...dummyAuction] }]);
     } else {
       const lastSix = dummyAuction.slice(-6);
-      setChartData(lastSix);
+      const newData = dummyAuction.slice(0, 1);
+      setChartData2((prev: any) => [
+        { ...prev[0], data: [...newData.concat(lastSix)] },
+      ]);
     }
   }, [dummyAuction]);
 
@@ -157,75 +170,76 @@ const DetailPage = () => {
             </label>
           </label>
         </article>
-        {/* TODO: marker ping effect 구현  */}
-        <ApexCharts
-          type="area"
-          series={[{ data: chartData, color: "#FF008A" }]}
-          options={{
-            fill: {
-              type: "gradient",
-              gradient: { opacityFrom: 0.9, opacityTo: 0.3 },
-            },
-            // 격자 없앰
-            grid: {
-              show: false,
-            },
-            // 데이터 값 표시
-            dataLabels: {
-              enabled: false,
-            },
-            // 그래프 모양
-            stroke: { curve: "smooth", colors: ["#FF008A"] },
-            // x 축
-            xaxis: { labels: { format: "dd일 hh:mm" }, type: "datetime" },
+        <div className="w-full h-[200px]">
+          <ResponsiveLine
+            defs={[
+              {
+                id: "gradient",
 
-            // 마커
-            markers: {
-              onClick: undefined,
-              onDblClick: undefined,
-              fillOpacity: 0.8,
-              discrete: [
-                {
-                  seriesIndex: 0,
-                  dataPointIndex: 0,
-                  fillColor: "#FF008A",
-                  strokeColor: "#FF008A",
-                  size: 5,
-                  shape: "circle",
-                },
-                {
-                  seriesIndex: 0,
-                  dataPointIndex: 5,
-                  fillColor: "#FF008A",
-                  strokeColor: "#FF008A",
-                  size: 5,
-                  shape: "circle",
-                },
-              ],
-            },
+                type: "linearGradient",
 
-            // 호버 시 툴팁
-            tooltip: {
-              enabled: false,
-            },
-
-            chart: {
-              zoom: {
-                enabled: false,
+                colors: [
+                  { offset: 50, color: "#FF008A" },
+                  { offset: 100, color: "white" },
+                ],
               },
-              animations: {
-                enabled: true,
-
-                dynamicAnimation: {
-                  speed: 500,
-                },
-              },
-              height: 500,
-              width: 500,
-              toolbar: { show: false },
-            },
-          }}
-        ></ApexCharts>
+            ]}
+            fill={[{ match: "*", id: "gradient" }]}
+            colors={"#FF008A"}
+            data={chartData2}
+            margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+            xScale={{
+              format: "%H:%M",
+              type: "time",
+              min: "auto",
+              max: "auto",
+            }}
+            yScale={{
+              type: "linear",
+              min: 0,
+              max: "auto",
+              stacked: true,
+              reverse: false,
+            }}
+            xFormat="time:%H:%M"
+            curve="monotoneX"
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              format: "%H:%M",
+              tickValues: 5,
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legendOffset: 36,
+              legendPosition: "middle",
+            }}
+            axisLeft={{
+              tickValues: 5,
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legendOffset: -40,
+              legendPosition: "middle",
+            }}
+            enableGridX={false}
+            enableGridY={false}
+            lineWidth={3}
+            pointSize={10}
+            pointColor={{ theme: "background" }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: "serieColor" }}
+            pointLabel={(e) => e.x + ": " + e.y}
+            pointLabelYOffset={-12}
+            enableArea={true}
+            areaOpacity={0.6}
+            isInteractive={false}
+            enableCrosshair={false}
+            useMesh={true}
+            motionConfig="stiff"
+            enablePoints={false}
+          />
+        </div>
       </section>
       <DetailFooter onClick={dummyButtonHandler} />
     </Layout>
