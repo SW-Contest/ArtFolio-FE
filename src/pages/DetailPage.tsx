@@ -4,21 +4,31 @@ import Header from "../components/ui/Header";
 import { dummyDetail } from "../mocks/dummyList";
 import DetailCarousel from "../components/detail/DetailCarousel";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, MutableRefObject } from "react";
 import * as StompJs from "@stomp/stompjs";
 import UserIcon from "../components/ui/UserIcon";
 
 import DetailFooter from "../components/detail/DetailFooter";
-import { ResponsiveLine } from "@nivo/line";
+import Chart from "../components/detail/Chart";
+
+interface AuctionProps {
+  x: Date;
+  y: number;
+}
+
+interface ChartDataProps {
+  id: string;
+  color: string;
+  data: AuctionProps[];
+}
 
 const DetailPage = () => {
   const auctionId = Number(useParams().auctionId);
-  const [dummyAuction, setDummyAuction] = useState<any>([
+  const [dummyAuction, setDummyAuction] = useState<AuctionProps[]>([
     { x: new Date(), y: 0 },
   ]);
 
-  const [chartData, setChartData] = useState<any>([]);
-  const [chartData2, setChartData2] = useState<any>([
+  const [chartData, setChartData] = useState<ChartDataProps[]>([
     {
       id: "charts",
       color: "",
@@ -28,7 +38,7 @@ const DetailPage = () => {
 
   const item = dummyDetail;
 
-  const client = useRef<any>({});
+  const client = useRef<StompJs.Client | null>(null);
 
   const connect = () => {
     client.current = new StompJs.Client({
@@ -42,7 +52,7 @@ const DetailPage = () => {
   };
 
   const publish = () => {
-    if (!client.current.connected) return;
+    if (!client.current?.connected) return;
 
     client.current.publish({
       destination: "/pub/price",
@@ -54,14 +64,14 @@ const DetailPage = () => {
   };
 
   const subscribe = () => {
-    client.current.subscribe("/sub/channel/" + 1, (body: any) => {
+    client.current?.subscribe("/sub/channel/" + 1, (body: any) => {
       const json_body = JSON.parse(body.body);
       console.log(json_body);
     });
   };
 
   const disconnect = () => {
-    client.current.deactivate();
+    client.current?.deactivate();
   };
 
   // useEffect(() => {
@@ -75,16 +85,16 @@ const DetailPage = () => {
       x: new Date(),
       y: dummyAuction.length,
     };
-    setDummyAuction((prev: any) => [...prev, new_auction]);
+    setDummyAuction((prev) => [...prev, new_auction]);
   };
 
   useEffect(() => {
     if (dummyAuction.length < 7) {
-      setChartData2((prev: any) => [{ ...prev[0], data: [...dummyAuction] }]);
+      setChartData((prev) => [{ ...prev[0], data: [...dummyAuction] }]);
     } else {
       const lastSix = dummyAuction.slice(-6);
       const newData = dummyAuction.slice(0, 1);
-      setChartData2((prev: any) => [
+      setChartData((prev) => [
         { ...prev[0], data: [...newData.concat(lastSix)] },
       ]);
     }
@@ -108,7 +118,6 @@ const DetailPage = () => {
 
             <p className="text-xs font-light">최근 거래 작품 n</p>
           </div>
-          {/* <CircleButton>작가 Home</CircleButton> */}
           <button className="border-0 rounded-full btn btn-sm bg-af-hotPink hover:bg-af-hotPink">
             작가 Home
           </button>
@@ -122,6 +131,7 @@ const DetailPage = () => {
         <article className="mb-4">
           <section className="w-full mb-4">
             <p className="mb-2 text-sm font-semibold">경매 내역</p>
+            <Chart chartData={chartData} />
             <div className="flex justify-between py-1 border-b">
               <p className="w-1/2 text-xs font-light text-left">입찰자</p>
               <p className="w-1/2 text-xs font-light text-right">입찰가</p>
@@ -170,76 +180,6 @@ const DetailPage = () => {
             </label>
           </label>
         </article>
-        <div className="w-full h-[200px]">
-          <ResponsiveLine
-            defs={[
-              {
-                id: "gradient",
-
-                type: "linearGradient",
-
-                colors: [
-                  { offset: 50, color: "#FF008A" },
-                  { offset: 100, color: "white" },
-                ],
-              },
-            ]}
-            fill={[{ match: "*", id: "gradient" }]}
-            colors={"#FF008A"}
-            data={chartData2}
-            margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
-            xScale={{
-              format: "%H:%M",
-              type: "time",
-              min: "auto",
-              max: "auto",
-            }}
-            yScale={{
-              type: "linear",
-              min: 0,
-              max: "auto",
-              stacked: true,
-              reverse: false,
-            }}
-            xFormat="time:%H:%M"
-            curve="monotoneX"
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              format: "%H:%M",
-              tickValues: 5,
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legendOffset: 36,
-              legendPosition: "middle",
-            }}
-            axisLeft={{
-              tickValues: 5,
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legendOffset: -40,
-              legendPosition: "middle",
-            }}
-            enableGridX={false}
-            enableGridY={false}
-            lineWidth={3}
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabel={(e) => e.x + ": " + e.y}
-            pointLabelYOffset={-12}
-            enableArea={true}
-            areaOpacity={0.6}
-            isInteractive={false}
-            enableCrosshair={false}
-            useMesh={true}
-            motionConfig="stiff"
-            enablePoints={false}
-          />
-        </div>
       </section>
       <DetailFooter onClick={dummyButtonHandler} />
     </Layout>
