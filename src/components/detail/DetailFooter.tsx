@@ -48,19 +48,27 @@ const DetailFooter = (props: DetailFooterProps) => {
           현재 n명이 작품 경매에 참여하고 있어요!
         </p>
 
-        <div className="flex justify-evenly w-full">
-          <button className="group btn btn-square btn-outline hover:bg-af-hotPink border-af-hotPink hover:border-af-hotPink">
+        <div className="flex justify-evenly w-full h-12">
+          <motion.button
+            initial={{ scale: 1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className=" w-12 group rounded-lg flex justify-center items-center border  hover:bg-af-hotPink border-af-hotPink hover:border-af-hotPink"
+          >
             <BsHeartFill
               size={24}
               className="fill-af-hotPink group-hover:fill-white"
             />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={props.onClick}
-            className="btn bg-af-hotPink hover:bg-af-hotPink w-1/2  border-0"
+            initial={{ scale: 1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className=" rounded-lg text-white bg-af-hotPink hover:bg-af-hotPink w-1/2  border-0"
           >
             입찰하기
-          </button>
+          </motion.button>
         </div>
       </motion.footer>
     </>

@@ -10,6 +10,7 @@ import UserIcon from "../components/ui/UserIcon";
 
 import DetailFooter from "../components/detail/DetailFooter";
 import Chart from "../components/detail/Chart";
+import { motion } from "framer-motion";
 
 interface AuctionProps {
   x: Date;
@@ -130,9 +131,14 @@ const DetailPage = () => {
 
             <p className="text-xs font-light">최근 거래 작품 n</p>
           </div>
-          <button className="border-0 rounded-full btn btn-sm bg-af-hotPink hover:bg-af-hotPink">
+          <motion.button
+            initial={{ scale: 1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="border-0 rounded-full px-2 py-1 text-white bg-af-hotPink "
+          >
             작가 Home
-          </button>
+          </motion.button>
         </article>
         <article className="mb-4">
           <p className="mb-2 text-sm font-semibold">작품 설명</p>
@@ -162,10 +168,16 @@ const DetailPage = () => {
             </div>
           </section>
 
-          <div className="flex justify-center w-full">
-            <label htmlFor="my-modal-4" className="btn btn-ghost">
+          <div className="flex justify-center items-center w-full">
+            <motion.label
+              htmlFor="my-modal-4"
+              initial={{ scale: 1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              className="rounded-xl p-3 hover:bg-gray-200 cursor-pointer"
+            >
               전체보기 {">"}
-            </label>
+            </motion.label>
           </div>
 
           {/* 모달 내용 */}
