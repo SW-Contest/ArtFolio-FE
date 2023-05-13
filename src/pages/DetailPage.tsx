@@ -11,6 +11,7 @@ import UserIcon from "../components/ui/UserIcon";
 import DetailFooter from "../components/detail/DetailFooter";
 import Chart from "../components/detail/Chart";
 import { motion } from "framer-motion";
+import Modal from "../components/detail/Modal";
 
 interface AuctionProps {
   x: Date;
@@ -168,41 +169,7 @@ const DetailPage = () => {
             </div>
           </section>
 
-          <div className="flex justify-center items-center w-full">
-            <motion.label
-              htmlFor="my-modal-4"
-              initial={{ scale: 1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.2 }}
-              className="rounded-xl p-3 hover:bg-gray-200 cursor-pointer"
-            >
-              전체보기 {">"}
-            </motion.label>
-          </div>
-
-          {/* 모달 내용 */}
-          <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-          <label htmlFor="my-modal-4" className="cursor-pointer modal">
-            <label className="modal-box relative w-[350px]" htmlFor="">
-              <p className="mb-2 text-sm font-semibold">경매 내역</p>
-              <div className="flex justify-between py-1 border-b">
-                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-              </div>
-              <div className="flex justify-between py-1">
-                <p className="w-1/2 text-xs font-light text-left">김김김</p>
-                <p className="w-1/2 text-xs font-light text-right">100,000</p>
-              </div>
-              <div className="flex justify-between py-1">
-                <p className="w-1/2 text-xs font-light text-left">김김김</p>
-                <p className="w-1/2 text-xs font-light text-right">100,000</p>
-              </div>
-              <div className="flex justify-between py-1">
-                <p className="w-1/2 text-xs font-light text-left">김김김</p>
-                <p className="w-1/2 text-xs font-light text-right">100,000</p>
-              </div>
-            </label>
-          </label>
+          <Modal />
         </article>
       </section>
       <DetailFooter onClick={dummyButtonHandler} />
