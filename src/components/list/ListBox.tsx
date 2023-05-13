@@ -60,8 +60,8 @@ const ListBox = (props: auctionProps) => {
           {props.artist}
         </p>
         <div className="flex gap-1">
-          <p className="mb-1 text-xs font-normal text-white ">현재가</p>
-          <p className="text-xs font-normal text-white ">
+          <p className="mb-1 text-xs font-normal text-af-hotPink ">현재가</p>
+          <p className="text-xs font-normal text-af-hotPink ">
             {props.currentPrice}원
           </p>
         </div>
