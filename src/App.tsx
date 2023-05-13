@@ -4,7 +4,7 @@ import DetailPage from "./pages/DetailPage";
 
 function App() {
   return (
-    <div className="flex justify-center w-screen h-screen bg-gray-100">
+    <div className="relative flex justify-center w-screen h-screen bg-gray-100 overflow-y-hidden">
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/auction/:auctionId" element={<DetailPage />} />

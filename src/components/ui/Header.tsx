@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BsShare,
-  BsBell,
-  BsArrowLeft,
-  BsHeart,
-  BsHeartFill,
-} from "react-icons/bs";
+import { BsShare, BsArrowLeft } from "react-icons/bs";
 
 const Header = () => {
   return (
@@ -14,7 +8,6 @@ const Header = () => {
         <BsArrowLeft size={24} />
       </div>
       <div className="flex gap-3">
-        <BsHeart size={24} />
         <BsShare size={24} />
       </div>
     </header>

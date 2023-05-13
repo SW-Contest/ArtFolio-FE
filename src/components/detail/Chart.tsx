@@ -23,7 +23,7 @@ const Chart = (props: ChartProps) => {
         fill={[{ match: "*", id: "gradient" }]}
         colors={"#FF008A"}
         data={props.chartData}
-        margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        margin={{ top: 20, right: 20, bottom: 20, left: 60 }}
         xScale={{
           format: "%H:%M",
           type: "time",
@@ -51,6 +51,7 @@ const Chart = (props: ChartProps) => {
           legendPosition: "middle",
         }}
         axisLeft={{
+          format: (tick) => tick + "원",
           tickValues: 5,
           tickSize: 5,
           tickPadding: 5,

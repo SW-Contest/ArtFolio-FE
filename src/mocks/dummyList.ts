@@ -41,12 +41,7 @@ export const dummyDetail: auctionDetailProps = {
   auctionCurrentPrice: 150000,
   like: 3,
   likeMembers: [1, 3, 5],
-  photoPaths: [
-    "https://artfolio-bucket.s3.ap-northeast-2.amazonaws.com/static/2/20230503_005332.jpg",
-    "https://artfolio-bucket.s3.ap-northeast-2.amazonaws.com/static/2/20230417_181536.jpg",
-    "https://artfolio-bucket.s3.ap-northeast-2.amazonaws.com/static/2/2023-%EA%B2%BD%EC%A7%84%EB%8C%80%ED%9A%8C-%EC%A7%80%EC%9B%90%EC%82%AC%EC%97%85-1.png",
-    "https://artfolio-bucket.s3.ap-northeast-2.amazonaws.com/static/2/20230417_181543.jpg",
-  ],
+  photoPaths: [],
 };
 
 export const dummyItems: auctionListProps = {
@@ -167,8 +162,8 @@ export const dummyItems2: auctionListProps = {
       auctionId: 6,
       like: 0,
       artist: "Leonardo da Vinci",
-      artPieceTitle: "Mona Lisa",
-      auctionTitle: "Renaissance Beauty",
+      artPieceTitle: "극단적으로 엄청나게 긴 제목 극단적으로 엄청나게 긴 제목",
+      auctionTitle: "극단적으로 엄청나게 긴 제목 극단적으로 엄청나게 긴 제목",
       currentPrice: 12000,
       tumbnailPath: "",
     },
