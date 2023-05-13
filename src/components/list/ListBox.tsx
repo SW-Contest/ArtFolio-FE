@@ -53,11 +53,11 @@ const ListBox = (props: auctionProps) => {
         src="/src/assets/img/cat.jpeg"
       />
       <div className="absolute flex flex-col justify-end w-full h-full p-2 ">
-        <p className="text-sm font-semibold text-white truncate ">
-          {props.artist}
-        </p>
-        <p className="mb-1 text-sm font-semibold text-white truncate">
+        <p className="text-md font-semibold text-white line-clamp-2  ">
           {props.auctionTitle}
+        </p>
+        <p className="mb-1 text-xs font-semibold text-white truncate">
+          {props.artist}
         </p>
         <div className="flex gap-1">
           <p className="mb-1 text-xs font-normal text-white ">현재가</p>
