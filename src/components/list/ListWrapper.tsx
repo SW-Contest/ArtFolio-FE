@@ -67,8 +67,8 @@ const ListWrapper = () => {
         </ListButton> */}
       </div>
       <div className="flex w-full flex-wrap justify-between">
-        {pages.map((list) =>
-          list.data.map((item, index) => <ListBox key={index} {...item} />)
+        {pages?.map((list) =>
+          list?.data?.map((item, index) => <ListBox key={index} {...item} />)
         )}
       </div>
       <div ref={infScroll} className="flex justify-center w-full h-8">

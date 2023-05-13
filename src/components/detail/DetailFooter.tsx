@@ -29,7 +29,7 @@ const DetailFooter = (props: DetailFooterProps) => {
           translateY: isCollapsed ? "8rem" : "0rem",
         }}
         transition={{ duration: 0.4 }}
-        className="flex flex-col shrink-0 absolute bottom-0 z-50  items-center w-[400px] h-40 bg-af-brightGray rounded-t-3xl gap-2"
+        className="flex flex-col shrink-0 fixed bottom-0 z-50  items-center w-full max-w-[400px] h-40 bg-af-brightGray rounded-t-3xl gap-2"
       >
         <motion.button
           initial={{
