@@ -23,7 +23,7 @@ const Chart = (props: ChartProps) => {
         fill={[{ match: "*", id: "gradient" }]}
         colors={"#FF008A"}
         data={props.chartData}
-        margin={{ top: 20, right: 20, bottom: 20, left: 60 }}
+        margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
         xScale={{
           format: "%H:%M",
           type: "time",
