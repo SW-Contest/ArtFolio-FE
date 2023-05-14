@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { Scrollbar } from "react-scrollbars-custom";
 
 const Modal = () => {
   // 모달이 있을 때는 외부 스크롤을 막습니다.
@@ -32,95 +33,96 @@ const Modal = () => {
         className="modal-toggle"
       />
       <label htmlFor="auction-modal" className="cursor-pointer modal">
-        <label
-          className="modal-box h-[350px] relative w-[350px] overflow-y-scroll"
-          htmlFor=""
-        >
-          <p className="mb-2 text-sm font-semibold">경매 내역</p>
-          <div className="flex justify-between py-1 border-b">
-            <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-            <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <p className="mb-2 text-sm font-semibold">경매 내역</p>
-          <div className="flex justify-between py-1 border-b">
-            <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-            <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <p className="mb-2 text-sm font-semibold">경매 내역</p>
-          <div className="flex justify-between py-1 border-b">
-            <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-            <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <p className="mb-2 text-sm font-semibold">경매 내역</p>
-          <div className="flex justify-between py-1 border-b">
-            <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-            <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <p className="mb-2 text-sm font-semibold">경매 내역</p>
-          <div className="flex justify-between py-1 border-b">
-            <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-            <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
-          <div className="flex justify-between py-1">
-            <p className="w-1/2 text-xs font-light text-left">김김김</p>
-            <p className="w-1/2 text-xs font-light text-right">100,000</p>
-          </div>
+        <label className="modal-box w-[350px] h-[350px] relative flex items-center">
+          <Scrollbar style={{ width: 350, height: 350 }}>
+            <article className="p-4">
+              <p className="mb-2 text-sm font-semibold">경매 내역</p>
+              <div className="flex justify-between py-1 border-b">
+                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
+                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <p className="mb-2 text-sm font-semibold">경매 내역</p>
+              <div className="flex justify-between py-1 border-b">
+                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
+                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <p className="mb-2 text-sm font-semibold">경매 내역</p>
+              <div className="flex justify-between py-1 border-b">
+                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
+                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <p className="mb-2 text-sm font-semibold">경매 내역</p>
+              <div className="flex justify-between py-1 border-b">
+                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
+                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <p className="mb-2 text-sm font-semibold">경매 내역</p>
+              <div className="flex justify-between py-1 border-b">
+                <p className="w-1/2 text-xs font-light text-left">입찰자</p>
+                <p className="w-1/2 text-xs font-light text-right">입찰가</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+              <div className="flex justify-between py-1">
+                <p className="w-1/2 text-xs font-light text-left">김김김</p>
+                <p className="w-1/2 text-xs font-light text-right">100,000</p>
+              </div>
+            </article>
+          </Scrollbar>
         </label>
       </label>
     </>
