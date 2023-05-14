@@ -7,7 +7,7 @@ import SearchBar from "../components/ui/SearchBar";
 const MainPage = () => {
   return (
     <Layout>
-      {/* <Header /> */}
+      <Header />
       <Carousel />
       <SearchBar />
       <ListWrapper />

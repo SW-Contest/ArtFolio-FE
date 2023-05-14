@@ -35,7 +35,7 @@
   height: 100%;
   text-align: center;
   font-size: 18px;
-  @apply bg-af-darkGray;
+  /* @apply bg-af-darkGray; */
 
   display: flex;
   justify-content: center;
@@ -46,7 +46,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* ListBox 사진 그라데이션 */

@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import SlideImage from "./SlideImage";
 
 interface DetailCarouselProps {
-  photoPaths?: string[];
+  photoPaths: string[];
 }
 const DetailCarousel = (props: DetailCarouselProps) => {
   return (
@@ -21,16 +21,19 @@ const DetailCarousel = (props: DetailCarouselProps) => {
         pagination={{
           clickable: true,
         }}
-        className="detailSwiper"
+        className="detailSwiper mt-10"
       >
-        {props.photoPaths?.map((photo, index) => (
-          <SwiperSlide key={index}>
-            <img
-              className="flex shrink-0 object-contain w-full h-80"
-              src={photo}
-            />
+        {props.photoPaths.length > 0 ? (
+          props.photoPaths.map((photo, index) => (
+            <SwiperSlide key={index}>
+              <img className="flex shrink-0 w-full h-80" src={photo} />
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide>
+            <p className="text-black">이미지가 없습니다</p>
           </SwiperSlide>
-        ))}
+        )}
       </Swiper>
     </>
   );
