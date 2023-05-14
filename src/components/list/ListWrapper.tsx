@@ -14,7 +14,9 @@ const ListWrapper = () => {
   const [sort, setSort] = useState("전체"); // 전체,인기
 
   const fetchData = async ({ pageParam = 0 }) => {
-    const res = await axios.get("/rt_auction/list/" + pageParam);
+    const res = await axios.get(
+      `http://20.249.220.42:8080/rt_auction/list?page=${pageParam}&size=10&sort=like,DESC`
+    );
     return res.data;
   };
 
@@ -31,7 +33,7 @@ const ListWrapper = () => {
     isFetchingPreviousPage,
   } = useInfiniteQuery(["Page"], fetchData, {
     getNextPageParam: (lastPage, allPages) =>
-      lastPage.isLast ? undefined : lastPage.pageNumber + 1,
+      lastPage.dataSize == 10 ? lastPage.pageNumber + 1 : undefined,
   });
 
   useEffect(() => {
@@ -56,9 +58,7 @@ const ListWrapper = () => {
   return (
     <section className="flex flex-col w-full p-3 font-Pretendard">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">
-          아트폴리오에서 경매 중인 작품 {String(isFetching)}
-        </p>
+        <p className="font-semibold">아트폴리오에서 경매 중인 작품</p>
         {/* <ListButton sort={sort} name="전체" onClick={changeSortHandler}>
           전체
         </ListButton>
@@ -66,7 +66,7 @@ const ListWrapper = () => {
           인기
         </ListButton> */}
       </div>
-      <div className="flex w-full flex-wrap justify-between">
+      <div className="flex w-full min-h-screen flex-wrap justify-between">
         {pages?.map((list) =>
           list?.data?.map((item, index) => <ListBox key={index} {...item} />)
         )}

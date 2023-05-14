@@ -17,7 +17,7 @@ const Carousel = () => {
         pagination={{
           clickable: true,
         }}
-        className="bannerSwiper"
+        className="bannerSwiper mt-10"
       >
         <SwiperSlide>
           <Slide />
