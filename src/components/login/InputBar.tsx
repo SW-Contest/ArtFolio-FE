@@ -27,7 +27,7 @@ const InputBar = ({
 
   return (
     <div>
-      <div className="mb-4">
+      <div className="mb-2">
         <span className="text-sm font-semibold text-black relative left-4">이메일 주소</span>
         <input
           type="text"
@@ -53,4 +53,5 @@ const InputBar = ({
   );
 };
 
-export default InputBar;
+
+export default InputBar
