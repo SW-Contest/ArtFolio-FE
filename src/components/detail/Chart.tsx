@@ -25,24 +25,25 @@ const Chart = (props: ChartProps) => {
         data={props.chartData}
         margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
         xScale={{
-          format: "%H:%M",
+          format: "native",
           type: "time",
           min: "auto",
           max: "auto",
+          nice: true,
         }}
         yScale={{
           type: "linear",
-          min: 0,
+          min: "auto",
           max: "auto",
-          stacked: true,
-          reverse: false,
         }}
-        xFormat="time:%H:%M"
+        areaBaselineValue={4000}
+        // xFormat="time:%H:%M:%S"
+        yFormat=" >-f"
         curve="monotoneX"
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          format: "%H:%M",
+          format: "%H:%M:%S",
           tickValues: 5,
           tickSize: 5,
           tickPadding: 5,

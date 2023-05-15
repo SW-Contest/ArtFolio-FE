@@ -1,7 +1,7 @@
 import Layout from "../components/ui/Layout";
 import { useParams } from "react-router-dom";
 import Header from "../components/ui/Header";
-import { dummyDetail } from "../mocks/dummyList";
+
 import DetailCarousel from "../components/detail/DetailCarousel";
 
 import { useEffect, useState, useRef, MutableRefObject } from "react";
@@ -14,6 +14,7 @@ import { motion } from "framer-motion";
 import Modal from "../components/detail/Modal";
 import axios from "Axios";
 import { useQuery } from "@tanstack/react-query";
+import { auctionDetailProps } from "../mocks/dummyList";
 
 interface AuctionProps {
   x: Date;
@@ -22,21 +23,18 @@ interface AuctionProps {
 
 interface ChartDataProps {
   id: string;
-  color: string;
   data: AuctionProps[];
 }
 
 const DetailPage = () => {
   const [bidder, setBidder] = useState(1);
+  const [bid, setBid] = useState(0);
   const auctionId = useParams().auctionId;
-  const [dummyAuction, setDummyAuction] = useState<AuctionProps[]>([
-    { x: new Date(), y: 0 },
-  ]);
+  const [dummyAuction, setDummyAuction] = useState<AuctionProps[]>([]);
 
   const [chartData, setChartData] = useState<ChartDataProps[]>([
     {
       id: "charts",
-      color: "",
       data: [],
     },
   ]);
@@ -48,10 +46,26 @@ const DetailPage = () => {
     return res.data;
   };
 
-  const { data, isFetching } = useQuery([auctionId], fetchData);
+  const { data, isFetching, refetch } = useQuery<auctionDetailProps>(
+    [auctionId],
+    fetchData
+  );
 
   useEffect(() => {
-    if (data) console.log(data);
+    if (data) {
+      console.log(data);
+      const startPriceData = {
+        x: new Date(data.createdAt),
+        y: data.auctionStartPrice,
+      };
+      const bidInfos = data.bidInfos.map((bidInfo) => ({
+        x: new Date(bidInfo.bidDate),
+        y: bidInfo.bidPrice,
+      }));
+      const newBidInfos = [startPriceData, ...bidInfos];
+
+      setDummyAuction(newBidInfos);
+    }
   }, [data]);
 
   const client = useRef<StompJs.Client | null>(null);
@@ -71,17 +85,27 @@ const DetailPage = () => {
     if (!client.current?.connected) return;
 
     client.current.publish({
-      destination: "/pub/price",
+      destination: "/app/price",
       body: JSON.stringify({
         auctionId: auctionId,
         bidderId: bidder,
-        price: 10000 + bidder,
+        price: bid,
       }),
     });
   };
 
   const subscribe = () => {
-    client.current?.subscribe("/sub/channel/" + auctionId, (body: any) => {
+    // 정상 응답 구독 경로
+    client.current?.subscribe("/topic/channel/" + auctionId, (body: any) => {
+      const json_body = JSON.parse(body.body);
+      console.log(json_body);
+
+      // 웹소켓 응답이 올 시 데이터를 재요청합니다.
+      refetch();
+    });
+
+    // 예외 발생시 응답 구독 경로
+    client.current?.subscribe("/user/queue/errors", (body: any) => {
       const json_body = JSON.parse(body.body);
       console.log(json_body);
     });
@@ -91,11 +115,11 @@ const DetailPage = () => {
     client.current?.deactivate();
   };
 
-  // useEffect(() => {
-  //   connect();
+  useEffect(() => {
+    connect();
 
-  //   return () => disconnect();
-  // }, []);
+    return () => disconnect();
+  }, []);
 
   const dummyButtonHandler = () => {
     const new_auction = {
@@ -111,15 +135,22 @@ const DetailPage = () => {
     } else {
       const lastSix = dummyAuction.slice(-6);
       const newData = dummyAuction.slice(0, 1);
-      setChartData((prev) => [
-        { ...prev[0], data: [...newData.concat(lastSix)] },
-      ]);
+
+      setChartData((prev) => [{ ...prev[0], data: [...dummyAuction] }]);
+      // setChartData((prev) => [
+      //   { ...prev[0], data: [...newData.concat(lastSix)] },
+      // ]);
     }
   }, [dummyAuction]);
 
   // 웹소켓 테스트용 bidder 변경 함수
   const tempBidderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBidder(Number(e.target.value));
+  };
+
+  // 웹소켓 테스트용 입찰가 변경 함수
+  const tempBidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBid(Number(e.target.value));
   };
 
   if (!data)
@@ -151,13 +182,14 @@ const DetailPage = () => {
       <Header />
 
       <DetailCarousel photoPaths={data.photoPaths} />
-      {/* <input onChange={tempBidderChangeHandler} />
-      <button onClick={() => console.log(bidder)}>확인</button> */}
+      <input onChange={tempBidderChangeHandler} />
+      <input onChange={tempBidChangeHandler} />
+      <button onClick={publish}>확인</button>
       <section className="flex flex-col p-2 mb-40 font-Pretendard">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{data.artPieceTitle}</p>
           <p className="text-xl font-bold text-af-hotPink ">
-            {data.auctionStartPrice}원
+            {data.auctionCurrentPrice}원
           </p>
         </article>
         <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray">
