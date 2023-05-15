@@ -5,9 +5,20 @@ interface ChartProps {
 }
 // TODO : customLayer를 통해 point 특정 부분에만 표시 구현
 const Chart = (props: ChartProps) => {
+  console.log(props.chartData);
+
   return (
     <div className="w-full h-[200px]">
       <ResponsiveLine
+        theme={{
+          axis: {
+            ticks: {
+              text: {
+                fontSize: 9,
+              },
+            },
+          },
+        }}
         defs={[
           {
             id: "gradient",
@@ -25,11 +36,14 @@ const Chart = (props: ChartProps) => {
         data={props.chartData}
         margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
         xScale={{
-          format: "native",
-          type: "time",
-          min: "auto",
-          max: "auto",
-          nice: true,
+          // format: "%Y-%m-%d %H:%M:%SZ",
+          type: "point",
+
+          // min: "auto",
+          // max: "auto",
+          // nice: true,
+          // useUTC: true,
+          // precision: "hour",
         }}
         yScale={{
           type: "linear",
@@ -37,14 +51,28 @@ const Chart = (props: ChartProps) => {
           max: "auto",
         }}
         areaBaselineValue={4000}
-        // xFormat="time:%H:%M:%S"
-        yFormat=" >-f"
         curve="monotoneX"
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          format: "%H:%M:%S",
-          tickValues: 5,
+          format: (tick) => {
+            const dateObj = new Date(tick);
+
+            const tickDate = new Intl.DateTimeFormat("ko", {
+              day: "2-digit",
+              // timeStyle: "short",
+            }).format(dateObj);
+
+            const tickTime = new Intl.DateTimeFormat("ko", {
+              // day: "2-digit",
+              hour: "numeric",
+              minute: "numeric",
+              hour12: false,
+            }).format(dateObj);
+
+            return tickDate + " " + tickTime;
+          },
+
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,

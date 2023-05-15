@@ -136,10 +136,10 @@ const DetailPage = () => {
       const lastSix = dummyAuction.slice(-6);
       const newData = dummyAuction.slice(0, 1);
 
-      setChartData((prev) => [{ ...prev[0], data: [...dummyAuction] }]);
-      // setChartData((prev) => [
-      //   { ...prev[0], data: [...newData.concat(lastSix)] },
-      // ]);
+      // setChartData((prev) => [{ ...prev[0], data: [...lastSix] }]);
+      setChartData((prev) => [
+        { ...prev[0], data: [...newData.concat(lastSix)] },
+      ]);
     }
   }, [dummyAuction]);
 
