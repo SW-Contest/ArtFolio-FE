@@ -5,8 +5,6 @@ interface ChartProps {
 }
 // TODO : customLayer를 통해 point 특정 부분에만 표시 구현
 const Chart = (props: ChartProps) => {
-  console.log(props.chartData);
-
   return (
     <div className="w-full h-[200px]">
       <ResponsiveLine

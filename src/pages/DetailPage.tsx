@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { auctionDetailProps } from "../mocks/dummyList";
 
 interface AuctionProps {
-  x: Date;
+  x: Date | null;
   y: number;
 }
 
@@ -30,7 +30,9 @@ const DetailPage = () => {
   const [bidder, setBidder] = useState(1);
   const [bid, setBid] = useState(0);
   const auctionId = useParams().auctionId;
-  const [dummyAuction, setDummyAuction] = useState<AuctionProps[]>([]);
+  const [dummyAuction, setDummyAuction] = useState<AuctionProps[]>([
+    { x: null, y: 0 },
+  ]);
 
   const [chartData, setChartData] = useState<ChartDataProps[]>([
     {
@@ -121,13 +123,14 @@ const DetailPage = () => {
     return () => disconnect();
   }, []);
 
-  const dummyButtonHandler = () => {
-    const new_auction = {
-      x: new Date(),
-      y: dummyAuction.length,
-    };
-    setDummyAuction((prev) => [...prev, new_auction]);
-  };
+  // 더미 차트 추가 함수
+  // const dummyButtonHandler = () => {
+  //   const new_auction = {
+  //     x: new Date(),
+  //     y: dummyAuction.length,
+  //   };
+  //   setDummyAuction((prev) => [...prev, new_auction]);
+  // };
 
   useEffect(() => {
     if (dummyAuction.length < 7) {
@@ -148,15 +151,14 @@ const DetailPage = () => {
     setBidder(Number(e.target.value));
   };
 
-  // 웹소켓 테스트용 입찰가 변경 함수
-  const tempBidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const BidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBid(Number(e.target.value));
   };
 
   if (!data)
     return (
       <Layout>
-        <div className="flex w-full">
+        <div className="flex w-full h-screen justify-center items-center">
           <svg
             aria-hidden="true"
             className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -183,8 +185,6 @@ const DetailPage = () => {
 
       <DetailCarousel photoPaths={data.photoPaths} />
       <input onChange={tempBidderChangeHandler} />
-      <input onChange={tempBidChangeHandler} />
-      <button onClick={publish}>확인</button>
       <section className="flex flex-col p-2 mb-40 font-Pretendard">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{data.artPieceTitle}</p>
@@ -239,7 +239,11 @@ const DetailPage = () => {
           <Modal />
         </article>
       </section>
-      <DetailFooter onClick={dummyButtonHandler} />
+      <DetailFooter
+        onPublishClick={publish}
+        onBidChange={BidChangeHandler}
+        currentPrice={data.auctionCurrentPrice}
+      />
     </Layout>
   );
 };
