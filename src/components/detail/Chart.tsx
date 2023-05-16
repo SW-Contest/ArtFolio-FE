@@ -48,7 +48,7 @@ const Chart = (props: ChartProps) => {
           min: "auto",
           max: "auto",
         }}
-        areaBaselineValue={4000}
+        areaBaselineValue={5000}
         curve="monotoneX"
         axisTop={null}
         axisRight={null}

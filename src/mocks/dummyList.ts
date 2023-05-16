@@ -24,6 +24,18 @@ export interface artistInfoProps {
   like: number;
 }
 
+export interface auctionInfoProps {
+  id: string;
+  title: string;
+  content: string;
+  startPrice: number;
+  currentPrice: number;
+  like: number;
+  createdAt: string;
+  photoPaths: string[];
+  likeMembers?: number[];
+}
+
 export interface bidInfosProps {
   bidderInfo: any;
   bidPrice: number;
@@ -31,20 +43,9 @@ export interface bidInfosProps {
 }
 
 export interface auctionDetailProps {
-  artPieceId: number;
-  artPieceTitle: string;
-  artistId: number;
   artistInfo: artistInfoProps;
-  auctionId: number;
-  auctionTitle: string;
-  auctionContent: string;
-  auctionStartPrice: number;
-  auctionCurrentPrice: number;
-  auctionlike: number;
-  createdAt: string;
-  likeMembers: number[];
-  photoPaths: string[];
-  bidInfos: bidInfosProps[];
+  auctionInfo: auctionInfoProps;
+  bidderInfos: bidInfosProps[];
 }
 
 // export const dummyDetail: auctionDetailProps = {
