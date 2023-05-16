@@ -58,12 +58,12 @@ const Chart = (props: ChartProps) => {
           format: (tick) => {
             const dateObj = new Date(tick);
 
-            const tickDate = new Intl.DateTimeFormat("ko", {
+            const tickDate = new Intl.DateTimeFormat("ko-KR", {
               day: "2-digit",
               // timeStyle: "short",
             }).format(dateObj);
 
-            const tickTime = new Intl.DateTimeFormat("ko", {
+            const tickTime = new Intl.DateTimeFormat("ko-KR", {
               // day: "2-digit",
               hour: "numeric",
               minute: "numeric",
