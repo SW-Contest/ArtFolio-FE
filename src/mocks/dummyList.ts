@@ -37,7 +37,11 @@ export interface auctionInfoProps {
 }
 
 export interface bidInfosProps {
-  bidderInfo: any;
+  id: number;
+  name: string;
+  email: string;
+  photoPath: string;
+  like: number;
   bidPrice: number;
   bidDate: string;
 }
