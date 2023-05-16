@@ -16,6 +16,7 @@ import axios from "Axios";
 import { useQuery } from "@tanstack/react-query";
 import { auctionDetailProps } from "../mocks/dummyList";
 
+
 interface AuctionProps {
   x: Date | null;
   y: number;
@@ -97,6 +98,7 @@ const DetailPage = () => {
   };
 
   const subscribe = () => {
+
     // 정상 응답 구독 경로
     client.current?.subscribe("/topic/channel/" + auctionId, (body: any) => {
       const json_body = JSON.parse(body.body);
@@ -151,6 +153,7 @@ const DetailPage = () => {
     setBidder(Number(e.target.value));
   };
 
+
   const BidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBid(Number(e.target.value));
   };
@@ -184,11 +187,13 @@ const DetailPage = () => {
       <Header />
 
       <DetailCarousel photoPaths={data.photoPaths} />
+
       <input onChange={tempBidderChangeHandler} />
       <section className="flex flex-col p-2 mb-40 font-Pretendard">
         <article className="flex justify-between w-full py-2">
           <p className="text-xl font-bold ">{data.artPieceTitle}</p>
           <p className="text-xl font-bold text-af-hotPink ">
+
             {data.auctionCurrentPrice}원
           </p>
         </article>
