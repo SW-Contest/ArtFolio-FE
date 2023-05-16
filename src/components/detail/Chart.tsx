@@ -1,7 +1,9 @@
 import { ResponsiveLine } from "@nivo/line";
+import { chartDataProps } from "./BidList";
 
 interface ChartProps {
-  chartData: any;
+  chartData: chartDataProps[];
+  startPrice: number;
 }
 // TODO : customLayer를 통해 point 특정 부분에만 표시 구현
 const Chart = (props: ChartProps) => {
@@ -48,7 +50,7 @@ const Chart = (props: ChartProps) => {
           min: "auto",
           max: "auto",
         }}
-        areaBaselineValue={5000}
+        areaBaselineValue={props.startPrice}
         curve="monotoneX"
         axisTop={null}
         axisRight={null}
