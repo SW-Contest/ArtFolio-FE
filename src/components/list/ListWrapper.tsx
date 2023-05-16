@@ -15,7 +15,7 @@ const ListWrapper = () => {
 
   const fetchData = async ({ pageParam = 0 }) => {
     const res = await axios.get(
-      `http://20.249.220.42:8080/rt_auction/list?page=${pageParam}&size=10&sort=like,DESC`
+      `http://20.249.220.42:8080/rt_auction/list?page=${pageParam}&size=10&sort=auctionLike,DESC`
     );
     return res.data;
   };

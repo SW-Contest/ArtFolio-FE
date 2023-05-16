@@ -8,6 +8,15 @@ const Chart = (props: ChartProps) => {
   return (
     <div className="w-full h-[200px]">
       <ResponsiveLine
+        theme={{
+          axis: {
+            ticks: {
+              text: {
+                fontSize: 9,
+              },
+            },
+          },
+        }}
         defs={[
           {
             id: "gradient",
@@ -25,25 +34,43 @@ const Chart = (props: ChartProps) => {
         data={props.chartData}
         margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
         xScale={{
-          format: "%H:%M",
-          type: "time",
-          min: "auto",
-          max: "auto",
+          // format: "%Y-%m-%d %H:%M:%SZ",
+          type: "point",
+
+          // min: "auto",
+          // max: "auto",
+          // nice: true,
+          // useUTC: true,
+          // precision: "hour",
         }}
         yScale={{
           type: "linear",
-          min: 0,
+          min: "auto",
           max: "auto",
-          stacked: true,
-          reverse: false,
         }}
-        xFormat="time:%H:%M"
+        areaBaselineValue={4000}
         curve="monotoneX"
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          format: "%H:%M",
-          tickValues: 5,
+          format: (tick) => {
+            const dateObj = new Date(tick);
+
+            const tickDate = new Intl.DateTimeFormat("ko", {
+              day: "2-digit",
+              // timeStyle: "short",
+            }).format(dateObj);
+
+            const tickTime = new Intl.DateTimeFormat("ko", {
+              // day: "2-digit",
+              hour: "numeric",
+              minute: "numeric",
+              hour12: false,
+            }).format(dateObj);
+
+            return tickDate + " " + tickTime;
+          },
+
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,

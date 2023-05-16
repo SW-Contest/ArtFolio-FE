@@ -48,10 +48,17 @@ const ListBox = (props: auctionProps) => {
       onClick={clickHandler}
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
-      <img
-        className="flex object-cover w-full h-full rounded-lg "
-        src="/src/assets/img/cat.jpeg"
-      />
+      {props.thumbnailPath !== "null" ? (
+        <img
+          className="flex object-cover w-full h-full rounded-lg "
+          src={props.thumbnailPath}
+        />
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <p>이미지가 없습니다</p>
+        </div>
+      )}
+
       <div className="absolute flex flex-col justify-end w-full h-full p-2 ">
         <p className="text-md font-semibold text-white line-clamp-2  ">
           {props.auctionTitle}
