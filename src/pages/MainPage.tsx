@@ -3,6 +3,7 @@ import Header from "../components/ui/Header";
 import Carousel from "../components/ui/Carousel";
 import ListWrapper from "../components/list/ListWrapper";
 import SearchBar from "../components/ui/SearchBar";
+import LoginPage from "./LoginPage";
 
 const MainPage = () => {
   return (
@@ -12,6 +13,7 @@ const MainPage = () => {
       <SearchBar />
       <ListWrapper />
     </Layout>
+  
   );
 };
 
