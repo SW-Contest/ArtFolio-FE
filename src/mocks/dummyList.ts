@@ -1,14 +1,10 @@
 export interface auctionProps {
-  auctionId: number;
-  like: number;
-  artist: string;
-  currentPrice: number;
-  artPieceTitle: string;
-  auctionTitle: string;
-  thumbnailPath: string;
+  artistInfo: artistInfoProps;
+  auctionInfo: auctionInfoProps;
 }
 
 export interface auctionListProps {
+  hasNext: boolean;
   isLast: boolean;
   pageSize: number;
   pageNumber: number;
@@ -27,12 +23,13 @@ export interface artistInfoProps {
 export interface auctionInfoProps {
   id: string;
   title: string;
-  content: string;
-  startPrice: number;
+  content?: string;
+  startPrice?: number;
   currentPrice: number;
   like: number;
-  createdAt: string;
-  photoPaths: string[];
+  createdAt?: string;
+  photoPaths?: string[];
+  thumbnailPath?: string;
   likeMembers?: number[];
 }
 

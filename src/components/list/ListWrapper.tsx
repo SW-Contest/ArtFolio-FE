@@ -20,21 +20,14 @@ const ListWrapper = () => {
     return res.data;
   };
 
-  const {
-    isFetching,
-    status,
-    isLoading,
-    data,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-  } = useInfiniteQuery(["Page"], fetchData, {
-    getNextPageParam: (lastPage, allPages) =>
-      lastPage.dataSize == 10 ? lastPage.pageNumber + 1 : undefined,
-  });
+  const { isFetching, data, fetchNextPage } = useInfiniteQuery(
+    ["Page"],
+    fetchData,
+    {
+      getNextPageParam: (lastPage, allPages) =>
+        lastPage.dataSize == 10 ? lastPage.pageNumber + 1 : undefined,
+    }
+  );
 
   useEffect(() => {
     if (data) {
@@ -67,8 +60,14 @@ const ListWrapper = () => {
         </ListButton> */}
       </div>
       <div className="flex w-full min-h-screen flex-wrap justify-between">
-        {pages?.map((list) =>
-          list?.data?.map((item, index) => <ListBox key={index} {...item} />)
+        {pages.map((list) =>
+          list.data.map((item) => (
+            <ListBox
+              key={item.auctionInfo.id}
+              artistInfo={item.artistInfo}
+              auctionInfo={item.auctionInfo}
+            />
+          ))
         )}
       </div>
       <div ref={infScroll} className="flex justify-center w-full h-8">
