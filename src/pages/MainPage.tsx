@@ -8,7 +8,7 @@ import LoginPage from "./LoginPage";
 const MainPage = () => {
   return (
     <Layout>
-      {/* <Header /> */}
+      <Header />
       <Carousel />
       <SearchBar />
       <ListWrapper />

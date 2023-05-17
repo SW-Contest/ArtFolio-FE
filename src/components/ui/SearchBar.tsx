@@ -22,7 +22,7 @@ const SearchBar = () => {
       </div>
       <input
         placeholder="관심있는 작가나 작품을 검색해보세요."
-        className="w-full rounded-xl p-2 pl-8"
+        className="w-full rounded-2xl p-2 pl-8"
       ></input>
     </section>
   );

@@ -1,9 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ListBoxProps } from "../../mocks/dummyList";
+import { auctionProps } from "../../mocks/dummyList";
 
-const ListBox = (props: ListBoxProps) => {
+interface ListBoxProps {
+  data: auctionProps;
+}
+const ListBox = (props: auctionProps) => {
   const navigate = useNavigate();
   const [time, setTime] = useState("");
 
@@ -45,20 +48,27 @@ const ListBox = (props: ListBoxProps) => {
       onClick={clickHandler}
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
-      <img
-        className="flex object-cover w-full h-full rounded-lg "
-        src="/src/assets/img/cat.jpeg"
-      />
+      {props.thumbnailPath !== "null" ? (
+        <img
+          className="flex object-cover w-full h-full rounded-lg "
+          src={props.thumbnailPath}
+        />
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <p>이미지가 없습니다</p>
+        </div>
+      )}
+
       <div className="absolute flex flex-col justify-end w-full h-full p-2 ">
-        <p className="text-sm font-semibold text-white truncate ">
+        <p className="text-md font-semibold text-white line-clamp-2  ">
+          {props.auctionTitle}
+        </p>
+        <p className="mb-1 text-xs font-semibold text-white truncate">
           {props.artist}
         </p>
-        <p className="mb-1 text-sm font-semibold text-white truncate">
-          {props.title}
-        </p>
         <div className="flex gap-1">
-          <p className="mb-1 text-xs font-normal text-white ">현재가</p>
-          <p className="text-xs font-normal text-white ">
+          <p className="mb-1 text-xs font-normal text-af-hotPink ">현재가</p>
+          <p className="text-xs font-normal text-af-hotPink ">
             {props.currentPrice}원
           </p>
         </div>

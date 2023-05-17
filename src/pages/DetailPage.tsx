@@ -1,27 +1,46 @@
 import Layout from "../components/ui/Layout";
 import { useParams } from "react-router-dom";
 import Header from "../components/ui/Header";
-import { dummyDetail } from "../mocks/dummyList";
+
 import DetailCarousel from "../components/detail/DetailCarousel";
-import BidButton from "../components/detail/BidButton";
-import OutlineButton from "../components/ui/OutlineButton";
+
 import { useEffect, useState, useRef } from "react";
 import * as StompJs from "@stomp/stompjs";
-import UserIcon from "../components/ui/UserIcon";
-import CircleButton from "../components/ui/CircleButton";
-import RoundedButton from "../components/ui/RoundedButton";
+
 import DetailFooter from "../components/detail/DetailFooter";
+import axios from "Axios";
+import { useQuery } from "@tanstack/react-query";
+import { auctionDetailProps } from "../mocks/dummyList";
+import BidList from "../components/detail/BidList";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
+import ArtistInfo from "../components/detail/ArtistInfo";
+import AuctionContent from "../components/detail/AuctionContent";
+import AuctionTitle from "../components/detail/AuctionTitle";
 
 const DetailPage = () => {
-  const auctionId = Number(useParams().auctionId);
+  const [bidder, setBidder] = useState(1);
+  const [bidPrice, setBidPrice] = useState(0);
+  const auctionId = useParams().auctionId;
 
-  const item = dummyDetail.filter((item) => item.auctionId === auctionId)[0];
+  const fetchData = async () => {
+    const res = await axios.get(
+      `http://20.249.220.42:8080/rt_auction/${auctionId}`
+    );
+    return res.data;
+  };
 
-  const client = useRef<any>({});
+  const { data, isFetching, refetch } = useQuery<auctionDetailProps>(
+    [auctionId],
+    fetchData
+  );
+
+  const { artistInfo, auctionInfo, bidderInfos } = data ?? {};
+
+  const client = useRef<StompJs.Client | null>(null);
 
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://3.37.192.223:8080/test",
+      brokerURL: "ws://20.249.220.42:8080/sock",
       onConnect: () => {
         console.log("success");
         subscribe();
@@ -31,26 +50,37 @@ const DetailPage = () => {
   };
 
   const publish = () => {
-    if (!client.current.connected) return;
+    if (!client.current?.connected) return;
 
     client.current.publish({
-      destination: "/pub/price",
+      destination: "/app/price",
       body: JSON.stringify({
-        auctionId: 1,
-        curPrice: 1000,
+        auctionId: auctionId,
+        bidderId: bidder,
+        price: bidPrice,
       }),
     });
   };
 
   const subscribe = () => {
-    client.current.subscribe("/sub/channel/" + 1, (body: any) => {
+    // 정상 응답 구독 경로
+    client.current?.subscribe("/topic/channel/" + auctionId, (body: any) => {
+      const json_body = JSON.parse(body.body);
+      console.log(json_body);
+
+      // 웹소켓 응답이 올 시 데이터를 재요청합니다.
+      refetch();
+    });
+
+    // 예외 발생시 응답 구독 경로
+    client.current?.subscribe("/user/queue/errors", (body: any) => {
       const json_body = JSON.parse(body.body);
       console.log(json_body);
     });
   };
 
   const disconnect = () => {
-    client.current.deactivate();
+    client.current?.deactivate();
   };
 
   useEffect(() => {
@@ -59,64 +89,44 @@ const DetailPage = () => {
     return () => disconnect();
   }, []);
 
-  return (
-    <Layout>
-      <Header />
-      <DetailCarousel photoPaths={item.photoPaths} />
-      <section className="flex flex-col p-2 font-Pretendard mb-40">
-        <article className="flex justify-between w-full py-2">
-          <p className="text-xl font-bold ">{item.artPieceTitle}</p>
-          <p className="text-xl font-bold text-af-hotPink ">
-            {item.auctionStartPrice}원
-          </p>
-        </article>
+  // 웹소켓 테스트용 bidder 변경 함수
+  const tempBidderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBidder(Number(e.target.value));
+  };
 
-        <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray">
-          <UserIcon url="/src/assets/img/cat.jpeg" />
-          <div className="flex flex-col justify-between grow">
-            <p className="text-sm font-bold truncate ">{item.artPieceId}</p>
+  const BidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBidPrice(Number(e.target.value));
+  };
 
-            <p className="text-xs font-light">최근 거래 작품 n</p>
-          </div>
-          <CircleButton>작가 Home</CircleButton>
-        </article>
+  if (data && auctionInfo && artistInfo && bidderInfos) {
+    return (
+      <Layout>
+        <Header />
 
-        <article className="mb-4">
-          <p className="mb-2 text-sm font-semibold">작품 설명</p>
-          <p className="w-full mb-1 text-sm font-normal ">
-            {item.auctionContent}
-          </p>
-        </article>
+        <DetailCarousel photoPaths={auctionInfo.photoPaths} />
 
-        <article className="mb-4">
-          <section className="w-full mb-4">
-            <p className="mb-2 text-sm font-semibold">경매 내역</p>
-            <div className="flex justify-between py-1 border-b">
-              <p className="w-1/2 text-xs font-light text-left">입찰자</p>
-              <p className="w-1/2 text-xs font-light text-right">입찰가</p>
-            </div>
-            <div className="flex justify-between py-1">
-              <p className="w-1/2 text-xs font-light text-left">김김김</p>
-              <p className="w-1/2 text-xs font-light text-right">100,000</p>
-            </div>
-            <div className="flex justify-between py-1">
-              <p className="w-1/2 text-xs font-light text-left">김김김</p>
-              <p className="w-1/2 text-xs font-light text-right">100,000</p>
-            </div>
-            <div className="flex justify-between py-1">
-              <p className="w-1/2 text-xs font-light text-left">김김김</p>
-              <p className="w-1/2 text-xs font-light text-right">100,000</p>
-            </div>
-          </section>
-
-          <div className="flex justify-center w-full">
-            <OutlineButton>전체보기 {">"}</OutlineButton>
-          </div>
-        </article>
-      </section>
-      <DetailFooter />
-    </Layout>
-  );
+        {/* <input onChange={tempBidderChangeHandler} /> */}
+        <section className="flex flex-col p-2 mb-40 font-Pretendard">
+          <AuctionTitle auctionInfo={auctionInfo} />
+          <ArtistInfo artistInfo={artistInfo} />
+          <AuctionContent auctionInfo={auctionInfo} />
+          <BidList data={data} />
+        </section>
+        <DetailFooter
+          onPublishClick={publish}
+          onBidChange={BidChangeHandler}
+          auctionInfo={auctionInfo}
+        />
+      </Layout>
+    );
+  } else {
+    // 데이터 받아오기전에 로딩스피너 보여줌
+    return (
+      <Layout>
+        <LoadingSpinner />
+      </Layout>
+    );
+  }
 };
 
 export default DetailPage;
