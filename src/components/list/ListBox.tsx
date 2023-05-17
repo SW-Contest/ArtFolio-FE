@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { auctionProps } from "../../mocks/dummyList";
+import { artistInfoProps, auctionInfoProps } from "../../mocks/dummyList";
 
 interface ListBoxProps {
-  data: auctionProps;
+  artistInfo: artistInfoProps;
+  auctionInfo: auctionInfoProps;
 }
-const ListBox = (props: auctionProps) => {
+const ListBox = (props: ListBoxProps) => {
   const navigate = useNavigate();
   const [time, setTime] = useState("");
 
@@ -40,7 +41,7 @@ const ListBox = (props: auctionProps) => {
   // };
 
   const clickHandler = () => {
-    navigate(`/auction/${props.auctionId}`);
+    navigate(`/auction/${props.auctionInfo.id}`);
   };
 
   return (
@@ -48,10 +49,10 @@ const ListBox = (props: auctionProps) => {
       onClick={clickHandler}
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
-      {props.thumbnailPath !== "null" ? (
+      {props.auctionInfo.thumbnailPath !== "null" ? (
         <img
           className="flex object-cover w-full h-full rounded-lg "
-          src={props.thumbnailPath}
+          src={props.auctionInfo.thumbnailPath}
         />
       ) : (
         <div className="w-full h-full flex justify-center items-center">
@@ -61,15 +62,15 @@ const ListBox = (props: auctionProps) => {
 
       <div className="absolute flex flex-col justify-end w-full h-full p-2 ">
         <p className="text-md font-semibold text-white line-clamp-2  ">
-          {props.auctionTitle}
+          {props.auctionInfo.title}
         </p>
         <p className="mb-1 text-xs font-semibold text-white truncate">
-          {props.artist}
+          {props.artistInfo.name}
         </p>
         <div className="flex gap-1">
           <p className="mb-1 text-xs font-normal text-af-hotPink ">현재가</p>
           <p className="text-xs font-normal text-af-hotPink ">
-            {props.currentPrice}원
+            {props.auctionInfo.currentPrice}원
           </p>
         </div>
       </div>
