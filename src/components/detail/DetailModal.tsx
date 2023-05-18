@@ -9,7 +9,7 @@ interface DetailModalProps {
 }
 const DetailModal = (props: DetailModalProps) => {
   // 모달이 있을 때는 외부 스크롤을 막습니다.
-  const chnageScrollHandler = (e: any) => {
+  const changeScrollHandler = (e: any) => {
     const isChecked = e.target.checked;
     if (isChecked) {
       document.body.style.overflow = "hidden";
@@ -31,7 +31,7 @@ const DetailModal = (props: DetailModalProps) => {
         </motion.label>
       </div>
       <input
-        onChange={chnageScrollHandler}
+        onChange={changeScrollHandler}
         type="checkbox"
         id="auction-modal"
         className="modal-toggle"
