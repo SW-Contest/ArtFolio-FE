@@ -16,6 +16,7 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ArtistInfo from "../components/detail/ArtistInfo";
 import AuctionContent from "../components/detail/AuctionContent";
 import AuctionTitle from "../components/detail/AuctionTitle";
+import ImageModal from "../components/detail/ImageModal";
 
 const DetailPage = () => {
   const [bidder, setBidder] = useState(1);
@@ -105,6 +106,7 @@ const DetailPage = () => {
 
         <DetailCarousel photoPaths={auctionInfo.photoPaths} />
 
+        <ImageModal />
         {/* <input onChange={tempBidderChangeHandler} /> */}
         <section className="flex flex-col p-2 mb-40 font-Pretendard">
           <AuctionTitle auctionInfo={auctionInfo} />
