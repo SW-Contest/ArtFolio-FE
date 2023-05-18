@@ -9,10 +9,22 @@ import "swiper/css/pagination";
 
 import SlideImage from "./SlideImage";
 
+import ImageModal from "./ImageModal";
+import { useState } from "react";
+
 interface DetailCarouselProps {
   photoPaths: string[];
 }
 const DetailCarousel = (props: DetailCarouselProps) => {
+  const [imgSrc, setImgSrc] = useState("");
+  const clickImageHandler = (photo: string) => {
+    const checkbox = document.getElementById("image-modal") as HTMLInputElement;
+    if (checkbox) {
+      setImgSrc(photo);
+      checkbox.checked = true;
+      document.body.style.overflow = "hidden";
+    }
+  };
   return (
     <>
       <Swiper
@@ -28,7 +40,11 @@ const DetailCarousel = (props: DetailCarouselProps) => {
         {props.photoPaths.length > 0 ? (
           props.photoPaths.map((photo, index) => (
             <SwiperSlide key={index}>
-              <img className="flex shrink-0 w-full h-80" src={photo} />
+              <img
+                onClick={() => clickImageHandler(photo)}
+                className="flex shrink-0 w-full h-80"
+                src={photo}
+              />
             </SwiperSlide>
           ))
         ) : (
@@ -37,6 +53,7 @@ const DetailCarousel = (props: DetailCarouselProps) => {
           </SwiperSlide>
         )}
       </Swiper>
+      <ImageModal imgSrc={imgSrc} />
     </>
   );
 };
