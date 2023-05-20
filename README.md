@@ -11,7 +11,8 @@
 ### Tech
 * React
 * TypeScript
-* Recoil
+* zustand
+* msw
 * Tailwind CSS
 
 ## 깃 브랜치 전략
