@@ -2,7 +2,7 @@ import ListButton from "./ListButton";
 import ListBox from "./ListBox";
 import { useState, useRef, useEffect } from "react";
 import { auctionListProps } from "../../mocks/dummyList";
-import axios from "Axios";
+import axios from "axios";
 import useListState from "../../store/store";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 

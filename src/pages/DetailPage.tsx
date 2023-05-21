@@ -8,7 +8,6 @@ import { useEffect, useState, useRef } from "react";
 import * as StompJs from "@stomp/stompjs";
 
 import DetailFooter from "../components/detail/DetailFooter";
-import axios from "Axios";
 import { useQuery } from "@tanstack/react-query";
 import { auctionDetailProps } from "../mocks/dummyList";
 import BidList from "../components/detail/BidList";
@@ -16,6 +15,7 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ArtistInfo from "../components/detail/ArtistInfo";
 import AuctionContent from "../components/detail/AuctionContent";
 import AuctionTitle from "../components/detail/AuctionTitle";
+import axios from "axios";
 
 const DetailPage = () => {
   const [bidder, setBidder] = useState(1);

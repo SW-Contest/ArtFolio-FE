@@ -9,7 +9,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import HeartAnimation from "../ui/HeartAnimation";
 import { useMutation } from "@tanstack/react-query";
-import axios from "Axios";
+import axios from "axios";
 import { auctionInfoProps } from "../../mocks/dummyList";
 
 interface DetailFooterProps {
