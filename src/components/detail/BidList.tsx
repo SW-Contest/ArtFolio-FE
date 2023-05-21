@@ -2,7 +2,7 @@ import React from "react";
 import Chart from "./Chart";
 import DetailModal from "./DetailModal";
 import { useState, useEffect } from "react";
-import { auctionDetailProps } from "../../mocks/dummyList";
+import { bidderInfosProps, auctionInfoProps } from "../../mocks/dummyList";
 
 export interface bidderDataProps {
   x: Date | null;
@@ -16,7 +16,8 @@ export interface chartDataProps {
 }
 
 interface BidListProps {
-  data: auctionDetailProps;
+  auctionInfo: auctionInfoProps;
+  bidderInfos: bidderInfosProps[];
 }
 
 const BidList = (props: BidListProps) => {
@@ -24,16 +25,14 @@ const BidList = (props: BidListProps) => {
     { x: null, y: 0, name: "" },
   ]);
 
-  const { auctionInfo, bidderInfos } = props.data;
-
   useEffect(() => {
-    if (props.data && auctionInfo) {
+    if (props.bidderInfos && props.auctionInfo) {
       const startPriceData = {
-        x: new Date(auctionInfo.createdAt),
-        y: auctionInfo.startPrice,
+        x: new Date(props.auctionInfo.createdAt),
+        y: props.auctionInfo.startPrice,
         name: "",
       };
-      const bidInfos = bidderInfos.map((bidInfo) => ({
+      const bidInfos = props.bidderInfos.map((bidInfo) => ({
         x: new Date(bidInfo.bidDate),
         y: bidInfo.bidPrice,
         name: bidInfo.name,
@@ -43,21 +42,7 @@ const BidList = (props: BidListProps) => {
 
       setBidderData(newBidInfos);
     }
-  }, [props.data]);
-
-  // useEffect(() => {
-
-  //   if (bidderData.length < 7) {
-  //     setChartData((prev) => [{ ...prev[0], data: [...bidderData] }]);
-  //   } else {
-  //     const lastFive = bidderData.slice(-5);
-  //     const newData = bidderData.slice(0, 1);
-
-  //     setChartData((prev) => [
-  //       { ...prev[0], data: [...newData.concat(lastFive)] },
-  //     ]);
-  //   }
-  // }, [bidderData]);
+  }, [props.bidderInfos, props.auctionInfo]);
 
   let chartData: chartDataProps[] = [
     {
@@ -77,13 +62,17 @@ const BidList = (props: BidListProps) => {
     chartData = [{ ...chartData[0], data: [...newData.concat(lastFive)] }];
   }
 
-  const lastThree = bidderData.slice(-3);
+  // 입찰자 미리보기는 뒤에 3개만 표시합니다.
+  const lastThree = bidderData.slice(-3).reverse();
 
   return (
     <article className="mb-4">
       <section className="w-full mb-4">
         <p className="mb-2 text-sm font-semibold">경매 내역</p>
-        <Chart chartData={chartData} startPrice={auctionInfo.startPrice} />
+        <Chart
+          chartData={chartData}
+          startPrice={props.auctionInfo.startPrice}
+        />
         <div className="flex justify-between py-1 border-b">
           <p className="w-1/2 text-xs font-light text-left">입찰자</p>
           <p className="w-1/2 text-xs font-light text-right">입찰가</p>

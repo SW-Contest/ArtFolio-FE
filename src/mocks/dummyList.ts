@@ -23,17 +23,17 @@ export interface artistInfoProps {
 export interface auctionInfoProps {
   id: string;
   title: string;
-  content?: string;
-  startPrice?: number;
+  content: string;
+  startPrice: number;
   currentPrice: number;
   like: number;
-  createdAt?: string;
-  photoPaths?: string[];
-  thumbnailPath?: string;
-  likeMembers?: number[];
+  createdAt: string;
+  photoPaths: string[];
+  thumbnailPath: string;
+  likeMembers: number[];
 }
 
-export interface bidInfosProps {
+export interface bidderInfosProps {
   id: number;
   name: string;
   email: string;
@@ -46,7 +46,7 @@ export interface bidInfosProps {
 export interface auctionDetailProps {
   artistInfo: artistInfoProps;
   auctionInfo: auctionInfoProps;
-  bidderInfos: bidInfosProps[];
+  bidderInfos: bidderInfosProps[];
 }
 
 // export const dummyDetail: auctionDetailProps = {
