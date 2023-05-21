@@ -110,7 +110,7 @@ const DetailPage = () => {
           <AuctionTitle auctionInfo={auctionInfo} />
           <ArtistInfo artistInfo={artistInfo} />
           <AuctionContent auctionInfo={auctionInfo} />
-          <BidList data={data} />
+          <BidList auctionInfo={auctionInfo} bidderInfos={bidderInfos} />
         </section>
         <DetailFooter
           onPublishClick={publish}

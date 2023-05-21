@@ -9,11 +9,7 @@ interface SlideImageProps {
 const SlideImage = (props: SlideImageProps) => {
   console.log(props.photo);
   const [isLoading, setIsLoading] = useState(true);
-  return (
-    <>
-
-    </>
-  );
+  return <></>;
 };
 
 export default SlideImage;
