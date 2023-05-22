@@ -27,7 +27,8 @@ const HeartAnimation = (props: HeartAnimationProps) => {
             translateY: "-50%",
           }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
+          exit={{ opacity: 0, scale: 0 }}
+          transition={{ type: "spring", duration: 0.5 }}
           className="z-[999] fixed top-1/2 left-1/2"
         >
           <BsHeartFill className="fill-af-hotPink" size={200} />
