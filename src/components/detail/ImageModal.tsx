@@ -26,7 +26,7 @@ const ImageModal = (props: ImageModalProps) => {
         <label htmlFor="image-modal" className="cursor-pointer modal">
           <label className="modal-box w-[350px] h-[350px] relative flex items-center justify-center">
             <TransformComponent>
-              <img src={props.imgSrc} />
+              <img className="w-[350px]" src={props.imgSrc} />
             </TransformComponent>
           </label>
         </label>
