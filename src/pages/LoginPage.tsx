@@ -54,11 +54,11 @@ const LoginPage = () => {
                 onPasswordChange={onPasswordChangeHandler}
                 />
                 <LoginButton onClick={loginHandler} />
-                <div className='w-full flex items-center list-none mx-12 text-xs mt-4 text-slate-400 space-x-4'>
-                    <li className='pr-8 border-r border-slate-400'>아이디 찾기</li>
-                    <div className=' border-1 border-slate-400 h-6'></div>
-                    <li className='pr-8 border-r border-slate-400'>비밀번호 찾기</li>
-                    <div className=' border-1 border-slate-400 h-6'></div>
+                <div className='w-full flex items-center justify-center list-none  text-xs mt-4 text-slate-400 space-x-4'>
+                    <li className=''>아이디 찾기</li>
+                    <div className=''>|</div>
+                    <li className=''>비밀번호 찾기</li>
+                    <div>|</div>
                     <li>회원가입</li>
                 </div>
             </div>
