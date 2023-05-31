@@ -28,16 +28,23 @@ const DetailFooter = (props: DetailFooterProps) => {
     setIsCollapsed((prev) => !prev);
   };
 
-  const changeShowHeartHandler = () => {
-    setIsShowHeart((prev) => !prev);
-  };
-
   const fetchData = async () => {
-    const res = await axios.post("http://20.249.220.42:8080/rt_auction/like", {
+    const res = await axios.post("http://20.249.220.42/rt_auction/like", {
       auctionId: "bc5b8c6f-8802-4042-873a-96b34f053a24",
       memberId: 1,
     });
     return res.data;
+  };
+
+  const clickHeartHandler = () => {
+    if (!isShowHeart) {
+      setIsShowHeart(true);
+    }
+  };
+
+  const hideHeartHandler = () => {
+    setIsShowHeart(false);
+    console.log("close");
   };
 
   const { data, mutate } = useMutation(fetchData);
@@ -45,7 +52,7 @@ const DetailFooter = (props: DetailFooterProps) => {
     <>
       <HeartAnimation
         isShow={isShowHeart}
-        changeShow={changeShowHeartHandler}
+        hideHeartAnimation={hideHeartHandler}
       />
       <motion.footer
         initial={{
@@ -114,7 +121,7 @@ const DetailFooter = (props: DetailFooterProps) => {
 
           <div className="flex w-full h-12 justify-evenly">
             <motion.button
-              onClick={() => changeShowHeartHandler()}
+              onClick={clickHeartHandler}
               initial={{ scale: 1 }}
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}

@@ -23,9 +23,7 @@ const DetailPage = () => {
   const auctionId = useParams().auctionId;
 
   const fetchData = async () => {
-    const res = await axios.get(
-      `http://20.249.220.42:8080/rt_auction/${auctionId}`
-    );
+    const res = await axios.get(`http://20.249.220.42/rt_auction/${auctionId}`);
     return res.data;
   };
 
@@ -40,7 +38,7 @@ const DetailPage = () => {
 
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://20.249.220.42:8080/sock",
+      brokerURL: "ws://20.249.220.42/sock",
       onConnect: () => {
         console.log("success");
         subscribe();

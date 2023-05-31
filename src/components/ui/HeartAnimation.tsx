@@ -4,18 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface HeartAnimationProps {
   isShow: boolean;
-  changeShow: () => void;
+  hideHeartAnimation: () => void;
 }
 const HeartAnimation = (props: HeartAnimationProps) => {
-  useEffect(() => {
-    if (props.isShow) {
-      setTimeout(() => {
-        props.changeShow();
-        console.log("change");
-      }, 1000);
-    }
-  }, [props.isShow]);
+  let heartTimer: any;
 
+  const hideHeartHandler = () => {
+    clearTimeout(heartTimer);
+    heartTimer = setTimeout(props.hideHeartAnimation, 500);
+  };
   return (
     <AnimatePresence>
       {props.isShow && (
@@ -29,6 +26,7 @@ const HeartAnimation = (props: HeartAnimationProps) => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           transition={{ type: "spring", duration: 0.5 }}
+          onAnimationComplete={hideHeartHandler}
           className="z-[999] fixed top-1/2 left-1/2"
         >
           <BsHeartFill className="fill-af-hotPink" size={200} />
