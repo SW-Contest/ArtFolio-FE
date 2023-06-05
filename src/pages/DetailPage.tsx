@@ -88,13 +88,31 @@ const DetailPage = () => {
     return () => disconnect();
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      setBidPrice(data.auctionInfo.currentPrice);
+    }
+  }, [data]);
+
   // 웹소켓 테스트용 bidder 변경 함수
   const tempBidderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBidder(Number(e.target.value));
   };
 
-  const BidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBidPrice(Number(e.target.value));
+  // input의 onChange에 할당되는 함수
+  const bidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newBidPrice = Number(e.target.value);
+
+    setBidPrice(newBidPrice);
+  };
+
+  // 경매가 변경 함수
+  const bidSetHandler = (value: number) => {
+    if (data) {
+      if (value >= data.auctionInfo.currentPrice) {
+        setBidPrice(value);
+      }
+    }
   };
 
   if (data && auctionInfo && artistInfo && bidderInfos) {
@@ -113,8 +131,10 @@ const DetailPage = () => {
         </section>
         <DetailFooter
           onPublishClick={publish}
-          onBidChange={BidChangeHandler}
+          onBidChange={bidChangeHandler}
+          onBidSet={bidSetHandler}
           auctionInfo={auctionInfo}
+          bidPrice={bidPrice}
         />
       </Layout>
     );

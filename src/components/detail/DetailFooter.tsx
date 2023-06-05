@@ -15,10 +15,14 @@ import { auctionInfoProps } from "../../mocks/dummyList";
 import { useAnimationStore } from "../../store/store";
 import { useStore } from "zustand";
 
+import MotionButton from "../ui/MotionButton";
+
 interface DetailFooterProps {
   onPublishClick: () => void;
   onBidChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBidSet: (value: number) => void;
   auctionInfo: auctionInfoProps;
+  bidPrice: number;
 }
 
 const DetailFooter = (props: DetailFooterProps) => {
@@ -27,7 +31,7 @@ const DetailFooter = (props: DetailFooterProps) => {
   const [isShowHeart, setIsShowHeart] = useState(false);
   const [time, setTime] = useState("");
 
-  const isLike = true;
+  const isLike = props.auctionInfo.likeMembers.includes(1);
 
   const tick = () => {
     setTime(() => getTimeLeft());
@@ -66,7 +70,7 @@ const DetailFooter = (props: DetailFooterProps) => {
 
   const fetchData = async () => {
     const res = await axios.post("http://20.249.220.42/rt_auction/like", {
-      auctionId: "bc5b8c6f-8802-4042-873a-96b34f053a24",
+      auctionId: props.auctionInfo.id,
       memberId: 1,
     });
     return res.data;
@@ -75,6 +79,7 @@ const DetailFooter = (props: DetailFooterProps) => {
   const clickHeartHandler = () => {
     if (!useAnimation.isShow) {
       useAnimation.showAnimation();
+      mutate();
     }
   };
   const { data, mutate } = useMutation(fetchData);
@@ -111,35 +116,47 @@ const DetailFooter = (props: DetailFooterProps) => {
           className="flex flex-col w-full gap-4"
         >
           <div className="flex w-full h-10 justify-evenly">
-            <button>
+            <MotionButton onClick={() => props.onBidSet(props.bidPrice - 1)}>
               <AiOutlineMinus size={24} />
-            </button>
+            </MotionButton>
             <motion.input
               key={props.auctionInfo.currentPrice}
               initial={{ color: "#000000" }}
               animate={{ color: ["#FF008A", "#000000"] }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-center bg-transparent text-2xl font-semibold"
+              className="text-2xl font-semibold text-center bg-transparent"
               onChange={props.onBidChange}
-              defaultValue={props.auctionInfo.currentPrice}
+              value={props.bidPrice}
             />
-            <button>
+            <MotionButton onClick={() => props.onBidSet(props.bidPrice + 1)}>
               <AiOutlinePlus size={24} />
-            </button>
+            </MotionButton>
           </div>
           <div className="flex w-full h-10 justify-evenly">
-            <button className="rounded-lg border-gray-300 border px-3">
+            <MotionButton
+              onClick={() => props.onBidSet(props.bidPrice + 1000)}
+              className="px-3 border border-gray-300 rounded-lg"
+            >
               +1천원
-            </button>
-            <button className="rounded-lg border-gray-300 border px-3">
+            </MotionButton>
+            <MotionButton
+              onClick={() => props.onBidSet(props.bidPrice + 10000)}
+              className="px-3 border border-gray-300 rounded-lg"
+            >
               +1만원
-            </button>
-            <button className="rounded-lg border-gray-300 border px-3">
+            </MotionButton>
+            <MotionButton
+              onClick={() => props.onBidSet(props.bidPrice + 50000)}
+              className="px-3 border border-gray-300 rounded-lg"
+            >
               +5만원
-            </button>
-            <button className="rounded-lg border-gray-300 border px-3">
-              +10만원
-            </button>
+            </MotionButton>
+            <MotionButton
+              onClick={() => props.onBidSet(props.auctionInfo.currentPrice)}
+              className="px-3 border border-gray-300 rounded-lg"
+            >
+              현재가
+            </MotionButton>
           </div>
         </motion.section>
       )}
@@ -153,18 +170,15 @@ const DetailFooter = (props: DetailFooterProps) => {
           <p className="font-normal text-black text-md">
             경매 종료까지 남은 시간
           </p>
-          <p className="text-4xl h-10 font-semibold text-center text-af-hotPink">
+          <p className="h-10 text-4xl font-semibold text-center text-af-hotPink">
             {time}
           </p>
         </motion.section>
       )}
 
-      <div className=" flex w-full h-12  justify-evenly">
-        <motion.button
+      <div className="flex w-full h-12  justify-evenly">
+        <MotionButton
           onClick={clickHeartHandler}
-          initial={{ scale: 1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.2 }}
           className={
             isLike
               ? "w-12 group rounded-lg flex justify-center items-center border bg-af-hotPink   border-af-hotPink"
@@ -175,16 +189,13 @@ const DetailFooter = (props: DetailFooterProps) => {
             size={24}
             className={isLike ? "fill-white " : "fill-af-hotPink "}
           />
-        </motion.button>
-        <motion.button
-          onClick={props.onPublishClick}
-          initial={{ scale: 1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.2 }}
+        </MotionButton>
+        <MotionButton
+          onClick={isCollapsed ? changeCollapsedHandler : props.onPublishClick}
           className="w-1/2 text-white border-0 rounded-lg bg-af-hotPink hover:bg-af-hotPink"
         >
           입찰하기
-        </motion.button>
+        </MotionButton>
       </div>
     </motion.footer>
   );
