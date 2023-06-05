@@ -1,13 +1,24 @@
-import create from "zustand";
+import { create } from "zustand";
 
 interface ListState {
   pageNumber: number;
   increasePageNumber: () => void;
 }
-const useListStore = create<ListState>((set) => ({
+
+interface AnimationState {
+  isShow: boolean;
+  showAnimation: () => void;
+  hideAnimation: () => void;
+}
+
+export const useListStore = create<ListState>((set) => ({
   pageNumber: 0,
   increasePageNumber: () =>
     set((state) => ({ pageNumber: state.pageNumber + 1 })),
 }));
 
-export default useListStore;
+export const useAnimationStore = create<AnimationState>((set) => ({
+  isShow: false,
+  showAnimation: () => set((state) => ({ isShow: true })),
+  hideAnimation: () => set((state) => ({ isShow: false })),
+}));

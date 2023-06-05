@@ -16,6 +16,7 @@ import ArtistInfo from "../components/detail/ArtistInfo";
 import AuctionContent from "../components/detail/AuctionContent";
 import AuctionTitle from "../components/detail/AuctionTitle";
 import axios from "axios";
+import HeartAnimation from "../components/ui/HeartAnimation";
 
 const DetailPage = () => {
   const [bidder, setBidder] = useState(1);
@@ -23,9 +24,7 @@ const DetailPage = () => {
   const auctionId = useParams().auctionId;
 
   const fetchData = async () => {
-    const res = await axios.get(
-      `http://20.249.220.42:8080/rt_auction/${auctionId}`
-    );
+    const res = await axios.get(`http://20.249.220.42/rt_auction/${auctionId}`);
     return res.data;
   };
 
@@ -40,7 +39,7 @@ const DetailPage = () => {
 
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://20.249.220.42:8080/sock",
+      brokerURL: "ws://20.249.220.42/sock",
       onConnect: () => {
         console.log("success");
         subscribe();
@@ -89,20 +88,38 @@ const DetailPage = () => {
     return () => disconnect();
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      setBidPrice(data.auctionInfo.currentPrice);
+    }
+  }, [data]);
+
   // 웹소켓 테스트용 bidder 변경 함수
   const tempBidderChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBidder(Number(e.target.value));
   };
 
-  const BidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBidPrice(Number(e.target.value));
+  // input의 onChange에 할당되는 함수
+  const bidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newBidPrice = Number(e.target.value);
+
+    setBidPrice(newBidPrice);
+  };
+
+  // 경매가 변경 함수
+  const bidSetHandler = (value: number) => {
+    if (data) {
+      if (value >= data.auctionInfo.currentPrice) {
+        setBidPrice(value);
+      }
+    }
   };
 
   if (data && auctionInfo && artistInfo && bidderInfos) {
     return (
       <Layout>
         <Header />
-
+        <HeartAnimation />
         <DetailCarousel photoPaths={auctionInfo.photoPaths ?? []} />
 
         {/* <input onChange={tempBidderChangeHandler} /> */}
@@ -114,8 +131,10 @@ const DetailPage = () => {
         </section>
         <DetailFooter
           onPublishClick={publish}
-          onBidChange={BidChangeHandler}
+          onBidChange={bidChangeHandler}
+          onBidSet={bidSetHandler}
           auctionInfo={auctionInfo}
+          bidPrice={bidPrice}
         />
       </Layout>
     );

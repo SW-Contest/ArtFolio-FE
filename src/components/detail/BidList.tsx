@@ -1,6 +1,6 @@
 import React from "react";
 import Chart from "./Chart";
-import DetailModal from "./DetailModal";
+import BidListModal from "./BidListModal";
 import { useState, useEffect } from "react";
 import { bidderInfosProps, auctionInfoProps } from "../../mocks/dummyList";
 
@@ -85,7 +85,7 @@ const BidList = (props: BidListProps) => {
         ))}
       </section>
 
-      <DetailModal bidderData={bidderData} />
+      <BidListModal bidderData={bidderData} />
     </article>
   );
 };

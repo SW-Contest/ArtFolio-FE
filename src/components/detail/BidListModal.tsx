@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { Scrollbar } from "react-scrollbars-custom";
 import { bidderDataProps } from "./BidList";
 
-interface DetailModalProps {
+interface BidListModal {
   bidderData: bidderDataProps[];
 }
-const DetailModal = (props: DetailModalProps) => {
+const BidListModal = (props: BidListModal) => {
   // 모달이 있을 때는 외부 스크롤을 막습니다.
   const changeScrollHandler = (e: any) => {
     const isChecked = e.target.checked;
@@ -63,4 +63,4 @@ const DetailModal = (props: DetailModalProps) => {
   );
 };
 
-export default DetailModal;
+export default BidListModal;

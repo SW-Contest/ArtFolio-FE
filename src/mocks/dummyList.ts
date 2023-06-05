@@ -28,6 +28,7 @@ export interface auctionInfoProps {
   currentPrice: number;
   like: number;
   createdAt: string;
+  finishedAt: string;
   photoPaths: string[];
   thumbnailPath: string;
   likeMembers: number[];
