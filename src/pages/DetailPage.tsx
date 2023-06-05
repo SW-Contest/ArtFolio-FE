@@ -16,6 +16,7 @@ import ArtistInfo from "../components/detail/ArtistInfo";
 import AuctionContent from "../components/detail/AuctionContent";
 import AuctionTitle from "../components/detail/AuctionTitle";
 import axios from "axios";
+import HeartAnimation from "../components/ui/HeartAnimation";
 
 const DetailPage = () => {
   const [bidder, setBidder] = useState(1);
@@ -100,7 +101,7 @@ const DetailPage = () => {
     return (
       <Layout>
         <Header />
-
+        <HeartAnimation />
         <DetailCarousel photoPaths={auctionInfo.photoPaths ?? []} />
 
         {/* <input onChange={tempBidderChangeHandler} /> */}
