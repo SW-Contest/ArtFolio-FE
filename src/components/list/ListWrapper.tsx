@@ -3,10 +3,10 @@ import ListBox from "./ListBox";
 import { useState, useRef, useEffect } from "react";
 import { auctionListProps } from "../../mocks/dummyList";
 import axios from "axios";
-import useListState from "../../store/store";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import ListBoxSkeleton from "./ListBoxSkeleton";
 
 const ListWrapper = () => {
   const infScroll = useRef(null);
@@ -59,7 +59,7 @@ const ListWrapper = () => {
           인기
         </ListButton> */}
       </div>
-      <div className="flex w-full min-h-screen flex-wrap justify-between">
+      <div className="flex flex-wrap justify-between w-full">
         {pages.map((list) =>
           list.data.map((item) => (
             <ListBox
@@ -69,6 +69,8 @@ const ListWrapper = () => {
             />
           ))
         )}
+        {isFetching &&
+          [1, 2, 3, 4, 5, 6].map((_, index) => <ListBoxSkeleton key={index} />)}
       </div>
       <div ref={infScroll} className="flex justify-center w-full h-8">
         {!isFetching && !data && <p>데이터가 없습니다.</p>}
