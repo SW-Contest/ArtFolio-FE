@@ -2,7 +2,7 @@ import React from "react";
 import Chart from "./Chart";
 import BidListModal from "./BidListModal";
 import { useState, useEffect } from "react";
-import { bidderInfosProps, auctionInfoProps } from "../../mocks/dummyList";
+import { BidderInfos, AuctionInfo } from "../../types/auction.type";
 
 export interface bidderDataProps {
   x: Date | null;
@@ -16,8 +16,8 @@ export interface chartDataProps {
 }
 
 interface BidListProps {
-  auctionInfo: auctionInfoProps;
-  bidderInfos: bidderInfosProps[];
+  auctionInfo: AuctionInfo;
+  bidderInfos: BidderInfos[];
 }
 
 const BidList = (props: BidListProps) => {

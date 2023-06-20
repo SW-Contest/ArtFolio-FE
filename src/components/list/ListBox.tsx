@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { artistInfoProps, auctionInfoProps } from "../../mocks/dummyList";
+import { ArtistInfo, AuctionInfo } from "../../types/auction.type";
 
 interface ListBoxProps {
-  artistInfo: artistInfoProps;
-  auctionInfo: auctionInfoProps;
+  artistInfo: ArtistInfo;
+  auctionInfo: AuctionInfo;
 }
 const ListBox = (props: ListBoxProps) => {
   const navigate = useNavigate();
