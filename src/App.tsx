@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
+import UserPage from "./pages/UserPage";
 import { useEffect } from "react";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/auction/:auctionId" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/user/:userName" element={<UserPage />} />
       </Routes>
     </div>
   );
