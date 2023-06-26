@@ -6,6 +6,7 @@ import MotionButton from "../components/ui/MotionButton";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import ListWrapper from "../components/list/ListWrapper";
+import SlidingMenu from "../components/ui/SlidingMenu";
 
 const UserPage = () => {
   const menus = ["경매 중 작품", "경매 완료 작품"];
@@ -14,14 +15,13 @@ const UserPage = () => {
   return (
     <Layout>
       <Header />
-
       <article className="flex flex-col items-center w-full gap-3">
         <div className="flex justify-center w-full mt-10">
           <UserIcon url="/src/assets/img/cat.jpeg" large />
         </div>
         <div className="flex flex-col items-center gap-3">
-          <p className="text-sm font-bold truncate ">이름</p>
-          <p className="text-sm font-light truncate ">
+          <p className="text-2xl font-bold truncate ">이름</p>
+          <p className="text-sm font-medium truncate ">
             한 줄 소개가 들어갑니다.
           </p>
         </div>
@@ -30,28 +30,12 @@ const UserPage = () => {
         </MotionButton>
       </article>
 
-      <ul className="flex w-full">
-        {menus.map((item) => (
-          <li
-            key={item}
-            className={
-              item === selectedMenu
-                ? "relative flex grow  text-red-500"
-                : "relative flex grow "
-            }
-            onClick={() => setSelectedMenu(item)}
-          >
-            <div className="w-full text-center border-b">{item}</div>
+      <SlidingMenu
+        menus={menus}
+        selectedMenu={selectedMenu}
+        setSelectedMenu={setSelectedMenu}
+      />
 
-            {item === selectedMenu ? (
-              <motion.div
-                className=" z-10 w-full absolute bottom-0 border-b border-red-500 "
-                layoutId="underline"
-              />
-            ) : null}
-          </li>
-        ))}
-      </ul>
       <ListWrapper />
     </Layout>
   );

@@ -45,9 +45,7 @@ const LoginPage = () => {
 
   return (
     <Layout>
-      <header>
-        <Logo />
-      </header>
+      <Logo />
       <div className="mt-16">
         <InputBar
           emailValue={emailValue}
