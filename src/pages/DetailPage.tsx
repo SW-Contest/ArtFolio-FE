@@ -9,7 +9,7 @@ import * as StompJs from "@stomp/stompjs";
 
 import DetailFooter from "../components/detail/DetailFooter";
 import { useQuery } from "@tanstack/react-query";
-import { auctionDetailProps } from "../mocks/dummyList";
+import { AuctionDetail } from "../types/auction.type";
 import BidList from "../components/detail/BidList";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ArtistInfo from "../components/detail/ArtistInfo";
@@ -17,20 +17,22 @@ import AuctionContent from "../components/detail/AuctionContent";
 import AuctionTitle from "../components/detail/AuctionTitle";
 import axios from "axios";
 import HeartAnimation from "../components/ui/HeartAnimation";
+import { getAuctionDetail } from "../api/auction.api";
+import { HOST } from "../constants/host";
 
 const DetailPage = () => {
   const [bidder, setBidder] = useState(1);
   const [bidPrice, setBidPrice] = useState(0);
   const auctionId = useParams().auctionId;
 
-  const fetchData = async () => {
-    const res = await axios.get(`http://20.249.220.42/rt_auction/${auctionId}`);
-    return res.data;
+  const fetchAuctionDetail = async () => {
+    const response = await getAuctionDetail(auctionId);
+    return response.data;
   };
 
-  const { data, isFetching, refetch } = useQuery<auctionDetailProps>(
+  const { data, isFetching, refetch } = useQuery<AuctionDetail>(
     [auctionId],
-    fetchData
+    fetchAuctionDetail
   );
 
   const { artistInfo, auctionInfo, bidderInfos } = data ?? {};
@@ -39,7 +41,7 @@ const DetailPage = () => {
 
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://20.249.220.42/sock",
+      brokerURL: `ws://${HOST}/sock`,
       onConnect: () => {
         console.log("success");
         subscribe();

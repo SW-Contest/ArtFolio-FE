@@ -1,11 +1,11 @@
 import React from "react";
 import UserIcon from "../ui/UserIcon";
 import { motion } from "framer-motion";
-import { artistInfoProps } from "../../mocks/dummyList";
+import { ArtistInfo } from "../../types/auction.type";
 import MotionButton from "../ui/MotionButton";
 
 interface ArtistInfoProps {
-  artistInfo: artistInfoProps;
+  artistInfo: ArtistInfo;
 }
 const ArtistInfo = (props: ArtistInfoProps) => {
   return (

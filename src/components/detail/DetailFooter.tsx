@@ -11,17 +11,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import HeartAnimation from "../ui/HeartAnimation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { auctionInfoProps } from "../../mocks/dummyList";
+import { AuctionInfo } from "../../types/auction.type";
 import { useAnimationStore } from "../../store/store";
 import { useStore } from "zustand";
 
 import MotionButton from "../ui/MotionButton";
+import { postAuctionLike } from "../../api/auction.api";
 
 interface DetailFooterProps {
   onPublishClick: () => void;
   onBidChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBidSet: (value: number) => void;
-  auctionInfo: auctionInfoProps;
+  auctionInfo: AuctionInfo;
   bidPrice: number;
 }
 
@@ -69,11 +70,8 @@ const DetailFooter = (props: DetailFooterProps) => {
   };
 
   const fetchData = async () => {
-    const res = await axios.post("http://20.249.220.42/rt_auction/like", {
-      auctionId: props.auctionInfo.id,
-      memberId: 1,
-    });
-    return res.data;
+    const response = await postAuctionLike(props.auctionInfo.id, 1);
+    return response.data;
   };
 
   const clickHeartHandler = () => {

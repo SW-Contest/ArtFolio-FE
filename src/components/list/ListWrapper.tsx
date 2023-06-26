@@ -1,28 +1,26 @@
-import ListButton from "./ListButton";
 import ListBox from "./ListBox";
 import { useState, useRef, useEffect } from "react";
-import { auctionListProps } from "../../mocks/dummyList";
-import axios from "axios";
+import { AuctionList } from "../../types/auction.type";
+
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import ListBoxSkeleton from "./ListBoxSkeleton";
+import { getAuctionPage } from "../../api/auction.api";
 
 const ListWrapper = () => {
   const infScroll = useRef(null);
-  const [pages, setPages] = useState<auctionListProps[]>([]);
+  const [pages, setPages] = useState<AuctionList[]>([]);
   const [sort, setSort] = useState("전체"); // 전체,인기
 
-  const fetchData = async ({ pageParam = 0 }) => {
-    const res = await axios.get(
-      `http://20.249.220.42/rt_auction/list?page=${pageParam}&size=10&sort=auctionLike,DESC`
-    );
-    return res.data;
+  const fetchAuctionPage = async ({ pageParam = 0 }) => {
+    const response = await getAuctionPage(pageParam);
+    return response.data;
   };
 
   const { isFetching, data, fetchNextPage } = useInfiniteQuery(
     ["Page"],
-    fetchData,
+    fetchAuctionPage,
     {
       getNextPageParam: (lastPage, allPages) =>
         lastPage.dataSize == 10 ? lastPage.pageNumber + 1 : undefined,
@@ -52,12 +50,6 @@ const ListWrapper = () => {
     <section className="flex flex-col w-full p-3 font-Pretendard">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">아트폴리오에서 경매 중인 작품</p>
-        {/* <ListButton sort={sort} name="전체" onClick={changeSortHandler}>
-          전체
-        </ListButton>
-        <ListButton sort={sort} name="인기" onClick={changeSortHandler}>
-          인기
-        </ListButton> */}
       </div>
       <div className="flex flex-wrap justify-between w-full">
         {pages.map((list) =>
