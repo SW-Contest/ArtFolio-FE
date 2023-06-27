@@ -39,6 +39,7 @@ const LoginPage = () => {
        else {
            console.log("로그인 실패");
        }
+
    };
 
     return (
@@ -47,18 +48,18 @@ const LoginPage = () => {
             <Logo />
             </header>
             <div className='mt-16'>
-                <InputBar
+                <InputBar 
                 emailValue={emailValue}
                 passwordValue={passwordValue}
                 onEmailChange={onEmailchangeHandler}
                 onPasswordChange={onPasswordChangeHandler}
                 />
                 <LoginButton onClick={loginHandler} />
-                <div className='w-full flex items-center list-none mx-12 text-xs mt-4 text-slate-400 space-x-4'>
-                    <li className='pr-8 border-r border-slate-400'>아이디 찾기</li>
-                    <div className=' border-1 border-slate-400 h-6'></div>
-                    <li className='pr-8 border-r border-slate-400'>비밀번호 찾기</li>
-                    <div className=' border-1 border-slate-400 h-6'></div>
+                <div className='w-full flex items-center justify-center list-none  text-xs mt-4 text-slate-400 space-x-4'>
+                    <li className=''>아이디 찾기</li>
+                    <div className=''>|</div>
+                    <li className=''>비밀번호 찾기</li>
+                    <div>|</div>
                     <li>회원가입</li>
                 </div>
             </div>
@@ -67,9 +68,21 @@ const LoginPage = () => {
         간편 로그인
         <hr className='flex-grow border-slate-400 mx-3'></hr>
         </div>
-            <SocialButton title={"Naver"} bgColor={"#17CE5F"} txtColor={"white"} />
-            <SocialButton title={"Kakao"} bgColor={"#FAE100"} txtColor={"black"} />
-            <SocialButton title={"Google"} bgColor={"#4284F3"} txtColor={"white"} />
+            <SocialButton 
+            title={"Naver"}
+            bgColor={"#17CE5F"} 
+            txtColor={"white"}
+            />
+            <SocialButton 
+            title={"Kakao"} 
+            bgColor={"#FAE100"} 
+            txtColor={"black"} 
+            />
+            <SocialButton 
+            title={"Google"} 
+            bgColor={"#4284F3"} 
+            txtColor={"white"}  
+            />
             </Layout>
     );
 };
