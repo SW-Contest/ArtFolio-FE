@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArtistInfo, AuctionInfo } from "../../types/auction.type";
@@ -8,10 +8,18 @@ interface ListBoxProps {
   auctionInfo: AuctionInfo;
 }
 const ListBox = (props: ListBoxProps) => {
+  const [imgError, setImgError] = useState(
+    props.auctionInfo.thumbnailPath === "null"
+  );
   const navigate = useNavigate();
 
   const clickHandler = () => {
     navigate(`/auction/${props.auctionInfo.id}`);
+  };
+
+  // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
+  const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    setImgError(true);
   };
 
   return (
@@ -19,8 +27,9 @@ const ListBox = (props: ListBoxProps) => {
       onClick={clickHandler}
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
-      {props.auctionInfo.thumbnailPath !== "null" ? (
+      {!imgError ? (
         <img
+          onError={onErrorHandler}
           className="flex object-cover w-full h-full rounded-lg "
           src={props.auctionInfo.thumbnailPath}
         />
