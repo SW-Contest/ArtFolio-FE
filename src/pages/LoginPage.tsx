@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/ui/Layout';
 import Logo from '../components/login/Logo';
 import InputBar from '../components/login/InputBar';
-import LoginButton from '../components/login/LoginButton';
 import SocialButton from '../components/login/SocialButton';
+import NaverOauth from '../components/login/NaverOauth';
+import KakaoOauth from '../components/login/KakaoOauth';
+import GoogleOauth from '../components/login/GoogleOauth';
 
 const userdata = [{
     email: "ovovvvvv@naver.com",
@@ -44,40 +46,20 @@ const LoginPage = () => {
 
     return (
             <Layout>
+                <div className='bg-black h-screen pt-[150px]'>
             <header>
             <Logo />
             </header>
-            <div className='mt-16'>
-                <InputBar 
-                emailValue={emailValue}
-                passwordValue={passwordValue}
-                onEmailChange={onEmailchangeHandler}
-                onPasswordChange={onPasswordChangeHandler}
-                />
-                <LoginButton onClick={loginHandler} />
+            <div className=''>
                 <div className='w-full flex items-center justify-center list-none  text-xs mt-4 text-slate-400 space-x-4'>
                 </div>
             </div>
-            <div className='text-slate-400 mt-16 text-sm flex items-center'>
-        <hr className='flex-grow border-slate-400 mx-3'></hr>    
-        간편 로그인
-        <hr className='flex-grow border-slate-400 mx-3'></hr>
+            <div className='text-slate-400 text-sm flex items-center'>
         </div>
-            <SocialButton 
-            title={"Naver"}
-            bgColor={"#17CE5F"} 
-            txtColor={"white"}
-            />
-            <SocialButton 
-            title={"Kakao"} 
-            bgColor={"#FAE100"} 
-            txtColor={"black"} 
-            />
-            <SocialButton 
-            title={"Google"} 
-            bgColor={"#4284F3"} 
-            txtColor={"white"}  
-            />
+           <NaverOauth />
+           <KakaoOauth/>
+            <GoogleOauth/>
+            </div>
             </Layout>
     );
 };
