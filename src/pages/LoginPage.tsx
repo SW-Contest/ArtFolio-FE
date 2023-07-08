@@ -56,11 +56,6 @@ const LoginPage = () => {
                 />
                 <LoginButton onClick={loginHandler} />
                 <div className='w-full flex items-center justify-center list-none  text-xs mt-4 text-slate-400 space-x-4'>
-                    <li className=''>아이디 찾기</li>
-                    <div className=''>|</div>
-                    <li className=''>비밀번호 찾기</li>
-                    <div>|</div>
-                    <li>회원가입</li>
                 </div>
             </div>
             <div className='text-slate-400 mt-16 text-sm flex items-center'>
