@@ -10,12 +10,13 @@ import "swiper/css/pagination";
 import SlideImage from "./SlideImage";
 
 import ImageModal from "./ImageModal";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 interface DetailCarouselProps {
   photoPaths: string[];
 }
 const DetailCarousel = (props: DetailCarouselProps) => {
+  const [imgError, setImgError] = useState(props.photoPaths.length > 0);
   const [imgSrc, setImgSrc] = useState("");
   const clickImageHandler = (photo: string) => {
     const checkbox = document.getElementById("image-modal") as HTMLInputElement;
@@ -24,6 +25,10 @@ const DetailCarousel = (props: DetailCarouselProps) => {
       checkbox.checked = true;
       document.body.style.overflow = "hidden";
     }
+  };
+
+  const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    setImgError(true);
   };
   return (
     <>
@@ -37,10 +42,11 @@ const DetailCarousel = (props: DetailCarouselProps) => {
         }}
         className="detailSwiper mt-10"
       >
-        {props.photoPaths.length > 0 ? (
+        {!imgError ? (
           props.photoPaths.map((photo, index) => (
             <SwiperSlide key={index}>
               <img
+                onError={onErrorHandler}
                 onClick={() => clickImageHandler(photo)}
                 className="flex shrink-0 w-full h-80"
                 src={photo}

@@ -9,7 +9,6 @@ const ImageModal = (props: ImageModalProps) => {
   // 모달이 있을 때는 외부 스크롤을 막습니다.
   const changeScrollHandler = (e: any) => {
     const isChecked = e.target.value;
-    console.log("in");
     if (isChecked) {
       document.body.style.overflow = "unset";
     }

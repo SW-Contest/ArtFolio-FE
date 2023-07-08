@@ -13,7 +13,6 @@ const MainPage = () => {
       <SearchBar />
       <ListWrapper />
     </Layout>
-  
   );
 };
 
