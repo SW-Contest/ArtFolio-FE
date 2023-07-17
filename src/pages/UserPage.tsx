@@ -25,9 +25,9 @@ const UserPage = () => {
             한 줄 소개가 들어갑니다.
           </p>
         </div>
-        <MotionButton className="px-2 py-1 text-white border-0 rounded-full  bg-af-hotPink">
+        <button className="btn px-2 py-1 text-white border-0 rounded-full  bg-af-hotPink">
           Follow
-        </MotionButton>
+        </button>
       </article>
 
       <SlidingMenu

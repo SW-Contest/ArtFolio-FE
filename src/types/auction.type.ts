@@ -1,3 +1,5 @@
+import { S } from "msw/lib/glossary-de6278a9";
+
 export interface Auction {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
@@ -44,8 +46,19 @@ export interface BidderInfos {
   bidDate: string;
 }
 
+export interface AiInfo {
+  labels: AiInfoLabel[];
+  content: string;
+}
+
+export interface AiInfoLabel {
+  name: string;
+  confidence: number;
+}
+
 export interface AuctionDetail {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
   bidderInfos: BidderInfos[];
+  aiInfo: AiInfo;
 }

@@ -14,7 +14,7 @@ const AuctionListWrapper = () => {
   const [pages, setPages] = useState<AuctionList[]>([]);
 
   const fetchAuctionPage = async ({ pageParam = 0 }) => {
-    const response = await getMockAuctionPage(pageParam);
+    const response = await getAuctionPage(pageParam);
     return response.data;
   };
 
@@ -29,7 +29,6 @@ const AuctionListWrapper = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data.pages);
       setPages(data.pages);
     }
   }, [data]);
@@ -48,10 +47,10 @@ const AuctionListWrapper = () => {
         <p className="font-semibold">아트폴리오에서 경매 중인 작품</p>
       </div>
       <div className="flex flex-wrap justify-between w-full">
-        <AuctionListBoxes pages={pages} />
         {!isError &&
           isFetching &&
           [1, 2, 3, 4, 5, 6].map((_, index) => <ListBoxSkeleton key={index} />)}
+        <AuctionListBoxes pages={pages} />
       </div>
       {isError && <p>데이터가 없습니다.</p>}
       {!isError && (

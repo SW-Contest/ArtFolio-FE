@@ -8,6 +8,7 @@ interface AuctionListBoxesProps {
 
 const AuctionListBoxes = (props: AuctionListBoxesProps) => {
   const { pages } = props;
+
   return (
     <>
       {pages.map((list) =>

@@ -15,8 +15,8 @@ import { AuctionInfo } from "../../../types/auction.type";
 import { useAnimationStore } from "../../../store/store";
 import { useStore } from "zustand";
 
-import MotionButton from "../../ui/MotionButton";
 import { postAuctionLike } from "../../../api/auction.api";
+import RoundButton from "../../ui/RoundButton";
 
 interface DetailFooterProps {
   onPublishClick: () => void;
@@ -32,7 +32,15 @@ const DetailFooter = (props: DetailFooterProps) => {
   const [isShowHeart, setIsShowHeart] = useState(false);
   const [time, setTime] = useState("");
 
-  const isLike = props.auctionInfo.likeMembers.includes(1);
+  const priceButton = [
+    { title: "+1천원", value: props.bidPrice + 1000 },
+    { title: "+1만원", value: props.bidPrice + 10000 },
+    { title: "+5만원", value: props.bidPrice + 50000 },
+    { title: "현재가", value: props.auctionInfo.currentPrice },
+  ];
+
+  // const isLike = props.auctionInfo.likeMembers.includes(1);
+  const isLike = false;
 
   const tick = () => {
     setTime(() => getTimeLeft());
@@ -113,10 +121,13 @@ const DetailFooter = (props: DetailFooterProps) => {
           exit={{ opacity: 0 }}
           className="flex flex-col w-full gap-4"
         >
-          <div className="flex w-full h-10 justify-evenly">
-            <MotionButton onClick={() => props.onBidSet(props.bidPrice - 1)}>
+          <div className="flex items-center w-full h-10 justify-evenly">
+            <button
+              className="h-full bg-gray-200 btn btn-sm hover:bg-gray-300"
+              onClick={() => props.onBidSet(props.bidPrice - 1)}
+            >
               <AiOutlineMinus size={24} />
-            </MotionButton>
+            </button>
             <motion.input
               key={props.auctionInfo.currentPrice}
               initial={{ color: "#000000" }}
@@ -126,35 +137,23 @@ const DetailFooter = (props: DetailFooterProps) => {
               onChange={props.onBidChange}
               value={props.bidPrice}
             />
-            <MotionButton onClick={() => props.onBidSet(props.bidPrice + 1)}>
+            <button
+              className="h-full bg-gray-200 btn btn-sm hover:bg-gray-300"
+              onClick={() => props.onBidSet(props.bidPrice + 1)}
+            >
               <AiOutlinePlus size={24} />
-            </MotionButton>
+            </button>
           </div>
-          <div className="flex w-full h-10 justify-evenly">
-            <MotionButton
-              onClick={() => props.onBidSet(props.bidPrice + 1000)}
-              className="px-3 border border-gray-300 rounded-lg"
-            >
-              +1천원
-            </MotionButton>
-            <MotionButton
-              onClick={() => props.onBidSet(props.bidPrice + 10000)}
-              className="px-3 border border-gray-300 rounded-lg"
-            >
-              +1만원
-            </MotionButton>
-            <MotionButton
-              onClick={() => props.onBidSet(props.bidPrice + 50000)}
-              className="px-3 border border-gray-300 rounded-lg"
-            >
-              +5만원
-            </MotionButton>
-            <MotionButton
-              onClick={() => props.onBidSet(props.auctionInfo.currentPrice)}
-              className="px-3 border border-gray-300 rounded-lg"
-            >
-              현재가
-            </MotionButton>
+          <div className="flex items-center w-full h-10 justify-evenly">
+            {priceButton.map((pb) => (
+              <button
+                key={pb.title}
+                onClick={() => props.onBidSet(pb.value)}
+                className="w-1/5 h-full bg-gray-200 btn btn-sm hover:bg-gray-300"
+              >
+                {pb.title}
+              </button>
+            ))}
           </div>
         </motion.section>
       )}
@@ -174,26 +173,26 @@ const DetailFooter = (props: DetailFooterProps) => {
         </motion.section>
       )}
 
-      <div className="flex w-full h-12  justify-evenly">
-        <MotionButton
+      <div className="flex w-full h-12 justify-evenly">
+        <button
           onClick={clickHeartHandler}
           className={
             isLike
-              ? "w-12 group rounded-lg flex justify-center items-center border bg-af-hotPink   border-af-hotPink"
-              : "w-12 group rounded-lg flex justify-center items-center border bg-transparent  border-af-hotPink"
+              ? "btn w-12 flex justify-center items-center border bg-af-hotPink   border-af-hotPink"
+              : "btn w-12 flex justify-center items-center border bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
           }
         >
           <BsHeartFill
             size={24}
             className={isLike ? "fill-white " : "fill-af-hotPink "}
           />
-        </MotionButton>
-        <MotionButton
+        </button>
+        <RoundButton
+          className="w-1/2"
           onClick={isCollapsed ? changeCollapsedHandler : props.onPublishClick}
-          className="w-1/2 text-white border-0 rounded-lg bg-af-hotPink hover:bg-af-hotPink"
         >
           입찰하기
-        </MotionButton>
+        </RoundButton>
       </div>
     </motion.footer>
   );

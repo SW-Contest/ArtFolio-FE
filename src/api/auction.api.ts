@@ -10,7 +10,7 @@ export const getMockAuctionPage = async (pageParam: number) => {
 
 export const getAuctionPage = async (pageParam: number) => {
   const response = await axios.get(
-    `http://${HOST}/rt_auction/list?page=${pageParam}&size=10&sort=auctionLike,DESC`
+    `http://${HOST}/rt_auction/list?searchType=CURRENT_PRICE&orderType=DESC&page=${0}`
   );
 
   return response;

@@ -92,6 +92,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setBidPrice(data.auctionInfo.currentPrice);
     }
   }, [data]);
