@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import MainPage from "./pages/MainPage";
+import AuctionPage from "./pages/AuctionPage";
 import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="relative flex justify-center w-screen h-full bg-gray-100 overflow-y-hidden">
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<AuctionPage />} />
         <Route path="/auction/:auctionId" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user/:userName" element={<UserPage />} />

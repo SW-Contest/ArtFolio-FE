@@ -2,10 +2,10 @@ import React from "react";
 import Layout from "../components/ui/Layout";
 import Header from "../components/ui/Header";
 import UserIcon from "../components/ui/UserIcon";
-import MotionButton from "../components/ui/MotionButton";
+
 import { motion } from "framer-motion";
 import { useState } from "react";
-import ListWrapper from "../components/list/ListWrapper";
+import ListWrapper from "../components/auction/list/AuctionListWrapper";
 import SlidingMenu from "../components/ui/SlidingMenu";
 
 const UserPage = () => {

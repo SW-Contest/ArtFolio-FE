@@ -2,22 +2,22 @@ import Layout from "../components/ui/Layout";
 import { useParams } from "react-router-dom";
 import Header from "../components/ui/Header";
 
-import DetailCarousel from "../components/detail/DetailCarousel";
+import DetailCarousel from "../components/auction/detail/DetailCarousel";
 
 import { useEffect, useState, useRef } from "react";
 import * as StompJs from "@stomp/stompjs";
 
-import DetailFooter from "../components/detail/DetailFooter";
+import DetailFooter from "../components/auction/detail/DetailFooter";
 import { useQuery } from "@tanstack/react-query";
 import { AuctionDetail } from "../types/auction.type";
-import BidList from "../components/detail/BidList";
+import BidList from "../components/auction/detail/BidList";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
-import ArtistInfo from "../components/detail/ArtistInfo";
-import AuctionContent from "../components/detail/AuctionContent";
-import AuctionTitle from "../components/detail/AuctionTitle";
+import ArtistInfo from "../components/auction/detail/ArtistInfo";
+import AuctionContent from "../components/auction/detail/AuctionContent";
+import AuctionTitle from "../components/auction/detail/AuctionTitle";
 import axios from "axios";
 import HeartAnimation from "../components/ui/HeartAnimation";
-import { getAuctionDetail } from "../api/auction.api";
+import { getAuctionDetail, getMockAuctionDetail } from "../api/auction.api";
 import { HOST } from "../constants/host";
 
 const DetailPage = () => {

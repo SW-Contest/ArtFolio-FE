@@ -16,7 +16,7 @@ interface DetailCarouselProps {
   photoPaths: string[];
 }
 const DetailCarousel = (props: DetailCarouselProps) => {
-  const [imgError, setImgError] = useState(props.photoPaths.length > 0);
+  const [imgError, setImgError] = useState(props.photoPaths.length === 0);
   const [imgSrc, setImgSrc] = useState("");
   const clickImageHandler = (photo: string) => {
     const checkbox = document.getElementById("image-modal") as HTMLInputElement;

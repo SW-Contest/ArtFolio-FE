@@ -1,8 +1,8 @@
 import React from "react";
-import UserIcon from "../ui/UserIcon";
+import UserIcon from "../../ui/UserIcon";
 import { motion } from "framer-motion";
-import { ArtistInfo } from "../../types/auction.type";
-import MotionButton from "../ui/MotionButton";
+import { ArtistInfo } from "../../../types/auction.type";
+import MotionButton from "../../ui/MotionButton";
 
 interface ArtistInfoProps {
   artistInfo: ArtistInfo;
