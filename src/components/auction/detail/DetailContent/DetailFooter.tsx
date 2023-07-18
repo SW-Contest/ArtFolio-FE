@@ -8,18 +8,18 @@ import {
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import HeartAnimation from "../../ui/HeartAnimation";
+import HeartAnimation from "../../../ui/HeartAnimation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { AuctionInfo } from "../../../types/auction.type";
-import { useAnimationStore } from "../../../store/store";
+import { AuctionInfo } from "../../../../types/auction.type";
+import { useAnimationStore } from "../../../../store/store";
 import { useStore } from "zustand";
 
-import { postAuctionLike } from "../../../api/auction.api";
-import RoundButton from "../../ui/RoundButton";
+import { postAuctionLike } from "../../../../api/auction.api";
+import RoundButton from "../../../ui/RoundButton";
 
 interface DetailFooterProps {
-  onPublishClick: any;
+  onPublishClick: (body: { bidderId: number; bidPrice: number }) => void;
   onBidChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBidSet: (value: number) => void;
   auctionInfo: AuctionInfo;

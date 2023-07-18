@@ -1,13 +1,9 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-
-import SlideImage from "./SlideImage";
 
 import ImageModal from "./ImageModal";
 import { SyntheticEvent, useState } from "react";
