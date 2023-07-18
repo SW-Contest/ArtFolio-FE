@@ -1,5 +1,3 @@
-import { S } from "msw/lib/glossary-de6278a9";
-
 export interface Auction {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;

@@ -1,6 +1,6 @@
-import UserIcon from "../../ui/UserIcon";
-import { ArtistInfo } from "../../../types/auction.type";
-import RoundButton from "../../ui/RoundButton";
+import UserIcon from "../../../ui/UserIcon";
+import { ArtistInfo } from "../../../../types/auction.type";
+import RoundButton from "../../../ui/RoundButton";
 
 interface ArtistInfoProps {
   artistInfo: ArtistInfo;

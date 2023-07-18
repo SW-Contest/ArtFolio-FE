@@ -19,11 +19,12 @@ import { postAuctionLike } from "../../../api/auction.api";
 import RoundButton from "../../ui/RoundButton";
 
 interface DetailFooterProps {
-  onPublishClick: () => void;
+  onPublishClick: any;
   onBidChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBidSet: (value: number) => void;
   auctionInfo: AuctionInfo;
   bidPrice: number;
+  bidderId: number;
 }
 
 const DetailFooter = (props: DetailFooterProps) => {
@@ -89,6 +90,13 @@ const DetailFooter = (props: DetailFooterProps) => {
     }
   };
   const { data, mutate } = useMutation(fetchData);
+
+  const publishClickHandler = () => {
+    props.onPublishClick({
+      bidderId: props.bidderId,
+      bidPrice: props.bidPrice,
+    });
+  };
 
   return (
     <motion.footer
@@ -189,7 +197,7 @@ const DetailFooter = (props: DetailFooterProps) => {
         </button>
         <RoundButton
           className="w-1/2"
-          onClick={isCollapsed ? changeCollapsedHandler : props.onPublishClick}
+          onClick={isCollapsed ? changeCollapsedHandler : publishClickHandler}
         >
           입찰하기
         </RoundButton>

@@ -4,7 +4,7 @@ import Logo from "../components/login/Logo";
 import InputBar from "../components/login/InputBar";
 import LoginButton from "../components/login/LoginButton";
 import SocialButton from "../components/login/SocialButton";
-
+import axios from "axios";
 const userdata = [
   {
     email: "ovovvvvv@naver.com",
@@ -69,7 +69,6 @@ const LoginPage = () => {
       </div>
       <SocialButton title={"Naver"} bgColor={"#17CE5F"} txtColor={"white"} />
       <SocialButton title={"Kakao"} bgColor={"#FAE100"} txtColor={"black"} />
-      <SocialButton title={"Google"} bgColor={"#4284F3"} txtColor={"white"} />
     </Layout>
   );
 };
