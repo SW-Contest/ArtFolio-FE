@@ -1,13 +1,12 @@
-import React from "react";
-import UserIcon from "../ui/UserIcon";
-import { motion } from "framer-motion";
-import { ArtistInfo } from "../../types/auction.type";
-import MotionButton from "../ui/MotionButton";
+import UserIcon from "../../../ui/UserIcon";
+import { ArtistInfo } from "../../../../types/auction.type";
+import RoundButton from "../../../ui/RoundButton";
 
 interface ArtistInfoProps {
   artistInfo: ArtistInfo;
 }
 const ArtistInfo = (props: ArtistInfoProps) => {
+  const clickArtistHomeHandler = () => {};
   return (
     <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray">
       <UserIcon url="/src/assets/img/cat.jpeg" />
@@ -16,9 +15,7 @@ const ArtistInfo = (props: ArtistInfoProps) => {
 
         <p className="text-xs font-light">좋아요 {props.artistInfo.like}</p>
       </div>
-      <MotionButton className="border-0 rounded-full px-2 py-1 text-white bg-af-hotPink ">
-        작가 Home
-      </MotionButton>
+      <RoundButton onClick={clickArtistHomeHandler}>작가 Home</RoundButton>
     </article>
   );
 };

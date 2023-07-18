@@ -2,10 +2,10 @@ import React from "react";
 import Layout from "../components/ui/Layout";
 import Header from "../components/ui/Header";
 import UserIcon from "../components/ui/UserIcon";
-import MotionButton from "../components/ui/MotionButton";
+
 import { motion } from "framer-motion";
 import { useState } from "react";
-import ListWrapper from "../components/list/ListWrapper";
+import ListWrapper from "../components/auction/list/AuctionListWrapper";
 import SlidingMenu from "../components/ui/SlidingMenu";
 
 const UserPage = () => {
@@ -25,9 +25,9 @@ const UserPage = () => {
             한 줄 소개가 들어갑니다.
           </p>
         </div>
-        <MotionButton className="px-2 py-1 text-white border-0 rounded-full  bg-af-hotPink">
+        <button className="btn px-2 py-1 text-white border-0 rounded-full  bg-af-hotPink">
           Follow
-        </MotionButton>
+        </button>
       </article>
 
       <SlidingMenu

@@ -2,7 +2,7 @@ import React from "react";
 import Chart from "./Chart";
 import BidListModal from "./BidListModal";
 import { useState, useEffect } from "react";
-import { BidderInfos, AuctionInfo } from "../../types/auction.type";
+import { BidderInfos, AuctionInfo } from "../../../../types/auction.type";
 
 export interface bidderDataProps {
   x: Date | null;

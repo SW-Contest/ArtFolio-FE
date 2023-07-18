@@ -1,5 +1,5 @@
 import React from "react";
-import { AuctionInfo } from "../../types/auction.type";
+import { AuctionInfo } from "../../../../types/auction.type";
 
 interface AuctionTitleProps {
   auctionInfo: AuctionInfo;

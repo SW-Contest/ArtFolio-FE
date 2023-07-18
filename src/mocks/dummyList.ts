@@ -32,6 +32,51 @@ export const dummyDetail: AuctionDetail = {
       bidDate: "2023-06-26T10:00:00",
     },
   ],
+  aiInfo: {
+    labels: [
+      {
+        name: "Cream",
+        confidence: 96.030624,
+      },
+      {
+        name: "Dessert",
+        confidence: 96.030624,
+      },
+      {
+        name: "Food",
+        confidence: 96.030624,
+      },
+      {
+        name: "Ice Cream",
+        confidence: 96.030624,
+      },
+      {
+        name: "Cup",
+        confidence: 83.85441,
+      },
+      {
+        name: "Disposable Cup",
+        confidence: 83.85441,
+      },
+      {
+        name: "Text",
+        confidence: 61.572563,
+      },
+      {
+        name: "Beverage",
+        confidence: 57.233093,
+      },
+      {
+        name: "Juice",
+        confidence: 57.233093,
+      },
+      {
+        name: "Plastic",
+        confidence: 56.20349,
+      },
+    ],
+    content: "",
+  },
 };
 
 export const dummyAuctionList: AuctionList = {
