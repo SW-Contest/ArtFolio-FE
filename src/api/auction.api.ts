@@ -2,13 +2,13 @@ import axios from "axios";
 import { HOST } from "../constants/host";
 
 // Mock 경매 리스트를 받아옵니다.
-export const getMockAuctionPage = async (pageParam: number) => {
+export const getMockAuctionList = async (pageParam: number) => {
   const dummyResponse = await axios.get(`/rt_auction/list/${pageParam}`);
 
   return dummyResponse;
 };
 
-export const getAuctionPage = async (pageParam: number) => {
+export const getAuctionList = async (pageParam: number) => {
   const response = await axios.get(
     `http://${HOST}/rt_auction/list?searchType=CURRENT_PRICE&orderType=DESC&page=${0}`
   );
@@ -34,6 +34,12 @@ export const postAuctionLike = async (auctionId: string, memberId: number) => {
     auctionId: auctionId,
     memberId: memberId,
   });
+
+  return response;
+};
+
+export const getArtPieceList = async (userId: string | undefined) => {
+  const response = await axios.get(`http://${HOST}/user/art_piece/${userId}`);
 
   return response;
 };

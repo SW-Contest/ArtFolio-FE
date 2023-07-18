@@ -79,7 +79,12 @@ const DetailFooter = (props: DetailFooterProps) => {
   };
 
   const fetchData = async () => {
-    const response = await postAuctionLike(props.auctionInfo.id, 1);
+    const response = await postAuctionLike(
+      props.auctionInfo.id,
+      props.bidderId
+    );
+
+    console.log(response.data);
     return response.data;
   };
 

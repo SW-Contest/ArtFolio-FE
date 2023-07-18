@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import ListWrapper from "../components/auction/list/AuctionListWrapper";
 import SlidingMenu from "../components/ui/SlidingMenu";
+import UserAuctionListWrapper from "../components/user/UserAuctionListWrapper";
 
 const UserPage = () => {
   const menus = ["경매 중 작품", "경매 완료 작품"];
@@ -36,7 +37,7 @@ const UserPage = () => {
         setSelectedMenu={setSelectedMenu}
       />
 
-      <ListWrapper />
+      <UserAuctionListWrapper />
     </Layout>
   );
 };

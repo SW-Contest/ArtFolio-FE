@@ -1,4 +1,4 @@
-export interface Auction {
+export interface AuctionData {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
 }
@@ -9,7 +9,7 @@ export interface AuctionList {
   pageSize: number;
   pageNumber: number;
   dataSize: number;
-  data: Auction[];
+  data: AuctionData[];
 }
 
 export interface ArtistInfo {
@@ -18,6 +18,14 @@ export interface ArtistInfo {
   email: string;
   profilePhotoPath: string;
   like: number;
+}
+
+export interface ArtPieceInfo {
+  id: number;
+  title: string;
+  content: string;
+  likes: number;
+  photos: string[];
 }
 
 export interface AuctionInfo {
@@ -30,7 +38,7 @@ export interface AuctionInfo {
   createdAt: string;
   finishedAt: string;
   photoPaths: string[];
-  thumbnailPath: string;
+  // thumbnailPath: string;
   likeMembers: number[];
 }
 
@@ -57,6 +65,12 @@ export interface AiInfoLabel {
 export interface AuctionDetail {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
+  artPieceInfo: ArtPieceInfo;
   bidderInfos: BidderInfos[];
   aiInfo: AiInfo;
+}
+
+export interface ArtPieceList {
+  artistInfo: ArtistInfo;
+  artPieceInfos: ArtPieceInfo[];
 }
