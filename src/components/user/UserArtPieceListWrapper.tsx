@@ -1,16 +1,14 @@
-import ListBox from "../ui/ListBox";
 import { useState, useRef, useEffect } from "react";
 import { ArtPieceList } from "../../types/auction.type";
 
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import ListBoxSkeleton from "../ui/ListBoxSkeleton";
 import { getArtPieceList } from "../../api/artPiece.api";
 import UserAuctionListBoxes from "./UserAuctionListBoxes";
 import { useParams } from "react-router-dom";
 
-const UserAuctionListWrapper = () => {
+const UserArtPieceListWrapper = () => {
   const infScroll = useRef(null);
   const [list, setList] = useState<ArtPieceList>();
   const userId = useParams().userId;
@@ -52,4 +50,4 @@ const UserAuctionListWrapper = () => {
   );
 };
 
-export default UserAuctionListWrapper;
+export default UserArtPieceListWrapper;

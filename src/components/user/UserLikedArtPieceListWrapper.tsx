@@ -1,28 +1,26 @@
-import ListBox from "../ui/ListBox";
 import { useState, useRef, useEffect } from "react";
 import { ArtPieceList } from "../../types/auction.type";
 
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import ListBoxSkeleton from "../ui/ListBoxSkeleton";
-import { getArtPieceList } from "../../api/artPiece.api";
+import { getLikedArtPieceList } from "../../api/artPiece.api";
 import UserAuctionListBoxes from "./UserAuctionListBoxes";
 import { useParams } from "react-router-dom";
 
-const UserAuctionListWrapper = () => {
+const UserLikedArtPieceListWrapper = () => {
   const infScroll = useRef(null);
   const [list, setList] = useState<ArtPieceList>();
   const userId = useParams().userId;
 
-  const fetchArtpieceList = async () => {
-    const response = await getArtPieceList(userId);
+  const fetchLikedArtpieceList = async () => {
+    const response = await getLikedArtPieceList(userId);
     return response.data;
   };
 
   const { isFetching, data, isError } = useQuery(
-    ["artPiece"],
-    fetchArtpieceList
+    ["likedArtPiece"],
+    fetchLikedArtpieceList
   );
 
   useEffect(() => {
@@ -35,7 +33,7 @@ const UserAuctionListWrapper = () => {
   return (
     <section className="flex flex-col w-full p-3 font-Pretendard">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">등록한 작품</p>
+        <p className="font-semibold">좋아요 한 작품</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError &&
@@ -52,4 +50,4 @@ const UserAuctionListWrapper = () => {
   );
 };
 
-export default UserAuctionListWrapper;
+export default UserLikedArtPieceListWrapper;

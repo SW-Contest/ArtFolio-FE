@@ -52,8 +52,10 @@ const AuctionListWrapper = () => {
           [1, 2, 3, 4, 5, 6].map((_, index) => <ListBoxSkeleton key={index} />)}
         <AuctionListBoxes pages={pages} />
       </div>
-      {isError && <p>데이터가 없습니다.</p>}
-      {!isError && !isFetching && <p>데이터가 없습니다.</p>}
+      {isError && <p>데이터가 불러오기 오류.</p>}
+      {!isError && !isFetching && pages.length === 0 && (
+        <p>데이터가 없습니다.</p>
+      )}
       {!isError && (
         <div ref={infScroll} className="flex justify-center w-full h-8"></div>
       )}

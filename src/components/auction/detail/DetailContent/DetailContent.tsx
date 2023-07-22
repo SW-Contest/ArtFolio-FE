@@ -4,7 +4,7 @@ import ArtistInfo from "./ArtistInfo";
 import AuctionContent from "./AuctionContent";
 import BidList from "./BidList";
 import DetailCarousel from "./DetailCarousel";
-import DetailFooter from "./DetailFooter";
+import DetailFooter from "./detailFooter/DetailFooter";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getAuctionDetail } from "../../../../api/auction.api";
@@ -52,17 +52,12 @@ const DetailContent = () => {
 
   // 경매가 변경 함수
   const bidSetHandler = (value: number) => {
-    if (data) {
-      if (value >= data.auctionInfo.currentPrice) {
-        setBidPrice(value);
-      }
-    }
+    setBidPrice(value);
   };
   if (data && artistInfo && auctionInfo && bidderInfos) {
     return (
       <section className="flex flex-col mb-40 font-Pretendard">
         <DetailCarousel photoPaths={auctionInfo.photoPaths ?? []} />
-
         <div className="p-2">
           <AuctionTitle auctionInfo={auctionInfo} />
           <ArtistInfo artistInfo={artistInfo} />

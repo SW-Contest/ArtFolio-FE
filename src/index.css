@@ -3,8 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 스크롤을 없앱니다. */
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* input 숫자 화살표를 없앱니다. */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* 배너 캐러셀 */
