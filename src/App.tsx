@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<AuctionPage />} />
         <Route path="/auction/:auctionId" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/user/:userName" element={<UserPage />} />
+        <Route path="/user/:userId" element={<UserPage />} />
       </Routes>
     </div>
   );

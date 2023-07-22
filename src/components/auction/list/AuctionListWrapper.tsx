@@ -6,7 +6,7 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
 import ListBoxSkeleton from "../../ui/ListBoxSkeleton";
-import { getAuctionPage, getMockAuctionPage } from "../../../api/auction.api";
+import { getAuctionList, getMockAuctionList } from "../../../api/auction.api";
 import AuctionListBoxes from "./AuctionListBoxes";
 
 const AuctionListWrapper = () => {
@@ -14,7 +14,7 @@ const AuctionListWrapper = () => {
   const [pages, setPages] = useState<AuctionList[]>([]);
 
   const fetchAuctionPage = async ({ pageParam = 0 }) => {
-    const response = await getAuctionPage(pageParam);
+    const response = await getAuctionList(pageParam);
     return response.data;
   };
 
@@ -52,7 +52,10 @@ const AuctionListWrapper = () => {
           [1, 2, 3, 4, 5, 6].map((_, index) => <ListBoxSkeleton key={index} />)}
         <AuctionListBoxes pages={pages} />
       </div>
-      {isError && <p>데이터가 없습니다.</p>}
+      {isError && <p>데이터가 불러오기 오류.</p>}
+      {!isError && !isFetching && pages.length === 0 && (
+        <p>데이터가 없습니다.</p>
+      )}
       {!isError && (
         <div ref={infScroll} className="flex justify-center w-full h-8"></div>
       )}

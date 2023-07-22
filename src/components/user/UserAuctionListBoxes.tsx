@@ -1,24 +1,24 @@
 import React from "react";
 import ListBox from "../ui/ListBox";
-import { AuctionList } from "../../types/auction.type";
+import ListBoxSkeleton from "../ui/ListBoxSkeleton";
+import ArtPieceListBox from "../ui/ArtPieceListBox";
+import { ArtPieceList } from "../../types/auction.type";
 
 interface UserAuctionListBoxes {
-  pages: AuctionList[];
+  list: ArtPieceList;
 }
 
 const UserAuctionListBoxes = (props: UserAuctionListBoxes) => {
-  const { pages } = props;
+  const { artPieceInfos, artistInfo } = props.list;
   return (
     <>
-      {pages.map((list) =>
-        list.data.map((item) => (
-          <ListBox
-            key={item.auctionInfo.id}
-            artistInfo={item.artistInfo}
-            auctionInfo={item.auctionInfo}
-          />
-        ))
-      )}
+      {artPieceInfos.map((artPieceInfo) => (
+        <ArtPieceListBox
+          key={artPieceInfo.id}
+          artPieceInfo={artPieceInfo}
+          artistInfo={artistInfo}
+        />
+      ))}
     </>
   );
 };

@@ -1,17 +1,19 @@
-import React from "react";
-import Layout from "../components/ui/Layout";
 import Header from "../components/ui/Header";
+import Layout from "../components/ui/Layout";
+import RoundButton from "../components/ui/RoundButton";
 import UserIcon from "../components/ui/UserIcon";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
-import ListWrapper from "../components/auction/list/AuctionListWrapper";
 import SlidingMenu from "../components/ui/SlidingMenu";
+import UserAuctionListWrapper from "../components/user/UserAuctionListWrapper";
+import UserLikedArtPieceListWrapper from "../components/user/UserLikedArtPieceListWrapper";
 
 const UserPage = () => {
-  const menus = ["경매 중 작품", "경매 완료 작품"];
-  const [selectedMenu, setSelectedMenu] = useState("경매 중 작품");
+  const menus = ["예술 작품", "경매 작품"];
+  const [selectedMenu, setSelectedMenu] = useState(menus[0]);
 
+  // 유저가 다른 유저의 프로필을 볼 때 : 해당 유저의 예술품 , 경매중인 예술품
+  // 유저가 자신의 프로필을 볼 때 : 내 예술품 , 내 경매
   return (
     <Layout>
       <Header />
@@ -25,9 +27,7 @@ const UserPage = () => {
             한 줄 소개가 들어갑니다.
           </p>
         </div>
-        <button className="btn px-2 py-1 text-white border-0 rounded-full  bg-af-hotPink">
-          Follow
-        </button>
+        <RoundButton onClick={() => {}}>Follow</RoundButton>
       </article>
 
       <SlidingMenu
@@ -36,7 +36,8 @@ const UserPage = () => {
         setSelectedMenu={setSelectedMenu}
       />
 
-      <ListWrapper />
+      <UserAuctionListWrapper />
+      <UserLikedArtPieceListWrapper />
     </Layout>
   );
 };
