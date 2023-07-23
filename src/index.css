@@ -15,6 +15,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+textarea {
+  resize: none;
+}
+
 /* 배너 캐러셀 */
 .bannerSwiper {
   display: flex;

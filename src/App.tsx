@@ -3,6 +3,7 @@ import AuctionPage from "./pages/AuctionPage";
 import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
+import NewArtPiecePage from "./pages/NewArtPiecePage";
 import { useEffect } from "react";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/auction/:auctionId" element={<DetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user/:userId" element={<UserPage />} />
+        <Route path="/artpiece/new" element={<NewArtPiecePage />} />
       </Routes>
     </div>
   );

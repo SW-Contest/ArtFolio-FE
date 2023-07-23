@@ -14,3 +14,13 @@ export const getLikedArtPieceList = async (userId: string | undefined) => {
 
   return response;
 };
+
+export const postNewArtPiece = async (body: {
+  title: string;
+  content: string;
+  artistId: number;
+}) => {
+  const response = await axios.post(`http://${HOST}/art_piece/`, body);
+
+  return response;
+};
