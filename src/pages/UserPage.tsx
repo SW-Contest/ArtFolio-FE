@@ -17,8 +17,8 @@ const UserPage = () => {
   return (
     <Layout>
       <Header />
-      <article className="flex flex-col items-center w-full gap-3">
-        <div className="flex justify-center w-full mt-10">
+      <article className="flex flex-col items-center w-full gap-3 mt-10">
+        <div className="flex justify-center w-full">
           <UserIcon url="/src/assets/img/cat.jpeg" large />
         </div>
         <div className="flex flex-col items-center gap-3">
