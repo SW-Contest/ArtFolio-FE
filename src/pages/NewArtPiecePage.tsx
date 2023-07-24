@@ -1,7 +1,7 @@
 import Layout from "../components/ui/Layout";
 import Header from "../components/ui/Header";
 import { useState, useEffect } from "react";
-import { postNewArtPiece } from "../api/artPiece.api";
+import { postNewArtPiece, uploadArtPieceImage } from "../api/artPiece.api";
 
 const NewArtPiecePage = () => {
   const [artPieceTitle, setArtPieceTitle] = useState("");
@@ -21,9 +21,12 @@ const NewArtPiecePage = () => {
   const onFileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setArtPieceFile(e.target.files[0]);
+      console.log(e.target.files[0]);
     }
   };
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async (e: any) => {
+    e.preventDefault();
+
     if (artPieceFile) {
       try {
         const response = await postNewArtPiece({
@@ -31,7 +34,21 @@ const NewArtPiecePage = () => {
           content: artPieceContent,
           artistId: 1,
         });
-      } catch (e) {}
+
+        const artPieceId = response.data;
+        console.log(artPieceId);
+        try {
+          await uploadArtPieceImage({
+            artistId: 1,
+            artPieceId: artPieceId,
+            files: artPieceFile,
+          });
+        } catch (e) {
+          console.log("이미지 업로드 중 오류 발생");
+        }
+      } catch (e) {
+        console.log("작품 등록 중 오류 발생");
+      }
     }
   };
   return (
