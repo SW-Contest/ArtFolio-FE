@@ -7,7 +7,7 @@ import SearchBar from "../components/ui/SearchBar";
 const AuctionPage = () => {
   return (
     <Layout>
-      <Header />
+      <Header main />
       <Carousel />
       <SearchBar />
       <AuctionListWrapper />
