@@ -1,13 +1,12 @@
-import ListBox from "../../ui/ListBox";
 import { useState, useRef, useEffect } from "react";
 import { AuctionList } from "../../../types/auction.type";
 
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
-import ListBoxSkeleton from "../../ui/ListBoxSkeleton";
 import { getAuctionList, getMockAuctionList } from "../../../api/auction.api";
 import AuctionListBoxes from "./AuctionListBoxes";
+import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
 
 const AuctionListWrapper = () => {
   const infScroll = useRef(null);
@@ -47,9 +46,7 @@ const AuctionListWrapper = () => {
         <p className="font-semibold">아트폴리오에서 경매 중인 작품</p>
       </div>
       <div className="flex flex-wrap justify-between w-full">
-        {!isError &&
-          isFetching &&
-          [1, 2, 3, 4, 5, 6].map((_, index) => <ListBoxSkeleton key={index} />)}
+        {!isError && isFetching && <ListBoxSkeletonList />}
         <AuctionListBoxes pages={pages} />
       </div>
       {isError && <p>데이터가 불러오기 오류.</p>}

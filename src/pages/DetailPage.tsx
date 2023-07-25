@@ -9,7 +9,6 @@ const DetailPage = () => {
     <Layout>
       <Header />
       <HeartAnimation />
-      {/* <input onChange={tempBidderChangeHandler} /> */}
       <DetailContent />
     </Layout>
   );
