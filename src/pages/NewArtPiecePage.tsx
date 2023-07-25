@@ -1,9 +1,11 @@
 import Layout from "../components/ui/Layout";
 import Header from "../components/ui/Header";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { postNewArtPiece, uploadArtPieceImage } from "../api/artPiece.api";
 
 const NewArtPiecePage = () => {
+  const navigate = useNavigate();
   const [artPieceTitle, setArtPieceTitle] = useState("");
   const [artPieceContent, setArtPieceContent] = useState("");
   const [artPieceFile, setArtPieceFile] = useState<File | null>(null);
@@ -24,6 +26,7 @@ const NewArtPiecePage = () => {
       console.log(e.target.files[0]);
     }
   };
+  
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
 
@@ -43,6 +46,8 @@ const NewArtPiecePage = () => {
             artPieceId: artPieceId,
             files: artPieceFile,
           });
+
+          navigate("/");
         } catch (e) {
           console.log("이미지 업로드 중 오류 발생");
         }

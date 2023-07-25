@@ -1,20 +1,20 @@
 import { useState, useRef, useEffect } from "react";
-import { ArtPieceList } from "../../types/auction.type";
-
+import { ArtPieceList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-
-import ListBoxSkeleton from "../ui/ListBoxSkeleton";
-import { getArtPieceList } from "../../api/artPiece.api";
+import { getArtPieceList } from "../../../api/artPiece.api";
 import UserAuctionListBoxes from "./UserAuctionListBoxes";
-import { useParams } from "react-router-dom";
+import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
 
-const UserArtPieceListWrapper = () => {
+interface UserAuctionListWrapperProps {
+  userId: string | undefined;
+}
+
+const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
   const infScroll = useRef(null);
   const [list, setList] = useState<ArtPieceList>();
-  const userId = useParams().userId;
 
   const fetchArtpieceList = async () => {
-    const response = await getArtPieceList(userId);
+    const response = await getArtPieceList(props.userId);
     return response.data;
   };
 
@@ -36,9 +36,7 @@ const UserArtPieceListWrapper = () => {
         <p className="font-semibold">등록한 작품</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
-        {!isError &&
-          isFetching &&
-          [1, 2, 3, 4, 5, 6].map((_, index) => <ListBoxSkeleton key={index} />)}
+        {!isError && isFetching && <ListBoxSkeletonList />}
         {list && <UserAuctionListBoxes list={list} />}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError && !isFetching && !list && <p>데이터가 없습니다.</p>}
@@ -50,4 +48,4 @@ const UserArtPieceListWrapper = () => {
   );
 };
 
-export default UserArtPieceListWrapper;
+export default UserAuctionListWrapper;

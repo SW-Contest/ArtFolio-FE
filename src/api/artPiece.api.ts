@@ -1,6 +1,5 @@
 import axios from "axios";
 import { HOST } from "../constants/host";
-import { B } from "msw/lib/glossary-de6278a9";
 
 export const getArtPieceList = async (userId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/user/art_piece/${userId}`);
