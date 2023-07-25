@@ -11,7 +11,7 @@ const SlidingMenu = (props: SlidingMenuProps) => {
     <ul className="flex w-full">
       {props.menus.map((item) => (
         <li
-          key={item}
+          key={item + "menu"}
           className={
             item === props.selectedMenu
               ? "relative flex grow text-af-hotPink"

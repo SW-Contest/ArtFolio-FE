@@ -4,6 +4,7 @@ import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import NewArtPiecePage from "./pages/NewArtPiecePage";
+import HeartAnimation from "./components/ui/HeartAnimation";
 import { useEffect } from "react";
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
   }, []);
 
   return (
-    <div className="relative flex justify-center w-screen h-full bg-gray-100 overflow-y-hidden">
+    <div className="relative flex justify-center w-screen h-full bg-gray-100 overflow-hidden">
+      <HeartAnimation />
       <Routes>
         <Route path="/" element={<AuctionPage />} />
         <Route path="/auction/:auctionId" element={<DetailPage />} />
