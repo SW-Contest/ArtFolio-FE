@@ -1,19 +1,17 @@
 import { BsShare, BsArrowLeft, BsPerson, BsPlusLg } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import TransitionLink from "./TransitionLink";
 
 interface HeaderProps {
   main?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
-  const navigate = useNavigate();
-
   let header = (
     <>
       <div className="flex">
-        <button onClick={() => navigate(-1)}>
+        <TransitionLink to=".." backWard>
           <BsArrowLeft size={24} />
-        </button>
+        </TransitionLink>
       </div>
       <div className="flex gap-3">
         <BsShare size={24} />
@@ -26,15 +24,15 @@ const Header = (props: HeaderProps) => {
     header = (
       <>
         <div className="flex">
-          <Link to="/artpiece/new">
+          <TransitionLink to="/artpiece/new">
             <BsPlusLg size={24} />
-          </Link>
+          </TransitionLink>
         </div>
         <div className="flex gap-3">
           {/* 임시 userId 1 */}
-          <Link to={`/user/${1}`}>
+          <TransitionLink to={`/user/${1}`}>
             <BsPerson size={24} />
-          </Link>
+          </TransitionLink>
         </div>
       </>
     );
