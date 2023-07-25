@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import Slide from "./Slide";
+import Slide from "../../ui/Slide";
 
 const Carousel = () => {
   return (
@@ -14,6 +14,7 @@ const Carousel = () => {
         centeredSlides={true}
         slidesPerView={1}
         // loop={true}
+
         pagination={{
           clickable: true,
         }}

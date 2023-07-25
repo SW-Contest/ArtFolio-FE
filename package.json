@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -15,8 +15,8 @@
     "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^4.29.5",
     "axios": "^1.4.0",
-    "daisyui": "^2.51.6",
     "dotenv": "^16.3.1",
+    "daisyui": "^3.2.1",
     "framer-motion": "^10.12.8",
     "msw": "^1.2.1",
     "react": "^18.2.0",
@@ -26,6 +26,7 @@
     "react-scrollbars-custom": "^4.1.1",
     "react-zoom-pan-pinch": "^3.0.7",
     "swiper": "^9.2.0",
+    "tailwind-merge": "^1.14.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {

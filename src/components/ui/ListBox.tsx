@@ -1,47 +1,25 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { artistInfoProps, auctionInfoProps } from "../../mocks/dummyList";
+import { ArtistInfo, AuctionInfo } from "../../types/auction.type";
 
 interface ListBoxProps {
-  artistInfo: artistInfoProps;
-  auctionInfo: auctionInfoProps;
+  artistInfo: ArtistInfo;
+  auctionInfo: AuctionInfo;
 }
 const ListBox = (props: ListBoxProps) => {
+  const [imgError, setImgError] = useState(
+    props.auctionInfo.photoPaths[0] === "null"
+  );
   const navigate = useNavigate();
-  const [time, setTime] = useState("");
-
-  // useEffect(() => {
-  //   tick();
-  //   const timeId = setInterval(() => tick(), 1000);
-
-  //   return () => {
-  //     clearInterval(timeId);
-  //   };
-  // }, []);
-
-  // const getTimeLeft = () => {
-  //   const curTime = new Date();
-  //   const timeDiff = Math.abs(curTime.getTime() - props.timeLeft.getTime());
-  //   let hours: string | number = Math.floor(timeDiff / 3600000);
-  //   let minutes: string | number = Math.floor((timeDiff % 3600000) / 60000);
-  //   let seconds: string | number = Math.floor((timeDiff % 60000) / 1000);
-
-  //   if (minutes < 10) minutes = `0${minutes}`;
-  //   if (seconds < 10) seconds = `0${seconds}`;
-  //   if (hours < 10) hours = `0${hours}`;
-
-  //   const timeLeft = hours + ":" + minutes + ":" + seconds;
-
-  //   return timeLeft;
-  // };
-
-  // const tick = () => {
-  //   setTime(() => getTimeLeft());
-  // };
 
   const clickHandler = () => {
     navigate(`/auction/${props.auctionInfo.id}`);
+  };
+
+  // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
+  const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    setImgError(true);
   };
 
   return (
@@ -49,10 +27,11 @@ const ListBox = (props: ListBoxProps) => {
       onClick={clickHandler}
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
-      {props.auctionInfo.thumbnailPath !== "null" ? (
+      {!imgError ? (
         <img
+          onError={onErrorHandler}
           className="flex object-cover w-full h-full rounded-lg "
-          src={props.auctionInfo.thumbnailPath}
+          src={props.auctionInfo.photoPaths[0]}
         />
       ) : (
         <div className="w-full h-full flex justify-center items-center">

@@ -1,8 +1,8 @@
 import React from "react";
-import { auctionInfoProps } from "../../mocks/dummyList";
+import { AuctionInfo } from "../../../../types/auction.type";
 
 interface AuctionTitleProps {
-  auctionInfo: auctionInfoProps;
+  auctionInfo: AuctionInfo;
 }
 const AuctionTitle = (props: AuctionTitleProps) => {
   return (
