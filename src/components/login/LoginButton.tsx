@@ -11,7 +11,7 @@ const LoginButton = (props : LoginButtonProps) => {
     return (
        <button
         onClick={props.onClick} 
-        className="w-11/12 text-sm bg-black ml-4 mt-10 pt-3 pb-3 rounded text-white">
+        className="w-11/12 text-sm bg-black flex justify-center mx-4 mt-10 pt-3 pb-3 rounded text-white">
            LOGIN
        </button>
     );

@@ -1,8 +1,13 @@
 import React, { ChangeEvent } from 'react';
+import { StringLiteral } from 'typescript';
 
 interface InputBarProps {
   emailValue: string;
   passwordValue: string;
+  NAVER_CLINET_ID: string;
+  REDIRECT_URI: string;
+  STATE: string;
+  NAVER_AUTH_URL: string;
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
 }
