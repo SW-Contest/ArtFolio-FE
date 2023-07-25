@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { AuctionInfo } from "../../../../../types/auction.type";
+import { AuctionInfo } from "../../../../types/auction.type";
 
 interface DetailFooterExpandedProps {
   onBidChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -6,12 +6,12 @@ import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BsChevronCompactUp, BsHeartFill } from "react-icons/bs";
 import { useStore } from "zustand";
-import { useAnimationStore } from "../../../../../store/store";
-import { AuctionInfo } from "../../../../../types/auction.type";
+import { useAnimationStore } from "../../../../store/store";
+import { AuctionInfo } from "../../../../types/auction.type";
 
-import { postAuctionLike } from "../../../../../api/auction.api";
-import RoundButton from "../../../../ui/RoundButton";
-import RotationButton from "../../../../ui/RotationButton";
+import { postAuctionLike } from "../../../../api/auction.api";
+import RoundButton from "../../../ui/RoundButton";
+import RotationButton from "../../../ui/RotationButton";
 import DetailFooterExpanded from "./DetailFooterExpanded";
 import DetailFooterFolded from "./DetailFooterFolded";
 

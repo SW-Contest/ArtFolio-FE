@@ -11,11 +11,7 @@ import {
 import AuctionListBoxes from "./AuctionListBoxes";
 import ListBoxSkeletonList from "../../../ui/ListBoxSkeletonList";
 
-interface AuctionListWrapperProps {
-  searchResult: string[] | null;
-}
-
-const AuctionListWrapper = (props: AuctionListWrapperProps) => {
+const AuctionListWrapper = () => {
   const infScroll = useRef(null);
   const [pages, setPages] = useState<AuctionList[]>([]);
 

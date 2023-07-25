@@ -63,3 +63,7 @@ export const getLikedAuctionList = async (userId: string | undefined) => {
 
   return response;
 };
+
+export const getSearchResultList = async () => {
+  return;
+};
