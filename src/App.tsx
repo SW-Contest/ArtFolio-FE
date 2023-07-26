@@ -8,6 +8,7 @@ import HeartAnimation from "./components/ui/HeartAnimation";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/ui/Header";
+import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooter";
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,10 @@ function App() {
           </Routes>
         </AnimatePresence>
       </section>
+      
+      <AnimatePresence>
+        {location.pathname.split("/")[1] === "auction" && <DetailFooterTest />}
+      </AnimatePresence>
     </div>
   );
 }

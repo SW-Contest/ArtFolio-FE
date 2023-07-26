@@ -7,6 +7,7 @@ interface TransitionLinkProps {
   children: React.ReactNode;
   to: string;
   backWard?: boolean;
+  className?: string;
 }
 
 const TransitionLink = (props: TransitionLinkProps) => {
@@ -27,7 +28,11 @@ const TransitionLink = (props: TransitionLinkProps) => {
       navigate(props.to);
     }
   };
-  return <button onClick={onClickHandler}>{props.children}</button>;
+  return (
+    <div className={props.className} onClick={onClickHandler}>
+      {props.children}
+    </div>
+  );
 };
 
 export default TransitionLink;

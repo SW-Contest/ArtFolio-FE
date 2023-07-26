@@ -1,48 +1,71 @@
-import { useEffect } from "react";
-
 import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useState, useEffect } from "react";
+
 import { BsChevronCompactUp, BsHeartFill } from "react-icons/bs";
 import { useStore } from "zustand";
 import { useAnimationStore } from "../../../../store/store";
-import { AuctionInfo } from "../../../../types/auction.type";
 
 import { postAuctionLike } from "../../../../api/auction.api";
 import RoundButton from "../../../ui/RoundButton";
 import RotationButton from "../../../ui/RotationButton";
 import DetailFooterExpanded from "./DetailFooterExpanded";
 import DetailFooterFolded from "./DetailFooterFolded";
+import useAuctionSocket from "../../../../hooks/useAuctionSocket";
 
-interface DetailFooterProps {
-  onPublishClick: (body: { bidderId: number; bidPrice: number }) => void;
-  onBidChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBidSet: (value: number) => void;
-  auctionInfo: AuctionInfo;
-  bidPrice: number;
-  bidderId: number;
-}
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { AuctionDetail } from "../../../../types/auction.type";
+import {
+  getAuctionDetail,
+  getMockAuctionDetail,
+} from "../../../../api/auction.api";
+import { matchPath, useLocation } from "react-router-dom";
 
-const DetailFooter = (props: DetailFooterProps) => {
+const DetailFooter = () => {
+  const location = useLocation();
+
   const useAnimation = useStore(useAnimationStore);
+  const [auctionId, setAuctionId] = useState(location.pathname.split("/")[2]);
+  const [bidderId, setBidderId] = useState(1);
+  const [bidPrice, setBidPrice] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
 
   // const isLike = props.auctionInfo.likeMembers.includes(1);
   const isLike = false;
 
+  const fetchAuctionDetail = async () => {
+    const response = await getAuctionDetail(auctionId);
+    return response.data;
+  };
+
+  const { data, isFetching, refetch } = useQuery<AuctionDetail>(
+    [auctionId],
+    fetchAuctionDetail,
+    {
+      enabled: !!auctionId,
+    }
+  );
+
+  const { artistInfo, auctionInfo, bidderInfos } = data ?? {};
+
+  useEffect(() => {
+    if (data && auctionInfo) {
+      setBidPrice(auctionInfo.currentPrice);
+    }
+  }, [data]);
+
+  const [publish] = useAuctionSocket(auctionId, refetch);
+
   const changeExpandedHandler = () => {
     setIsExpanded((prev) => !prev);
   };
 
-  const fetchData = async () => {
-    const response = await postAuctionLike(
-      props.auctionInfo.id,
-      props.bidderId
-    );
-
-    console.log(response.data);
-    return response.data;
+  const toggleAuctionLike = async () => {
+    if (data && auctionInfo) {
+      const response = await postAuctionLike(auctionInfo.id, bidderId);
+      console.log(response.data);
+      return response.data;
+    }
   };
 
   const clickHeartHandler = () => {
@@ -51,27 +74,43 @@ const DetailFooter = (props: DetailFooterProps) => {
       mutate();
     }
   };
-  const { data, mutate } = useMutation(fetchData);
+  const { data: likeData, mutate } = useMutation(toggleAuctionLike);
 
   const publishClickHandler = () => {
-    if (props.bidPrice > props.auctionInfo.currentPrice) {
-      props.onPublishClick({
-        bidderId: props.bidderId,
-        bidPrice: props.bidPrice,
-      });
+    if (data && auctionInfo) {
+      if (bidPrice > auctionInfo.currentPrice) {
+        publish({
+          bidderId: bidderId,
+          bidPrice: bidPrice,
+        });
+      }
     }
+  };
+
+  // input의 onChange에 할당되는 함수
+  const bidChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newBidPrice = Number(e.target.value);
+    setBidPrice(newBidPrice);
+  };
+
+  // 경매가 변경 함수
+  const bidSetHandler = (value: number) => {
+    setBidPrice(value);
   };
 
   return (
     <motion.footer
       initial={{
-        translateY: "3rem",
+        y: "15rem",
       }}
       animate={{
-        translateY: isExpanded ? "0rem" : "3rem",
+        y: isExpanded ? "0rem" : "3rem",
       }}
       transition={{ duration: 0.4 }}
-      className="flex flex-col shrink-0 fixed bottom-0 z-50  items-center w-full max-w-[400px] h-60 bg-af-brightGray rounded-t-3xl gap-4 font-Pretendard"
+      exit={{
+        y: "15rem",
+      }}
+      className="flex flex-col shrink-0 fixed bottom-0 z-50 items-center w-full max-w-[400px] h-60 bg-af-brightGray rounded-t-3xl gap-4 font-Pretendard"
     >
       <RotationButton
         isExpanded={isExpanded}
@@ -80,10 +119,19 @@ const DetailFooter = (props: DetailFooterProps) => {
         <BsChevronCompactUp size={24} />
       </RotationButton>
 
-      {/* 접혀있을 때 */}
-      {isExpanded && <DetailFooterExpanded {...props} />}
       {/* 펼쳤을 때 */}
-      {!isExpanded && <DetailFooterFolded {...props} />}
+      {auctionInfo && isExpanded && (
+        <DetailFooterExpanded
+          onBidChange={bidChangeHandler}
+          onBidSet={bidSetHandler}
+          auctionInfo={auctionInfo}
+          bidPrice={bidPrice}
+        />
+      )}
+      {/* 접혔을 때 */}
+      {auctionInfo && !isExpanded && (
+        <DetailFooterFolded auctionInfo={auctionInfo!} />
+      )}
 
       <div className="flex w-full h-12 justify-evenly">
         <button
@@ -101,7 +149,7 @@ const DetailFooter = (props: DetailFooterProps) => {
         </button>
         <RoundButton
           className="w-1/2"
-          onClick={isExpanded ? changeExpandedHandler : publishClickHandler}
+          onClick={isExpanded ? publishClickHandler : changeExpandedHandler}
         >
           입찰하기
         </RoundButton>
