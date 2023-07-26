@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArtistInfo, AuctionInfo } from "../../types/auction.type";
+import TransitionLink from "./TransitionLink";
 
 interface ListBoxProps {
   artistInfo: ArtistInfo;
@@ -23,8 +24,8 @@ const ListBox = (props: ListBoxProps) => {
   };
 
   return (
-    <div
-      onClick={clickHandler}
+    <TransitionLink
+      to={`/auction/${props.auctionInfo.id}`}
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
       {!imgError ? (
@@ -53,7 +54,7 @@ const ListBox = (props: ListBoxProps) => {
           </p>
         </div>
       </div>
-    </div>
+    </TransitionLink>
   );
 };
 

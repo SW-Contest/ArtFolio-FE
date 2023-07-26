@@ -40,6 +40,7 @@ export default function useAuctionSocket(
   };
 
   const subscribe = () => {
+    console.log("subscribe");
     // 정상 응답 구독 경로
     client.current?.subscribe("/topic/channel/" + auctionId, (body: any) => {
       const json_body = JSON.parse(body.body);

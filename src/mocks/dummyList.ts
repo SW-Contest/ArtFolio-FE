@@ -1,6 +1,13 @@
 import { AuctionList, AuctionDetail } from "../types/auction.type";
 
 export const dummyDetail: AuctionDetail = {
+  artPieceInfo: {
+    id: 1,
+    title: "Starry Night",
+    content: "Starry Night",
+    likes: 0,
+    photos: [""],
+  },
   artistInfo: {
     memberId: 1,
     name: "Vincent van Gogh",
@@ -18,7 +25,7 @@ export const dummyDetail: AuctionDetail = {
     createdAt: "1995-12-17T03:24:00",
     finishedAt: "1995-12-17T15:24:00",
     photoPaths: [""],
-    thumbnailPath: "null",
+
     likeMembers: [],
   },
   bidderInfos: [
@@ -104,7 +111,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2023-06-26T09:00:00",
         finishedAt: "2023-06-26T21:00:00",
         photoPaths: [""],
-        thumbnailPath: "null",
+
         likeMembers: [],
       },
     },
@@ -126,7 +133,6 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2000-01-01T09:00:00",
         finishedAt: "2000-01-01T21:00:00",
         photoPaths: [""],
-        thumbnailPath: "",
         likeMembers: [],
       },
     },
@@ -148,7 +154,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2010-05-20T12:00:00",
         finishedAt: "2010-05-20T00:00:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -170,7 +176,6 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2015-07-10T18:30:00",
         finishedAt: "2015-07-11T06:30:00",
         photoPaths: [""],
-        thumbnailPath: "",
         likeMembers: [],
       },
     },
@@ -192,7 +197,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2022-03-05T14:45:00",
         finishedAt: "2022-03-05T02:45:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -214,7 +219,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2023-01-15T08:20:00",
         finishedAt: "2023-01-15T20:20:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -236,7 +241,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2023-05-10T11:10:00",
         finishedAt: "2023-05-10T23:10:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -258,7 +263,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2023-06-20T16:50:00",
         finishedAt: "2023-06-21T04:50:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -280,7 +285,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2023-06-25T07:15:00",
         finishedAt: "2023-06-25T19:15:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -302,7 +307,7 @@ export const dummyAuctionList: AuctionList = {
         createdAt: "2023-06-26T10:30:00",
         finishedAt: "2023-06-26T22:30:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -334,7 +339,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T09:00:00",
         finishedAt: "2023-06-26T21:00:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -356,7 +361,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T11:30:00",
         finishedAt: "2023-06-26T23:30:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -378,7 +383,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T13:45:00",
         finishedAt: "2023-06-27T01:45:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -400,7 +405,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T16:15:00",
         finishedAt: "2023-06-26T04:15:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -422,7 +427,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T19:45:00",
         finishedAt: "2023-06-27T07:45:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -444,7 +449,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T22:30:00",
         finishedAt: "2023-06-27T10:30:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -466,7 +471,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T03:15:00",
         finishedAt: "2023-06-26T15:15:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -488,7 +493,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T06:30:00",
         finishedAt: "2023-06-26T18:30:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -510,7 +515,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T09:45:00",
         finishedAt: "2023-06-26T21:45:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },
@@ -532,7 +537,7 @@ export const dummyAuctionList2: AuctionList = {
         createdAt: "2023-06-26T12:00:00",
         finishedAt: "2023-06-26T00:00:00",
         photoPaths: [""],
-        thumbnailPath: " ",
+
         likeMembers: [],
       },
     },

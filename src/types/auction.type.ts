@@ -25,7 +25,7 @@ export interface ArtPieceInfo {
   title: string;
   content: string;
   likes: number;
-  photos: string[];
+  photoPaths: string[];
 }
 
 export interface AuctionInfo {

@@ -9,7 +9,7 @@ interface ListBoxProps {
 }
 const ArtPieceListBox = (props: ListBoxProps) => {
   const [imgError, setImgError] = useState(
-    props.artPieceInfo.photos.length === 0
+    props.artPieceInfo.photoPaths.length === 0
   );
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const ArtPieceListBox = (props: ListBoxProps) => {
         <img
           onError={onErrorHandler}
           className="flex object-cover w-full h-full rounded-lg "
-          src={props.artPieceInfo.photos[0]}
+          src={props.artPieceInfo.photoPaths[0]}
         />
       ) : (
         <div className="w-full h-full flex justify-center items-center">

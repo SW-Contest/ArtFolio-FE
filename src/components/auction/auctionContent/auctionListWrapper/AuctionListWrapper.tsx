@@ -49,8 +49,8 @@ const AuctionListWrapper = () => {
         <p className="font-semibold">경매 중인 작품</p>
       </div>
       <div className="flex flex-wrap justify-between w-full">
-        {!isError && isFetching && <ListBoxSkeletonList />}
         <AuctionListBoxes pages={pages} />
+        {!isError && isFetching && <ListBoxSkeletonList />}
       </div>
       {isError && <p>데이터 불러오기 오류.</p>}
       {!isError && !isFetching && pages.length === 0 && (
