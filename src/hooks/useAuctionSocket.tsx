@@ -19,7 +19,7 @@ export default function useAuctionSocket(
     client.current = new StompJs.Client({
       brokerURL: `ws://${HOST}/sock`,
       onConnect: () => {
-        console.log("success");
+        // console.log("success");
         subscribe();
       },
     });
@@ -40,7 +40,7 @@ export default function useAuctionSocket(
   };
 
   const subscribe = () => {
-    console.log("subscribe");
+    // console.log("subscribe");
     // 정상 응답 구독 경로
     client.current?.subscribe("/topic/channel/" + auctionId, (body: any) => {
       const json_body = JSON.parse(body.body);
@@ -58,7 +58,7 @@ export default function useAuctionSocket(
   };
 
   const disconnect = () => {
-    console.log("disconnect");
+    // console.log("disconnect");
     client.current?.deactivate();
   };
 

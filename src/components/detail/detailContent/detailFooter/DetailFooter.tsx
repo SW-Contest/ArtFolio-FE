@@ -23,8 +23,9 @@ import { matchPath, useLocation } from "react-router-dom";
 
 const DetailFooter = () => {
   const location = useLocation();
-  const auctionId = location.pathname.split("/")[2];
+
   const useAnimation = useStore(useAnimationStore);
+  const [auctionId, setAuctionId] = useState(location.pathname.split("/")[2]);
   const [bidderId, setBidderId] = useState(1);
   const [bidPrice, setBidPrice] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -59,13 +60,12 @@ const DetailFooter = () => {
     setIsExpanded((prev) => !prev);
   };
 
-  const fetchData = async () => {
-    // const response = await postAuctionLike(
-    //   props.auctionInfo.id,
-    //   props.bidderId
-    // );
-    // console.log(response.data);
-    // return response.data;
+  const toggleAuctionLike = async () => {
+    if (data && auctionInfo) {
+      const response = await postAuctionLike(auctionInfo.id, bidderId);
+      console.log(response.data);
+      return response.data;
+    }
   };
 
   const clickHeartHandler = () => {
@@ -74,7 +74,7 @@ const DetailFooter = () => {
       mutate();
     }
   };
-  const { data: likeData, mutate } = useMutation(fetchData);
+  const { data: likeData, mutate } = useMutation(toggleAuctionLike);
 
   const publishClickHandler = () => {
     if (data && auctionInfo) {

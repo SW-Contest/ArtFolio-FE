@@ -29,6 +29,7 @@ const DetailContent = () => {
   const { artistInfo, auctionInfo, bidderInfos } = data ?? {};
 
   if (data && artistInfo && auctionInfo && bidderInfos) {
+    console.log(data);
     return (
       <section className="flex flex-col mb-40 font-Pretendard">
         <DetailCarousel photoPaths={auctionInfo.photoPaths ?? []} />

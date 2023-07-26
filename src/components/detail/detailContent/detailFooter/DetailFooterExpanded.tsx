@@ -37,7 +37,7 @@ const DetailFooterExpanded = (props: DetailFooterExpandedProps) => {
           initial={{ color: "#000000" }}
           animate={{ color: ["#FF008A", "#000000"] }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="text-2xl font-semibold text-center bg-transparent"
+          className="text-2xl font-semibold text-center bg-transparent w-1/2"
           onChange={props.onBidChange}
           value={props.bidPrice}
         />

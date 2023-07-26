@@ -8,7 +8,7 @@ import HeartAnimation from "./components/ui/HeartAnimation";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/ui/Header";
-import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooterTest";
+import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooter";
 
 function App() {
   const location = useLocation();
