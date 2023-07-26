@@ -5,7 +5,6 @@ import AuctionContent from "../components/auction/auctionContent/AuctionContent"
 const AuctionPage = () => {
   return (
     <Layout>
-      <Header main />
       <AuctionContent />
     </Layout>
   );

@@ -7,11 +7,11 @@ import DetailCarousel from "./DetailCarousel";
 import DetailFooter from "./detailFooter/DetailFooter";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getAuctionDetail } from "../../../../api/auction.api";
+import { getAuctionDetail } from "../../../api/auction.api";
 import { useQuery } from "@tanstack/react-query";
-import { AuctionDetail } from "../../../../types/auction.type";
-import useAuctionSocket from "../../../../hooks/useAuctionSocket";
-import LoadingSpinner from "../../../ui/LoadingSpinner";
+import { AuctionDetail } from "../../../types/auction.type";
+import useAuctionSocket from "../../../hooks/useAuctionSocket";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 const DetailContent = () => {
   const [bidderId, setBidderId] = useState(1);

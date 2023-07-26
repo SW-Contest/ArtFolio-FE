@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { AuctionList } from "../../../types/auction.type";
 
 interface SearchBarProps {
-  searchResult: string[] | null;
+  changeSearchQuery: (searchText: string) => void;
 }
 
 const SearchBar = (props: SearchBarProps) => {
@@ -13,7 +14,7 @@ const SearchBar = (props: SearchBarProps) => {
 
   const searchTextHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(searchText);
+    props.changeSearchQuery(searchText);
   };
 
   return (

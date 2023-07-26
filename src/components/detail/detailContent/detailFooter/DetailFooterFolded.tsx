@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { AuctionInfo } from "../../../../../types/auction.type";
+import { AuctionInfo } from "../../../../types/auction.type";
 
 interface DetailFooterFoldedProps {
   auctionInfo: AuctionInfo;

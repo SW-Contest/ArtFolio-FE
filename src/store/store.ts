@@ -11,6 +11,13 @@ interface AnimationState {
   hideAnimation: () => void;
 }
 
+interface TransitionState {
+  from: number;
+  to: number;
+  transitionForward: () => void;
+  transitionBackward: () => void;
+}
+
 export const useListStore = create<ListState>((set) => ({
   pageNumber: 0,
   increasePageNumber: () =>
@@ -21,4 +28,11 @@ export const useAnimationStore = create<AnimationState>((set) => ({
   isShow: false,
   showAnimation: () => set((state) => ({ isShow: true })),
   hideAnimation: () => set((state) => ({ isShow: false })),
+}));
+
+export const useTransitionStore = create<TransitionState>((set) => ({
+  from: 0,
+  to: 0,
+  transitionForward: () => set((state) => ({ from: 1, to: -1 })),
+  transitionBackward: () => set((state) => ({ from: -1, to: 1 })),
 }));
