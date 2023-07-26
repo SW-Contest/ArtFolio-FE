@@ -5,7 +5,6 @@ import DetailContent from "../components/detail/detailContent/DetailContent";
 const DetailPage = () => {
   return (
     <Layout>
-      <Header />
       <DetailContent />
     </Layout>
   );

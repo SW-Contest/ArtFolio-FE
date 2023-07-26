@@ -33,6 +33,6 @@ export const useAnimationStore = create<AnimationState>((set) => ({
 export const useTransitionStore = create<TransitionState>((set) => ({
   from: 0,
   to: 0,
-  transitionForward: () => set((state) => ({ from: 400, to: -400 })),
-  transitionBackward: () => set((state) => ({ from: -400, to: 400 })),
+  transitionForward: () => set((state) => ({ from: 1, to: -1 })),
+  transitionBackward: () => set((state) => ({ from: -1, to: 1 })),
 }));

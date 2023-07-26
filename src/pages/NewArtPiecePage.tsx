@@ -70,7 +70,6 @@ const NewArtPiecePage = () => {
   };
   return (
     <Layout>
-      <Header />
       <form
         onSubmit={onSubmitHandler}
         className="flex flex-col mt-10 items-center gap-4"

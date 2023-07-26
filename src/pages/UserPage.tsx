@@ -5,7 +5,6 @@ import UserContent from "../components/user/userContent/UserContent";
 const UserPage = () => {
   return (
     <Layout>
-      <Header />
       <UserContent />
     </Layout>
   );

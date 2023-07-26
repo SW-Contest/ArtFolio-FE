@@ -13,7 +13,12 @@ const TransitionLink = (props: TransitionLinkProps) => {
   const { transitionForward, transitionBackward } = useTransitionStore();
   const navigate = useNavigate();
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   const onClickHandler = () => {
+    // scrollToTop();
     if (props.backWard) {
       transitionBackward();
       navigate(-1);
