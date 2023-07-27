@@ -1,26 +1,26 @@
 import { useState, useRef, useEffect } from "react";
-import { ArtPieceList } from "../../../types/auction.type";
+import { AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { getArtPieceList } from "../../../api/artPiece.api";
+import { getLiveAuctionList } from "../../../api/auction.api";
 import { useParams } from "react-router-dom";
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
 import UserArtPieceListBoxes from "./UserArtPieceListBoxes";
+import AuctionListBoxes from "../../auction/auctionContent/auctionListWrapper/AuctionListBoxes";
 
-interface UserArtPieceListWrapperProps {
+interface UserLiveAuctionListWrapperProps {
   userId: string | undefined;
 }
-const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
-  const [list, setList] = useState<ArtPieceList>();
+const UserLiveAuctionListWrapper = (props: UserLiveAuctionListWrapperProps) => {
+  const [list, setList] = useState<AuctionList[]>();
 
-  const fetchArtpieceList = async () => {
-    console.log("fetch");
-    const response = await getArtPieceList(props.userId);
-    return response.data;
+  const fetchLiveAuctionList = async () => {
+    const response = await getLiveAuctionList(props.userId);
+    return response.data.userBidAuctionList;
   };
 
   const { isFetching, data, isError } = useQuery(
-    ["artPiece" + props.userId],
-    fetchArtpieceList,
+    ["liveAuction" + props.userId],
+    fetchLiveAuctionList,
     { staleTime: 5000 }
   );
 
@@ -33,13 +33,13 @@ const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
   return (
     <section className="flex flex-col w-full p-3 font-Pretendard">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">등록한 작품</p>
+        <p className="font-semibold">참여 중 경매</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
-        {list && <UserArtPieceListBoxes list={list} />}
         {!isError && isFetching && <ListBoxSkeletonList />}
+        {list && <AuctionListBoxes list={list} />}
         {isError && <p>데이터 불러오기 오류.</p>}
-        {!isError && !isFetching && list?.artPieceInfos.length === 0 && (
+        {!isError && !isFetching && list?.length === 0 && (
           <p>데이터가 없습니다.</p>
         )}
       </div>
@@ -47,4 +47,4 @@ const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
   );
 };
 
-export default UserArtPieceListWrapper;
+export default UserLiveAuctionListWrapper;

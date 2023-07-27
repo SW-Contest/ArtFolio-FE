@@ -1,10 +1,10 @@
 import AuctionListBoxes from "./auctionListWrapper/AuctionListBoxes";
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
-import { AuctionData } from "../../../types/auction.type";
+import { AuctionList } from "../../../types/auction.type";
 
 interface SearchResultListWrapperProps {
   isFetching: boolean;
-  searchResult: AuctionData[];
+  searchResult: AuctionList[];
   isError: boolean;
 }
 const SearchResultListWrapper = (props: SearchResultListWrapperProps) => {

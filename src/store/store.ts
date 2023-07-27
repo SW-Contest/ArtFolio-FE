@@ -14,9 +14,13 @@ interface AnimationState {
 interface TransitionState {
   from: number;
   to: number;
+  scrollY: number;
+  setScrollY: (scrollY: number) => void;
   transitionForward: () => void;
   transitionBackward: () => void;
 }
+
+interface ScrollState {}
 
 export const useListStore = create<ListState>((set) => ({
   pageNumber: 0,
@@ -31,8 +35,10 @@ export const useAnimationStore = create<AnimationState>((set) => ({
 }));
 
 export const useTransitionStore = create<TransitionState>((set) => ({
+  scrollY: 0,
   from: 0,
   to: 0,
+  setScrollY: (scrollY: number) => set((state) => ({ scrollY: scrollY })),
   transitionForward: () => set((state) => ({ from: 1, to: -1 })),
   transitionBackward: () => set((state) => ({ from: -1, to: 1 })),
 }));

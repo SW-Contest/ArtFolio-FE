@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { AuctionList } from "../../../../types/auction.type";
+import { AuctionPage } from "../../../../types/auction.type";
 
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
@@ -13,7 +13,7 @@ import ListBoxSkeletonList from "../../../ui/ListBoxSkeletonList";
 
 const AuctionListWrapper = () => {
   const infScroll = useRef(null);
-  const [pages, setPages] = useState<AuctionList[]>([]);
+  const [pages, setPages] = useState<AuctionPage[]>([]);
 
   const fetchAuctionPage = async ({ pageParam = 0 }) => {
     const response = await getAuctionList(pageParam);

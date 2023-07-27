@@ -1,10 +1,10 @@
 import React from "react";
 import ListBox from "../../../ui/ListBox";
-import { AuctionList, AuctionData } from "../../../../types/auction.type";
+import { AuctionList, AuctionPage } from "../../../../types/auction.type";
 
 interface AuctionListBoxesProps {
-  pages?: AuctionList[];
-  list?: AuctionData[];
+  pages?: AuctionPage[];
+  list?: AuctionList[];
 }
 
 const AuctionListBoxes = (props: AuctionListBoxesProps) => {

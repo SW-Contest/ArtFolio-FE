@@ -22,6 +22,7 @@ const Layout = (props: LayoutProps) => {
         x: `${100 * from}%`,
         opacity: 1,
         position: "absolute",
+        height: window.innerHeight,
       }}
       animate={{
         x: 0,

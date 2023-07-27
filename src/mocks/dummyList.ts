@@ -1,4 +1,4 @@
-import { AuctionList, AuctionDetail } from "../types/auction.type";
+import { AuctionPage, AuctionList, AuctionDetail } from "../types/auction.type";
 
 export const dummyDetail: AuctionDetail = {
   artPieceInfo: {
@@ -86,7 +86,7 @@ export const dummyDetail: AuctionDetail = {
   },
 };
 
-export const dummyAuctionList: AuctionList = {
+export const dummyAuctionList: AuctionPage = {
   hasNext: true,
   isLast: false,
   pageSize: 10,
@@ -314,7 +314,7 @@ export const dummyAuctionList: AuctionList = {
   ],
 };
 
-export const dummyAuctionList2: AuctionList = {
+export const dummyAuctionList2: AuctionPage = {
   hasNext: false,
   isLast: true,
   pageSize: 10,

@@ -42,15 +42,19 @@ export const postAuctionLike = async (auctionId: string, userId: number) => {
 };
 
 // 해당 유저가 낙찰받은 경매 리스트를 받아옵니다.
-export const getWinAuctionList = async (userId: string | undefined) => {
-  const response = await axios.get(`http://${HOST}/user/bids/${userId}`);
+export const getFinishAuctionList = async (userId: string | undefined) => {
+  const response = await axios.get(
+    `http://${HOST}/user/auction/finish/${userId}`
+  );
 
   return response;
 };
 
 // 해당 유저가 참여중인 경매 리스트를 받아옵니다.
 export const getLiveAuctionList = async (userId: string | undefined) => {
-  const response = await axios.get(`http://${HOST}/user/live/${userId}`);
+  const response = await axios.get(
+    `http://${HOST}/user/auction/live/${userId}`
+  );
 
   return response;
 };
@@ -64,6 +68,7 @@ export const getLikedAuctionList = async (userId: string | undefined) => {
   return response;
 };
 
+// 검색한 경매 결과를 받아옵니다.
 export const getSearchResultList = async (keyword: string) => {
   const response = await axios.get(
     `http://${HOST}/rt_auction/search?keyword=${keyword}`

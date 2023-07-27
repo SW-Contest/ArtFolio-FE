@@ -10,16 +10,15 @@ interface TransitionLinkProps {
   className?: string;
 }
 
+// Link를 대신하여 페이지를 이동시키는 버튼으로 사용하는 컴포넌트입니다.
+// 페이지 이동시 , 뒤로가기 버튼을 누른 경우와 다른 페이지 버튼을 누른 경우에
+// 각각 다른 애니메이션을 보여줍니다.
 const TransitionLink = (props: TransitionLinkProps) => {
-  const { transitionForward, transitionBackward } = useTransitionStore();
+  const { scrollY, setScrollY, transitionForward, transitionBackward } =
+    useTransitionStore();
   const navigate = useNavigate();
 
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
-
   const onClickHandler = () => {
-    // scrollToTop();
     if (props.backWard) {
       transitionBackward();
       navigate(-1);
