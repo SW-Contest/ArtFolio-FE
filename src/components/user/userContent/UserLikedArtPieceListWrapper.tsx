@@ -4,7 +4,7 @@ import { ArtPieceList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 import { getLikedArtPieceList } from "../../../api/artPiece.api";
-import UserAuctionListBoxes from "./UserAuctionListBoxes";
+import UserAuctionListBoxes from "./UserArtPieceListBoxes";
 
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
 
@@ -24,7 +24,7 @@ const UserLikedArtPieceListWrapper = (
   };
 
   const { isFetching, data, isError } = useQuery(
-    ["likedArtPiece"],
+    ["likedArtPiece" + props.userId],
     fetchLikedArtpieceList
   );
 
@@ -44,9 +44,8 @@ const UserLikedArtPieceListWrapper = (
         {!isError && isFetching && <ListBoxSkeletonList />}
         {list && <UserAuctionListBoxes list={list} />}
         {isError && <p>데이터 불러오기 오류.</p>}
-        {!isError && !isFetching && !list && <p>데이터가 없습니다.</p>}
-        {!isError && (
-          <div ref={infScroll} className="flex justify-center w-8 h-full"></div>
+        {!isError && !isFetching && list?.artPieceInfos.length === 0 && (
+          <p>데이터가 없습니다.</p>
         )}
       </div>
     </section>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import SlidingMenu from "../../ui/SlidingMenu";
-import UserAuctionListWrapper from "./UserAuctionListWrapper";
+import UserArtPieceListWrapper from "./UserArtPieceListWrapper";
 import UserLikedArtPieceListWrapper from "./UserLikedArtPieceListWrapper";
 
 const UserContent = () => {
@@ -25,7 +25,7 @@ const UserContent = () => {
         setSelectedMenu={setSelectedMenu}
       />
 
-      <UserAuctionListWrapper userId={userId} />
+      <UserArtPieceListWrapper userId={userId} />
       <UserLikedArtPieceListWrapper userId={userId} />
     </>
   );
