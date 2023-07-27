@@ -64,6 +64,9 @@ export const getLikedAuctionList = async (userId: string | undefined) => {
   return response;
 };
 
-export const getSearchResultList = async () => {
-  return;
+export const getSearchResultList = async (keyword: string) => {
+  const response = await axios.get(
+    `http://${HOST}/rt_auction/search?keyword=${keyword}`
+  );
+  return response;
 };

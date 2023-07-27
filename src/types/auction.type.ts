@@ -1,6 +1,7 @@
 export interface AuctionData {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
+  artPieceInfo?: ArtPieceInfo;
 }
 
 export interface AuctionList {
