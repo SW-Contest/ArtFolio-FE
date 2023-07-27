@@ -6,7 +6,7 @@ export const dummyDetail: AuctionDetail = {
     title: "Starry Night",
     content: "Starry Night",
     likes: 0,
-    photos: [""],
+    photoPaths: [""],
   },
   artistInfo: {
     memberId: 1,
