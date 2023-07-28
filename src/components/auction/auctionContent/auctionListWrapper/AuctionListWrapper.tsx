@@ -53,7 +53,7 @@ const AuctionListWrapper = () => {
         {!isError && isFetching && <ListBoxSkeletonList />}
       </div>
       {isError && <p>데이터 불러오기 오류.</p>}
-      {!isError && !isFetching && pages.length === 0 && (
+      {!isError && !isFetching && !pages[0]?.dataSize && (
         <p>데이터가 없습니다.</p>
       )}
       {!isError && (

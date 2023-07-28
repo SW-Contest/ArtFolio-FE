@@ -13,7 +13,6 @@ const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
   const [list, setList] = useState<ArtPieceList>();
 
   const fetchArtpieceList = async () => {
-    console.log("fetch");
     const response = await getArtPieceList(props.userId);
     return response.data;
   };

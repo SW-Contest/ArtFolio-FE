@@ -1,57 +1,43 @@
 import { create } from "zustand";
 
-interface ListState {
-  pageNumber: number;
-  increasePageNumber: () => void;
-}
-
 interface AnimationState {
-  isShow: boolean;
-  showAnimation: () => void;
+  type: string; // 애니메이션의 종류를 나타냅니다. (heart,loading)
+  isShow: boolean; // 애니메이션이 보여지는지 안보여지는지 여부입니다. (true: 보여짐, false: 안보여짐)
+  showAnimation: (type: string) => void;
   hideAnimation: () => void;
 }
 
 interface TransitionState {
-  from: number;
-  to: number;
-  scrollY: number;
-  onTransition: boolean;
-  recentPage: string;
-  setScrollY: (scrollY: number) => void;
+  from: number; // 트랜지션의 방향을 나타냅니다. 1: forward, -1: backward
+  to: number; // 트랜지션의 방향을 나타냅니다. -1: forward, 1: backward
+  onTransition: boolean; // 트랜지션이 진행중인지 여부입니다. (true: 진행중, false: 진행중이 아님)
+  recentPage: string; // 최근에 방문한 페이지의 url을 저장합니다.
   transitionForward: () => void;
   transitionBackward: () => void;
-  changeOnTransition: (onTransition: boolean) => void;
+  toggleTransition: () => void;
   setRecentPage: (recentPage: string) => void;
 }
 
-interface ScrollState {}
-
-export const useListStore = create<ListState>((set) => ({
-  pageNumber: 0,
-  increasePageNumber: () =>
-    set((state) => ({ pageNumber: state.pageNumber + 1 })),
-}));
-
 export const useAnimationStore = create<AnimationState>((set) => ({
+  type: "loading",
   isShow: false,
-  showAnimation: () => set((state) => ({ isShow: true })),
+  showAnimation: (type: string) =>
+    set((state) => ({ isShow: true, type: type })),
   hideAnimation: () => set((state) => ({ isShow: false })),
 }));
 
 export const useTransitionStore = create<TransitionState>((set) => ({
-  scrollY: 0,
   from: 0,
   to: 0,
   onTransition: false,
   recentPage: "/",
-  setScrollY: (scrollY: number) => set((state) => ({ scrollY: scrollY })),
   transitionForward: () => set((state) => ({ from: 1, to: -1 })),
   transitionBackward: () => set((state) => ({ from: -1, to: 1 })),
-  changeOnTransition: (onTransition: boolean) => {
-    console.log("onTransition", onTransition);
-    set((state) => ({ onTransition: onTransition }));
+  toggleTransition: () => {
+    // 트랜져션의 여부를 토글합니다. (true: 진행중, false: 진행중이 아님)
+    // 또한 setTimeout을 통해 1.1초 후에 트랜지션 여부를 false로 바꿉니다.
+    set((state) => ({ onTransition: true }));
     setTimeout(() => {
-      console.log("onTransition", "false");
       set((state) => ({ onTransition: false }));
     }, 1100);
   },
