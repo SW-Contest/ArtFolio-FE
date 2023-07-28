@@ -4,12 +4,12 @@ import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import NewArtPiecePage from "./pages/NewArtPiecePage";
-import HeartAnimation from "./components/ui/HeartAnimation";
+import Animations from "./components/ui/animations/Animations";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/ui/Header";
 import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooter";
-import { useTransitionStore } from "./store/store";
+import { useTransitionStore, useAnimationStore } from "./store/store";
 
 function App() {
   const location = useLocation();
@@ -23,6 +23,7 @@ function App() {
     toggleTransition,
     transitionBackward,
   } = useTransitionStore();
+  const { isShow, showAnimation } = useAnimationStore();
 
   // 브라우저의 뒤로가기 버튼을 눌렀을때, 헤더의 뒤로가기 버튼을 누른것처럼 보이게 하기 위한 코드입니다.
   // TODO: 이 코드는 불안정하므로, 추후 개선이 필요함
@@ -53,17 +54,25 @@ function App() {
 
   return (
     <div className="relative flex justify-center w-screen h-full min-h-screen bg-gray-100 ">
-      <HeartAnimation />
+      <Animations />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
       )}
 
       <div className="absolute  top-0 left-0">
         <p>{recentPage}</p>
-        <p>{String(onTransition)}</p>
+        <p>onTransition : {String(onTransition)}</p>
         <p>
           {to} {from}
         </p>
+        <p>isShow : {String(isShow)}</p>
+        <button
+          onClick={() => {
+            if (!isShow) showAnimation("loading");
+          }}
+        >
+          애니메이션
+        </button>
       </div>
 
       <section

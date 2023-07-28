@@ -6,8 +6,10 @@ import { postNewArtPiece, uploadArtPieceImage } from "../api/artPiece.api";
 import { BsFillImageFill } from "react-icons/bs";
 import { userId } from "../mocks/dummyUser";
 import DetailCarousel from "../components/detail/detailContent/DetailCarousel";
+import { useAnimationStore } from "../store/store";
 
 const NewArtPiecePage = () => {
+  const { showAnimation, hideAnimation } = useAnimationStore();
   const navigate = useNavigate();
   const [artPieceTitle, setArtPieceTitle] = useState("");
   const [artPieceContent, setArtPieceContent] = useState("");
@@ -44,6 +46,7 @@ const NewArtPiecePage = () => {
 
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    showAnimation("loading");
 
     if (artPieceFile) {
       try {
@@ -63,6 +66,8 @@ const NewArtPiecePage = () => {
           navigate(-1);
         } catch (e) {
           console.log("이미지 업로드 중 오류 발생");
+        } finally {
+          hideAnimation();
         }
       } catch (e) {
         console.log("작품 등록 중 오류 발생");

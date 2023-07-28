@@ -1,8 +1,9 @@
 import { create } from "zustand";
 
 interface AnimationState {
+  type: string; // 애니메이션의 종류를 나타냅니다. (heart,loading)
   isShow: boolean; // 애니메이션이 보여지는지 안보여지는지 여부입니다. (true: 보여짐, false: 안보여짐)
-  showAnimation: () => void;
+  showAnimation: (type: string) => void;
   hideAnimation: () => void;
 }
 
@@ -18,8 +19,10 @@ interface TransitionState {
 }
 
 export const useAnimationStore = create<AnimationState>((set) => ({
+  type: "loading",
   isShow: false,
-  showAnimation: () => set((state) => ({ isShow: true })),
+  showAnimation: (type: string) =>
+    set((state) => ({ isShow: true, type: type })),
   hideAnimation: () => set((state) => ({ isShow: false })),
 }));
 

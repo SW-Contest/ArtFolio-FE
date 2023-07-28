@@ -33,10 +33,9 @@ export const getAuctionDetail = async (auctionId: string | undefined) => {
 
 // 해당 경매를 좋아요합니다.
 export const postAuctionLike = async (auctionId: string, userId: number) => {
-  const response = await axios.patch(`http://${HOST}/rt_auction/like`, {
-    auctionId: auctionId,
-    userId: userId,
-  });
+  const response = await axios.patch(
+    `http://${HOST}/rt_auction/like?auctionId=${auctionId}&userId=${userId}`
+  );
 
   return response;
 };

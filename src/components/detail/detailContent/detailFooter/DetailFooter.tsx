@@ -70,7 +70,7 @@ const DetailFooter = () => {
 
   const clickHeartHandler = () => {
     if (!useAnimation.isShow) {
-      useAnimation.showAnimation();
+      useAnimation.showAnimation("heart");
       mutate();
     }
   };
