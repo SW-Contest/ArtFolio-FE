@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTransitionStore } from "../../store/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface TransitionLinkProps {
   children: React.ReactNode;
@@ -14,17 +14,29 @@ interface TransitionLinkProps {
 // 페이지 이동시 , 뒤로가기 버튼을 누른 경우와 다른 페이지 버튼을 누른 경우에
 // 각각 다른 애니메이션을 보여줍니다.
 const TransitionLink = (props: TransitionLinkProps) => {
-  const { scrollY, setScrollY, transitionForward, transitionBackward } =
-    useTransitionStore();
+  const {
+    recentPage,
+    setRecentPage,
+    changeOnTransition,
+    onTransition,
+    transitionForward,
+    transitionBackward,
+  } = useTransitionStore();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onClickHandler = () => {
-    if (props.backWard) {
-      transitionBackward();
-      navigate(-1);
-    } else {
-      transitionForward();
-      navigate(props.to);
+    if (!onTransition) {
+      const recent = location.pathname;
+      changeOnTransition(true);
+      if (props.backWard) {
+        transitionBackward();
+        navigate(recentPage);
+      } else {
+        transitionForward();
+        navigate(props.to);
+      }
+      setRecentPage(recent);
     }
   };
   return (

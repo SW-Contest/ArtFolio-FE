@@ -30,7 +30,7 @@ const DetailCarousel = (props: DetailCarouselProps) => {
     <>
       <Swiper
         spaceBetween={10}
-        centeredSlides={true}
+        // centeredSlides={true}
         slidesPerView={1}
         loop={true}
         pagination={{
