@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AuctionPage from "./pages/AuctionPage";
 import DetailPage from "./pages/DetailPage";
 import LoginPage from "./pages/LoginPage";
@@ -9,9 +9,35 @@ import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/ui/Header";
 import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooter";
+import { useTransitionStore } from "./store/store";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const {
+    to,
+    from,
+    setRecentPage,
+    recentPage,
+    onTransition,
+    changeOnTransition,
+    transitionBackward,
+  } = useTransitionStore();
+
+  // 브라우저의 뒤로가기 버튼을 눌렀을때, 헤더의 뒤로가기 버튼을 누른것처럼 보이게 하기 위한 코드입니다.
+  // TODO: 이 코드는 불안정하므로, 추후 개선이 필요함
+  // -----
+  history.pushState(null, "", location.pathname);
+
+  window.onpopstate = () => {
+    history.go(1);
+    if (!onTransition && location.pathname !== "/") {
+      transitionBackward();
+      changeOnTransition(true);
+      navigate("/");
+    }
+  };
+  // ------
 
   const handleResize = () => {
     const vh = window.innerHeight * 0.01;
@@ -32,7 +58,18 @@ function App() {
         <Header main={location.pathname === "/"} />
       )}
 
-      <section className="relative flex flex-col w-[400px] h-full bg-white overflow-hidden ">
+      <div className="absolute  top-0 left-0">
+        <p>{recentPage}</p>
+        <p>{String(onTransition)}</p>
+        <p>
+          {to} {from}
+        </p>
+      </div>
+
+      <section
+        id="page"
+        className="relative flex  w-[400px] h-full bg-white overflow-hidden"
+      >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<AuctionPage />} />
@@ -43,7 +80,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </section>
-      
+
       <AnimatePresence>
         {location.pathname.split("/")[1] === "auction" && <DetailFooterTest />}
       </AnimatePresence>

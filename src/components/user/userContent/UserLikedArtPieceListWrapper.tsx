@@ -4,7 +4,7 @@ import { ArtPieceList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 
 import { getLikedArtPieceList } from "../../../api/artPiece.api";
-import UserAuctionListBoxes from "./UserAuctionListBoxes";
+import UserAuctionListBoxes from "./UserArtPieceListBoxes";
 
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
 
@@ -15,7 +15,6 @@ interface UserLikedArtPieceListWrapperProps {
 const UserLikedArtPieceListWrapper = (
   props: UserLikedArtPieceListWrapperProps
 ) => {
-  const infScroll = useRef(null);
   const [list, setList] = useState<ArtPieceList>();
 
   const fetchLikedArtpieceList = async () => {
@@ -24,13 +23,13 @@ const UserLikedArtPieceListWrapper = (
   };
 
   const { isFetching, data, isError } = useQuery(
-    ["likedArtPiece"],
-    fetchLikedArtpieceList
+    ["likedArtPiece" + props.userId],
+    fetchLikedArtpieceList,
+    { staleTime: 5000 }
   );
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       setList(data);
     }
   }, [data]);
@@ -41,12 +40,11 @@ const UserLikedArtPieceListWrapper = (
         <p className="font-semibold">좋아요 한 작품</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
-        {!isError && isFetching && <ListBoxSkeletonList />}
         {list && <UserAuctionListBoxes list={list} />}
+        {!isError && isFetching && <ListBoxSkeletonList />}
         {isError && <p>데이터 불러오기 오류.</p>}
-        {!isError && !isFetching && !list && <p>데이터가 없습니다.</p>}
-        {!isError && (
-          <div ref={infScroll} className="flex justify-center w-8 h-full"></div>
+        {!isError && !isFetching && list?.artPieceInfos.length === 0 && (
+          <p>데이터가 없습니다.</p>
         )}
       </div>
     </section>

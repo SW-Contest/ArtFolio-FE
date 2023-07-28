@@ -4,11 +4,11 @@ import ListBoxSkeleton from "../../ui/ListBoxSkeleton";
 import ArtPieceListBox from "../../ui/ArtPieceListBox";
 import { ArtPieceList } from "../../../types/auction.type";
 
-interface UserAuctionListBoxes {
+interface UserArtPieceListBoxesProps {
   list: ArtPieceList;
 }
 
-const UserAuctionListBoxes = (props: UserAuctionListBoxes) => {
+const UserArtPieceListBoxes = (props: UserArtPieceListBoxesProps) => {
   const { artPieceInfos, artistInfo } = props.list;
   return (
     <>
@@ -23,4 +23,4 @@ const UserAuctionListBoxes = (props: UserAuctionListBoxes) => {
   );
 };
 
-export default UserAuctionListBoxes;
+export default UserArtPieceListBoxes;

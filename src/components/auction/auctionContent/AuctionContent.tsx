@@ -2,44 +2,50 @@ import Carousel from "./Carousel";
 import SearchBar from "./SearchBar";
 import AuctionListWrapper from "./auctionListWrapper/AuctionListWrapper";
 import SearchResultListWrapper from "./SearchResultListWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuctionList } from "../../../types/auction.type";
 import { getSearchResultList } from "../../../api/auction.api";
 import { useQuery } from "@tanstack/react-query";
 
 const AuctionContent = () => {
   const [searchResult, setSearchResult] = useState<AuctionList[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const fetchSearchResultList = async () => {
-    const response = await getSearchResultList();
-    // return response.data;
+    const response = await getSearchResultList(searchKeyword);
+    console.log(response);
+    return response.data.searchResult;
   };
 
   const { isFetching, data, isError } = useQuery(
-    ["SearchResultList"],
+    ["SearchResult" + searchKeyword],
     fetchSearchResultList,
     {
-      enabled: !!searchQuery,
+      enabled: !!searchKeyword,
     }
   );
 
-  const changeSearchQueryHandler = (searchText: string) => {
-    setSearchQuery(searchText);
+  useEffect(() => {
+    if (data) {
+      setSearchResult(data);
+    }
+  }, [data]);
+
+  const changeSearchKeywordHandler = (searchText: string) => {
+    setSearchKeyword(searchText);
   };
   return (
     <>
       <Carousel />
-      <SearchBar changeSearchQuery={changeSearchQueryHandler} />
-      {searchQuery && (
+      <SearchBar changeSearchQuery={changeSearchKeywordHandler} />
+      {searchKeyword && (
         <SearchResultListWrapper
           isFetching={isFetching}
-          data={data}
           isError={isError}
           searchResult={searchResult}
         />
       )}
-      {!searchQuery && <AuctionListWrapper />}
+      {!searchKeyword && <AuctionListWrapper />}
     </>
   );
 };

@@ -11,10 +11,9 @@ const Carousel = () => {
     <>
       <Swiper
         spaceBetween={0}
-        centeredSlides={true}
+        // centeredSlides={true}
         slidesPerView={1}
-        // loop={true}
-
+        loop={true}
         pagination={{
           clickable: true,
         }}

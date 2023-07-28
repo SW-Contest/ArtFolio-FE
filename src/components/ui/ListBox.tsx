@@ -10,13 +10,9 @@ interface ListBoxProps {
 }
 const ListBox = (props: ListBoxProps) => {
   const [imgError, setImgError] = useState(
-    props.auctionInfo.photoPaths[0] === "null"
+    props.auctionInfo.photoPaths.length === 0
   );
   const navigate = useNavigate();
-
-  const clickHandler = () => {
-    navigate(`/auction/${props.auctionInfo.id}`);
-  };
 
   // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
   const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {

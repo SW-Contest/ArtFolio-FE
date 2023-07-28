@@ -1,11 +1,11 @@
 import AuctionListBoxes from "./auctionListWrapper/AuctionListBoxes";
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
+import { AuctionList } from "../../../types/auction.type";
 
 interface SearchResultListWrapperProps {
   isFetching: boolean;
-  data: any;
+  searchResult: AuctionList[];
   isError: boolean;
-  searchResult: any;
 }
 const SearchResultListWrapper = (props: SearchResultListWrapperProps) => {
   return (
@@ -15,12 +15,12 @@ const SearchResultListWrapper = (props: SearchResultListWrapperProps) => {
       </div>
       <div className="flex flex-wrap justify-between w-full">
         {!props.isError && props.isFetching && <ListBoxSkeletonList />}
-        {/* <AuctionListBoxes pages={pages} /> */}
+        <AuctionListBoxes list={props.searchResult} />
       </div>
       {props.isError && <p>데이터 불러오기 오류.</p>}
-      {!props.isError && !props.isFetching && !props.data && (
-        <p>데이터가 없습니다.</p>
-      )}
+      {!props.isError &&
+        !props.isFetching &&
+        props.searchResult.length === 0 && <p>검색 결과가 없습니다.</p>}
     </section>
   );
 };

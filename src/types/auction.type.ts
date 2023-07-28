@@ -1,15 +1,16 @@
-export interface AuctionData {
+export interface AuctionList {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
+  artPieceInfo?: ArtPieceInfo;
 }
 
-export interface AuctionList {
+export interface AuctionPage {
   hasNext: boolean;
   isLast: boolean;
   pageSize: number;
   pageNumber: number;
   dataSize: number;
-  data: AuctionData[];
+  data: AuctionList[];
 }
 
 export interface ArtistInfo {
