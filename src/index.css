@@ -70,3 +70,8 @@ textarea {
   );
   @apply rounded-lg;
 }
+
+/* 이미지 모달 zoom-panch 확대시 최대로 보이게함 */
+.react-transform-wrapper {
+  overflow: visible !important;
+}

@@ -4,21 +4,25 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { postNewArtPiece, uploadArtPieceImage } from "../api/artPiece.api";
 import { BsFillImageFill } from "react-icons/bs";
+import { userId } from "../mocks/dummyUser";
+import DetailCarousel from "../components/detail/detailContent/DetailCarousel";
 
 const NewArtPiecePage = () => {
   const navigate = useNavigate();
   const [artPieceTitle, setArtPieceTitle] = useState("");
   const [artPieceContent, setArtPieceContent] = useState("");
-  const [artPieceFile, setArtPieceFile] = useState<File | null>(null);
-  const [artPieceImage, setArtPieceImage] = useState("");
+  const [artPieceFile, setArtPieceFile] = useState<FileList | null>(null);
+  const [artPieceImages, setArtPieceImages] = useState<string[]>([]);
 
   useEffect(() => {
     if (artPieceFile) {
-      const reader = new FileReader();
-      reader.readAsDataURL(artPieceFile);
-      reader.onloadend = () => {
-        setArtPieceImage(reader.result as string);
-      };
+      [...artPieceFile].forEach((file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          setArtPieceImages((prev) => [...prev, String(reader.result)]);
+        };
+      });
     }
   }, [artPieceFile]);
 
@@ -34,12 +38,11 @@ const NewArtPiecePage = () => {
 
   const onFileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setArtPieceFile(e.target.files[0]);
-      console.log(e.target.files[0]);
+      setArtPieceFile(e.target.files);
     }
   };
 
-  const onSubmitHandler = async (e: any) => {
+  const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (artPieceFile) {
@@ -47,19 +50,17 @@ const NewArtPiecePage = () => {
         const response = await postNewArtPiece({
           title: artPieceTitle,
           content: artPieceContent,
-          artistId: 1,
+          artistId: userId,
         });
 
         const artPieceId = response.data;
-        console.log(artPieceId);
         try {
           await uploadArtPieceImage({
-            artistId: 1,
+            artistId: userId,
             artPieceId: artPieceId,
             files: artPieceFile,
           });
-
-          navigate("/");
+          navigate(-1);
         } catch (e) {
           console.log("이미지 업로드 중 오류 발생");
         }
@@ -72,7 +73,7 @@ const NewArtPiecePage = () => {
     <Layout>
       <form
         onSubmit={onSubmitHandler}
-        className="flex flex-col mt-10 items-center gap-4"
+        className="flex flex-col mt-10 items-center gap-4 mb-10"
       >
         <div>
           <h1 className="text-2xl font-bold">새로운 작품 등록하기</h1>
@@ -109,6 +110,7 @@ const NewArtPiecePage = () => {
             <span className="label-text">파일을 선택해주세요</span>
           </label>
           <input
+            multiple
             onChange={onFileChangeHandler}
             type="file"
             accept="image/*"
@@ -121,10 +123,10 @@ const NewArtPiecePage = () => {
           <label className="label">
             <span className="label-text">미리보기</span>
           </label>
-          {artPieceImage ? (
-            <img className="w-full h-36 object-contain" src={artPieceImage} />
+          {artPieceImages.length > 0 ? (
+            <DetailCarousel photoPaths={artPieceImages} />
           ) : (
-            <div className="w-full h-36 bg-slate-200 flex justify-center items-center">
+            <div className="w-full h-[300px] bg-slate-200 flex justify-center items-center">
               <BsFillImageFill size={24} />
             </div>
           )}

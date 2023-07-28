@@ -30,12 +30,19 @@ export const postNewArtPiece = async (body: {
 export const uploadArtPieceImage = async (body: {
   artistId: number;
   artPieceId: number;
-  files: File;
+  files: FileList;
 }) => {
   const formData = new FormData();
   formData.append("artistId", body.artistId.toString());
   formData.append("artPieceId", body.artPieceId.toString());
-  formData.append("files", body.files);
+
+  for (let i = 0; i < body.files.length; i++) {
+    const file = body.files.item(i);
+    if (file) {
+      formData.append("files", file);
+    }
+  }
+  
   const response = await axios.post(
     `http://${HOST}/art_piece/image`,
     formData,

@@ -20,7 +20,7 @@ function App() {
     setRecentPage,
     recentPage,
     onTransition,
-    changeOnTransition,
+    toggleTransition,
     transitionBackward,
   } = useTransitionStore();
 
@@ -33,7 +33,7 @@ function App() {
     history.go(1);
     if (!onTransition && location.pathname !== "/") {
       transitionBackward();
-      changeOnTransition(true);
+      toggleTransition();
       navigate("/");
     }
   };

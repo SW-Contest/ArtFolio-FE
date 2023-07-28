@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 
 import ImageModal from "./ImageModal";
 import { SyntheticEvent, useState } from "react";
+import { Pagination } from "swiper";
 
 interface DetailCarouselProps {
   photoPaths: string[];
@@ -33,9 +34,12 @@ const DetailCarousel = (props: DetailCarouselProps) => {
         // centeredSlides={true}
         slidesPerView={1}
         loop={true}
-        pagination={{
-          clickable: true,
-        }}
+        pagination={
+          {
+            // clickable: true,
+          }
+        }
+        modules={[Pagination]}
         className="detailSwiper mt-10"
       >
         {!imgError ? (

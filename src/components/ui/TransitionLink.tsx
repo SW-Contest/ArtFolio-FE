@@ -17,7 +17,7 @@ const TransitionLink = (props: TransitionLinkProps) => {
   const {
     recentPage,
     setRecentPage,
-    changeOnTransition,
+    toggleTransition,
     onTransition,
     transitionForward,
     transitionBackward,
@@ -28,7 +28,7 @@ const TransitionLink = (props: TransitionLinkProps) => {
   const onClickHandler = () => {
     if (!onTransition) {
       const recent = location.pathname;
-      changeOnTransition(true);
+      toggleTransition();
       if (props.backWard) {
         transitionBackward();
         navigate(recentPage);
