@@ -15,6 +15,7 @@ const Chart = (props: ChartProps) => {
             ticks: {
               text: {
                 fontSize: 9,
+                fontFamily: "Pretendard",
               },
             },
           },

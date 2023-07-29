@@ -13,7 +13,6 @@ const AuctionContent = () => {
 
   const fetchSearchResultList = async () => {
     const response = await getSearchResultList(searchKeyword);
-    console.log(response);
     return response.data.searchResult;
   };
 
@@ -35,7 +34,7 @@ const AuctionContent = () => {
     setSearchKeyword(searchText);
   };
   return (
-    <>
+    <section className="flex flex-col mt-10">
       <Carousel />
       <SearchBar changeSearchQuery={changeSearchKeywordHandler} />
       {searchKeyword && (
@@ -46,7 +45,7 @@ const AuctionContent = () => {
         />
       )}
       {!searchKeyword && <AuctionListWrapper />}
-    </>
+    </section>
   );
 };
 

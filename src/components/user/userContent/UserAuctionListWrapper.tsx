@@ -31,7 +31,7 @@ const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">낙찰한 작품</p>
       </div>

@@ -32,13 +32,13 @@ const UserLikedAuctionListWrapper = (
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">좋아요 한 경매</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}
-        {/* {list && <AuctionListBoxes list={list} />} */}
+        {list && <AuctionListBoxes list={list} />}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError && !isFetching && list?.length === 0 && (
           <p>데이터가 없습니다.</p>

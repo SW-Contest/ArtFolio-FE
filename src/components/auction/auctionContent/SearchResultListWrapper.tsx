@@ -9,7 +9,7 @@ interface SearchResultListWrapperProps {
 }
 const SearchResultListWrapper = (props: SearchResultListWrapperProps) => {
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">검색 결과</p>
       </div>

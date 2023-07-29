@@ -21,7 +21,7 @@ const UserContent = () => {
     // 유저 정보 불러오기
   }, []);
   return (
-    <>
+    <section className="flex flex-col mt-10">
       <UserProfile />
       <SlidingMenu
         menus={menus}
@@ -40,10 +40,10 @@ const UserContent = () => {
         <>
           <UserFinishAuctionListWrapper userId={userId} />
           <UserLiveAuctionListWrapper userId={userId} />
-          <UserLikedAuctionListWrapper userId={userId} />
+          {/* <UserLikedAuctionListWrapper userId={userId} /> */}
         </>
       )}
-    </>
+    </section>
   );
 };
 

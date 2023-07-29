@@ -76,7 +76,6 @@ const DetailFooter = () => {
   // 경매 좋아요 유저 정보를 가져오고 , 해당 경매가 좋아요 된 경매인지 확인합니다.
   useEffect(() => {
     if (auctionLikeMemberData) {
-      console.log(auctionLikeMemberData);
       const likeMember = auctionLikeMemberData.likeUsers.filter((user) => {
         if (user.id === userId) return user;
       });
@@ -152,7 +151,7 @@ const DetailFooter = () => {
       exit={{
         y: "15rem",
       }}
-      className="flex flex-col shrink-0 fixed bottom-0 z-50 items-center w-full max-w-[400px] h-60 bg-af-brightGray rounded-t-3xl gap-4 font-Pretendard"
+      className="flex flex-col shrink-0 fixed bottom-0 z-50 items-center w-full max-w-[400px] h-60 bg-af-brightGray rounded-t-3xl gap-4 "
     >
       <RotationButton
         isExpanded={isExpanded}

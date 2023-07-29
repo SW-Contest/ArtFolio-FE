@@ -8,6 +8,10 @@
   display: none;
 }
 
+* {
+  @apply font-Pretendard;
+}
+
 /* input 숫자 화살표를 없앱니다. */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

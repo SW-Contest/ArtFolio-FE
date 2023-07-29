@@ -8,7 +8,7 @@ interface ArtistInfoProps {
 const ArtistInfo = (props: ArtistInfoProps) => {
   const clickArtistHomeHandler = () => {};
   return (
-    <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray">
+    <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray ">
       <UserIcon url="/src/assets/img/cat.jpeg" />
       <div className="flex flex-col justify-between grow">
         <p className="text-sm font-bold truncate ">{props.artistInfo.name}</p>

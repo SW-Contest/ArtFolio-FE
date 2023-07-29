@@ -20,7 +20,7 @@ const SearchBar = (props: SearchBarProps) => {
   return (
     <form
       onSubmit={searchTextHandler}
-      className="relative flex shrink-0 items-center justify-center w-full p-3 h-20 bg-af-darkGray font-Pretendard"
+      className="relative flex shrink-0 items-center justify-center w-full p-3 h-20 bg-af-darkGray"
     >
       <input
         type="text"
