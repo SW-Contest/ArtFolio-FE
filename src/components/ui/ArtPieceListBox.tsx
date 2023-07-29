@@ -2,6 +2,7 @@ import { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArtistInfo, ArtPieceInfo } from "../../types/auction.type";
+import TransitionLink from "./TransitionLink";
 
 interface ListBoxProps {
   artistInfo: ArtistInfo;
@@ -23,8 +24,8 @@ const ArtPieceListBox = (props: ListBoxProps) => {
   };
 
   return (
-    <div
-      onClick={clickHandler}
+    <TransitionLink
+      to={`/artdetail/${props.artPieceInfo.id}`}
       className=" shrink-0 relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
       {!imgError ? (
@@ -47,7 +48,7 @@ const ArtPieceListBox = (props: ListBoxProps) => {
           {props.artistInfo.name}
         </p>
       </div>
-    </div>
+    </TransitionLink>
   );
 };
 

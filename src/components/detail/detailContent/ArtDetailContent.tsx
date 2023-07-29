@@ -10,22 +10,22 @@ import ArtistInfo from "./ArtistInfo";
 
 const ArtDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
-  const { artpieceId } = useParams();
+  const { artPieceId } = useParams();
 
   const fetchArtPieceDetail = async () => {
-    if (!artpieceId) {
+    if (!artPieceId) {
       // artpieceId가 없으면 아무것도 하지 않음
       return null;
     }
 
     showAnimation("loading");
-    const response = await getArtPieceDetail(Number(artpieceId));
+    const response = await getArtPieceDetail(Number(artPieceId));
     console.log(response.data);
     return response.data;
   };
 
   const { data, isFetching } = useQuery<ArtPieceInfo>(
-    [artpieceId],
+    [artPieceId],
     fetchArtPieceDetail,
     {
       onSuccess: (response) => {
@@ -38,6 +38,7 @@ const ArtDetailContent = () => {
 
   if (isFetching || !data || !data.artPieceInfo) {
     // 로딩 중이거나 데이터가 없거나 artPieceInfo가 없을 경우 로딩 스피너를 출력
+    console.log("망했따")
     return <LoadingSpinner />;
   }
 
