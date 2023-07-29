@@ -1,9 +1,11 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/autoplay";
 
 const Carousel = () => {
   const slidesSrc = [
@@ -17,10 +19,9 @@ const Carousel = () => {
         spaceBetween={0}
         // centeredSlides={true}
         slidesPerView={1}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         loop={true}
-        pagination={{
-          clickable: true,
-        }}
+        modules={[Autoplay]}
         className="bannerSwiper"
       >
         {slidesSrc.map((src, index) => (
