@@ -1,29 +1,34 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import Slide from "../../ui/Slide";
+import "swiper/css/autoplay";
 
 const Carousel = () => {
+  const slidesSrc = [
+    "/img/banner/001.png",
+    "/img/banner/002.png",
+    "/img/banner/003.png",
+  ];
   return (
     <>
       <Swiper
         spaceBetween={0}
         // centeredSlides={true}
         slidesPerView={1}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
         loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        className="bannerSwiper mt-10"
+        modules={[Autoplay]}
+        className="bannerSwiper"
       >
-        <SwiperSlide>
-          <Slide />
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
+        {slidesSrc.map((src, index) => (
+          <SwiperSlide key={index}>
+            <img className="flex shrink-0 w-full " src={src} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

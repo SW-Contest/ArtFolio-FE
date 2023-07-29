@@ -15,7 +15,7 @@ const UserLikedAuctionListWrapper = (
 
   const fetchLikedAuctionList = async () => {
     const response = await getLikedAuctionList(props.userId);
-    return response.data.userBidAuctionList;
+    return response.data.auctionInfos;
   };
 
   const { isFetching, data, isError } = useQuery(
@@ -26,12 +26,13 @@ const UserLikedAuctionListWrapper = (
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setList(data);
     }
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">좋아요 한 경매</p>
       </div>

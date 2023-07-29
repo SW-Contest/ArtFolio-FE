@@ -30,7 +30,7 @@ const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">등록한 작품</p>
       </div>

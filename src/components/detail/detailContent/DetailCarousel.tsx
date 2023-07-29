@@ -40,7 +40,7 @@ const DetailCarousel = (props: DetailCarouselProps) => {
           }
         }
         modules={[Pagination]}
-        className="detailSwiper mt-10"
+        className="detailSwiper"
       >
         {!imgError ? (
           props.photoPaths.map((photo, index) => (
