@@ -7,7 +7,6 @@ interface ArtistInfoProps {
   artistInfo: ArtistInfo;
 }
 const ArtistInfo = (props: ArtistInfoProps) => {
-  const clickArtistHomeHandler = () => {};
   return (
     <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray ">
       <UserIcon url={props.artistInfo.photoPath} />

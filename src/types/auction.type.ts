@@ -15,11 +15,12 @@ export interface AuctionPage {
 
 export interface ArtistInfo {
   id: number;
-  username: string;
+  username?: string;
   name: string;
   email: string;
   photoPath: string;
   content?: string;
+  like?: number;
 }
 
 export interface ArtPieceInfo {
