@@ -1,6 +1,10 @@
 import UserIcon from "../../ui/UserIcon";
 import RoundButton from "../../ui/RoundButton";
 
+interface UserProfileProps {
+  userId: string;
+}
+
 const UserProfile = () => {
   return (
     <article className="flex flex-col items-center w-full gap-3">

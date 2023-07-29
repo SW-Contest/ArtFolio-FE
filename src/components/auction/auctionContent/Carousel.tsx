@@ -4,9 +4,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import Slide from "../../ui/Slide";
 
 const Carousel = () => {
+  const slidesSrc = [
+    "/img/banner/001.png",
+    "/img/banner/002.png",
+    "/img/banner/003.png",
+  ];
   return (
     <>
       <Swiper
@@ -19,11 +23,11 @@ const Carousel = () => {
         }}
         className="bannerSwiper"
       >
-        <SwiperSlide>
-          <Slide />
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
+        {slidesSrc.map((src, index) => (
+          <SwiperSlide key={index}>
+            <img className="flex shrink-0 w-full " src={src} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

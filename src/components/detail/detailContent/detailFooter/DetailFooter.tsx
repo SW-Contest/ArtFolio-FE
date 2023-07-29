@@ -64,7 +64,7 @@ const DetailFooter = () => {
       }
     );
 
-  const { artistInfo, auctionInfo, bidderInfos } = auctionData ?? {};
+  const { auctionInfo } = auctionData ?? {};
 
   // 경매 정보가 변경되면 입찰가를 변경합니다.
   useEffect(() => {
@@ -106,7 +106,9 @@ const DetailFooter = () => {
   // 좋아오 버튼이 눌리면 애니메이션을 보여주고, 좋아요를 토글합니다.
   const clickHeartHandler = () => {
     if (!useAnimation.isShow) {
-      useAnimation.showAnimation("heart");
+      if (!isLike) {
+        useAnimation.showAnimation("heart");
+      }
       mutate();
     }
   };
@@ -139,6 +141,7 @@ const DetailFooter = () => {
     setBidPrice(value);
   };
 
+  if (!auctionInfo) return <></>;
   return (
     <motion.footer
       initial={{
@@ -161,7 +164,7 @@ const DetailFooter = () => {
       </RotationButton>
 
       {/* 펼쳤을 때 */}
-      {auctionInfo && isExpanded && (
+      {isExpanded && (
         <DetailFooterExpanded
           onBidChange={bidChangeHandler}
           onBidSet={bidSetHandler}
@@ -170,9 +173,7 @@ const DetailFooter = () => {
         />
       )}
       {/* 접혔을 때 */}
-      {auctionInfo && !isExpanded && (
-        <DetailFooterFolded auctionInfo={auctionInfo!} />
-      )}
+      {!isExpanded && <DetailFooterFolded auctionInfo={auctionInfo!} />}
 
       <div className="flex w-full h-12 justify-evenly">
         <button
