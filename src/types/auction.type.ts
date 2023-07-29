@@ -14,11 +14,12 @@ export interface AuctionPage {
 }
 
 export interface ArtistInfo {
-  memberId: number;
+  id: number;
+  username: string;
   name: string;
   email: string;
-  profilePhotoPath: string;
-  like: number;
+  photoPath: string;
+  content?: string;
 }
 
 export interface ArtPieceInfo {
@@ -74,4 +75,9 @@ export interface AuctionDetail {
 export interface ArtPieceList {
   artistInfo: ArtistInfo;
   artPieceInfos: ArtPieceInfo[];
+}
+
+export interface AuctionLikedMember {
+  size: number;
+  likeUsers: ArtistInfo[];
 }

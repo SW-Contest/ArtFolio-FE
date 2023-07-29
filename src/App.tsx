@@ -33,9 +33,18 @@ function App() {
   window.onpopstate = () => {
     history.go(1);
     if (!onTransition && location.pathname !== "/") {
-      transitionBackward();
+      // transitionBackward();
+      // toggleTransition();
+      // navigate("/");
+      const recent = location.pathname;
       toggleTransition();
-      navigate("/");
+      transitionBackward();
+      navigate(recentPage);
+      if (recentPage === "/") {
+        setRecentPage(recent);
+      } else {
+        setRecentPage("/");
+      }
     }
   };
   // ------

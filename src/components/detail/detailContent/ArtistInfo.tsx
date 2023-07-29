@@ -13,7 +13,7 @@ const ArtistInfo = (props: ArtistInfoProps) => {
       <div className="flex flex-col justify-between grow">
         <p className="text-sm font-bold truncate ">{props.artistInfo.name}</p>
 
-        <p className="text-xs font-light">좋아요 {props.artistInfo.like}</p>
+        <p className="text-xs font-light">팔로우 {}</p>
       </div>
       <RoundButton onClick={clickArtistHomeHandler}>작가 Home</RoundButton>
     </article>

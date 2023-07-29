@@ -13,71 +13,113 @@ import DetailFooterExpanded from "./DetailFooterExpanded";
 import DetailFooterFolded from "./DetailFooterFolded";
 import useAuctionSocket from "../../../../hooks/useAuctionSocket";
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { AuctionDetail } from "../../../../types/auction.type";
+import { useQuery } from "@tanstack/react-query";
+import {
+  AuctionDetail,
+  AuctionLikedMember,
+} from "../../../../types/auction.type";
 import {
   getAuctionDetail,
   getMockAuctionDetail,
+  getAuctionLikedMember,
 } from "../../../../api/auction.api";
 import { matchPath, useLocation } from "react-router-dom";
+import { userId } from "../../../../mocks/dummyUser";
 
 const DetailFooter = () => {
   const location = useLocation();
 
   const useAnimation = useStore(useAnimationStore);
   const [auctionId, setAuctionId] = useState(location.pathname.split("/")[2]);
-  const [bidderId, setBidderId] = useState(1);
+  const [bidderId, setBidderId] = useState(userId);
   const [bidPrice, setBidPrice] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLike, setIsLike] = useState(false);
 
-  // const isLike = props.auctionInfo.likeMembers.includes(1);
-  const isLike = false;
-
+  // 경매 상세 정보를 가져옵니다.
   const fetchAuctionDetail = async () => {
     const response = await getAuctionDetail(auctionId);
     return response.data;
   };
 
-  const { data, isFetching, refetch } = useQuery<AuctionDetail>(
-    [auctionId],
-    fetchAuctionDetail,
-    {
+  // 경매 상세 정보를 관리하는 쿼리
+  const { data: auctionData, refetch: auctionRefetch } =
+    useQuery<AuctionDetail>(["auctionDetail" + auctionId], fetchAuctionDetail, {
       enabled: !!auctionId,
-    }
-  );
+    });
 
-  const { artistInfo, auctionInfo, bidderInfos } = data ?? {};
+  // 경매를 좋아요 한 유저 정보를 가져옵니다.
+  const fetchAuctionLikedMemeber = async () => {
+    const response = await getAuctionLikedMember(auctionId);
+    return response.data;
+  };
 
+  // 경매를 좋아요 한 유저 정보를 관리하는 쿼리
+  const { data: auctionLikeMemberData, refetch: auctionLikeMemberRefetch } =
+    useQuery<AuctionLikedMember>(
+      ["likeMember" + auctionId],
+      fetchAuctionLikedMemeber,
+      {
+        enabled: !!auctionId,
+      }
+    );
+
+  const { artistInfo, auctionInfo, bidderInfos } = auctionData ?? {};
+
+  // 경매 정보가 변경되면 입찰가를 변경합니다.
   useEffect(() => {
-    if (data && auctionInfo) {
+    if (auctionData && auctionInfo) {
       setBidPrice(auctionInfo.currentPrice);
     }
-  }, [data]);
+  }, [auctionData]);
 
-  const [publish] = useAuctionSocket(auctionId, refetch);
+  // 경매 좋아요 유저 정보를 가져오고 , 해당 경매가 좋아요 된 경매인지 확인합니다.
+  useEffect(() => {
+    if (auctionLikeMemberData) {
+      console.log(auctionLikeMemberData);
+      const likeMember = auctionLikeMemberData.likeUsers.filter((user) => {
+        if (user.id === userId) return user;
+      });
+
+      if (likeMember.length > 0) {
+        setIsLike(true);
+      } else {
+        setIsLike(false);
+      }
+    }
+  }, [auctionLikeMemberData]);
+
+  // 실시간 경매가를 위한 경매 소켓을 사용합니다.
+  const [publish] = useAuctionSocket(auctionId, auctionRefetch);
 
   const changeExpandedHandler = () => {
     setIsExpanded((prev) => !prev);
   };
 
+  // 경매 좋아요를 토글합니다.
   const toggleAuctionLike = async () => {
-    if (data && auctionInfo) {
+    if (auctionData && auctionInfo) {
       const response = await postAuctionLike(auctionInfo.id, bidderId);
-      console.log(response.data);
       return response.data;
     }
   };
 
+  // 좋아오 버튼이 눌리면 애니메이션을 보여주고, 좋아요를 토글합니다.
   const clickHeartHandler = () => {
     if (!useAnimation.isShow) {
       useAnimation.showAnimation("heart");
       mutate();
     }
   };
-  const { data: likeData, mutate } = useMutation(toggleAuctionLike);
+  const { data: likeData, mutate } = useMutation(toggleAuctionLike, {
+    onSuccess: () => {
+      auctionLikeMemberRefetch();
+    },
+  });
 
+  // 입찰 버튼이 눌리면 입찰가를 갱신합니다.
   const publishClickHandler = () => {
-    if (data && auctionInfo) {
+    if (auctionData && auctionInfo) {
       if (bidPrice > auctionInfo.currentPrice) {
         publish({
           bidderId: bidderId,
@@ -138,8 +180,8 @@ const DetailFooter = () => {
           onClick={clickHeartHandler}
           className={
             isLike
-              ? "btn w-12 flex justify-center items-center border bg-af-hotPink   border-af-hotPink"
-              : "btn w-12 flex justify-center items-center border bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
+              ? "btn btn-outline w-12 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
+              : "btn btn-outline w-12 flex justify-center items-center  bg-white  border-af-hotPink hover:bg-white hover:border-af-hotPink"
           }
         >
           <BsHeartFill

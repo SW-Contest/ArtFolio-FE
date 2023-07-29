@@ -7,6 +7,7 @@ import UserLikedArtPieceListWrapper from "./UserLikedArtPieceListWrapper";
 import UserAuctionListWrapper from "./UserAuctionListWrapper";
 import UserLiveAuctionListWrapper from "./UserLiveAuctionListWrapper";
 import UserFinishAuctionListWrapper from "./UserFinishAuctionListWrapper";
+import UserLikedAuctionListWrapper from "./UserLikedAuctionListWrapper";
 
 const UserContent = () => {
   const userId = useParams().userId;
@@ -39,6 +40,7 @@ const UserContent = () => {
         <>
           <UserFinishAuctionListWrapper userId={userId} />
           <UserLiveAuctionListWrapper userId={userId} />
+          <UserLikedAuctionListWrapper userId={userId} />
         </>
       )}
     </>

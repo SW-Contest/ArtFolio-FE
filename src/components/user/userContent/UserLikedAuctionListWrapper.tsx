@@ -15,7 +15,7 @@ const UserLikedAuctionListWrapper = (
 
   const fetchLikedAuctionList = async () => {
     const response = await getLikedAuctionList(props.userId);
-    return response.data.userBidAuctionList;
+    return response.data.auctionInfos;
   };
 
   const { isFetching, data, isError } = useQuery(
@@ -26,6 +26,7 @@ const UserLikedAuctionListWrapper = (
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setList(data);
     }
   }, [data]);
@@ -37,7 +38,7 @@ const UserLikedAuctionListWrapper = (
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}
-        {list && <AuctionListBoxes list={list} />}
+        {/* {list && <AuctionListBoxes list={list} />} */}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError && !isFetching && list?.length === 0 && (
           <p>데이터가 없습니다.</p>

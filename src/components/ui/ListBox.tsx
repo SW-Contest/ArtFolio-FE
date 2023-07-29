@@ -12,7 +12,6 @@ const ListBox = (props: ListBoxProps) => {
   const [imgError, setImgError] = useState(
     props.auctionInfo.photoPaths.length === 0
   );
-  const navigate = useNavigate();
 
   // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
   const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
