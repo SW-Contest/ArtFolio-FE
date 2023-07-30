@@ -25,7 +25,7 @@ const DetailContent = () => {
   };
 
   const { data, isFetching, refetch } = useQuery<AuctionDetail>(
-    [auctionId],
+    ["auctionDetail" + auctionId],
     fetchAuctionDetail,
     {
       onSuccess: () => {

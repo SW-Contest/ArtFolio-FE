@@ -1,15 +1,75 @@
-import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveLine, CustomLayerProps, Layer } from "@nivo/line";
 import { chartDataProps } from "./BidList";
+import { DotsItem } from "@nivo/core";
+import { motion } from "framer-motion";
 
 interface ChartProps {
   chartData: chartDataProps[];
   startPrice: number;
 }
-// TODO : customLayer를 통해 point 특정 부분에만 표시 구현
+// customLayer를 통해 마지막 point에만 표시합니다.
+function LastPoint({ points, ...props }: CustomLayerProps) {
+  const shownPoints = points.slice(-1);
+
+  return (
+    <>
+      {/* 포인트 */}
+      <g>
+        {shownPoints.map((point) => (
+          <DotsItem
+            key={point.id}
+            x={point.x}
+            y={point.y}
+            datum={point.data}
+            symbol={props.pointSymbol as any}
+            size={props.pointSize!}
+            color={point.color}
+            borderWidth={props.pointBorderWidth!}
+            borderColor={point.borderColor}
+            // label={point.label}
+            labelYOffset={props.pointLabelYOffset}
+          />
+        ))}
+      </g>
+      {/* ping 애니메이션 효과 */}
+      <motion.g className="animate-custom-ping" animate={{ scale: 1 }}>
+        {shownPoints.map((point) => (
+          <DotsItem
+            key={point.id}
+            x={point.x}
+            y={point.y}
+            datum={point.data}
+            symbol={props.pointSymbol as any}
+            size={props.pointSize!}
+            color={point.color}
+            borderWidth={props.pointBorderWidth!}
+            borderColor={point.borderColor}
+            // label={point.label}
+            labelYOffset={props.pointLabelYOffset}
+          />
+        ))}
+      </motion.g>
+    </>
+  );
+}
+
 const Chart = (props: ChartProps) => {
   return (
     <div className="w-full h-[200px]">
       <ResponsiveLine
+        layers={
+          [
+            "grid",
+            "axes",
+            "areas",
+            "lines",
+            "crosshair",
+            "slices",
+            "mesh",
+            "legends",
+            LastPoint,
+          ] as Layer[]
+        }
         theme={{
           axis: {
             ticks: {
@@ -35,7 +95,7 @@ const Chart = (props: ChartProps) => {
         fill={[{ match: "*", id: "gradient" }]}
         colors={"#FF008A"}
         data={props.chartData}
-        margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
+        margin={{ top: 20, right: 25, bottom: 40, left: 60 }}
         xScale={{
           // format: "%Y-%m-%d %H:%M:%SZ",
           type: "point",
@@ -93,7 +153,7 @@ const Chart = (props: ChartProps) => {
         enableGridY={false}
         lineWidth={3}
         pointSize={10}
-        pointColor={{ theme: "background" }}
+        pointColor={"#FF008A"}
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}
         pointLabel={(e) => e.x + ": " + e.y}
