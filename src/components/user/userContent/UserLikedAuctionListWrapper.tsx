@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { AuctionList } from "../../../types/auction.type";
+import { AuctionInfo, AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getLikedAuctionList } from "../../../api/auction.api";
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
@@ -18,7 +18,7 @@ const UserLikedAuctionListWrapper = (
     return response.data.auctionInfos;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<AuctionList[]>(
     ["likedAuction" + props.userId],
     fetchLikedAuctionList,
     { staleTime: 5000 }
@@ -26,7 +26,6 @@ const UserLikedAuctionListWrapper = (
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       setList(data);
     }
   }, [data]);

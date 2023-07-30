@@ -40,7 +40,7 @@ const UserContent = () => {
         <>
           <UserFinishAuctionListWrapper userId={userId} />
           <UserLiveAuctionListWrapper userId={userId} />
-          {/* <UserLikedAuctionListWrapper userId={userId} /> */}
+          <UserLikedAuctionListWrapper userId={userId} />
         </>
       )}
     </section>

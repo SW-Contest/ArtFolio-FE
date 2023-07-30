@@ -17,7 +17,7 @@ const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
     return response.data;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<ArtPieceList>(
     ["artPiece" + props.userId],
     fetchArtpieceList,
     { staleTime: 5000 }

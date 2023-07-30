@@ -27,16 +27,22 @@ const BidList = (props: BidListProps) => {
 
   useEffect(() => {
     if (props.bidderInfos && props.auctionInfo) {
+      // 시작 가격의 정보를 만듭니다.
+      // x는 경매 시작 시간, y는 시작 가격, name은 시작가로 합니다.
       const startPriceData = {
         x: new Date(props.auctionInfo.createdAt),
         y: props.auctionInfo.startPrice,
-        name: "",
+        name: "시작가",
       };
+
+      // bidderInfo의 정보를 만듭니다.
+      // x는 입찰 시간, y는 입찰 가격, name은 입찰자의 이름으로 합니다.
       const bidInfos = props.bidderInfos.map((bidInfo) => ({
         x: new Date(bidInfo.bidDate),
         y: bidInfo.bidPrice,
         name: bidInfo.name,
       }));
+
       // 시작 가격의 정보와 bidderInfo의 정보를 합칩니다.
       const newBidInfos = [startPriceData, ...bidInfos];
 
@@ -51,9 +57,18 @@ const BidList = (props: BidListProps) => {
     },
   ];
 
-  // chart에는 6개의 포인트만 보여줄 것이므로 6개 이하라면 그대로 보여주고 ,
-  // 아니라면 첫 번째 데이터와 뒤에서부터 5개의 데이터를 합쳐서 보여줍니다.
-  if (bidderData.length < 7) {
+  // chart에 아무도 입찰을 하지 않았다면, 시작 가격을 그래프로 나타내기 위해 2개의 데이터를 넣어줍니다.
+  // 입찰내역이 여러개라면 , chart에는 6개의 포인트만 보여줄 것이므로 6개 이하라면 그대로 보여주고 ,
+  // 아니라면 자연스러운 그래프 모양을 위하여 첫 번째 데이터와 뒤에서부터 5개의 데이터를 합쳐서 보여줍니다.
+  if (bidderData.length === 1) {
+    // 시작 가격을 통해 그래프를 일자로 그리기 위하여 1초 전의 시간을 넣어줍니다.
+    const startPriceData = {
+      x: new Date(new Date(props.auctionInfo.createdAt).getTime() - 1000), // 1초 전
+      y: props.auctionInfo.startPrice,
+      name: "시작가",
+    };
+    chartData = [{ ...chartData[0], data: [startPriceData, bidderData[0]] }];
+  } else if (bidderData.length < 7) {
     chartData = [{ ...chartData[0], data: [...bidderData] }];
   } else {
     const lastFive = bidderData.slice(-5);

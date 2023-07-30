@@ -82,3 +82,11 @@ export const getAuctionLikedMember = async (auctionId: string) => {
   );
   return response;
 };
+
+// 해당 유저의 경매 목록을 받아옵니다.
+export const getUserAuctionList = async (auctionId: string) => {
+  const response = await axios.get(
+    `http://${HOST}/rt_auction/like/${auctionId}`
+  );
+  return response;
+};

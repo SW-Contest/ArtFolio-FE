@@ -18,7 +18,7 @@ const UserFinishAuctionListWrapper = (
     return response.data.userBidAuctionList;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<AuctionList[]>(
     ["finishAuction" + props.userId],
     fetchFinishAuctionList,
     { staleTime: 5000 }
