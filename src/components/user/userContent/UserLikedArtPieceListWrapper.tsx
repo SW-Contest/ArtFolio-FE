@@ -22,7 +22,7 @@ const UserLikedArtPieceListWrapper = (
     return response.data;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<ArtPieceList>(
     ["likedArtPiece" + props.userId],
     fetchLikedArtpieceList,
     { staleTime: 5000 }

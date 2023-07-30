@@ -181,7 +181,7 @@ const DetailFooter = () => {
           className={
             isLike
               ? "btn btn-outline w-12 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
-              : "btn btn-outline w-12 flex justify-center items-center  bg-white  border-af-hotPink hover:bg-white hover:border-af-hotPink"
+              : "btn btn-outline w-12 flex justify-center items-center  bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
           }
         >
           <BsHeartFill
