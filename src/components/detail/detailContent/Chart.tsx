@@ -7,28 +7,49 @@ interface ChartProps {
   chartData: chartDataProps[];
   startPrice: number;
 }
-// TODO : customLayer를 통해 point 특정 부분에만 표시 구현
+// customLayer를 통해 마지막 point에만 표시합니다.
 function LastPoint({ points, ...props }: CustomLayerProps) {
   const shownPoints = points.slice(-1);
 
   return (
-    <motion.g className="animate-custom-ping" animate={{ scale: 1 }}>
-      {shownPoints.map((point) => (
-        <DotsItem
-          key={point.id}
-          x={point.x}
-          y={point.y}
-          datum={point.data}
-          symbol={props.pointSymbol as any}
-          size={props.pointSize!}
-          color={point.color}
-          borderWidth={props.pointBorderWidth!}
-          borderColor={point.borderColor}
-          // label={point.label}
-          labelYOffset={props.pointLabelYOffset}
-        />
-      ))}
-    </motion.g>
+    <>
+      {/* 포인트 */}
+      <g>
+        {shownPoints.map((point) => (
+          <DotsItem
+            key={point.id}
+            x={point.x}
+            y={point.y}
+            datum={point.data}
+            symbol={props.pointSymbol as any}
+            size={props.pointSize!}
+            color={point.color}
+            borderWidth={props.pointBorderWidth!}
+            borderColor={point.borderColor}
+            // label={point.label}
+            labelYOffset={props.pointLabelYOffset}
+          />
+        ))}
+      </g>
+      {/* ping 애니메이션 효과 */}
+      <motion.g className="animate-custom-ping" animate={{ scale: 1 }}>
+        {shownPoints.map((point) => (
+          <DotsItem
+            key={point.id}
+            x={point.x}
+            y={point.y}
+            datum={point.data}
+            symbol={props.pointSymbol as any}
+            size={props.pointSize!}
+            color={point.color}
+            borderWidth={props.pointBorderWidth!}
+            borderColor={point.borderColor}
+            // label={point.label}
+            labelYOffset={props.pointLabelYOffset}
+          />
+        ))}
+      </motion.g>
+    </>
   );
 }
 
