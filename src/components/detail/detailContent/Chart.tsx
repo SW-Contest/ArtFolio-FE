@@ -7,6 +7,7 @@ interface ChartProps {
   chartData: chartDataProps[];
   startPrice: number;
 }
+
 // customLayer를 통해 마지막 point에만 표시합니다.
 function LastPoint({ points, ...props }: CustomLayerProps) {
   const shownPoints = points.slice(-1);
@@ -26,13 +27,17 @@ function LastPoint({ points, ...props }: CustomLayerProps) {
             color={point.color}
             borderWidth={props.pointBorderWidth!}
             borderColor={point.borderColor}
-            // label={point.label}
             labelYOffset={props.pointLabelYOffset}
           />
         ))}
       </g>
       {/* ping 애니메이션 효과 */}
-      <motion.g className="animate-custom-ping" animate={{ scale: 1 }}>
+      {/* point의 y값에 따라 애니메이션이 따라가도록 함 */}
+      <motion.g
+        key={points[0].y}
+        className="animate-custom-ping"
+        animate={{ scale: 1 }}
+      >
         {shownPoints.map((point) => (
           <DotsItem
             key={point.id}
@@ -44,7 +49,6 @@ function LastPoint({ points, ...props }: CustomLayerProps) {
             color={point.color}
             borderWidth={props.pointBorderWidth!}
             borderColor={point.borderColor}
-            // label={point.label}
             labelYOffset={props.pointLabelYOffset}
           />
         ))}
@@ -97,14 +101,7 @@ const Chart = (props: ChartProps) => {
         data={props.chartData}
         margin={{ top: 20, right: 25, bottom: 40, left: 60 }}
         xScale={{
-          // format: "%Y-%m-%d %H:%M:%SZ",
           type: "point",
-
-          // min: "auto",
-          // max: "auto",
-          // nice: true,
-          // useUTC: true,
-          // precision: "hour",
         }}
         yScale={{
           type: "linear",
