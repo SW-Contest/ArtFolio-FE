@@ -1,10 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getArtPieceDetail } from "../../../api/artPiece.api";
+import { analyzeArtPiece, getArtPieceDetail } from "../../../api/artPiece.api";
 import { useAnimationStore } from "../../../store/store";
-import { ArtPieceDetail } from "../../../types/auction.type";
+import { ArtPieceDetail } from "../../../types/artPiece.type";
 import ImageCarousel from "../../common/ImageCarousel";
 import ArtistInfo from "../../common/user/ArtistInfo";
+import RoundButton from "../../common/RoundButton";
+import { FcFlashOn } from "react-icons/fc";
+import { AiInfo } from "../../../types/ai.type";
+import LoadingSpinner from "../../common/LoadingSpinner";
+import ArtPieceDescription from "./ArtPieceDescription";
+
+import ArtPieceTitle from "./ArtPieceTitle";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -28,22 +35,41 @@ const ArtPieceDetailContent = () => {
     }
   );
 
+  const fetchAIInfo = async () => {
+    const response = await analyzeArtPiece(artPieceId);
+    console.log(response.data);
+    return response.data;
+  };
+
+  const { data: AIData, isFetching: AIIsFetching } = useQuery<AiInfo>(
+    ["AIInfo" + artPieceId],
+    fetchAIInfo
+  );
+
   const { artistInfo, artPieceInfo } = data ?? {};
 
   return (
     <section className="flex flex-col mt-10 mb-40 font-Pretendard">
       {data && artistInfo && artPieceInfo && (
         <>
-          <ImageCarousel photoPaths={data.artPieceInfo.photoPaths ?? []} />
-          <div className="p-2">
-            <article className="flex justify-between w-full py-2 ">
-              <p className="text-xl font-bold">{data.artPieceInfo.title}</p>
-            </article>
+          <ImageCarousel photoPaths={artPieceInfo.photoPaths ?? []} />
+          <div className="flex flex-col gap-2 p-2">
+            <ArtPieceTitle artPieceInfo={artPieceInfo} />
             <ArtistInfo artistInfo={artistInfo} />
-            <p className="mb-2 text-sm font-semibold ">작품 설명</p>
-            <p className="w-full mb-1 text-sm font-normal ">
-              {data.artPieceInfo.content}
-            </p>
+            <ArtPieceDescription artPieceInfo={artPieceInfo} />
+            <div className="flex justify-center w-full">
+              {AIIsFetching ? (
+                <RoundButton>
+                  <p>AI 분석중...</p>
+                  <LoadingSpinner small />
+                </RoundButton>
+              ) : (
+                <RoundButton className="gap-0" onClick={fetchAIInfo}>
+                  <FcFlashOn size={30} />
+                  <p>AI를 통해 그림 분석하기</p>
+                </RoundButton>
+              )}
+            </div>
           </div>
         </>
       )}

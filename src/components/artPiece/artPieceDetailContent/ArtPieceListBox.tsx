@@ -1,8 +1,9 @@
 import { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ArtistInfo, ArtPieceInfo } from "../../../types/auction.type";
-import TransitionLink from "../TransitionLink";
+import { ArtistInfo } from "../../../types/auction.type";
+import { ArtPieceInfo } from "../../../types/artPiece.type";
+import TransitionLink from "../../common/TransitionLink";
 
 interface ListBoxProps {
   artistInfo: ArtistInfo;

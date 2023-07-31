@@ -1,5 +1,5 @@
-import ArtPieceListBox from "../../common/artPiece/ArtPieceListBox";
-import { ArtPieceList } from "../../../types/auction.type";
+import ArtPieceListBox from "../../artPiece/artPieceDetailContent/ArtPieceListBox";
+import { ArtPieceList } from "../../../types/artPiece.type";
 
 interface UserArtPieceListBoxesProps {
   list: ArtPieceList;

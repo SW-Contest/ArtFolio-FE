@@ -1,11 +1,10 @@
-import Header from "../components/common/Header";
+import AuctionDetailContent from "../components/auction/auctionDetailContent/AuctionDetailContent";
 import Layout from "../components/common/Layout";
-import DetailContent from "../components/auction/auctionDetailContent/DetailContent";
 
 const AuctionDetailPage = () => {
   return (
     <Layout>
-      <DetailContent />
+      <AuctionDetailContent />
     </Layout>
   );
 };

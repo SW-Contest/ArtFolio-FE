@@ -33,7 +33,7 @@ function App() {
 
   window.onpopstate = () => {
     history.go(1);
-    if (!onTransition && location.pathname !== "/") {
+    if (!isShow && !onTransition && location.pathname !== "/") {
       // transitionBackward();
       // toggleTransition();
       // navigate("/");
