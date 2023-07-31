@@ -14,6 +14,7 @@ const ArtDetailContent = () => {
 
   const fetchArtPieceDetail = async () => {
     if (!artPieceId) {
+      console.log("불러오기 오류");
       // artpieceId가 없으면 아무것도 하지 않음
       return null;
     }
@@ -38,7 +39,6 @@ const ArtDetailContent = () => {
 
   if (isFetching || !data || !data.artPieceInfo) {
     // 로딩 중이거나 데이터가 없거나 artPieceInfo가 없을 경우 로딩 스피너를 출력
-    console.log("망했따")
     return <LoadingSpinner />;
   }
 
