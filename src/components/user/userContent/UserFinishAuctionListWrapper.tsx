@@ -18,7 +18,7 @@ const UserFinishAuctionListWrapper = (
     return response.data.userBidAuctionList;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<AuctionList[]>(
     ["finishAuction" + props.userId],
     fetchFinishAuctionList,
     { staleTime: 5000 }
@@ -31,7 +31,7 @@ const UserFinishAuctionListWrapper = (
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">낙찰한 경매</p>
       </div>

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { AuctionList } from "../../../types/auction.type";
+import { AuctionInfo, AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getLikedAuctionList } from "../../../api/auction.api";
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
@@ -15,10 +15,10 @@ const UserLikedAuctionListWrapper = (
 
   const fetchLikedAuctionList = async () => {
     const response = await getLikedAuctionList(props.userId);
-    return response.data.userBidAuctionList;
+    return response.data.auctionInfos;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<AuctionList[]>(
     ["likedAuction" + props.userId],
     fetchLikedAuctionList,
     { staleTime: 5000 }
@@ -31,7 +31,7 @@ const UserLikedAuctionListWrapper = (
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">좋아요 한 경매</p>
       </div>

@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import { AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getFinishAuctionList } from "../../../api/auction.api";
-import { useParams } from "react-router-dom";
+
 import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
-import UserArtPieceListBoxes from "./UserArtPieceListBoxes";
+
 import AuctionListBoxes from "../../auction/auctionContent/auctionListWrapper/AuctionListBoxes";
 
 interface UserAuctionListWrapperProps {
@@ -14,7 +14,7 @@ const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
   const [list, setList] = useState<AuctionList[]>();
 
   const fetchUserAuctionList = async () => {
-    // const response = await getAuctionList(props.userId);
+    // const response = await getUserAuctionList(props.userId);
     // return response.data.userBidAuctionList;
   };
 
@@ -31,7 +31,7 @@ const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">낙찰한 작품</p>
       </div>

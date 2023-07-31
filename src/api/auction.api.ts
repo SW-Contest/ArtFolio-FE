@@ -74,3 +74,19 @@ export const getSearchResultList = async (keyword: string) => {
   );
   return response;
 };
+
+// 해당 경매를 좋아요한 유저 목록을 받아옵니다.
+export const getAuctionLikedMember = async (auctionId: string) => {
+  const response = await axios.get(
+    `http://${HOST}/rt_auction/like/${auctionId}`
+  );
+  return response;
+};
+
+// 해당 유저의 경매 목록을 받아옵니다.
+export const getUserAuctionList = async (auctionId: string) => {
+  const response = await axios.get(
+    `http://${HOST}/rt_auction/like/${auctionId}`
+  );
+  return response;
+};

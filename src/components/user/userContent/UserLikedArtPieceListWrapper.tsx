@@ -22,7 +22,7 @@ const UserLikedArtPieceListWrapper = (
     return response.data;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<ArtPieceList>(
     ["likedArtPiece" + props.userId],
     fetchLikedArtpieceList,
     { staleTime: 5000 }
@@ -35,7 +35,7 @@ const UserLikedArtPieceListWrapper = (
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard ">
+    <section className="flex flex-col w-full p-3  ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">좋아요 한 작품</p>
       </div>

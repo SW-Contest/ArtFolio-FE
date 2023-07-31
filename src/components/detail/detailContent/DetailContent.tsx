@@ -25,7 +25,7 @@ const DetailContent = () => {
   };
 
   const { data, isFetching, refetch } = useQuery<AuctionDetail>(
-    [auctionId],
+    ["auctionDetail" + auctionId],
     fetchAuctionDetail,
     {
       onSuccess: () => {
@@ -37,7 +37,7 @@ const DetailContent = () => {
   const { artistInfo, auctionInfo, bidderInfos } = data ?? {};
 
   return (
-    <section className="flex flex-col mb-40 font-Pretendard">
+    <section className="flex flex-col mb-40  mt-10">
       {data && artistInfo && auctionInfo && bidderInfos && (
         <>
           <DetailCarousel photoPaths={auctionInfo.photoPaths ?? []} />

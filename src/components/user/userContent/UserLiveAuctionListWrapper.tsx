@@ -18,7 +18,7 @@ const UserLiveAuctionListWrapper = (props: UserLiveAuctionListWrapperProps) => {
     return response.data.userBidAuctionList;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const { isFetching, data, isError } = useQuery<AuctionList[]>(
     ["liveAuction" + props.userId],
     fetchLiveAuctionList,
     { staleTime: 5000 }
@@ -26,12 +26,29 @@ const UserLiveAuctionListWrapper = (props: UserLiveAuctionListWrapperProps) => {
 
   useEffect(() => {
     if (data) {
-      setList(data);
+      // 참여 중인 경매 데이터에는 같은 경매가 여러 번 포함되어 있을 수 있음
+      // 따라서 같은 경매가 여러 번 포함되지 않도록 중복 제거
+      const uniqueData = data.reduce(
+        (uniqueArray: AuctionList[], currentItem) => {
+          // 이미 같은 id를 갖는 경매 정보가 가 결과 배열에 없다면 추가
+          if (
+            !uniqueArray.some(
+              (item) => item.auctionInfo.id === currentItem.auctionInfo.id
+            )
+          ) {
+            uniqueArray.push(currentItem);
+          }
+          return uniqueArray;
+        },
+        []
+      );
+
+      setList(uniqueData);
     }
   }, [data]);
 
   return (
-    <section className="flex flex-col w-full p-3 font-Pretendard">
+    <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
         <p className="font-semibold">참여 중 경매</p>
       </div>

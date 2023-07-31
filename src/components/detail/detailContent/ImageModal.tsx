@@ -6,6 +6,7 @@ interface ImageModalProps {
 }
 
 const ImageModal = (props: ImageModalProps) => {
+
   // 모달이 있을 때는 외부 스크롤을 막습니다.
   const changeScrollHandler = (e: any) => {
     const isChecked = e.target.value;
@@ -13,6 +14,7 @@ const ImageModal = (props: ImageModalProps) => {
       document.body.style.overflow = "unset";
     }
   };
+  
   return (
     <>
       <input
@@ -22,7 +24,11 @@ const ImageModal = (props: ImageModalProps) => {
         className="modal-toggle"
       />
       <TransformWrapper initialScale={1}>
+<<<<<<< HEAD
         <label htmlFor="image-modal" className="cursor-pointer modal">
+=======
+        <label htmlFor="image-modal" className="cursor-pointer modal ">
+>>>>>>> main
           <label className="modal-box w-[350px] h-[350px] relative flex items-center justify-center">
             <TransformComponent>
               <img src={props.imgSrc} />

@@ -6,11 +6,11 @@ interface UserIconProps {
 }
 const UserIcon = (props: UserIconProps) => {
   let styles =
-    "grow-0 flex items-center justify-end rounded-full overflow-hidden w-10 h-10 ";
+    "shrink-0 flex items-center justify-end rounded-full overflow-hidden w-10 h-10 ";
 
   if (props.large) {
     styles =
-      "grow-0 flex items-center justify-end rounded-full overflow-hidden w-24 h-24 ";
+      "shrink-0 flex items-center justify-end rounded-full overflow-hidden w-24 h-24 ";
   }
   return (
     <div className={styles}>

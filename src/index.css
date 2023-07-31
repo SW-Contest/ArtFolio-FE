@@ -8,6 +8,13 @@
   display: none;
 }
 
+<<<<<<< HEAD
+=======
+* {
+  @apply font-Pretendard;
+}
+
+>>>>>>> main
 /* input 숫자 화살표를 없앱니다. */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -75,3 +82,17 @@ textarea {
 .react-transform-wrapper {
   overflow: visible !important;
 }
+<<<<<<< HEAD
+=======
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.animate-custom-ping {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+>>>>>>> main
