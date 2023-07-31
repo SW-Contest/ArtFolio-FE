@@ -24,7 +24,11 @@ const ImageModal = (props: ImageModalProps) => {
         className="modal-toggle"
       />
       <TransformWrapper initialScale={1}>
+<<<<<<< HEAD
+        <label htmlFor="image-modal" className="cursor-pointer modal">
+=======
         <label htmlFor="image-modal" className="cursor-pointer modal ">
+>>>>>>> main
           <label className="modal-box w-[350px] h-[350px] relative flex items-center justify-center">
             <TransformComponent>
               <img src={props.imgSrc} />

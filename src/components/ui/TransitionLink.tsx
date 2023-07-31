@@ -36,11 +36,15 @@ const TransitionLink = (props: TransitionLinkProps) => {
         transitionForward();
         navigate(props.to);
       }
+<<<<<<< HEAD
+      setRecentPage(recent);
+=======
       if (recentPage === "/") {
         setRecentPage(recent);
       } else {
         setRecentPage("/");
       }
+>>>>>>> main
     }
   };
   return (

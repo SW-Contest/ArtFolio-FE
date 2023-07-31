@@ -30,16 +30,20 @@ const LoginPage = () => {
     setEmailValue(value);
   };
 
-  //    const loginHandler = () => {
-  //      const user = userdata.find((user) => user.email === emailValue && user.passwd === passwordValue);
-  //      if (user) {
-  //          console.log("로그인 성공");
-  //        }
-  //        else {
-  //            console.log("로그인 실패");
-  //        }
+  const onPasswordChangeHandler = (value: string) => {
+    setPasswordValue(value);
+  };
 
-  //    };
+  const loginHandler = () => {
+    const user = userdata.find(
+      (user) => user.email === emailValue && user.passwd === passwordValue
+    );
+    if (user) {
+      console.log("로그인 성공");
+    } else {
+      console.log("로그인 실패");
+    }
+  };
 
   return (
     <Layout>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAnimationStore } from "../../store/store";
 import { useNavigate } from "react-router-dom";
-import { deleteArtPiece, postNewArtPiece } from "../../api/artPiece.api";
+import { postNewArtPiece } from "../../api/artPiece.api";
 import { uploadArtPieceImage } from "../../api/artPiece.api";
 import DetailCarousel from "../detail/detailContent/DetailCarousel";
 import { BsFillImageFill } from "react-icons/bs";
@@ -71,7 +71,7 @@ const NewArtPieceContent = () => {
         } catch (e) {
           console.log("이미지 업로드 중 오류 발생");
           // 이미지 업로드에 실패하면 작품을 삭제합니다.
-          await deleteArtPiece({ artPieceId: artPieceId, artistId: userId });
+          // await deleteArtPiece({ artPieceId: artPieceId, artistId: userId });
         } finally {
           hideAnimation();
         }

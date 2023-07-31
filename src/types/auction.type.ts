@@ -73,6 +73,11 @@ export interface AuctionDetail {
   aiInfo: AiInfo;
 }
 
+export interface ArtPieceDetail {
+  artistInfo: ArtistInfo;
+  artPieceInfo: ArtPieceInfo;
+}
+
 export interface ArtPieceList {
   artistInfo: ArtistInfo;
   artPieceInfos: ArtPieceInfo[];

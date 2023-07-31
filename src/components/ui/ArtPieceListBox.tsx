@@ -2,6 +2,7 @@ import { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ArtistInfo, ArtPieceInfo } from "../../types/auction.type";
+import TransitionLink from "./TransitionLink";
 
 interface ListBoxProps {
   artistInfo: ArtistInfo;
@@ -13,19 +14,15 @@ const ArtPieceListBox = (props: ListBoxProps) => {
   );
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    navigate(`/art_piece/${props.artPieceInfo.id}`);
-  };
-
   // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
   const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     setImgError(true);
   };
 
   return (
-    <div
-      onClick={clickHandler}
-      className=" shrink-0 relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box "
+    <TransitionLink
+      to={`/artpiece/${props.artPieceInfo.id}`}
+      className=" shrink-0 relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
       {!imgError ? (
         <img
@@ -47,7 +44,7 @@ const ArtPieceListBox = (props: ListBoxProps) => {
           {props.artistInfo.name}
         </p>
       </div>
-    </div>
+    </TransitionLink>
   );
 };
 
