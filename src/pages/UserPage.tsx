@@ -1,5 +1,4 @@
-import Header from "../components/ui/Header";
-import Layout from "../components/ui/Layout";
+import Layout from "../components/common/Layout";
 import UserContent from "../components/user/userContent/UserContent";
 
 const UserPage = () => {

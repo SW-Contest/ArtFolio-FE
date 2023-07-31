@@ -3,7 +3,7 @@ import { useAnimationStore } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import { postNewArtPiece } from "../../api/artPiece.api";
 import { uploadArtPieceImage } from "../../api/artPiece.api";
-import DetailCarousel from "../detail/detailContent/DetailCarousel";
+import DetailCarousel from "../common/ImageCarousel";
 import { BsFillImageFill } from "react-icons/bs";
 import { userId } from "../../mocks/dummyUser";
 
@@ -18,6 +18,7 @@ const NewArtPieceContent = () => {
   // 이미지 파일이 변경되면 이미지 파일을 base64로 인코딩하여 artPieceImages에 저장합니다.
   useEffect(() => {
     if (artPieceFile) {
+      setArtPieceImages([]);
       [...artPieceFile].forEach((file) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);

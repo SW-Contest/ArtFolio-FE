@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
-const Carousel = () => {
+const BannerCarousel = () => {
   const slidesSrc = [
     "/img/banner/001.png",
     "/img/banner/002.png",
@@ -34,4 +34,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default BannerCarousel;

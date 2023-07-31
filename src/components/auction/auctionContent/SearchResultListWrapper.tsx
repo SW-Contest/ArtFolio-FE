@@ -1,5 +1,5 @@
 import AuctionListBoxes from "./auctionListWrapper/AuctionListBoxes";
-import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
+import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
 import { AuctionList } from "../../../types/auction.type";
 
 interface SearchResultListWrapperProps {

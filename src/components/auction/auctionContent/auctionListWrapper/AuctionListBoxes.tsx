@@ -1,5 +1,5 @@
 import React from "react";
-import ListBox from "../../../ui/ListBox";
+import AuctionListBox from "../AuctionListBox";
 import { AuctionList, AuctionPage } from "../../../../types/auction.type";
 
 interface AuctionListBoxesProps {
@@ -17,7 +17,7 @@ const AuctionListBoxes = (props: AuctionListBoxesProps) => {
       <>
         {pages.map((list) =>
           list.data.map((item) => (
-            <ListBox
+            <AuctionListBox
               key={item.auctionInfo.id}
               artistInfo={item.artistInfo}
               auctionInfo={item.auctionInfo}
@@ -34,7 +34,7 @@ const AuctionListBoxes = (props: AuctionListBoxesProps) => {
     return (
       <>
         {list.map((item) => (
-          <ListBox
+          <AuctionListBox
             key={item.auctionInfo.id}
             artistInfo={item.artistInfo}
             auctionInfo={item.auctionInfo}

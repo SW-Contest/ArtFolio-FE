@@ -1,3 +1,6 @@
+import { ArtPieceInfo } from "./artPiece.type";
+import { AiInfo } from "./ai.type";
+
 export interface AuctionList {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
@@ -21,14 +24,6 @@ export interface ArtistInfo {
   photoPath: string;
   content?: string;
   like?: number;
-}
-
-export interface ArtPieceInfo {
-  id: number;
-  title: string;
-  content: string;
-  likes: number;
-  photoPaths: string[];
 }
 
 export interface AuctionInfo {
@@ -55,32 +50,12 @@ export interface BidderInfos {
   bidDate: string;
 }
 
-export interface AiInfo {
-  labels: AiInfoLabel[];
-  content: string;
-}
-
-export interface AiInfoLabel {
-  name: string;
-  confidence: number;
-}
-
 export interface AuctionDetail {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
   artPieceInfo: ArtPieceInfo;
   bidderInfos: BidderInfos[];
   aiInfo: AiInfo;
-}
-
-export interface ArtPieceDetail {
-  artistInfo: ArtistInfo;
-  artPieceInfo: ArtPieceInfo;
-}
-
-export interface ArtPieceList {
-  artistInfo: ArtistInfo;
-  artPieceInfos: ArtPieceInfo[];
 }
 
 export interface AuctionLikedMember {

@@ -6,7 +6,7 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getLikedArtPieceList } from "../../../api/artPiece.api";
 import UserAuctionListBoxes from "./UserArtPieceListBoxes";
 
-import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
+import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
 
 interface UserLikedArtPieceListWrapperProps {
   userId: string | undefined;

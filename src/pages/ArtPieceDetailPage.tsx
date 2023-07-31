@@ -1,6 +1,5 @@
-import Layout from "../components/ui/Layout";
-import Header from "../components/ui/Header";
-import ArtPieceDetailContent from "../components/detail/detailContent/ArtPieceDetailContent";
+import ArtPieceDetailContent from "../components/artPiece/artPieceDetailContent/ArtPieceDetailContent";
+import Layout from "../components/common/Layout";
 
 const ArtDetailPage = () => {
   return (

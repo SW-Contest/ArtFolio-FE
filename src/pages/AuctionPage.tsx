@@ -1,6 +1,5 @@
-import Layout from "../components/ui/Layout";
-import Header from "../components/ui/Header";
 import AuctionContent from "../components/auction/auctionContent/AuctionContent";
+import Layout from "../components/common/Layout";
 
 const AuctionPage = () => {
   return (

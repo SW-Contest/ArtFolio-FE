@@ -9,10 +9,10 @@ import ImageModal from "./ImageModal";
 import { SyntheticEvent, useState } from "react";
 import { Pagination } from "swiper";
 
-interface DetailCarouselProps {
+interface ImageCarouselProps {
   photoPaths: string[];
 }
-const DetailCarousel = (props: DetailCarouselProps) => {
+const ImageCarousel = (props: ImageCarouselProps) => {
   const [imgError, setImgError] = useState(props.photoPaths.length === 0);
   const [imgSrc, setImgSrc] = useState("");
   const clickImageHandler = (photo: string) => {
@@ -64,4 +64,4 @@ const DetailCarousel = (props: DetailCarouselProps) => {
   );
 };
 
-export default DetailCarousel;
+export default ImageCarousel;

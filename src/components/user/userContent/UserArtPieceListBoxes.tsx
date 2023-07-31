@@ -1,8 +1,5 @@
-import React from "react";
-import ListBox from "../../ui/ListBox";
-import ListBoxSkeleton from "../../ui/ListBoxSkeleton";
-import ArtPieceListBox from "../../ui/ArtPieceListBox";
-import { ArtPieceList } from "../../../types/auction.type";
+import ArtPieceListBox from "../../artPiece/artPieceDetailContent/ArtPieceListBox";
+import { ArtPieceList } from "../../../types/artPiece.type";
 
 interface UserArtPieceListBoxesProps {
   list: ArtPieceList;

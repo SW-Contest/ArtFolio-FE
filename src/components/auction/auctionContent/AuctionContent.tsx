@@ -1,4 +1,4 @@
-import Carousel from "./Carousel";
+import BannerCarousel from "./BannerCarousel";
 import SearchBar from "./SearchBar";
 import AuctionListWrapper from "./auctionListWrapper/AuctionListWrapper";
 import SearchResultListWrapper from "./SearchResultListWrapper";
@@ -35,7 +35,7 @@ const AuctionContent = () => {
   };
   return (
     <section className="flex flex-col mt-10">
-      <Carousel />
+      <BannerCarousel />
       <SearchBar changeSearchQuery={changeSearchKeywordHandler} />
       {searchKeyword && (
         <SearchResultListWrapper

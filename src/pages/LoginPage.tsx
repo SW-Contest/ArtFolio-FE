@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/ui/Layout";
+import Layout from "../components/common/Layout";
 import Logo from "../components/login/Logo";
 import InputBar from "../components/login/InputBar";
 import SocialButton from "../components/login/SocialButton";

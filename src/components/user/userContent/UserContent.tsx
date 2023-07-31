@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import UserProfile from "./UserProfile";
-import SlidingMenu from "../../ui/SlidingMenu";
+import SlidingMenu from "../../common/SlidingMenu";
 import UserArtPieceListWrapper from "./UserArtPieceListWrapper";
 import UserLikedArtPieceListWrapper from "./UserLikedArtPieceListWrapper";
 import UserAuctionListWrapper from "./UserAuctionListWrapper";

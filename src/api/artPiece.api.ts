@@ -1,12 +1,14 @@
 import axios from "axios";
 import { HOST } from "../constants/host";
 
+// 예술품 리스트를 받아옵니다.
 export const getArtPieceList = async (userId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/user/art_piece/${userId}`);
 
   return response;
 };
 
+// 해당 유저가 좋아요한 예술품 리스트를 받아옵니다.
 export const getLikedArtPieceList = async (userId: string | undefined) => {
   const response = await axios.get(
     `http://${HOST}/user/art_piece/like/${userId}`
@@ -22,6 +24,18 @@ export const postNewArtPiece = async (body: {
   artistId: number;
 }) => {
   const response = await axios.post(`http://${HOST}/art_piece`, body);
+
+  return response;
+};
+
+// 작품을 삭제합니다.
+export const deleteArtPiece = async (body: {
+  artistId: number;
+  artPieceId: number;
+}) => {
+  const response = await axios.delete(`http://${HOST}/art_piece`, {
+    data: body,
+  });
 
   return response;
 };
@@ -55,5 +69,13 @@ export const uploadArtPieceImage = async (body: {
 //예술품 상세정보 불러오기
 export const getArtPieceDetail = async (artPieceId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/art_piece/${artPieceId}`);
+  return response;
+};
+
+// 예술품을 AI를 통해 감정합니다.
+export const analyzeArtPiece = async (artPieceId: string | undefined) => {
+  const response = await axios.post(`http://${HOST}/art_piece/analyze/image`, {
+    artPieceId,
+  });
   return response;
 };

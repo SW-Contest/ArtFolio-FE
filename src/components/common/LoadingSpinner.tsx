@@ -1,10 +1,23 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
-const LoadingSpinner = () => {
+interface LoadingSpinnerProps {
+  small?: boolean;
+}
+
+const LoadingSpinner = (props: LoadingSpinnerProps) => {
+  let size = "w-8 h-8";
+  if (props.small) {
+    size = "w-4 h-4";
+  }
+  
   return (
     <svg
       aria-hidden="true"
-      className="w-8 h-8  text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+      className={twMerge(
+        size,
+        "text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+      )}
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
