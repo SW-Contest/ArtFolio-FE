@@ -53,8 +53,7 @@ export const uploadArtPieceImage = async (body: {
 };
 
 //예술품 상세정보 불러오기
-export const getArtPieceDetail = async (artPieceId: number) => {
-  console.log(artPieceId);
+export const getArtPieceDetail = async (artPieceId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/art_piece/${artPieceId}`);
   return response;
 };

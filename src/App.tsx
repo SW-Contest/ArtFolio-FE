@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import Header from "./components/ui/Header";
 import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooter";
 import { useTransitionStore, useAnimationStore } from "./store/store";
-import ArtDetailPage from "./pages/ArtDetailPage";
+import ArtDetailPage from "./pages/ArtPieceDetailPage";
 
 function App() {
   const location = useLocation();
@@ -87,7 +87,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/artpiece/new" element={<NewArtPiecePage />} />
-            <Route path="/artdetail/:artpieceId" element={<ArtDetailPage />} />
+            <Route path="/artpiece/:artPieceId" element={<ArtDetailPage />} />
           </Routes>
         </AnimatePresence>
       </section>

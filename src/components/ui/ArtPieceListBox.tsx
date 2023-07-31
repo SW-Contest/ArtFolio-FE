@@ -14,10 +14,6 @@ const ArtPieceListBox = (props: ListBoxProps) => {
   );
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    navigate(`/art_piece/${props.artPieceInfo.id}`);
-  };
-
   // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
   const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     setImgError(true);
@@ -25,7 +21,7 @@ const ArtPieceListBox = (props: ListBoxProps) => {
 
   return (
     <TransitionLink
-      to={`/artdetail/${props.artPieceInfo.id}`}
+      to={`/artpiece/${props.artPieceInfo.id}`}
       className=" shrink-0 relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
     >
       {!imgError ? (

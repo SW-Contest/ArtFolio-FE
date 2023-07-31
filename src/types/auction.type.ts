@@ -13,25 +13,17 @@ export interface AuctionPage {
   data: AuctionList[];
 }
 
-export interface ArtistDetailInfo {
-  id: number;
-  username: string;
-  name: string;
-  email: string;
-  photoPath: string[];
-}
-
 export interface ArtistInfo {
-  memberId: number;
+  id: number;
+  username?: string;
   name: string;
   email: string;
-  profilePhotoPath: string;
-  like: number;
+  photoPath: string;
+  content?: string;
+  like?: number;
 }
 
 export interface ArtPieceInfo {
-  artPieceInfo: ArtPieceInfo | undefined;
-  artpieceId: any;
   id: number;
   title: string;
   content: string;
@@ -81,7 +73,17 @@ export interface AuctionDetail {
   aiInfo: AiInfo;
 }
 
+export interface ArtPieceDetail {
+  artistInfo: ArtistInfo;
+  artPieceInfo: ArtPieceInfo;
+}
+
 export interface ArtPieceList {
   artistInfo: ArtistInfo;
   artPieceInfos: ArtPieceInfo[];
+}
+
+export interface AuctionLikedMember {
+  size: number;
+  likeUsers: ArtistInfo[];
 }
