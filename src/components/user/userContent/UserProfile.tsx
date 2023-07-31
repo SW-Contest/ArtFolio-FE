@@ -1,5 +1,5 @@
-import UserIcon from "../../ui/UserIcon";
-import RoundButton from "../../ui/RoundButton";
+import UserIcon from "../../common/user/UserIcon";
+import RoundButton from "../../common/RoundButton";
 
 interface UserProfileProps {
   userId: string;

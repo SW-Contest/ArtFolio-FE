@@ -1,7 +1,7 @@
-import UserIcon from "../../ui/UserIcon";
+import UserIcon from "./UserIcon";
 import { ArtistInfo } from "../../../types/auction.type";
-import RoundButton from "../../ui/RoundButton";
-import TransitionLink from "../../ui/TransitionLink";
+import RoundButton from "../RoundButton";
+import TransitionLink from "../TransitionLink";
 
 interface ArtistInfoProps {
   artistInfo: ArtistInfo;

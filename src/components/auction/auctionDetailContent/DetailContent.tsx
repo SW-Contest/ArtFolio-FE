@@ -1,9 +1,9 @@
 import React from "react";
 import AuctionTitle from "./AuctionTitle";
-import ArtistInfo from "./ArtistInfo";
+import ArtistInfo from "../../common/user/ArtistInfo";
 import AuctionContent from "./AuctionContent";
 import BidList from "./BidList";
-import DetailCarousel from "./DetailCarousel";
+import ImageCarousel from "../../common/ImageCarousel";
 import { useActionData, useParams } from "react-router-dom";
 import {
   getAuctionDetail,
@@ -11,7 +11,7 @@ import {
 } from "../../../api/auction.api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AuctionDetail } from "../../../types/auction.type";
-import LoadingSpinner from "../../ui/LoadingSpinner";
+import LoadingSpinner from "../../common/LoadingSpinner";
 import { useAnimationStore } from "../../../store/store";
 
 const DetailContent = () => {
@@ -40,7 +40,7 @@ const DetailContent = () => {
     <section className="flex flex-col mb-40  mt-10">
       {data && artistInfo && auctionInfo && bidderInfos && (
         <>
-          <DetailCarousel photoPaths={auctionInfo.photoPaths ?? []} />
+          <ImageCarousel photoPaths={auctionInfo.photoPaths ?? []} />
           <div className="p-2">
             <AuctionTitle auctionInfo={auctionInfo} />
             <ArtistInfo artistInfo={artistInfo} />

@@ -3,7 +3,7 @@ import HeartAnimation from "./HeartAnimation";
 import LoadingAnimation from "./LoadingAnimation";
 import { AnimatePresence } from "framer-motion";
 
-const Animations = () => {
+const AnimationController = () => {
   const { isShow, type } = useAnimationStore();
   return (
     <AnimatePresence>
@@ -13,4 +13,4 @@ const Animations = () => {
   );
 };
 
-export default Animations;
+export default AnimationController;

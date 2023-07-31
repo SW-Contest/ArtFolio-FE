@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import DetailCarousel from "./DetailCarousel";
-import { useActionData, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { getArtPieceDetail } from "../../../api/artPiece.api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArtPieceDetail } from "../../../types/auction.type";
-import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useAnimationStore } from "../../../store/store";
-import ArtistInfo from "./ArtistInfo";
+import { ArtPieceDetail } from "../../../types/auction.type";
+import ImageCarousel from "../../common/ImageCarousel";
+import ArtistInfo from "../../common/user/ArtistInfo";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -15,6 +13,7 @@ const ArtPieceDetailContent = () => {
   const fetchArtPieceDetail = async () => {
     showAnimation("loading");
     const response = await getArtPieceDetail(artPieceId);
+    console.log(response.data);
     return response.data;
   };
 
@@ -35,7 +34,7 @@ const ArtPieceDetailContent = () => {
     <section className="flex flex-col mt-10 mb-40 font-Pretendard">
       {data && artistInfo && artPieceInfo && (
         <>
-          <DetailCarousel photoPaths={data.artPieceInfo.photoPaths ?? []} />
+          <ImageCarousel photoPaths={data.artPieceInfo.photoPaths ?? []} />
           <div className="p-2">
             <article className="flex justify-between w-full py-2 ">
               <p className="text-xl font-bold">{data.artPieceInfo.title}</p>

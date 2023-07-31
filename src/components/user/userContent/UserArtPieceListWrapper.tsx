@@ -3,7 +3,7 @@ import { ArtPieceList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getArtPieceList } from "../../../api/artPiece.api";
 import { useParams } from "react-router-dom";
-import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
+import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
 import UserArtPieceListBoxes from "./UserArtPieceListBoxes";
 
 interface UserArtPieceListWrapperProps {

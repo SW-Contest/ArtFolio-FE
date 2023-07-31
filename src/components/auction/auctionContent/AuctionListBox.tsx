@@ -1,21 +1,17 @@
 import React, { SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ArtistInfo, AuctionInfo } from "../../types/auction.type";
-import TransitionLink from "./TransitionLink";
+import { ArtistInfo, AuctionInfo } from "../../../types/auction.type";
+import TransitionLink from "../../common/TransitionLink";
 
 interface ListBoxProps {
   artistInfo: ArtistInfo;
   auctionInfo: AuctionInfo;
 }
-const ListBox = (props: ListBoxProps) => {
+const AuctionListBox = (props: ListBoxProps) => {
   const [imgError, setImgError] = useState(
     props.auctionInfo.photoPaths.length === 0
   );
-<<<<<<< HEAD
-  const navigate = useNavigate();
-=======
->>>>>>> main
 
   // 이미지 링크가 잘못되었다면 기본 이미지를 표시합니다.
   const onErrorHandler = (e: SyntheticEvent<HTMLImageElement, Event>) => {
@@ -25,11 +21,7 @@ const ListBox = (props: ListBoxProps) => {
   return (
     <TransitionLink
       to={`/auction/${props.auctionInfo.id}`}
-<<<<<<< HEAD
-      className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
-=======
       className="relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box "
->>>>>>> main
     >
       {!imgError ? (
         <img
@@ -61,4 +53,4 @@ const ListBox = (props: ListBoxProps) => {
   );
 };
 
-export default ListBox;
+export default AuctionListBox;

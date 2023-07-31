@@ -9,7 +9,7 @@ import {
   getMockAuctionList,
 } from "../../../../api/auction.api";
 import AuctionListBoxes from "./AuctionListBoxes";
-import ListBoxSkeletonList from "../../../ui/ListBoxSkeletonList";
+import ListBoxSkeletonList from "../../../common/ListBoxSkeletonList";
 
 const AuctionListWrapper = () => {
   const infScroll = useRef(null);

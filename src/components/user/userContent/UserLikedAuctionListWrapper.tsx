@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { AuctionInfo, AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getLikedAuctionList } from "../../../api/auction.api";
-import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
+import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
 import AuctionListBoxes from "../../auction/auctionContent/auctionListWrapper/AuctionListBoxes";
 
 interface UserLikedAuctionListWrapperProps {

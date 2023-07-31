@@ -3,7 +3,7 @@ import { AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import { getLiveAuctionList } from "../../../api/auction.api";
 import { useParams } from "react-router-dom";
-import ListBoxSkeletonList from "../../ui/ListBoxSkeletonList";
+import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
 import UserArtPieceListBoxes from "./UserArtPieceListBoxes";
 import AuctionListBoxes from "../../auction/auctionContent/auctionListWrapper/AuctionListBoxes";
 

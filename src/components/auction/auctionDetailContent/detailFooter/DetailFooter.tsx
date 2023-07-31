@@ -7,8 +7,8 @@ import { useStore } from "zustand";
 import { useAnimationStore } from "../../../../store/store";
 
 import { postAuctionLike } from "../../../../api/auction.api";
-import RoundButton from "../../../ui/RoundButton";
-import RotationButton from "../../../ui/RotationButton";
+import RoundButton from "../../../common/RoundButton";
+import RotationButton from "../../../common/RotationButton";
 import DetailFooterExpanded from "./DetailFooterExpanded";
 import DetailFooterFolded from "./DetailFooterFolded";
 import useAuctionSocket from "../../../../hooks/useAuctionSocket";

@@ -1,14 +1,14 @@
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AuctionPage from "./pages/AuctionPage";
-import DetailPage from "./pages/DetailPage";
+import AuctionDetailPage from "./pages/AuctionDetailPage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import NewArtPiecePage from "./pages/NewArtPiecePage";
-import Animations from "./components/ui/animations/Animations";
+import AnimationController from "./components/common/animations/AnimationController";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import Header from "./components/ui/Header";
-import DetailFooterTest from "./components/detail/detailContent/detailFooter/DetailFooter";
+import Header from "./components/common/Header";
+import DetailFooterTest from "./components/auction/auctionDetailContent/detailFooter/DetailFooter";
 import { useTransitionStore, useAnimationStore } from "./store/store";
 import ArtDetailPage from "./pages/ArtPieceDetailPage";
 
@@ -64,7 +64,7 @@ function App() {
 
   return (
     <div className="relative flex justify-center w-screen h-full min-h-screen bg-gray-100 ">
-      <Animations />
+      <AnimationController />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
       )}
@@ -92,7 +92,7 @@ function App() {
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<AuctionPage />} />
-            <Route path="/auction/:auctionId" element={<DetailPage />} />
+            <Route path="/auction/:auctionId" element={<AuctionDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/artpiece/new" element={<NewArtPiecePage />} />

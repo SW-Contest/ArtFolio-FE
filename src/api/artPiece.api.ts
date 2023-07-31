@@ -26,6 +26,18 @@ export const postNewArtPiece = async (body: {
   return response;
 };
 
+// 작품을 삭제합니다.
+export const deleteArtPiece = async (body: {
+  artistId: number;
+  artPieceId: number;
+}) => {
+  const response = await axios.delete(`http://${HOST}/art_piece`, {
+    data: body,
+  });
+
+  return response;
+};
+
 // 작품에 이미지를 업로드합니다.
 export const uploadArtPieceImage = async (body: {
   artistId: number;
