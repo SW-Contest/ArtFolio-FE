@@ -11,24 +11,20 @@ interface UserAuctionListWrapperProps {
   userId: string | undefined;
 }
 const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
-  const [list, setList] = useState<AuctionList[]>();
-
   const fetchUserAuctionList = async () => {
     // const response = await getUserAuctionList(props.userId);
     // return response.data.userBidAuctionList;
   };
 
-  const { isFetching, data, isError } = useQuery(
+  const {
+    isFetching,
+    data: auctionListData,
+    isError,
+  } = useQuery<AuctionList[]>(
     ["auction" + props.userId],
-    fetchUserAuctionList,
+    // fetchUserAuctionList,
     { staleTime: 5000 }
   );
-
-  useEffect(() => {
-    if (data) {
-      setList(data);
-    }
-  }, [data]);
 
   return (
     <section className="flex flex-col w-full p-3 ">
@@ -37,9 +33,9 @@ const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}
-        {list && <AuctionListBoxes list={list} />}
+        {auctionListData && <AuctionListBoxes list={auctionListData} />}
         {isError && <p>데이터 불러오기 오류.</p>}
-        {!isError && !isFetching && list?.length === 0 && (
+        {!isError && !isFetching && auctionListData?.length === 0 && (
           <p>데이터가 없습니다.</p>
         )}
       </div>
