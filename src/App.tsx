@@ -87,7 +87,7 @@ function App() {
 
       <section
         id="page"
-        className="relative flex  w-[400px] h-full bg-white overflow-hidden"
+        className="relative flex w-full  h-full bg-white overflow-hidden"
       >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>

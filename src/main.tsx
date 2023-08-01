@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
@@ -10,7 +9,7 @@ const queryClient = new QueryClient();
 
 import { worker } from "./mocks/worker";
 
-if (process.env.NODE_ENV === "development") {
+if (import.meta.env.MODE === "development") {
   // worker.start();
 }
 

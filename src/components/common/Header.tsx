@@ -38,7 +38,7 @@ const Header = (props: HeaderProps) => {
     );
   }
   return (
-    <header className="z-50 flex p-2 justify-between shrink-0 w-full max-w-[400px] h-10 bg-white fixed top-0">
+    <header className="z-50 flex p-2 justify-between shrink-0 w-full  h-10 bg-white fixed top-0">
       {header}
     </header>
   );

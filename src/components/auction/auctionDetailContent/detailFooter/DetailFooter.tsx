@@ -154,7 +154,7 @@ const DetailFooter = () => {
       exit={{
         y: "15rem",
       }}
-      className="flex flex-col shrink-0 fixed bottom-0 z-50 items-center w-full max-w-[400px] h-60 bg-af-brightGray rounded-t-3xl gap-4 "
+      className="flex flex-col shrink-0 fixed bottom-0 z-50 items-center w-full  h-60 bg-af-brightGray rounded-t-3xl gap-4 "
     >
       <RotationButton
         isExpanded={isExpanded}
