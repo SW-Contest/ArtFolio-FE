@@ -69,7 +69,7 @@ function App() {
         <Header main={location.pathname === "/"} />
       )}
 
-      <div className="absolute  top-0 left-0">
+      <div className="absolute top-0 left-0">
         <p>{recentPage}</p>
         <p>onTransition : {String(onTransition)}</p>
         <p>
@@ -78,7 +78,7 @@ function App() {
         <p>isShow : {String(isShow)}</p>
         <button
           onClick={() => {
-            if (!isShow) showAnimation("loading");
+            if (!isShow) showAnimation("check");
           }}
         >
           애니메이션
@@ -87,7 +87,7 @@ function App() {
 
       <section
         id="page"
-        className="relative flex w-full  h-full bg-white overflow-hidden"
+        className="relative flex w-full max-w-[400px] h-full overflow-hidden bg-white"
       >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>

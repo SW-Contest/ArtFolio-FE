@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface AnimationState {
-  type: string; // 애니메이션의 종류를 나타냅니다. (heart,loading)
+  type: string; // 애니메이션의 종류를 나타냅니다. (heart,loading,success)
   isShow: boolean; // 애니메이션이 보여지는지 안보여지는지 여부입니다. (true: 보여짐, false: 안보여짐)
   showAnimation: (type: string) => void;
   hideAnimation: () => void;

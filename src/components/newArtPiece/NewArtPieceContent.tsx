@@ -68,7 +68,10 @@ const NewArtPieceContent = () => {
             artPieceId: artPieceId,
             files: artPieceFile,
           });
+
+          hideAnimation();
           navigate(-1);
+          showAnimation("success");
         } catch (e) {
           console.log("이미지 업로드 중 오류 발생");
           // 이미지 업로드에 실패하면 작품을 삭제합니다.
