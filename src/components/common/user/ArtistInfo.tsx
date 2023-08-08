@@ -15,7 +15,7 @@ const ArtistInfo = (props: ArtistInfoProps) => {
         <p className="text-xs font-light">팔로우 {}</p>
       </div>
       <TransitionLink to={`/user/${props.artistInfo.id}`}>
-        <RoundButton>자세히 보기</RoundButton>
+        <RoundButton className=" w-24">자세히 보기</RoundButton>
       </TransitionLink>
     </article>
   );

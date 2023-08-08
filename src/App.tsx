@@ -34,9 +34,6 @@ function App() {
   window.onpopstate = () => {
     history.go(1);
     if (!isShow && !onTransition && location.pathname !== "/") {
-      // transitionBackward();
-      // toggleTransition();
-      // navigate("/");
       const recent = location.pathname;
       toggleTransition();
       transitionBackward();
@@ -78,7 +75,7 @@ function App() {
         <p>isShow : {String(isShow)}</p>
         <button
           onClick={() => {
-            if (!isShow) showAnimation("check");
+            if (!isShow) showAnimation("success");
           }}
         >
           애니메이션
