@@ -11,6 +11,9 @@ import Header from "./components/common/Header";
 import DetailFooterTest from "./components/auction/auctionDetailContent/detailFooter/DetailFooter";
 import { useTransitionStore, useAnimationStore } from "./store/store";
 import ArtDetailPage from "./pages/ArtPieceDetailPage";
+import NaverRedirect from "./components/login/NaverRedirect";
+import KakaoOauth from "./components/login/KakaoOauth";
+import KakaoRedirect from "./components/login/KakaoRedirect";
 
 function App() {
   const location = useLocation();
@@ -91,6 +94,8 @@ function App() {
             <Route path="/" element={<AuctionPage />} />
             <Route path="/auction/:auctionId" element={<AuctionDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/NaverRedirect" element={<NaverRedirect />} />
+            <Route path="/KakaoRedirect" element={<KakaoRedirect />} />
             <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/artpiece/new" element={<NewArtPiecePage />} />
             <Route path="/artpiece/:artPieceId" element={<ArtDetailPage />} />

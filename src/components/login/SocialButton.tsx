@@ -4,21 +4,14 @@ interface SocialButtonProps {
   title: string;
   iconURL: string;
   txtColor: string;
-  link: string;
 }
 // 네이버 로그인
 
-const SocialButton = ({
-  title,
-  iconURL,
-  txtColor,
-  link,
-}: SocialButtonProps) => {
+const SocialButton = ({ title, iconURL, txtColor }: SocialButtonProps) => {
   return (
     <div className="flex justify-center border border-gray-400 m-2 ">
       <a
         className={`w-11/12 text-sm flex justify-center items-center pt-5 pb-5 rounded text-${txtColor}`}
-        href={link}
       >
         <img
           className="mr-2"
