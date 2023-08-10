@@ -4,6 +4,7 @@ import AuctionDetailPage from "./pages/AuctionDetailPage";
 import LoginPage from "./pages/LoginPage";
 import UserPage from "./pages/UserPage";
 import NewArtPiecePage from "./pages/NewArtPiecePage";
+import AuthPage from "./pages/AuthPage";
 import AnimationController from "./components/common/animations/AnimationController";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
@@ -11,11 +12,13 @@ import Header from "./components/common/Header";
 import DetailFooterTest from "./components/auction/auctionDetailContent/detailFooter/DetailFooter";
 import { useTransitionStore, useAnimationStore } from "./store/store";
 import ArtDetailPage from "./pages/ArtPieceDetailPage";
-import NaverRedirect from "./components/login/NaverRedirect";
-import KakaoOauth from "./components/login/KakaoOauth";
-import KakaoRedirect from "./components/login/KakaoRedirect";
-
+import axios from "axios";
 function App() {
+  // // axios를 통해 API를 호출할 때 헤더에 토큰을 자동으로 넣어줍니다.
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${sessionStorage.getItem("accessToken")}`;
+
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -94,8 +97,7 @@ function App() {
             <Route path="/" element={<AuctionPage />} />
             <Route path="/auction/:auctionId" element={<AuctionDetailPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/NaverRedirect" element={<NaverRedirect />} />
-            <Route path="/KakaoRedirect" element={<KakaoRedirect />} />
+            <Route path="/auth/:provider" element={<AuthPage />} />
             <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/artpiece/new" element={<NewArtPiecePage />} />
             <Route path="/artpiece/:artPieceId" element={<ArtDetailPage />} />

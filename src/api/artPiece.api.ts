@@ -1,6 +1,8 @@
 import axios from "axios";
 import { HOST } from "../constants/host";
 
+
+
 // 예술품 리스트를 받아옵니다.
 export const getArtPieceList = async (userId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/user/art_piece/${userId}`);

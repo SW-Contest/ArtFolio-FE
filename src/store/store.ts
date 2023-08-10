@@ -18,6 +18,16 @@ interface TransitionState {
   setRecentPage: (recentPage: string) => void;
 }
 
+interface userState {
+  userId: number | null;
+  setUserId: (userId: number) => void;
+}
+
+export const useUserStore = create<userState>((set) => ({
+  userId: null,
+  setUserId: (userId: number) => set((state) => ({ userId: userId })),
+}));
+
 export const useAnimationStore = create<AnimationState>((set) => ({
   type: "loading",
   isShow: false,
