@@ -8,9 +8,10 @@ import {
 } from "../../api/artPiece.api";
 import DetailCarousel from "../common/ImageCarousel";
 import { BsFillImageFill } from "react-icons/bs";
-import { userId } from "../../mocks/dummyUser";
+import { useUserStore } from "../../store/store";
 
 const NewArtPieceContent = () => {
+  const { userId } = useUserStore();
   const { toggleTransition, transitionBackward } = useTransitionStore();
   const { showAnimation, hideAnimation } = useAnimationStore();
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const NewArtPieceContent = () => {
     e.preventDefault();
     showAnimation("loading");
 
-    if (artPieceFile) {
+    if (artPieceFile && userId) {
       try {
         const response = await postNewArtPiece({
           title: artPieceTitle,

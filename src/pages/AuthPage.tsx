@@ -27,6 +27,7 @@ const AuthPage = () => {
 
         setUserId(response["userid"]);
 
+        sessionStorage.setItem("userId", response["userid"]);
         sessionStorage.setItem("accessToken", response["authorization"]);
         sessionStorage.setItem(
           "refreshToken",

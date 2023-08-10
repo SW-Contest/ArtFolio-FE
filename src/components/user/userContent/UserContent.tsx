@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import UserProfile from "./UserProfile";
 import SlidingMenu from "../../common/SlidingMenu";
 import UserArtPieceListWrapper from "./UserArtPieceListWrapper";
-import UserLikedArtPieceListWrapper from "./UserLikedArtPieceListWrapper";
-import UserAuctionListWrapper from "./UserAuctionListWrapper";
-import UserLiveAuctionListWrapper from "./UserLiveAuctionListWrapper";
 import UserFinishAuctionListWrapper from "./UserFinishAuctionListWrapper";
+import UserLikedArtPieceListWrapper from "./UserLikedArtPieceListWrapper";
 import UserLikedAuctionListWrapper from "./UserLikedAuctionListWrapper";
+import UserLiveAuctionListWrapper from "./UserLiveAuctionListWrapper";
+import UserProfile from "./UserProfile";
 
 const UserContent = () => {
   const userId = useParams().userId;

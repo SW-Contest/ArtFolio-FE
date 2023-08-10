@@ -20,6 +20,7 @@ export interface ArtistInfo {
   id: number;
   username?: string;
   name: string;
+  nickname?: string;
   email: string;
   photoPath: string;
   content?: string;

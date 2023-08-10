@@ -1,8 +1,6 @@
 import axios from "axios";
 import { HOST } from "../constants/host";
 
-
-
 // 예술품 리스트를 받아옵니다.
 export const getArtPieceList = async (userId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/user/art_piece/${userId}`);
@@ -75,9 +73,14 @@ export const getArtPieceDetail = async (artPieceId: string | undefined) => {
 };
 
 // 예술품을 AI를 통해 감정합니다.
-export const analyzeArtPiece = async (artPieceId: string | undefined) => {
-  const response = await axios.post(`http://${HOST}/art_piece/analyze/image`, {
-    artPieceId,
-  });
+export const analyzeArtPiece = async (body: {
+  artPieceId: number;
+  question: string | undefined;
+}) => {
+  console.log(body);
+  const response = await axios.post(
+    `http://${HOST}/art_piece/analyze/image`,
+    body
+  );
   return response;
 };

@@ -10,7 +10,6 @@ export const getMockAuctionList = async (pageParam: number) => {
 
 // 진행중인 경매 리스트를 받아옵니다.
 export const getAuctionList = async (pageParam: number) => {
-  console.log(sessionStorage.getItem("accessToken"));
   const response = await axios.get(
     `http://${HOST}/rt_auction/list?searchType=CURRENT_PRICE&orderType=DESC&page=${0}`
   );

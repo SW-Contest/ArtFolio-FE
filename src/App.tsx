@@ -9,10 +9,16 @@ import AnimationController from "./components/common/animations/AnimationControl
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/common/Header";
-import DetailFooterTest from "./components/auction/auctionDetailContent/detailFooter/DetailFooter";
-import { useTransitionStore, useAnimationStore } from "./store/store";
+import DetailFooter from "./components/auction/auctionDetailContent/detailFooter/DetailFooter";
+import {
+  useTransitionStore,
+  useAnimationStore,
+  useUserStore,
+} from "./store/store";
 import ArtDetailPage from "./pages/ArtPieceDetailPage";
 import axios from "axios";
+import PublicRoute from "./components/common/PublicRoute";
+import PrivateRoute from "./components/common/PrivateRoute";
 function App() {
   // // axios를 통해 API를 호출할 때 헤더에 토큰을 자동으로 넣어줍니다.
   axios.defaults.headers.common[
@@ -31,6 +37,7 @@ function App() {
     transitionBackward,
   } = useTransitionStore();
   const { isShow, showAnimation } = useAnimationStore();
+  const { userId, setUserId } = useUserStore();
 
   // 브라우저의 뒤로가기 버튼을 눌렀을때, 헤더의 뒤로가기 버튼을 누른것처럼 보이게 하기 위한 코드입니다.
   // TODO: 이 코드는 불안정하므로, 추후 개선이 필요함
@@ -65,6 +72,12 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (!userId) {
+      setUserId(Number(sessionStorage.getItem("userId")));
+    }
+  }, [location]);
+
   return (
     <div className="relative flex justify-center w-screen h-full min-h-screen bg-gray-100 ">
       <AnimationController />
@@ -94,19 +107,40 @@ function App() {
       >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<AuctionPage />} />
-            <Route path="/auction/:auctionId" element={<AuctionDetailPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/auth/:provider" element={<AuthPage />} />
-            <Route path="/user/:userId" element={<UserPage />} />
-            <Route path="/artpiece/new" element={<NewArtPiecePage />} />
-            <Route path="/artpiece/:artPieceId" element={<ArtDetailPage />} />
+            <Route
+              path="/login"
+              element={<PublicRoute element={<LoginPage />} />}
+            />
+            <Route
+              path="/"
+              element={<PrivateRoute element={<AuctionPage />} />}
+            />
+            <Route
+              path="/auction/:auctionId"
+              element={<PrivateRoute element={<AuctionDetailPage />} />}
+            />
+            <Route
+              path="/auth/:provider"
+              element={<PublicRoute element={<AuthPage />} />}
+            />
+            <Route
+              path="/user/:userId"
+              element={<PrivateRoute element={<UserPage />} />}
+            />
+            <Route
+              path="/artpiece/new"
+              element={<PrivateRoute element={<NewArtPiecePage />} />}
+            />
+            <Route
+              path="/artpiece/:artPieceId"
+              element={<PrivateRoute element={<ArtDetailPage />} />}
+            />
           </Routes>
         </AnimatePresence>
       </section>
 
       <AnimatePresence>
-        {location.pathname.split("/")[1] === "auction" && <DetailFooterTest />}
+        {location.pathname.split("/")[1] === "auction" && <DetailFooter />}
       </AnimatePresence>
     </div>
   );
