@@ -29,7 +29,7 @@ const UserLikedAuctionListWrapper = (
   return (
     <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">좋아요 한 경매</p>
+        <p className="font-semibold">좋아요한 경매</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}

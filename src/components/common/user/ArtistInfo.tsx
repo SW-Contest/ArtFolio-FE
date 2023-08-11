@@ -14,6 +14,7 @@ const ArtistInfo = (props: ArtistInfoProps) => {
         <p className="text-sm font-bold truncate ">
           {props.artistInfo.nickname}
         </p>
+        <p className="text-sm font-bold truncate ">{props.artistInfo.name}</p>
         <p className="text-xs font-light">팔로우 {}</p>
       </div>
       <TransitionLink to={`/user/${props.artistInfo.id}`}>

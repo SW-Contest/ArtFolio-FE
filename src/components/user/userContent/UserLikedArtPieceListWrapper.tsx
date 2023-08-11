@@ -33,7 +33,7 @@ const UserLikedArtPieceListWrapper = (
   return (
     <section className="flex flex-col w-full p-3  ">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">좋아요 한 작품</p>
+        <p className="font-semibold">좋아요한 작품</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {artPieceListData && <UserAuctionListBoxes list={artPieceListData} />}

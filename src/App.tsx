@@ -19,6 +19,7 @@ import ArtDetailPage from "./pages/ArtPieceDetailPage";
 import axios from "axios";
 import PublicRoute from "./components/common/PublicRoute";
 import PrivateRoute from "./components/common/PrivateRoute";
+import NewAuctionPage from "./pages/NewAuctionPage";
 function App() {
   // // axios를 통해 API를 호출할 때 헤더에 토큰을 자동으로 넣어줍니다.
   axios.defaults.headers.common[
@@ -79,7 +80,7 @@ function App() {
         <Header main={location.pathname === "/"} />
       )}
 
-      <div className="absolute top-0 left-0">
+      {/* <div className="absolute top-0 left-0">
         <p>{recentPage}</p>
         <p>onTransition : {String(onTransition)}</p>
         <p>
@@ -93,7 +94,7 @@ function App() {
         >
           애니메이션
         </button>
-      </div>
+      </div> */}
 
       <section
         id="page"
@@ -114,6 +115,10 @@ function App() {
               element={<PrivateRoute element={<AuctionDetailPage />} />}
             />
             <Route
+              path="/auction/new"
+              element={<PrivateRoute element={<NewAuctionPage />} />}
+            />
+            <Route
               path="/auth/:provider"
               element={<PublicRoute element={<AuthPage />} />}
             />
@@ -125,6 +130,7 @@ function App() {
               path="/artpiece/new"
               element={<PrivateRoute element={<NewArtPiecePage />} />}
             />
+
             <Route
               path="/artpiece/:artPieceId"
               element={<PrivateRoute element={<ArtDetailPage />} />}
@@ -134,7 +140,8 @@ function App() {
       </section>
 
       <AnimatePresence>
-        {location.pathname.split("/")[1] === "auction" && <DetailFooter />}
+        {location.pathname.split("/")[1] === "auction" &&
+          location.pathname.split("/")[2] !== "new" && <DetailFooter />}
       </AnimatePresence>
     </div>
   );

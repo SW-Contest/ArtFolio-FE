@@ -11,6 +11,7 @@ import { getUserInfo } from "../../../api/user.api";
 import { useQuery } from "@tanstack/react-query";
 import { ArtistInfo } from "../../../types/auction.type";
 import { useAnimationStore } from "../../../store/store";
+import UserAuctionListWrapper from "./UserAuctionListWrapper";
 
 const UserContent = () => {
   const userId = useParams().userId;
@@ -24,7 +25,6 @@ const UserContent = () => {
   const fetchUserInfo = async () => {
     showAnimation("loading");
     const response = await getUserInfo(userId);
-    console.log(response.data);
     return response.data;
   };
 
@@ -58,6 +58,7 @@ const UserContent = () => {
 
           {selectedMenu === menus[1] && (
             <>
+              <UserAuctionListWrapper userId={userId} />
               <UserFinishAuctionListWrapper userId={userId} />
               <UserLiveAuctionListWrapper userId={userId} />
               <UserLikedAuctionListWrapper userId={userId} />

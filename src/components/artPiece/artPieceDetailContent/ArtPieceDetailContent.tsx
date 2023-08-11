@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { analyzeArtPiece, getArtPieceDetail } from "../../../api/artPiece.api";
-import { useAnimationStore } from "../../../store/store";
+import { useAnimationStore, useTransitionStore } from "../../../store/store";
 import { AiInfo } from "../../../types/ai.type";
 import { ArtPieceDetail } from "../../../types/artPiece.type";
 import ImageCarousel from "../../common/ImageCarousel";
@@ -15,9 +15,11 @@ import ArtPieceAIDocentModal from "./ArtPieceAIDocentModal";
 import ArtPieceLabelWrapper from "./ArtPieceLabelWrapper";
 import ArtPieceTitle from "./ArtPieceTitle";
 import ArtPieceAiDocent from "./ArtPieceAIDocent";
+import TransitionLink from "../../common/TransitionLink";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
+  const { onTransition } = useTransitionStore();
   const artPieceId = useParams().artPieceId;
 
   const fetchArtPieceDetail = async () => {
@@ -74,18 +76,25 @@ const ArtPieceDetailContent = () => {
               <>
                 <ArtPieceLabelWrapper labels={labels} />
                 <ArtPieceAIDescription content={AIContent} />
-                <ArtPieceAiDocent
-                  artPieceInfo={artPieceInfo}
-                  content={AIContent}
-                  voice={voice}
-                />
+                {!onTransition && (
+                  <ArtPieceAiDocent
+                    artPieceInfo={artPieceInfo}
+                    content={AIContent}
+                    voice={voice}
+                  />
+                )}
               </>
             )}
             <div className="flex justify-center w-full">
               {AIIsFetched ? (
-                <RoundButton className="btn">
-                  <p>경매 올리기</p>
-                </RoundButton>
+                <TransitionLink
+                  to="/auction/new"
+                  state={{ artPieceId: artPieceId }}
+                >
+                  <RoundButton className="btn">
+                    <p>경매 올리기</p>
+                  </RoundButton>
+                </TransitionLink>
               ) : (
                 <RoundButton className="btn">
                   <p>AI 분석중...</p>

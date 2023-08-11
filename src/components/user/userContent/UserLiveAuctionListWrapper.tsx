@@ -51,7 +51,7 @@ const UserLiveAuctionListWrapper = (props: UserLiveAuctionListWrapperProps) => {
   return (
     <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">참여 중 경매</p>
+        <p className="font-semibold">참여중 경매</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}

@@ -8,6 +8,7 @@ interface TransitionLinkProps {
   to: string;
   backWard?: boolean;
   className?: string;
+  state?: any;
 }
 
 // Link를 대신하여 페이지를 이동시키는 버튼으로 사용하는 컴포넌트입니다.
@@ -34,7 +35,7 @@ const TransitionLink = (props: TransitionLinkProps) => {
         navigate(recentPage);
       } else {
         transitionForward();
-        navigate(props.to);
+        navigate(props.to, { state: props.state });
       }
       if (recentPage === "/") {
         setRecentPage(recent);

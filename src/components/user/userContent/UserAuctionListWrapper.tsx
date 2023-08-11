@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AuctionList } from "../../../types/auction.type";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
-import { getFinishAuctionList } from "../../../api/auction.api";
+import { getUserAuctionList } from "../../../api/auction.api";
 
 import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
 
@@ -12,8 +12,8 @@ interface UserAuctionListWrapperProps {
 }
 const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
   const fetchUserAuctionList = async () => {
-    // const response = await getUserAuctionList(props.userId);
-    // return response.data.userBidAuctionList;
+    const response = await getUserAuctionList(props.userId);
+    return response.data.myAuctions;
   };
 
   const {
@@ -22,14 +22,14 @@ const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
     isError,
   } = useQuery<AuctionList[]>(
     ["auction" + props.userId],
-    // fetchUserAuctionList,
+    fetchUserAuctionList,
     { staleTime: 5000 }
   );
 
   return (
     <section className="flex flex-col w-full p-3 ">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">낙찰한 작품</p>
+        <p className="font-semibold">등록한 경매</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}
