@@ -72,12 +72,6 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    if (!userId) {
-      setUserId(Number(sessionStorage.getItem("userId")));
-    }
-  }, [location]);
-
   return (
     <div className="relative flex justify-center w-screen h-full min-h-screen bg-gray-100 ">
       <AnimationController />

@@ -14,7 +14,7 @@ const UserIcon = (props: UserIconProps) => {
   }
   return (
     <div className={styles}>
-      <img src={props.url} />
+      <img src={props.url} className="w-full h-full object-cover" />
     </div>
   );
 };

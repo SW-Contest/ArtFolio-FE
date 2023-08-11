@@ -15,7 +15,6 @@ const AuthPage = () => {
   };
 
   useEffect(() => {
-    console.log(location);
     const searchParams = new URLSearchParams(location.search);
     const code = searchParams.get("code");
     const state = searchParams.get("state");
@@ -23,7 +22,6 @@ const AuthPage = () => {
     const login = async () => {
       try {
         const response = await oauthLoginHandler({ code, provider, state });
-        console.log(response);
 
         setUserId(response["userid"]);
 

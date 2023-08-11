@@ -9,6 +9,7 @@ import {
 import DetailCarousel from "../common/ImageCarousel";
 import { BsFillImageFill } from "react-icons/bs";
 import { useUserStore } from "../../store/store";
+import RoundButton from "../common/RoundButton";
 
 const NewArtPieceContent = () => {
   const { userId } = useUserStore();
@@ -147,13 +148,13 @@ const NewArtPieceContent = () => {
         {artPieceImages.length > 0 ? (
           <DetailCarousel photoPaths={artPieceImages} />
         ) : (
-          <div className="w-full h-[300px] bg-slate-200 flex justify-center items-center">
+          <div className="w-full h-[300px] bg-slate-200 flex justify-center items-center rounded-xl">
             <BsFillImageFill size={24} />
           </div>
         )}
       </div>
 
-      <button className="btn">등록하기</button>
+      <RoundButton>등록하기</RoundButton>
     </form>
   );
 };

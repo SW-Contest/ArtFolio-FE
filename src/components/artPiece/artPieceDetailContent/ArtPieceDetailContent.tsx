@@ -2,16 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { analyzeArtPiece, getArtPieceDetail } from "../../../api/artPiece.api";
 import { useAnimationStore } from "../../../store/store";
+import { AiInfo } from "../../../types/ai.type";
 import { ArtPieceDetail } from "../../../types/artPiece.type";
 import ImageCarousel from "../../common/ImageCarousel";
-import ArtistInfo from "../../common/user/ArtistInfo";
-import RoundButton from "../../common/RoundButton";
-import { FcFlashOn } from "react-icons/fc";
-import { AiInfo } from "../../../types/ai.type";
 import LoadingSpinner from "../../common/LoadingSpinner";
+import RoundButton from "../../common/RoundButton";
+import ArtistInfo from "../../common/user/ArtistInfo";
 import ArtPieceDescription from "./ArtPieceDescription";
 
+import ArtPieceAIDescription from "./ArtPieceAIDescription";
+import ArtPieceAIDocentModal from "./ArtPieceAIDocentModal";
+import ArtPieceLabelWrapper from "./ArtPieceLabelWrapper";
 import ArtPieceTitle from "./ArtPieceTitle";
+import ArtPieceAiDocent from "./ArtPieceAIDocent";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -20,7 +23,6 @@ const ArtPieceDetailContent = () => {
   const fetchArtPieceDetail = async () => {
     showAnimation("loading");
     const response = await getArtPieceDetail(artPieceId);
-    console.log(response.data);
     return response.data;
   };
 
@@ -46,11 +48,10 @@ const ArtPieceDetailContent = () => {
       태그를 세밀하게 설명하지 말고 , 전체적인 부분을 설명해주세요.
       답변은 '이 작품은~' 으로 시작하며 500자 정도로 부드러운 어투로 설명해주세요.`,
     });
-    console.log(response.data);
     return response.data;
   };
 
-  const { data: AIData, isFetching: AIIsFetching } = useQuery<AiInfo>(
+  const { data: AIData, isFetched: AIIsFetched } = useQuery<AiInfo>(
     ["AIInfo" + artPieceId],
     fetchAIInfo,
     {
@@ -58,8 +59,10 @@ const ArtPieceDetailContent = () => {
     }
   );
 
+  const { labels, voice, content: AIContent } = AIData ?? {};
+
   return (
-    <section className="flex flex-col mt-10 mb-40 font-Pretendard">
+    <section className="relative flex flex-col mt-10 mb-20 font-Pretendard">
       {data && artistInfo && artPieceInfo && (
         <>
           <ImageCarousel photoPaths={artPieceInfo.photoPaths ?? []} />
@@ -67,16 +70,26 @@ const ArtPieceDetailContent = () => {
             <ArtPieceTitle artPieceInfo={artPieceInfo} />
             <ArtistInfo artistInfo={artistInfo} />
             <ArtPieceDescription artPieceInfo={artPieceInfo} />
+            {AIData && labels && voice && AIContent && (
+              <>
+                <ArtPieceLabelWrapper labels={labels} />
+                <ArtPieceAIDescription content={AIContent} />
+                <ArtPieceAiDocent
+                  artPieceInfo={artPieceInfo}
+                  content={AIContent}
+                  voice={voice}
+                />
+              </>
+            )}
             <div className="flex justify-center w-full">
-              {AIIsFetching ? (
-                <RoundButton>
-                  <p>AI 분석중...</p>
-                  <LoadingSpinner small />
+              {AIIsFetched ? (
+                <RoundButton className="btn">
+                  <p>경매 올리기</p>
                 </RoundButton>
               ) : (
-                <RoundButton className="gap-0" onClick={fetchAIInfo}>
-                  <FcFlashOn size={30} />
-                  <p>AI를 통해 그림 분석하기</p>
+                <RoundButton className="btn">
+                  <p>AI 분석중...</p>
+                  <LoadingSpinner small />
                 </RoundButton>
               )}
             </div>
