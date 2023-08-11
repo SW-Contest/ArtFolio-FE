@@ -40,7 +40,7 @@ const AuctionListBox = (props: ListBoxProps) => {
           {props.auctionInfo.title}
         </p>
         <p className="mb-1 text-xs font-semibold text-white truncate">
-          {props.artistInfo.name}
+          {props.artistInfo?.name ? props.artistInfo.name : ""}
         </p>
         <div className="flex gap-1">
           <p className="mb-1 text-xs font-normal text-af-hotPink ">현재가</p>

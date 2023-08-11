@@ -84,9 +84,18 @@ export const getAuctionLikedMember = async (auctionId: string) => {
 };
 
 // 해당 유저의 경매 목록을 받아옵니다.
-export const getUserAuctionList = async (auctionId: string) => {
-  const response = await axios.get(
-    `http://${HOST}/rt_auction/like/${auctionId}`
-  );
+export const getUserAuctionList = async (userId: string | undefined) => {
+  const response = await axios.get(`http://${HOST}/rt_auction/list/${userId}`);
+  return response;
+};
+
+export const postNewAuction = async (body: {
+  artistId: number;
+  artPieceId: number;
+  auctionTitle: string;
+  auctionContent: string;
+  auctionStartPrice: number;
+}) => {
+  const response = await axios.post(`http://${HOST}/rt_auction/create`, body);
   return response;
 };

@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
-import { useAnimationStore } from "../../store/store";
+import { useAnimationStore, useTransitionStore } from "../../store/store";
 import { useNavigate } from "react-router-dom";
-import { postNewArtPiece } from "../../api/artPiece.api";
-import { uploadArtPieceImage } from "../../api/artPiece.api";
+import {
+  uploadArtPieceImage,
+  postNewArtPiece,
+  deleteArtPiece,
+} from "../../api/artPiece.api";
 import DetailCarousel from "../common/ImageCarousel";
 import { BsFillImageFill } from "react-icons/bs";
-import { userId } from "../../mocks/dummyUser";
+import { useUserStore } from "../../store/store";
+import RoundButton from "../common/RoundButton";
 
 const NewArtPieceContent = () => {
+  const { userId } = useUserStore();
+  const { toggleTransition, transitionBackward } = useTransitionStore();
   const { showAnimation, hideAnimation } = useAnimationStore();
   const navigate = useNavigate();
   const [artPieceTitle, setArtPieceTitle] = useState("");
@@ -53,7 +59,7 @@ const NewArtPieceContent = () => {
     e.preventDefault();
     showAnimation("loading");
 
-    if (artPieceFile) {
+    if (artPieceFile && userId) {
       try {
         const response = await postNewArtPiece({
           title: artPieceTitle,
@@ -68,16 +74,20 @@ const NewArtPieceContent = () => {
             artPieceId: artPieceId,
             files: artPieceFile,
           });
-          navigate(-1);
+
+          showAnimation("success");
+          toggleTransition();
+          transitionBackward();
+          navigate("/");
         } catch (e) {
           console.log("이미지 업로드 중 오류 발생");
           // 이미지 업로드에 실패하면 작품을 삭제합니다.
-          // await deleteArtPiece({ artPieceId: artPieceId, artistId: userId });
-        } finally {
+          await deleteArtPiece({ artPieceId: artPieceId, artistId: userId });
           hideAnimation();
         }
       } catch (e) {
         console.log("작품 등록 중 오류 발생");
+        hideAnimation();
       }
     }
   };
@@ -138,13 +148,13 @@ const NewArtPieceContent = () => {
         {artPieceImages.length > 0 ? (
           <DetailCarousel photoPaths={artPieceImages} />
         ) : (
-          <div className="w-full h-[300px] bg-slate-200 flex justify-center items-center">
+          <div className="w-full h-[300px] bg-slate-200 flex justify-center items-center rounded-xl">
             <BsFillImageFill size={24} />
           </div>
         )}
       </div>
 
-      <button className="btn">등록하기</button>
+      <RoundButton>등록하기</RoundButton>
     </form>
   );
 };

@@ -11,6 +11,7 @@ import { Pagination } from "swiper";
 
 interface ImageCarouselProps {
   photoPaths: string[];
+  disableClick?: boolean;
 }
 const ImageCarousel = (props: ImageCarouselProps) => {
   const [imgError, setImgError] = useState(props.photoPaths.length === 0);
@@ -47,7 +48,11 @@ const ImageCarousel = (props: ImageCarouselProps) => {
             <SwiperSlide key={index}>
               <img
                 onError={onErrorHandler}
-                onClick={() => clickImageHandler(photo)}
+                onClick={() => {
+                  if (!props.disableClick) {
+                    clickImageHandler(photo);
+                  }
+                }}
                 className="flex shrink-0 w-full h-80"
                 src={photo}
               />
@@ -59,7 +64,7 @@ const ImageCarousel = (props: ImageCarouselProps) => {
           </SwiperSlide>
         )}
       </Swiper>
-      <ImageModal imgSrc={imgSrc} />
+      {!props.disableClick && <ImageModal imgSrc={imgSrc} />}
     </>
   );
 };

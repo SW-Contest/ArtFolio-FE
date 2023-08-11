@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface AnimationState {
-  type: string; // 애니메이션의 종류를 나타냅니다. (heart,loading)
+  type: string; // 애니메이션의 종류를 나타냅니다. (heart,loading,success)
   isShow: boolean; // 애니메이션이 보여지는지 안보여지는지 여부입니다. (true: 보여짐, false: 안보여짐)
   showAnimation: (type: string) => void;
   hideAnimation: () => void;
@@ -17,6 +17,16 @@ interface TransitionState {
   toggleTransition: () => void;
   setRecentPage: (recentPage: string) => void;
 }
+
+interface userState {
+  userId: number | null;
+  setUserId: (userId: number) => void;
+}
+
+export const useUserStore = create<userState>((set) => ({
+  userId: null,
+  setUserId: (userId: number) => set((state) => ({ userId: userId })),
+}));
 
 export const useAnimationStore = create<AnimationState>((set) => ({
   type: "loading",

@@ -73,9 +73,13 @@ export const getArtPieceDetail = async (artPieceId: string | undefined) => {
 };
 
 // 예술품을 AI를 통해 감정합니다.
-export const analyzeArtPiece = async (artPieceId: string | undefined) => {
-  const response = await axios.post(`http://${HOST}/art_piece/analyze/image`, {
-    artPieceId,
-  });
+export const analyzeArtPiece = async (body: {
+  artPieceId: number;
+  question: string | undefined;
+}) => {
+  const response = await axios.post(
+    `http://${HOST}/art_piece/analyze/image`,
+    body
+  );
   return response;
 };

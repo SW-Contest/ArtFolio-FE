@@ -9,18 +9,11 @@ export const dummyDetail: AuctionDetail = {
     photoPaths: [""],
   },
   artistInfo: {
-<<<<<<< HEAD
-    memberId: 1,
-    name: "Vincent van Gogh",
-    email: "Vincent@google.com",
-    profilePhotoPath: "",
-=======
     id: 1,
     username: "Vincent",
     name: "Vincent van Gogh",
     email: "Vincent@google.com",
     photoPath: "",
->>>>>>> main
     like: 0,
   },
   auctionInfo: {
@@ -103,17 +96,10 @@ export const dummyAuctionList: AuctionPage = {
   data: [
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 1,
-        name: "Vincent van Gogh",
-        email: "Vincent@google.com",
-        profilePhotoPath: "",
-=======
         id: 1,
         name: "Vincent van Gogh",
         email: "Vincent@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -132,17 +118,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 2,
-        name: "Leonardo da Vinci",
-        email: "Leonardo@google.com",
-        profilePhotoPath: "",
-=======
         id: 2,
         name: "Leonardo da Vinci",
         email: "Leonardo@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -160,17 +139,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 3,
-        name: "Pablo Picasso",
-        email: "Pablo@google.com",
-        profilePhotoPath: "",
-=======
         id: 3,
         name: "Pablo Picasso",
         email: "Pablo@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -189,17 +161,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 4,
-        name: "Michelangelo",
-        email: "Michelangelo@google.com",
-        profilePhotoPath: "",
-=======
         id: 4,
         name: "Michelangelo",
         email: "Michelangelo@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -217,17 +182,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 5,
-        name: "Claude Monet",
-        email: "Monet@google.com",
-        profilePhotoPath: "",
-=======
         id: 5,
         name: "Claude Monet",
         email: "Monet@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -246,17 +204,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 6,
-        name: "Frida Kahlo",
-        email: "Frida@google.com",
-        profilePhotoPath: "",
-=======
         id: 6,
         name: "Frida Kahlo",
         email: "Frida@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -275,17 +226,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 7,
-        name: "Salvador Dali",
-        email: "Dali@google.com",
-        profilePhotoPath: "",
-=======
         id: 7,
         name: "Salvador Dali",
         email: "Dali@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -304,17 +248,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 8,
-        name: "Georgia O'Keeffe",
-        email: "Georgia@google.com",
-        profilePhotoPath: "",
-=======
         id: 8,
         name: "Georgia O'Keeffe",
         email: "Georgia@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -333,17 +270,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 9,
-        name: "Rembrandt van Rijn",
-        email: "Rembrandt@google.com",
-        profilePhotoPath: "",
-=======
         id: 9,
         name: "Rembrandt van Rijn",
         email: "Rembrandt@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -362,17 +292,10 @@ export const dummyAuctionList: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 10,
-        name: "Andy Warhol",
-        email: "Andy@google.com",
-        profilePhotoPath: "",
-=======
         id: 10,
         name: "Andy Warhol",
         email: "Andy@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -401,17 +324,10 @@ export const dummyAuctionList2: AuctionPage = {
   data: [
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 1,
-        name: "Leonardo da Vinci",
-        email: "Leonardo@google.com",
-        profilePhotoPath: "",
-=======
         id: 1,
         name: "Leonardo da Vinci",
         email: "Leonardo@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -430,17 +346,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 2,
-        name: "Pablo Picasso",
-        email: "Pablo@google.com",
-        profilePhotoPath: "",
-=======
         id: 2,
         name: "Pablo Picasso",
         email: "Pablo@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -459,17 +368,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 3,
-        name: "Vincent van Gogh",
-        email: "Vincent@google.com",
-        profilePhotoPath: "",
-=======
         id: 3,
         name: "Vincent van Gogh",
         email: "Vincent@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -488,17 +390,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 4,
-        name: "Claude Monet",
-        email: "Monet@google.com",
-        profilePhotoPath: "",
-=======
         id: 4,
         name: "Claude Monet",
         email: "Monet@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -517,17 +412,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 5,
-        name: "Frida Kahlo",
-        email: "Frida@google.com",
-        profilePhotoPath: "",
-=======
         id: 5,
         name: "Frida Kahlo",
         email: "Frida@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -546,17 +434,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 6,
-        name: "Salvador Dali",
-        email: "Dali@google.com",
-        profilePhotoPath: "",
-=======
         id: 6,
         name: "Salvador Dali",
         email: "Dali@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -575,17 +456,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 7,
-        name: "Georgia O'Keeffe",
-        email: "Georgia@google.com",
-        profilePhotoPath: "",
-=======
         id: 7,
         name: "Georgia O'Keeffe",
         email: "Georgia@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -604,17 +478,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 8,
-        name: "Michelangelo",
-        email: "Michelangelo@google.com",
-        profilePhotoPath: "",
-=======
         id: 8,
         name: "Michelangelo",
         email: "Michelangelo@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -633,17 +500,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 9,
-        name: "Rembrandt van Rijn",
-        email: "Rembrandt@google.com",
-        profilePhotoPath: "",
-=======
         id: 9,
         name: "Rembrandt van Rijn",
         email: "Rembrandt@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {
@@ -662,17 +522,10 @@ export const dummyAuctionList2: AuctionPage = {
     },
     {
       artistInfo: {
-<<<<<<< HEAD
-        memberId: 10,
-        name: "Andy Warhol",
-        email: "Andy@google.com",
-        profilePhotoPath: "",
-=======
         id: 10,
         name: "Andy Warhol",
         email: "Andy@google.com",
         photoPath: "",
->>>>>>> main
         like: 0,
       },
       auctionInfo: {

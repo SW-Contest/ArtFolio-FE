@@ -1,10 +1,10 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTransitionStore } from "../../store/store";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface LayoutProps {
   children: React.ReactNode;
+  className?: string;
 }
 
 // Route가 변경될때마다 from에서 to로 슬라이딩하며 트랜지션합니다.
@@ -14,7 +14,10 @@ const Layout = (props: LayoutProps) => {
 
   return (
     <motion.div
-      className="shrink-0 flex flex-col w-full h-full min-h-screen  bg-white overflow-y-scroll "
+      className={twMerge(
+        "shrink-0 flex flex-col w-full h-full min-h-screen  bg-white overflow-y-scroll",
+        props.className
+      )}
       initial={{
         x: `${100 * from}%`,
         opacity: 1,

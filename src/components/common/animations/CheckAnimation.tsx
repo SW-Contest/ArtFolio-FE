@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import { useStore } from "zustand";
-import heartAnimation from "../../../lotties/heartAnimation.json";
+import checkAnimation from "../../../lotties/checkAnimation.json";
 import { useAnimationStore } from "../../../store/store";
 
 const HeartAnimation = () => {
@@ -14,7 +14,7 @@ const HeartAnimation = () => {
   return (
     <motion.div
       initial={{
-        scale: 3,
+        scale: 2,
         translateX: "-50%",
         translateY: "-50%",
       }}
@@ -24,7 +24,7 @@ const HeartAnimation = () => {
       <Lottie
         loop={false}
         onComplete={hideHeartHandler}
-        animationData={heartAnimation}
+        animationData={checkAnimation}
       />
     </motion.div>
   );

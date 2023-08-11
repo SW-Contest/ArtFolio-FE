@@ -1,11 +1,13 @@
 import { BsShare, BsArrowLeft, BsPerson, BsPlusLg } from "react-icons/bs";
 import TransitionLink from "./TransitionLink";
+import { useUserStore } from "../../store/store";
 
 interface HeaderProps {
   main?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
+  const { userId } = useUserStore();
   let header = (
     <>
       <div className="flex">
@@ -29,8 +31,7 @@ const Header = (props: HeaderProps) => {
           </TransitionLink>
         </div>
         <div className="flex gap-3">
-          {/* 임시 userId 1 */}
-          <TransitionLink to={`/user/${1}`}>
+          <TransitionLink to={`/user/${userId}`}>
             <BsPerson size={24} />
           </TransitionLink>
         </div>
@@ -38,7 +39,7 @@ const Header = (props: HeaderProps) => {
     );
   }
   return (
-    <header className="z-50 flex p-2 justify-between shrink-0 w-full max-w-[400px] h-10 bg-white fixed top-0">
+    <header className="z-50 flex p-2 justify-between shrink-0 w-full  h-10 bg-white fixed top-0">
       {header}
     </header>
   );
