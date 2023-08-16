@@ -1,11 +1,22 @@
 import { FcFlashOn } from "react-icons/fc";
 import { ResponsivePie } from "@nivo/pie";
 import { AiInfoLabel } from "../../../types/ai.type";
+import { useEffect, useState } from "react";
 
 interface ArtPieceLabelChartProps {
   labels: AiInfoLabel[];
 }
 const ArtPieceLabelChart = ({ labels }: ArtPieceLabelChartProps) => {
+  const [angle, setAngle] = useState(360);
+
+  useEffect(() => {
+    if (angle > 0) {
+      setTimeout(() => {
+        setAngle((prev) => prev - 45);
+      }, 50);
+    }
+  }, [angle]);
+
   const pieChartData = labels.map((label) => {
     return {
       id: label.name,
@@ -22,6 +33,8 @@ const ArtPieceLabelChart = ({ labels }: ArtPieceLabelChartProps) => {
       </div>
       <div className="w-full h-64">
         <ResponsivePie
+          startAngle={angle}
+          fit={false}
           isInteractive={false}
           margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
           data={pieChartData}
