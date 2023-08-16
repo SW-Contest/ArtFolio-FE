@@ -16,6 +16,7 @@ import ArtPieceLabelWrapper from "./ArtPieceLabelWrapper";
 import ArtPieceTitle from "./ArtPieceTitle";
 import ArtPieceAiDocent from "./ArtPieceAIDocent";
 import TransitionLink from "../../common/TransitionLink";
+import ArtPieceLabelChart from "./ArtPieceLabelChart";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -74,7 +75,8 @@ const ArtPieceDetailContent = () => {
             <ArtPieceDescription artPieceInfo={artPieceInfo} />
             {AIData && labels && voice && AIContent && (
               <>
-                <ArtPieceLabelWrapper labels={labels} />
+                <ArtPieceLabelChart labels={labels} />
+                {/* <ArtPieceLabelWrapper labels={labels} /> */}
                 <ArtPieceAIDescription content={AIContent} />
                 {!onTransition && (
                   <ArtPieceAiDocent

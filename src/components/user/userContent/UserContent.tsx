@@ -15,7 +15,7 @@ import UserAuctionListWrapper from "./UserAuctionListWrapper";
 
 const UserContent = () => {
   const userId = useParams().userId;
-  const menus = ["예술품", "경매"];
+  const menus = ["작품", "경매"];
   const [selectedMenu, setSelectedMenu] = useState(menus[0]);
   const { showAnimation, hideAnimation } = useAnimationStore();
 
