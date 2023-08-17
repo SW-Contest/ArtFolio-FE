@@ -61,20 +61,20 @@ function App() {
   };
   // ------
 
-  const handleResize = () => {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  };
+  // const handleResize = () => {
+  //   const vh = window.innerHeight * 0.01;
+  //   document.documentElement.style.setProperty("--vh", `${vh}px`);
+  // };
 
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
+  // useEffect(() => {
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   return (
-    <div className="relative flex justify-center w-screen h-full min-h-screen bg-gray-100 ">
+    <div className="relative flex justify-center w-[100dvw] h-full min-h-[100vh] bg-gray-100 ">
       <AnimationController />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
