@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { BsChevronCompactUp, BsHeartFill } from "react-icons/bs";
 import { useStore } from "zustand";
-import { useAnimationStore } from "../../../../store/store";
+import { useAnimationStore, useUserStore } from "../../../../store/store";
 
 import { postAuctionLike } from "../../../../api/auction.api";
 import RoundButton from "../../../common/RoundButton";
@@ -24,17 +24,16 @@ import {
   getAuctionLikedMember,
 } from "../../../../api/auction.api";
 import { matchPath, useLocation } from "react-router-dom";
-import { userId } from "../../../../mocks/dummyUser";
 
 const DetailFooter = () => {
   const location = useLocation();
 
   const useAnimation = useStore(useAnimationStore);
   const [auctionId, setAuctionId] = useState(location.pathname.split("/")[2]);
-  const [bidderId, setBidderId] = useState(userId);
   const [bidPrice, setBidPrice] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLike, setIsLike] = useState(false);
+  const { userId } = useUserStore();
 
   // 경매 상세 정보를 가져옵니다.
   const fetchAuctionDetail = async () => {
@@ -98,7 +97,7 @@ const DetailFooter = () => {
   // 경매 좋아요를 토글합니다.
   const toggleAuctionLike = async () => {
     if (auctionData && auctionInfo) {
-      const response = await postAuctionLike(auctionInfo.id, bidderId);
+      const response = await postAuctionLike(auctionInfo.id, userId!);
       return response.data;
     }
   };
@@ -123,7 +122,7 @@ const DetailFooter = () => {
     if (auctionData && auctionInfo) {
       if (bidPrice > auctionInfo.currentPrice) {
         publish({
-          bidderId: bidderId,
+          bidderId: userId!,
           bidPrice: bidPrice,
         });
       }

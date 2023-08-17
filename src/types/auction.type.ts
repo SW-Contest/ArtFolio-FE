@@ -1,5 +1,5 @@
 import { ArtPieceInfo } from "./artPiece.type";
-import { AiInfo } from "./ai.type";
+import { AIInfo } from "./ai.type";
 
 export interface AuctionList {
   artistInfo: ArtistInfo;
@@ -56,7 +56,7 @@ export interface AuctionDetail {
   auctionInfo: AuctionInfo;
   artPieceInfo: ArtPieceInfo;
   bidderInfos: BidderInfos[];
-  aiInfo: AiInfo;
+  aiInfo: AIInfo;
 }
 
 export interface AuctionLikedMember {
