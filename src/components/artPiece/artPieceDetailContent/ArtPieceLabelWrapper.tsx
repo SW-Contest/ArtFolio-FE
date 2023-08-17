@@ -1,9 +1,9 @@
 import ArtPieceLabel from "./ArtPieceLabel";
-import { AiInfoLabel } from "../../../types/ai.type";
+import { AIInfoLabel } from "../../../types/ai.type";
 import { FcFlashOn } from "react-icons/fc";
 
 interface ArtPieceLabelWrapperProps {
-  labels: AiInfoLabel[];
+  labels: AIInfoLabel[];
 }
 const ArtPieceLabelWrapper = (props: ArtPieceLabelWrapperProps) => {
   return (

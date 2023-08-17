@@ -10,6 +10,7 @@ import AuctionTitle from "./AuctionTitle";
 import BidList from "./BidList";
 import ArtPieceTitle from "../../artPiece/artPieceDetailContent/ArtPieceTitle";
 import ArtPieceDescription from "../../artPiece/artPieceDetailContent/ArtPieceDescription";
+import ArtPieceAIContent from "../../artPiece/artPieceDetailContent/ArtPieceAIContent";
 
 const AuctionDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -44,6 +45,7 @@ const AuctionDetailContent = () => {
             <ArtPieceTitle artPieceInfo={artPieceInfo} />
             <ArtPieceDescription artPieceInfo={artPieceInfo} />
             <AuctionDescription auctionInfo={auctionInfo} />
+            <ArtPieceAIContent  artPieceInfo={artPieceInfo} />
             <BidList auctionInfo={auctionInfo} bidderInfos={bidderInfos} />
           </div>
         </>

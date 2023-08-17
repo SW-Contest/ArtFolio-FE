@@ -1,10 +1,10 @@
 import { FcFlashOn } from "react-icons/fc";
 import { ResponsivePie } from "@nivo/pie";
-import { AiInfoLabel } from "../../../types/ai.type";
+import { AIInfoLabel } from "../../../types/ai.type";
 import { useEffect, useState } from "react";
 
 interface ArtPieceLabelChartProps {
-  labels: AiInfoLabel[];
+  labels: AIInfoLabel[];
 }
 const ArtPieceLabelChart = ({ labels }: ArtPieceLabelChartProps) => {
   const [angle, setAngle] = useState(360);

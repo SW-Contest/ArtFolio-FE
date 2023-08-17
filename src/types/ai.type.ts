@@ -1,10 +1,10 @@
-export interface AiInfo {
-  labels?: AiInfoLabel[];
+export interface AIInfo {
+  labels?: AIInfoLabel[];
   content?: string;
   voice?: string;
 }
 
-export interface AiInfoLabel {
+export interface AIInfoLabel {
   name: string;
   confidence: number;
 }

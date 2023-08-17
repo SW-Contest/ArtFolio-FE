@@ -106,7 +106,8 @@ const NewAuctionContent = () => {
         </label>
         <input
           type="number"
-          value={auctionPrice}
+          placeholder="경매 시작가를 입력해주세요"
+          value={auctionPrice.toString().replace(/(^0+)/, "")}
           onChange={onPriceChangeHandler}
           className="input input-bordered h-12"
           required

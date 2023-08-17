@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { analyzeArtPiece, getArtPieceDetail } from "../../../api/artPiece.api";
 import { useAnimationStore, useTransitionStore } from "../../../store/store";
-import { AiInfo } from "../../../types/ai.type";
+import { AIInfo } from "../../../types/ai.type";
 import { ArtPieceDetail } from "../../../types/artPiece.type";
 import ImageCarousel from "../../common/ImageCarousel";
 import LoadingSpinner from "../../common/LoadingSpinner";
@@ -10,13 +10,9 @@ import RoundButton from "../../common/RoundButton";
 import ArtistInfo from "../../common/user/ArtistInfo";
 import ArtPieceDescription from "./ArtPieceDescription";
 
-import ArtPieceAIDescription from "./ArtPieceAIDescription";
-import ArtPieceAIDocentModal from "./ArtPieceAIDocentModal";
-import ArtPieceLabelWrapper from "./ArtPieceLabelWrapper";
-import ArtPieceTitle from "./ArtPieceTitle";
-import ArtPieceAiDocent from "./ArtPieceAIDocent";
 import TransitionLink from "../../common/TransitionLink";
-import ArtPieceLabelChart from "./ArtPieceLabelChart";
+import ArtPieceAIContent from "./ArtPieceAIContent";
+import ArtPieceTitle from "./ArtPieceTitle";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -54,15 +50,13 @@ const ArtPieceDetailContent = () => {
     return response.data;
   };
 
-  const { data: AIData, isFetched: AIIsFetched } = useQuery<AiInfo>(
+  const { isFetched: AIIsFetched } = useQuery<AIInfo>(
     ["AIInfo" + artPieceId],
     fetchAIInfo,
     {
       enabled: !!artPieceInfo,
     }
   );
-
-  const { labels, voice, content: AIContent } = AIData ?? {};
 
   return (
     <section className="relative flex flex-col mt-10 mb-20 font-Pretendard">
@@ -73,20 +67,8 @@ const ArtPieceDetailContent = () => {
             <ArtPieceTitle artPieceInfo={artPieceInfo} />
             <ArtistInfo artistInfo={artistInfo} />
             <ArtPieceDescription artPieceInfo={artPieceInfo} />
-            {AIData && labels && voice && AIContent && (
-              <>
-                <ArtPieceLabelChart labels={labels} />
-                {/* <ArtPieceLabelWrapper labels={labels} /> */}
-                <ArtPieceAIDescription content={AIContent} />
-                {!onTransition && (
-                  <ArtPieceAiDocent
-                    artPieceInfo={artPieceInfo}
-                    content={AIContent}
-                    voice={voice}
-                  />
-                )}
-              </>
-            )}
+            <ArtPieceAIContent artPieceInfo={artPieceInfo} />
+
             <div className="flex justify-center w-full">
               {AIIsFetched ? (
                 <TransitionLink

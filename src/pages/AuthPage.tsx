@@ -11,7 +11,7 @@ const AuthPage = () => {
 
   const oauthLoginHandler = async ({ code, provider, state }: any) => {
     const response = await oauthLogin({ code, provider, state });
-    return response.headers;
+    return response!.headers;
   };
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const AuthPage = () => {
     const state = searchParams.get("state");
 
     const login = async () => {
+      console.log(code, state, provider);
       try {
         const response = await oauthLoginHandler({ code, provider, state });
 

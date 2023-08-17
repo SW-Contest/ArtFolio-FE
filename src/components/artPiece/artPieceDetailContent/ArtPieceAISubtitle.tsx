@@ -12,7 +12,6 @@ const ArtPieceAISubtitle = ({ content }: ArtPieceAISubtitleProps) => {
   useEffect(() => {
     if (subTitleIndex < subtitle.length) {
       const currentIndex = subTitleIndex;
-      console.log(130 * subtitle[currentIndex].length);
       const interval = setTimeout(() => {
         setSubTitleIndex((prev) => prev + 1);
       }, 130 * subtitle[currentIndex].length);
