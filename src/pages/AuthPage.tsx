@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { oauthLogin } from "../api/auth.api";
-import { useUserStore } from "../store/store";
+import { useUserStore, useAnimationStore } from "../store/store";
 
 const AuthPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const provider = useParams().provider;
   const { setUserId } = useUserStore();
+  const { showAnimation, hideAnimation } = useAnimationStore();
 
   const oauthLoginHandler = async ({ code, provider, state }: any) => {
     const response = await oauthLogin({ code, provider, state });
@@ -20,8 +21,8 @@ const AuthPage = () => {
     const state = searchParams.get("state");
 
     const login = async () => {
-      console.log(code, state, provider);
       try {
+        showAnimation("loading");
         const response = await oauthLoginHandler({ code, provider, state });
 
         setUserId(response["userid"]);
@@ -33,9 +34,12 @@ const AuthPage = () => {
           response["authorization-refresh"]
         );
 
+        hideAnimation();
         navigate("/");
       } catch (error) {
         console.log("로그인 중 에러가 발생했습니다.");
+        hideAnimation();
+        navigate("/login");
       }
     };
 
