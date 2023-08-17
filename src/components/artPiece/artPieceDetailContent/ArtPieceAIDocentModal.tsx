@@ -1,6 +1,7 @@
 import { ArtPieceInfo } from "../../../types/artPiece.type";
 import ImageCarousel from "../../common/ImageCarousel";
 import ArtPieceAISubtitle from "./ArtPieceAISubtitle";
+import { useEffect } from "react";
 
 interface ArtPieceAIDocentModalProps {
   artPieceInfo: ArtPieceInfo;
@@ -25,6 +26,11 @@ const ArtPieceAIDocentModal = ({
     }
   };
 
+  useEffect(() => {
+    let audio = document.getElementById("audio") as HTMLAudioElement;
+    audio.play();
+  }, []);
+
   return (
     <>
       <input
@@ -41,12 +47,15 @@ const ArtPieceAIDocentModal = ({
               disableClick
               photoPaths={artPieceInfo.photoPaths ?? []}
             />
-            <iframe
-              className="hidden "
+            <audio autoPlay id="audio">
+              <source src={voice} />
+            </audio>
+            {/* <iframe
+              className="w-0 h-0 "
               src={voice}
               allow="autoplay"
               id="iframeAudio"
-            />
+            /> */}
             <ArtPieceAISubtitle content={content} />
             <div onClick={changeScrollHandler} className="btn w-20">
               닫기
