@@ -1,29 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { BsChevronCompactUp, BsHeartFill } from "react-icons/bs";
 import { useStore } from "zustand";
 import { useAnimationStore, useUserStore } from "../../../../store/store";
 
 import { postAuctionLike } from "../../../../api/auction.api";
-import RoundButton from "../../../common/RoundButton";
+import useAuctionSocket from "../../../../hooks/useAuctionSocket";
 import RotationButton from "../../../common/RotationButton";
+import RoundButton from "../../../common/RoundButton";
 import DetailFooterExpanded from "./DetailFooterExpanded";
 import DetailFooterFolded from "./DetailFooterFolded";
-import useAuctionSocket from "../../../../hooks/useAuctionSocket";
 
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
+import {
+  getAuctionDetail,
+  getAuctionLikedMember,
+} from "../../../../api/auction.api";
 import {
   AuctionDetail,
   AuctionLikedMember,
 } from "../../../../types/auction.type";
-import {
-  getAuctionDetail,
-  getMockAuctionDetail,
-  getAuctionLikedMember,
-} from "../../../../api/auction.api";
-import { matchPath, useLocation } from "react-router-dom";
 
 const DetailFooter = () => {
   const location = useLocation();
@@ -63,7 +62,10 @@ const DetailFooter = () => {
       }
     );
 
-  const { auctionInfo } = auctionData ?? {};
+  const { auctionInfo, artistInfo } = auctionData ?? {};
+
+  // 해당 경매가 접속한 유저의 경매인지 확인합니다.
+  const isOwner = artistInfo?.id === userId;
 
   // 경매 정보가 변경되면 입찰가를 변경합니다.
   useEffect(() => {
@@ -141,62 +143,86 @@ const DetailFooter = () => {
   };
 
   if (!auctionInfo) return <></>;
-  return (
-    <motion.footer
-      initial={{
-        y: "15rem",
-      }}
-      animate={{
-        y: isExpanded ? "0rem" : "3rem",
-      }}
-      transition={{ duration: 0.4 }}
-      exit={{
-        y: "15rem",
-      }}
-      className="flex flex-col shrink-0 fixed bottom-0 z-50 items-center w-full  h-60 bg-af-brightGray rounded-t-3xl gap-4 "
-    >
-      <RotationButton
-        isExpanded={isExpanded}
-        onChangeisExpanded={changeExpandedHandler}
+
+  if (isOwner) {
+    return (
+      <motion.footer
+        initial={{
+          y: "8rem",
+        }}
+        animate={{
+          y: "0rem",
+        }}
+        transition={{ duration: 0.4 }}
+        exit={{
+          y: "15rem",
+        }}
+        className="fixed bottom-0 z-50 flex flex-col items-center  w-full gap-4 shrink-0 h-32 bg-af-brightGray rounded-t-3xl "
       >
-        <BsChevronCompactUp size={24} />
-      </RotationButton>
-
-      {/* 펼쳤을 때 */}
-      {isExpanded && (
-        <DetailFooterExpanded
-          onBidChange={bidChangeHandler}
-          onBidSet={bidSetHandler}
-          auctionInfo={auctionInfo}
-          bidPrice={bidPrice}
-        />
-      )}
-      {/* 접혔을 때 */}
-      {!isExpanded && <DetailFooterFolded auctionInfo={auctionInfo!} />}
-
-      <div className="flex w-full h-12 justify-evenly">
-        <button
-          onClick={clickHeartHandler}
-          className={
-            isLike
-              ? "btn btn-outline w-12 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
-              : "btn btn-outline w-12 flex justify-center items-center  bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
-          }
+        <section className="flex w-full h-full items-center">
+          {/* 경매 종료까지 남은 시간만 표시 */}
+          <DetailFooterFolded auctionInfo={auctionInfo!} />
+        </section>
+      </motion.footer>
+    );
+  } else {
+    return (
+      <motion.footer
+        initial={{
+          y: "15rem",
+        }}
+        animate={{
+          y: isExpanded ? "0rem" : "3rem",
+        }}
+        transition={{ duration: 0.4 }}
+        exit={{
+          y: "15rem",
+        }}
+        className="fixed bottom-0 z-50 flex flex-col items-center w-full gap-4 shrink-0 h-60 bg-af-brightGray rounded-t-3xl "
+      >
+        <RotationButton
+          isExpanded={isExpanded}
+          onChangeisExpanded={changeExpandedHandler}
         >
-          <BsHeartFill
-            size={24}
-            className={isLike ? "fill-white " : "fill-af-hotPink "}
+          <BsChevronCompactUp size={24} />
+        </RotationButton>
+
+        {/* 펼쳤을 때 */}
+        {isExpanded && (
+          <DetailFooterExpanded
+            onBidChange={bidChangeHandler}
+            onBidSet={bidSetHandler}
+            auctionInfo={auctionInfo}
+            bidPrice={bidPrice}
           />
-        </button>
-        <RoundButton
-          className="w-1/2"
-          onClick={isExpanded ? publishClickHandler : changeExpandedHandler}
-        >
-          입찰하기
-        </RoundButton>
-      </div>
-    </motion.footer>
-  );
+        )}
+        {/* 접혔을 때 */}
+        {!isExpanded && <DetailFooterFolded auctionInfo={auctionInfo!} />}
+
+        <div className="flex w-full h-12 justify-evenly">
+          <button
+            onClick={clickHeartHandler}
+            className={
+              isLike
+                ? "btn btn-outline w-12 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
+                : "btn btn-outline w-12 flex justify-center items-center  bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
+            }
+          >
+            <BsHeartFill
+              size={24}
+              className={isLike ? "fill-white " : "fill-af-hotPink "}
+            />
+          </button>
+          <RoundButton
+            className="w-1/2"
+            onClick={isExpanded ? publishClickHandler : changeExpandedHandler}
+          >
+            입찰하기
+          </RoundButton>
+        </div>
+      </motion.footer>
+    );
+  }
 };
 
 export default DetailFooter;

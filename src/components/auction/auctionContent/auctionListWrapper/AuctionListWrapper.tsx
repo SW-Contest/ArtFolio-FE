@@ -3,9 +3,7 @@ import { AuctionPage } from "../../../../types/auction.type";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import {
-  getAuctionList
-} from "../../../../api/auction.api";
+import { getAuctionList } from "../../../../api/auction.api";
 import useIntersectionObserver from "../../../../hooks/useIntersectionObserver";
 import ListBoxSkeletonList from "../../../common/ListBoxSkeletonList";
 import AuctionListBoxes from "./AuctionListBoxes";
@@ -39,7 +37,7 @@ const AuctionListWrapper = () => {
   return (
     <section className="flex flex-col w-full p-3">
       <div className="flex gap-4 mb-3">
-        <p className="font-semibold">경매 중인 작품</p>
+        <p className="font-semibold">경매중인 작품</p>
       </div>
       <div className="flex flex-wrap justify-between w-full">
         <AuctionListBoxes pages={pageData?.pages} />

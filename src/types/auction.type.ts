@@ -37,7 +37,6 @@ export interface AuctionInfo {
   createdAt: string;
   finishedAt: string;
   photoPaths: string[];
-  // thumbnailPath: string;
   likeMembers: number[];
 }
 

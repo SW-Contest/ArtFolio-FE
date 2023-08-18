@@ -27,7 +27,7 @@ const SearchBar = (props: SearchBarProps) => {
         value={searchText}
         onChange={changeTextHandler}
         placeholder="관심있는 작가나 작품을 검색해보세요."
-        className="w-full p-2 pr-8 rounded-2xl"
+        className="w-full p-2 pl-3 pr-8 rounded-2xl"
       ></input>
       <button className="absolute  right-5 w-5 h-5">
         <SearchIcon />
