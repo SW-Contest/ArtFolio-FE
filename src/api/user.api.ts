@@ -1,7 +1,7 @@
 import axios from "axios";
 import { HOST } from "../constants/host";
 
-export const getUserFollowerList = async (userId: string | undefined) => {
+export const getUserFollowList = async (userId: string | undefined) => {
   const response = await axios.get(`http://${HOST}/follow/${userId}`);
   console.log(response.data);
   return response.data;
