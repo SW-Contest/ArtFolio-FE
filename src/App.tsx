@@ -74,7 +74,7 @@ function App() {
   // }, []);
 
   return (
-    <div className="relative flex justify-center w-[100dvw] h-full min-h-[100vh] bg-gray-100 ">
+    <div className="relative flex justify-center w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
       <AnimationController />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
