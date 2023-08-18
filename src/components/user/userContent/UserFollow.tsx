@@ -32,7 +32,6 @@ const UserFollow = ({ artistInfo }: UserFollowProps) => {
 
   const toggleUserFollowHandler = () => {
     if (userId && artistInfo) {
-      console.log("push");
       toggleUserFollowMutate({
         fromUserId: userId,
         toUserId: artistInfo.id,
