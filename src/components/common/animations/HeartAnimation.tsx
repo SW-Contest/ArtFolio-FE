@@ -13,13 +13,8 @@ const HeartAnimation = () => {
 
   return (
     <motion.div
-      initial={{
-        scale: 3,
-        translateX: "-50%",
-        translateY: "-50%",
-      }}
       exit={{ opacity: 0 }}
-      className="z-[999] fixed top-1/2 left-1/2"
+      className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  w-60 h-60 z-[999]"
     >
       <Lottie
         loop={false}

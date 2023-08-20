@@ -46,7 +46,7 @@ const DetailFooterFolded = (props: DetailFooterFoldedProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center w-full"
+      className="flex flex-col items-center w-full "
     >
       <p className="font-normal text-black text-md">경매 종료까지 남은 시간</p>
       <p className="h-10 text-4xl font-semibold text-center text-af-hotPink">

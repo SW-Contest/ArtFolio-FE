@@ -25,7 +25,7 @@ const AuthPage = () => {
         showAnimation("loading");
         const response = await oauthLoginHandler({ code, provider, state });
 
-        setUserId(response["userid"]);
+        setUserId(Number(response["userid"]));
 
         sessionStorage.setItem("userId", response["userid"]);
         sessionStorage.setItem("accessToken", response["authorization"]);

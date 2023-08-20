@@ -34,6 +34,11 @@ const AuctionDetailContent = () => {
 
   const { artistInfo, auctionInfo, bidderInfos, artPieceInfo } = data ?? {};
 
+  const artPieceInfoWithPhotoPaths = {
+    ...artPieceInfo!,
+    photoPaths: auctionInfo?.photoPaths!,
+  };
+
   return (
     <section className="flex flex-col mt-10 mb-40">
       {data && artistInfo && auctionInfo && bidderInfos && artPieceInfo && (
@@ -45,7 +50,7 @@ const AuctionDetailContent = () => {
             <ArtPieceTitle artPieceInfo={artPieceInfo} />
             <ArtPieceDescription artPieceInfo={artPieceInfo} />
             <AuctionDescription auctionInfo={auctionInfo} />
-            <ArtPieceAIContent  artPieceInfo={artPieceInfo} />
+            <ArtPieceAIContent artPieceInfo={artPieceInfoWithPhotoPaths} />
             <BidList auctionInfo={auctionInfo} bidderInfos={bidderInfos} />
           </div>
         </>
