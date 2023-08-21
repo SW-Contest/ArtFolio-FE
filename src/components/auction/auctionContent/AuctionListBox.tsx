@@ -21,7 +21,7 @@ const AuctionListBox = (props: ListBoxProps) => {
   return (
     <TransitionLink
       to={`/auction/${props.auctionInfo.id}`}
-      className="relative flex flex-col mb-4 rounded-lg h-60 w-[calc(50%-10px)] list-box "
+      className="relative shrink-0 flex flex-col mb-4 rounded-lg h-60 w-[calc(50%-10px)] list-box "
     >
       {!imgError ? (
         <img
