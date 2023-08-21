@@ -73,7 +73,7 @@ const ArtPieceDetailContent = () => {
   );
 
   return (
-    <section className="relative flex flex-col mt-10 mb-60 font-Pretendard">
+    <section className=" flex flex-col mt-10 mb-60 ">
       {data && artistInfo && artPieceInfo && (
         <>
           <ImageCarousel photoPaths={artPieceInfo.photoPaths ?? []} />

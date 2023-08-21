@@ -2,6 +2,7 @@ import { ResponsiveLine, CustomLayerProps, Layer } from "@nivo/line";
 import { chartDataProps } from "./BidList";
 import { DotsItem } from "@nivo/core";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface ChartProps {
   chartData: chartDataProps[];
@@ -11,6 +12,9 @@ interface ChartProps {
 // customLayer를 통해 마지막 point에만 표시합니다.
 function LastPoint({ points, ...props }: CustomLayerProps) {
   const shownPoints = points.slice(-1);
+
+  // 마지막 포인트의 x와 y가 변경될 때마다 ping 애니메이셔을 재랜더링 하기 위한 key
+  const pingKey = "key" + String(shownPoints[0].x) + String(shownPoints[0].y);
 
   return (
     <>
@@ -32,9 +36,9 @@ function LastPoint({ points, ...props }: CustomLayerProps) {
         ))}
       </g>
       {/* ping 애니메이션 효과 */}
-      {/* point의 y값에 따라 애니메이션이 따라가도록 함 */}
+      {/* 위에서 만든 key를 사용하여 화면 크기가 변하면 재렌더링 되도록 함  */}
       <motion.g
-        key={points[0].y}
+        key={pingKey}
         className="animate-custom-ping"
         animate={{ scale: 1 }}
       >
@@ -59,7 +63,7 @@ function LastPoint({ points, ...props }: CustomLayerProps) {
 
 const Chart = (props: ChartProps) => {
   return (
-    <div className="w-full h-[200px]">
+    <div className="w-full h-[200px] px-2">
       <ResponsiveLine
         layers={
           [
