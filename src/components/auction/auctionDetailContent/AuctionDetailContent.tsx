@@ -41,7 +41,7 @@ const AuctionDetailContent = () => {
   };
 
   return (
-    <section className="flex flex-col mt-10 mb-40">
+    <section className="flex flex-col mt-10 mb-60">
       {data && artistInfo && auctionInfo && bidderInfos && artPieceInfo && (
         <>
           <ImageCarousel photoPaths={auctionInfo.photoPaths ?? []} />

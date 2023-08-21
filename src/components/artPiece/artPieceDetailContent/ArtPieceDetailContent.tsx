@@ -20,8 +20,8 @@ import ArtPieceTitle from "./ArtPieceTitle";
 
 const ArtPieceDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
-  const { onTransition } = useTransitionStore();
   const artPieceId = useParams().artPieceId;
+
   const { userId } = useUserStore();
 
   const fetchArtPieceDetail = async () => {
@@ -73,7 +73,7 @@ const ArtPieceDetailContent = () => {
   );
 
   return (
-    <section className="relative flex flex-col mt-10 mb-20 font-Pretendard">
+    <section className="relative flex flex-col mt-10 mb-60 font-Pretendard">
       {data && artistInfo && artPieceInfo && (
         <>
           <ImageCarousel photoPaths={artPieceInfo.photoPaths ?? []} />

@@ -19,6 +19,7 @@ import {
   useTransitionStore,
   useUserStore,
 } from "./store/store";
+import ArtPieceDetailFooter from "./components/artPiece/artPieceDetailContent/ArtPieceDetailFooter";
 function App() {
   //  axios를 통해 API를 호출할 때 헤더에 토큰을 자동으로 넣어줍니다.
   axios.defaults.headers.common[
@@ -71,7 +72,7 @@ function App() {
   // }, []);
 
   return (
-    <div className="relative flex justify-center w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
+    <div className="relative flex  justify-center  w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
       <AnimationController />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
@@ -79,7 +80,7 @@ function App() {
 
       <section
         id="page"
-        className="relative flex w-full max-w-[400px] h-full overflow-hidden bg-white"
+        className="relative flex w-full max-w-[400px] h-full overflow-hidden bg-white "
       >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
@@ -123,6 +124,8 @@ function App() {
       <AnimatePresence>
         {location.pathname.split("/")[1] === "auction" &&
           location.pathname.split("/")[2] !== "new" && <DetailFooter />}
+        {location.pathname.split("/")[1] === "artpiece" &&
+          location.pathname.split("/")[2] !== "new" && <ArtPieceDetailFooter />}
       </AnimatePresence>
     </div>
   );
