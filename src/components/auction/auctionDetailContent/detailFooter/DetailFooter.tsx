@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -144,25 +145,35 @@ const DetailFooter = () => {
 
   if (!auctionInfo) return <></>;
 
+  const auctionLikeMemberLength = auctionLikeMemberData?.likeUsers.length;
+
   if (isOwner) {
     return (
       <motion.footer
         initial={{
-          y: "8rem",
+          y: "12rem",
         }}
         animate={{
-          y: "0rem",
+          y: "1rem",
         }}
         transition={{ duration: 0.4 }}
         exit={{
-          y: "15rem",
+          y: "12rem",
         }}
-        className="fixed bottom-0 z-50 flex flex-col items-center  w-full gap-4 shrink-0 h-32 bg-af-brightGray rounded-t-3xl "
+        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full  h-48 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl max-w-[450px] "
       >
-        <section className="flex w-full h-full items-center">
-          {/* 경매 종료까지 남은 시간만 표시 */}
-          <DetailFooterFolded auctionInfo={auctionInfo!} />
-        </section>
+        {/* 경매 종료까지 남은 시간만 표시 */}
+        <DetailFooterFolded auctionInfo={auctionInfo!} />
+        <button
+          className={
+            "btn btn-outline w-60 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
+          }
+        >
+          <BsHeartFill size={14} className={"fill-white "} />
+          <div className={twMerge(" h-7 text-lg font-semibold", "text-white")}>
+            {auctionLikeMemberLength}
+          </div>
+        </button>
       </motion.footer>
     );
   } else {
@@ -178,7 +189,7 @@ const DetailFooter = () => {
         exit={{
           y: "15rem",
         }}
-        className="fixed bottom-0 z-50 flex flex-col items-center w-full gap-4 shrink-0 h-60 bg-af-brightGray rounded-t-3xl "
+        className="fixed bottom-0 z-50 flex flex-col items-center w-full gap-4 shrink-0 h-60 bg-af-brightGray rounded-t-3xl max-w-[450px]"
       >
         <RotationButton
           isExpanded={isExpanded}
@@ -204,14 +215,22 @@ const DetailFooter = () => {
             onClick={clickHeartHandler}
             className={
               isLike
-                ? "btn btn-outline w-12 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
-                : "btn btn-outline w-12 flex justify-center items-center  bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
+                ? "btn btn-outline w-24 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
+                : "btn btn-outline w-24 flex justify-center items-center  bg-transparent  border-af-hotPink hover:bg-transparent hover:border-af-hotPink"
             }
           >
             <BsHeartFill
-              size={24}
+              size={14}
               className={isLike ? "fill-white " : "fill-af-hotPink "}
             />
+            <div
+              className={twMerge(
+                " h-7 text-lg font-semibold",
+                isLike ? "text-white" : "text-af-hotPink"
+              )}
+            >
+              {auctionLikeMemberLength}
+            </div>
           </button>
           <RoundButton
             className="w-1/2"

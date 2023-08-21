@@ -29,11 +29,11 @@ export const useUserStore = create<userState>((set) => ({
 }));
 
 export const useAnimationStore = create<AnimationState>((set) => ({
-  type: "loading",
+  type: "",
   isShow: false,
   showAnimation: (type: string) =>
     set((state) => ({ isShow: true, type: type })),
-  hideAnimation: () => set((state) => ({ isShow: false })),
+  hideAnimation: () => set((state) => ({ isShow: false, type: "" })),
 }));
 
 export const useTransitionStore = create<TransitionState>((set) => ({

@@ -17,6 +17,24 @@ export const getLikedArtPieceList = async (userId: string | undefined) => {
   return response;
 };
 
+// 해당 작품을 좋아요합니다.
+export const toggleArtpieceLike = async (body: {
+  artPieceId: string;
+  artistId: number;
+}) => {
+  const response = await axios.patch(`http://${HOST}/art_piece/like`, body);
+
+  return response;
+};
+
+// 해당 작품을 좋아요한 유저 목록을 받아옵니다.
+export const getArtPieceLikedMember = async (artPieceId: string) => {
+  const response = await axios.get(
+    `http://${HOST}/art_piece/like/${artPieceId}`
+  );
+  return response;
+};
+
 // 새로운 작품을 등록합니다.
 export const postNewArtPiece = async (body: {
   title: string;
@@ -77,7 +95,6 @@ export const analyzeArtPiece = async (body: {
   artPieceId: number;
   question: string | undefined;
 }) => {
-  console.log("start analyzeArtPiece");
   const response = await axios.post(
     `http://${HOST}/art_piece/analyze/image`,
     body

@@ -89,6 +89,7 @@ export const getUserAuctionList = async (userId: string | undefined) => {
   return response;
 };
 
+// 새로운 경매를 등록합니다.
 export const postNewAuction = async (body: {
   artistId: number;
   artPieceId: number;

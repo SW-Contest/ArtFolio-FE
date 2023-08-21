@@ -1,9 +1,8 @@
-import { ArtPieceInfo } from "../../../types/artPiece.type";
-import ArtPieceAIDocentModal from "./ArtPieceAIDocentModal";
 import { useEffect, useState } from "react";
 import { HiSpeakerphone } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
-import { twMerge } from "tailwind-merge";
+import { ArtPieceInfo } from "../../../types/artPiece.type";
+import ArtPieceAIDocentModal from "./ArtPieceAIDocentModal";
 
 interface ArtPieceAiDocentProps {
   artPieceInfo: ArtPieceInfo;
@@ -16,8 +15,6 @@ const ArtPieceAiDocent = ({
   content,
   voice,
 }: ArtPieceAiDocentProps) => {
-  const location = useLocation();
-  const currentPath = location.pathname.split("/")[1];
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const clickDocentHandler = () => {
@@ -37,10 +34,7 @@ const ArtPieceAiDocent = ({
   return (
     <>
       <button
-        className={twMerge(
-          "fixed w-16 h-16 right-5 btn btn-circle z-50 shadow-xl",
-          currentPath === "auction" ? "top-20" : "bottom-8"
-        )}
+        className=" absolute w-16 h-16 right-5 btn btn-circle z-50 shadow-xl top-20"
         onClick={clickDocentHandler}
       >
         <HiSpeakerphone size={30} />

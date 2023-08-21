@@ -12,7 +12,7 @@ const RoundButton = (props: RoundButtonProps) => {
     <button
       onClick={props.onClick}
       className={twMerge(
-        "shrink-0 text-white border-0 btn rounded-xl bg-af-hotPink hover:bg-af-hotPink",
+        "shrink-0 text-white border-0 btn rounded-lg bg-af-hotPink hover:bg-af-hotPink",
         props.className
       )}
     >

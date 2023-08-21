@@ -11,6 +11,7 @@ import BidList from "./BidList";
 import ArtPieceTitle from "../../artPiece/artPieceDetailContent/ArtPieceTitle";
 import ArtPieceDescription from "../../artPiece/artPieceDetailContent/ArtPieceDescription";
 import ArtPieceAIContent from "../../artPiece/artPieceDetailContent/ArtPieceAIContent";
+import SuccessfulBidAnimation from "../../common/animations/successfulBidAnimation";
 
 const AuctionDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
@@ -40,7 +41,7 @@ const AuctionDetailContent = () => {
   };
 
   return (
-    <section className="flex flex-col mt-10 mb-40">
+    <section className="flex flex-col mt-10 mb-60">
       {data && artistInfo && auctionInfo && bidderInfos && artPieceInfo && (
         <>
           <ImageCarousel photoPaths={auctionInfo.photoPaths ?? []} />

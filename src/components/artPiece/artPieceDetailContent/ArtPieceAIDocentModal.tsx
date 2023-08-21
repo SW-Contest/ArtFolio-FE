@@ -18,7 +18,6 @@ const ArtPieceAIDocentModal = ({
 }: ArtPieceAIDocentModalProps) => {
   // 모달이 있을 때는 외부 스크롤을 막습니다.
   const changeScrollHandler = (e: any) => {
-    console.log("click");
     setIsModalOpen(false);
     const isChecked = e.target.value;
     if (isChecked) {
@@ -41,8 +40,8 @@ const ArtPieceAIDocentModal = ({
       />
 
       {
-        <label htmlFor="docent-modal" className="cursor-pointer modal px-2">
-          <label className="relative flex flex-col items-center justify-center w-full h-screen modal-box">
+        <label htmlFor="docent-modal" className="cursor-pointer modal px-2 ">
+          <label className="relative flex flex-col items-center justify-center w-full max-w-[400px]  h-screen modal-box">
             <ImageCarousel
               disableClick
               photoPaths={artPieceInfo.photoPaths ?? []}
@@ -50,12 +49,6 @@ const ArtPieceAIDocentModal = ({
             <audio autoPlay id="audio">
               <source src={voice} />
             </audio>
-            {/* <iframe
-              className="w-0 h-0 "
-              src={voice}
-              allow="autoplay"
-              id="iframeAudio"
-            /> */}
             <ArtPieceAISubtitle content={content} />
             <div onClick={changeScrollHandler} className="btn w-20">
               닫기

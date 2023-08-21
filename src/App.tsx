@@ -19,11 +19,24 @@ import {
   useTransitionStore,
   useUserStore,
 } from "./store/store";
+import ArtPieceDetailFooter from "./components/artPiece/artPieceDetailContent/ArtPieceDetailFooter";
 function App() {
   //  axios를 통해 API를 호출할 때 헤더에 토큰을 자동으로 넣어줍니다.
   axios.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${sessionStorage.getItem("accessToken")}`;
+
+  // axios 를 통해 API를 호출할 때, 403 에러가 발생하면 로그인 페이지로 이동합니다. (토큰이 만료된 경우)
+  axios.interceptors.response.use(
+    (response) => response,
+    (e) => {
+      if (e.response.status === 403) {
+        sessionStorage.clear();
+        window.location.href = "/login";
+      }
+      return Promise.reject(e);
+    }
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +47,7 @@ function App() {
     toggleTransition,
     transitionBackward,
   } = useTransitionStore();
-  const { isShow, showAnimation } = useAnimationStore();
+  const { isShow, showAnimation, hideAnimation } = useAnimationStore();
 
   // 브라우저의 뒤로가기 버튼을 눌렀을때, 헤더의 뒤로가기 버튼을 누른것처럼 보이게 하기 위한 코드입니다.
   // TODO: 이 코드는 불안정하므로, 추후 개선이 필요함
@@ -43,10 +56,11 @@ function App() {
 
   window.onpopstate = () => {
     history.go(1);
-    if (!isShow && !onTransition && location.pathname !== "/") {
+    if (!onTransition && location.pathname !== "/") {
       const recent = location.pathname;
       toggleTransition();
       transitionBackward();
+      hideAnimation();
       navigate(recentPage);
       if (recentPage === "/") {
         setRecentPage(recent);
@@ -57,20 +71,8 @@ function App() {
   };
   // ------
 
-  // const handleResize = () => {
-  //   const vh = window.innerHeight * 0.01;
-  //   document.documentElement.style.setProperty("--vh", `${vh}px`);
-  // };
-
-  // useEffect(() => {
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
   return (
-    <div className="relative flex justify-center w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
+    <div className="relative flex    justify-center   w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
       <AnimationController />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
@@ -78,7 +80,7 @@ function App() {
 
       <section
         id="page"
-        className="relative flex w-full max-w-[400px] h-full overflow-hidden bg-white"
+        className="relative flex w-full max-w-[450px] h-full overflow-hidden bg-white "
       >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>
@@ -122,6 +124,8 @@ function App() {
       <AnimatePresence>
         {location.pathname.split("/")[1] === "auction" &&
           location.pathname.split("/")[2] !== "new" && <DetailFooter />}
+        {location.pathname.split("/")[1] === "artpiece" &&
+          location.pathname.split("/")[2] !== "new" && <ArtPieceDetailFooter />}
       </AnimatePresence>
     </div>
   );

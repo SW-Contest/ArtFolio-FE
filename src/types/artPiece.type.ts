@@ -17,3 +17,8 @@ export interface ArtPieceList {
   artistInfo: ArtistInfo;
   artPieceInfos: ArtPieceInfo[];
 }
+
+export interface ArtPieceLikedMember {
+  size: number;
+  likeUsers: ArtistInfo[];
+}

@@ -44,7 +44,7 @@ export default function useAuctionSocket(
     // 정상 응답 구독 경로
     client.current?.subscribe("/topic/channel/" + auctionId, (body: any) => {
       const json_body = JSON.parse(body.body);
-      console.log(json_body);
+      // console.log(json_body);
 
       // 웹소켓 응답이 올 시 데이터를 재요청합니다.
       callback();
@@ -53,7 +53,7 @@ export default function useAuctionSocket(
     // 예외 발생시 응답 구독 경로
     client.current?.subscribe("/user/queue/errors", (body: any) => {
       const json_body = JSON.parse(body.body);
-      console.log(json_body);
+      // console.log(json_body);
     });
   };
 

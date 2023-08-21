@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CLIENT_HOST } from "../constants/host";
+import { CLIENT_HOST, HOST } from "../constants/host";
 import { REDIRECT_URI } from "../constants/oauth";
 
 // OAuth 로그인을 시도합니다.

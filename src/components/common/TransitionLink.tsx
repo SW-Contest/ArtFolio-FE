@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTransitionStore } from "../../store/store";
+import { useTransitionStore, useAnimationStore } from "../../store/store";
 import { useNavigate, useLocation } from "react-router-dom";
 
 interface TransitionLinkProps {
@@ -23,6 +23,7 @@ const TransitionLink = (props: TransitionLinkProps) => {
     transitionForward,
     transitionBackward,
   } = useTransitionStore();
+  const { hideAnimation } = useAnimationStore();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,6 +31,7 @@ const TransitionLink = (props: TransitionLinkProps) => {
     if (!onTransition) {
       const recent = location.pathname;
       toggleTransition();
+      hideAnimation();
       if (props.backWard) {
         transitionBackward();
         navigate(recentPage);
