@@ -77,7 +77,6 @@ export const analyzeArtPiece = async (body: {
   artPieceId: number;
   question: string | undefined;
 }) => {
-  console.log("start analyzeArtPiece");
   const response = await axios.post(
     `http://${HOST}/art_piece/analyze/image`,
     body

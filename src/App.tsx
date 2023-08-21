@@ -34,7 +34,7 @@ function App() {
     toggleTransition,
     transitionBackward,
   } = useTransitionStore();
-  const { isShow, showAnimation } = useAnimationStore();
+  const { isShow, showAnimation, hideAnimation } = useAnimationStore();
 
   // 브라우저의 뒤로가기 버튼을 눌렀을때, 헤더의 뒤로가기 버튼을 누른것처럼 보이게 하기 위한 코드입니다.
   // TODO: 이 코드는 불안정하므로, 추후 개선이 필요함
@@ -43,10 +43,11 @@ function App() {
 
   window.onpopstate = () => {
     history.go(1);
-    if (!isShow && !onTransition && location.pathname !== "/") {
+    if (!onTransition && location.pathname !== "/") {
       const recent = location.pathname;
       toggleTransition();
       transitionBackward();
+      hideAnimation();
       navigate(recentPage);
       if (recentPage === "/") {
         setRecentPage(recent);

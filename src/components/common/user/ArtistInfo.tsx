@@ -15,7 +15,6 @@ const ArtistInfo = ({ artistInfo }: ArtistInfoProps) => {
     () => getUserFollowList(String(artistInfo.id))
   );
 
-  console.log(userFollowListData);
   const userFollower = userFollowListData?.followerInfos.length;
   return (
     <article className="flex items-center w-full gap-4 p-4 mb-4 rounded-md bg-af-lightGray ">
