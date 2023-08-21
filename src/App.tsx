@@ -26,6 +26,18 @@ function App() {
     "Authorization"
   ] = `Bearer ${sessionStorage.getItem("accessToken")}`;
 
+  // axios 를 통해 API를 호출할 때, 403 에러가 발생하면 로그인 페이지로 이동합니다. (토큰이 만료된 경우)
+  axios.interceptors.response.use(
+    (response) => response,
+    (e) => {
+      if (e.response.status === 403) {
+        sessionStorage.clear();
+        window.location.href = "/login";
+      }
+      return Promise.reject(e);
+    }
+  );
+
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -59,20 +71,8 @@ function App() {
   };
   // ------
 
-  // const handleResize = () => {
-  //   const vh = window.innerHeight * 0.01;
-  //   document.documentElement.style.setProperty("--vh", `${vh}px`);
-  // };
-
-  // useEffect(() => {
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
   return (
-    <div className="relative flex  justify-center  w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
+    <div className="relative flex    justify-center   w-[100dvw] h-full min-h-[100dvh] bg-gray-100 ">
       <AnimationController />
       {location.pathname !== "/login" && (
         <Header main={location.pathname === "/"} />
@@ -80,7 +80,7 @@ function App() {
 
       <section
         id="page"
-        className="relative flex w-full max-w-[400px] h-full overflow-hidden bg-white "
+        className="relative flex w-full max-w-[450px] h-full overflow-hidden bg-white "
       >
         <AnimatePresence>
           <Routes location={location} key={location.pathname}>

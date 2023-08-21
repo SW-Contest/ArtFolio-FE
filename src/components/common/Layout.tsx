@@ -15,7 +15,7 @@ const Layout = (props: LayoutProps) => {
   return (
     <motion.div
       className={twMerge(
-        "shrink-0 flex flex-col w-full h-full min-h-screen  bg-white overflow-y-scroll",
+        "shrink-0 flex flex-col w-full h-full min-h-[100dvh]  bg-white overflow-y-scroll",
         props.className
       )}
       initial={{

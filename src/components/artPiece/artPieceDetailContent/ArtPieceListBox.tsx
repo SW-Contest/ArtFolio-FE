@@ -21,7 +21,7 @@ const ArtPieceListBox = (props: ListBoxProps) => {
   return (
     <TransitionLink
       to={`/artpiece/${props.artPieceInfo.id}`}
-      className=" shrink-0 relative flex flex-col mb-4 rounded-lg h-60 w-44 list-box font-Pretendard"
+      className=" shrink-0 relative flex flex-col mb-4 rounded-lg h-60 w-[calc(50%-10px)] list-box font-Pretendard"
     >
       {!imgError ? (
         <img

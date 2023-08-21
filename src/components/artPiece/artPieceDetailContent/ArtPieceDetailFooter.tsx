@@ -93,7 +93,7 @@ const ArtPieceDetailFooter = () => {
     }
   };
 
-  const { data: likeData, mutate } = useMutation(toggleArtpieceLike, {
+  const { mutate } = useMutation(toggleArtpieceLike, {
     onSuccess: () => {
       artPieceLikeMemberRefetch();
     },
@@ -116,7 +116,7 @@ const ArtPieceDetailFooter = () => {
         exit={{
           y: "8rem",
         }}
-        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full h-32 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl "
+        className="fixed  bottom-0 z-50 flex flex-col items-center justify-center w-full  h-32 gap-4  shrink-0 bg-af-brightGray rounded-t-3xl max-w-[450px]"
       >
         <button
           className={
@@ -143,7 +143,7 @@ const ArtPieceDetailFooter = () => {
         exit={{
           y: "8rem",
         }}
-        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full h-32 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl "
+        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full h-32 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl max-w-[450px]"
       >
         <div className="flex items-center gap-2">
           <button

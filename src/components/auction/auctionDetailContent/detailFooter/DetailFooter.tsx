@@ -160,7 +160,7 @@ const DetailFooter = () => {
         exit={{
           y: "12rem",
         }}
-        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full h-48 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl "
+        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full  h-48 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl max-w-[450px] "
       >
         {/* 경매 종료까지 남은 시간만 표시 */}
         <DetailFooterFolded auctionInfo={auctionInfo!} />
@@ -189,7 +189,7 @@ const DetailFooter = () => {
         exit={{
           y: "15rem",
         }}
-        className="fixed bottom-0 z-50 flex flex-col items-center w-full gap-4 shrink-0 h-60 bg-af-brightGray rounded-t-3xl "
+        className="fixed bottom-0 z-50 flex flex-col items-center w-full gap-4 shrink-0 h-60 bg-af-brightGray rounded-t-3xl max-w-[450px]"
       >
         <RotationButton
           isExpanded={isExpanded}

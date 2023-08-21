@@ -10,8 +10,10 @@ const ArtPieceAISubtitle = ({ content }: ArtPieceAISubtitleProps) => {
   const [subTitleIndex, setSubTitleIndex] = useState<number>(0);
 
   useEffect(() => {
+    // 자막의 현재 인덱스가 자막의 길이보다 작다면
     if (subTitleIndex < subtitle.length) {
       const currentIndex = subTitleIndex;
+      // 글자 수 * 130ms 후에 다음 자막으로 넘어갑니다.
       const interval = setTimeout(() => {
         setSubTitleIndex((prev) => prev + 1);
       }, 130 * subtitle[currentIndex].length);
