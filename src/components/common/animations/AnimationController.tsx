@@ -3,7 +3,7 @@ import HeartAnimation from "./HeartAnimation";
 import LoadingAnimation from "./LoadingAnimation";
 import CheckAnimation from "./CheckAnimation";
 import { AnimatePresence } from "framer-motion";
-import SuccessfulBidAnimation from "./successfulBidAnimation";
+import SuccessfulBidAnimation from "./SuccessfulBidAnimation";
 
 const AnimationController = () => {
   const { isShow, type } = useAnimationStore();

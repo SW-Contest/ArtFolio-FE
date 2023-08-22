@@ -11,7 +11,7 @@ import BidList from "./BidList";
 import ArtPieceTitle from "../../artPiece/artPieceDetailContent/ArtPieceTitle";
 import ArtPieceDescription from "../../artPiece/artPieceDetailContent/ArtPieceDescription";
 import ArtPieceAIContent from "../../artPiece/artPieceDetailContent/ArtPieceAIContent";
-import SuccessfulBidAnimation from "../../common/animations/successfulBidAnimation";
+import SuccessfulBidAnimation from "../../common/animations/SuccessfulBidAnimation";
 
 const AuctionDetailContent = () => {
   const { showAnimation, hideAnimation } = useAnimationStore();
