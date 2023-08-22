@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AnimatePresence } from "framer-motion";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import ArtPieceDetailFooter from "./components/artPiece/artPieceDetailContent/ArtPieceDetailFooter";
 import DetailFooter from "./components/auction/auctionDetailContent/detailFooter/DetailFooter";
 import Header from "./components/common/Header";
 import PrivateRoute from "./components/common/PrivateRoute";
@@ -13,13 +14,9 @@ import AuthPage from "./pages/AuthPage";
 import LoginPage from "./pages/LoginPage";
 import NewArtPiecePage from "./pages/NewArtPiecePage";
 import NewAuctionPage from "./pages/NewAuctionPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import UserPage from "./pages/UserPage";
-import {
-  useAnimationStore,
-  useTransitionStore,
-  useUserStore,
-} from "./store/store";
-import ArtPieceDetailFooter from "./components/artPiece/artPieceDetailContent/ArtPieceDetailFooter";
+import { useAnimationStore, useTransitionStore } from "./store/store";
 function App() {
   //  axios를 통해 API를 호출할 때 헤더에 토큰을 자동으로 넣어줍니다.
   axios.defaults.headers.common[
@@ -32,7 +29,12 @@ function App() {
     (e) => {
       if (e.response.status === 403) {
         sessionStorage.clear();
+        setRecentPage("/");
         window.location.href = "/login";
+      }
+      if (e.response.status === 400) {
+        setRecentPage("/");
+        window.location.href = "/";
       }
       return Promise.reject(e);
     }
@@ -116,6 +118,10 @@ function App() {
             <Route
               path="/artpiece/:artPieceId"
               element={<PrivateRoute element={<ArtDetailPage />} />}
+            />
+            <Route
+              path="/*"
+              element={<PrivateRoute element={<NotFoundPage />} />}
             />
           </Routes>
         </AnimatePresence>
