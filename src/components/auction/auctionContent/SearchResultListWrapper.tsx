@@ -15,7 +15,7 @@ const SearchResultListWrapper = (props: SearchResultListWrapperProps) => {
       </div>
       <div className="flex flex-wrap justify-between w-full">
         {!props.isError && props.isFetching && <ListBoxSkeletonList />}
-        <AuctionListBoxes list={props.searchResult} />
+        <AuctionListBoxes id="auctionSearchResult" list={props.searchResult} />
       </div>
       {props.isError && <p>데이터 불러오기 오류.</p>}
       {!props.isError &&

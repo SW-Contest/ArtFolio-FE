@@ -1,12 +1,14 @@
-import { useState, useRef, useEffect } from "react";
-import { ArtPieceList } from "../../../types/artPiece.type";
+import {
+  ArtPieceDetail,
+  ArtPieceLikedList,
+} from "../../../types/artPiece.type";
 
-import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { getLikedArtPieceList } from "../../../api/artPiece.api";
-import UserAuctionListBoxes from "./UserArtPieceListBoxes";
 
 import ListBoxSkeletonList from "../../common/ListBoxSkeletonList";
+import UserLikedArtPieceListBoxes from "./UserLikedArtPieceListBoxes";
 
 interface UserLikedArtPieceListWrapperProps {
   userId: string | undefined;
@@ -24,10 +26,12 @@ const UserLikedArtPieceListWrapper = (
     isFetching,
     data: artPieceListData,
     isError,
-  } = useQuery<ArtPieceList>(
+  } = useQuery<ArtPieceLikedList>(
     ["likedArtPiece" + props.userId],
     fetchLikedArtpieceList,
-    { staleTime: 5000 }
+    {
+      staleTime: 5000,
+    }
   );
 
   return (
@@ -36,7 +40,12 @@ const UserLikedArtPieceListWrapper = (
         <p className="font-semibold">좋아요한 작품</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
-        {artPieceListData && <UserAuctionListBoxes list={artPieceListData} />}
+        {artPieceListData && (
+          <UserLikedArtPieceListBoxes
+            id="userLikeArtPiece"
+            list={artPieceListData.artPieceInfos}
+          />
+        )}
         {!isError && isFetching && <ListBoxSkeletonList />}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError &&

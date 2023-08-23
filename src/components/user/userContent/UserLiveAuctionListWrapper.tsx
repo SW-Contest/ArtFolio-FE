@@ -55,7 +55,9 @@ const UserLiveAuctionListWrapper = (props: UserLiveAuctionListWrapperProps) => {
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
         {!isError && isFetching && <ListBoxSkeletonList />}
-        {auctionListData && <AuctionListBoxes list={auctionListData} />}
+        {auctionListData && (
+          <AuctionListBoxes id="userLiveAuction" list={auctionListData} />
+        )}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError && !isFetching && auctionListData?.length === 0 && (
           <p>데이터가 없습니다.</p>

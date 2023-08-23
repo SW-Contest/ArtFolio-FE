@@ -32,7 +32,9 @@ const UserAuctionListWrapper = (props: UserAuctionListWrapperProps) => {
         <p className="font-semibold">등록한 경매</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
-        {auctionListData && <AuctionListBoxes list={auctionListData} />}
+        {auctionListData && (
+          <AuctionListBoxes id="userAuction" list={auctionListData} />
+        )}
         {!isError && isFetching && <ListBoxSkeletonList />}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError && !isFetching && auctionListData?.length === 0 && (

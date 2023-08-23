@@ -29,7 +29,9 @@ const UserArtPieceListWrapper = (props: UserArtPieceListWrapperProps) => {
         <p className="font-semibold">등록한 작품</p>
       </div>
       <div className="flex gap-4 overflow-x-auto    ">
-        {artPieceListData && <UserArtPieceListBoxes list={artPieceListData} />}
+        {artPieceListData && (
+          <UserArtPieceListBoxes id="userArtPiece" list={artPieceListData} />
+        )}
         {!isError && isFetching && <ListBoxSkeletonList />}
         {isError && <p>데이터 불러오기 오류.</p>}
         {!isError &&

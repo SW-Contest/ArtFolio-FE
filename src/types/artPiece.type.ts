@@ -18,6 +18,11 @@ export interface ArtPieceList {
   artPieceInfos: ArtPieceInfo[];
 }
 
+export interface ArtPieceLikedList {
+  size: number;
+  artPieceInfos: ArtPieceDetail[];
+}
+
 export interface ArtPieceLikedMember {
   size: number;
   likeUsers: ArtistInfo[];
