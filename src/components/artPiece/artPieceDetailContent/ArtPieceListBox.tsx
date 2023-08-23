@@ -40,7 +40,7 @@ const ArtPieceListBox = (props: ListBoxProps) => {
           {props.artPieceInfo.title}
         </p>
         <p className="mb-1 text-xs font-semibold text-white truncate">
-          {/* {props.artistInfo.name} */}
+          {props.artistInfo.name}
         </p>
       </div>
     </TransitionLink>

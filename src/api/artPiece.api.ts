@@ -62,14 +62,14 @@ export const deleteArtPiece = async (body: {
 export const uploadArtPieceImage = async (body: {
   artistId: number;
   artPieceId: number;
-  files: FileList;
+  files: File[];
 }) => {
   const formData = new FormData();
   formData.append("artistId", body.artistId.toString());
   formData.append("artPieceId", body.artPieceId.toString());
 
   for (let i = 0; i < body.files.length; i++) {
-    const file = body.files.item(i);
+    const file = body.files[i];
     if (file) {
       formData.append("files", file);
     }
@@ -93,11 +93,26 @@ export const getArtPieceDetail = async (artPieceId: string | undefined) => {
 // 예술품을 AI를 통해 감정합니다.
 export const analyzeArtPiece = async (body: {
   artPieceId: number;
-  question: string | undefined;
+  artPieceContent: string;
+  // question: string | undefined;
 }) => {
-  const response = await axios.post(
-    `http://${HOST}/art_piece/analyze/image`,
-    body
-  );
+  const question = `---
+  description: ${body.artPieceContent}
+  Task: Write a description from image label and description as a docent
+  Topic: Art
+  Length: 2 paragraphs
+  Format: Text
+  Answer me in Korean
+  Answer start with '이 작품은'
+  ---
+  Describe image figuratively to use labels from image.
+  if labels are diverse, use label the most relevant to description.
+  Never mention about label's name
+  Never mention about question itself`;
+
+  const response = await axios.post(`http://${HOST}/art_piece/analyze/image`, {
+    artPieceId: body.artPieceId,
+    question: question,
+  });
   return response;
 };

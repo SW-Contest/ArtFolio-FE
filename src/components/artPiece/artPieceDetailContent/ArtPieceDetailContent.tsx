@@ -49,17 +49,7 @@ const ArtPieceDetailContent = () => {
   const fetchAIInfo = async () => {
     const response = await analyzeArtPiece({
       artPieceId: Number(artPieceId),
-      question: `---
-      description: ${artPieceInfo?.content}
-      Task: Write a description from image label and description
-      Topic: Art,Drawing
-      Length: 2 paragraphs
-      Format: Text
-      Answer me in Korean
-      Answer start with '이 작품은'
-      ---
-      Describe image figuratively to use labels from image.
-      Do not mention about label's name`,
+      artPieceContent: `${artPieceInfo?.content}`,
     });
     return response.data;
   };
