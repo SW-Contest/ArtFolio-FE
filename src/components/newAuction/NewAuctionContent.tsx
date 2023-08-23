@@ -43,7 +43,6 @@ const NewAuctionContent = () => {
     e.preventDefault();
     showAnimation("loading");
 
-    console.log(auctionTitle, auctionContent, auctionPrice);
     if (userId) {
       try {
         const response = await postNewAuction({

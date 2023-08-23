@@ -2,6 +2,7 @@ import ArtPieceListBox from "../../artPiece/artPieceDetailContent/ArtPieceListBo
 import { ArtPieceList } from "../../../types/artPiece.type";
 
 interface UserArtPieceListBoxesProps {
+  id: string;
   list: ArtPieceList;
 }
 
@@ -11,7 +12,7 @@ const UserArtPieceListBoxes = (props: UserArtPieceListBoxesProps) => {
     <>
       {artPieceInfos.map((artPieceInfo) => (
         <ArtPieceListBox
-          key={artPieceInfo.id}
+          key={props.id + artPieceInfo.id}
           artPieceInfo={artPieceInfo}
           artistInfo={artistInfo}
         />

@@ -5,6 +5,7 @@ import { AuctionList, AuctionPage } from "../../../../types/auction.type";
 interface AuctionListBoxesProps {
   pages?: AuctionPage[];
   list?: AuctionList[];
+  id: string;
 }
 
 const AuctionListBoxes = (props: AuctionListBoxesProps) => {
@@ -18,7 +19,7 @@ const AuctionListBoxes = (props: AuctionListBoxesProps) => {
         {pages.map((list) =>
           list.data.map((item) => (
             <AuctionListBox
-              key={item.auctionInfo.id}
+              key={props.id + item.auctionInfo.id}
               artistInfo={item.artistInfo}
               auctionInfo={item.auctionInfo}
             />
@@ -35,7 +36,7 @@ const AuctionListBoxes = (props: AuctionListBoxesProps) => {
       <>
         {list.map((item) => (
           <AuctionListBox
-            key={item.auctionInfo.id}
+            key={props.id + item.auctionInfo.id}
             artistInfo={item.artistInfo}
             auctionInfo={item.auctionInfo}
           />
