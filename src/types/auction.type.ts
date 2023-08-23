@@ -38,6 +38,7 @@ export interface AuctionInfo {
   finishedAt: string;
   photoPaths: string[];
   likeMembers: number[];
+  isFinish: boolean;
 }
 
 export interface BidderInfos {

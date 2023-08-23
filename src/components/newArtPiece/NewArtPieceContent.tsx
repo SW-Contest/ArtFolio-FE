@@ -10,6 +10,7 @@ import DetailCarousel from "../common/ImageCarousel";
 import { BsFillImageFill } from "react-icons/bs";
 import { useUserStore } from "../../store/store";
 import RoundButton from "../common/RoundButton";
+import Resizer from "react-image-file-resizer";
 
 const NewArtPieceContent = () => {
   const { userId } = useUserStore();
@@ -18,7 +19,7 @@ const NewArtPieceContent = () => {
   const navigate = useNavigate();
   const [artPieceTitle, setArtPieceTitle] = useState("");
   const [artPieceContent, setArtPieceContent] = useState("");
-  const [artPieceFile, setArtPieceFile] = useState<FileList | null>(null);
+  const [artPieceFile, setArtPieceFile] = useState<File[] | null>(null);
   const [artPieceImages, setArtPieceImages] = useState<string[]>([]);
 
   // 이미지 파일이 변경되면 이미지 파일을 base64로 인코딩하여 artPieceImages에 저장합니다.
@@ -45,10 +46,36 @@ const NewArtPieceContent = () => {
     setArtPieceContent(e.target.value);
   };
 
-  const onFileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChangeHandler = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (e.target.files) {
-      setArtPieceFile(e.target.files);
+      const files = [...e.target.files];
+      const resized = await resizeFiles(files);
+      setArtPieceFile(resized);
     }
+  };
+
+  const resizeFile = (file: File): Promise<any> =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        500,
+        500,
+        "png",
+        100,
+        0,
+        (result) => {
+          resolve(result);
+        },
+        "file"
+      );
+    });
+
+  const resizeFiles = async (files: File[]) => {
+    const promises = [...files].map((file) => resizeFile(file));
+    const resizedFiles = await Promise.all(promises);
+    return resizedFiles;
   };
 
   // 작품 등록 버튼을 누르면 작품 정보를 서버에 먼저 전송합니다.
@@ -80,6 +107,7 @@ const NewArtPieceContent = () => {
           transitionBackward();
           navigate("/");
         } catch (e) {
+          console.log(e);
           console.log("이미지 업로드 중 오류 발생");
           // 이미지 업로드에 실패하면 작품을 삭제합니다.
           await deleteArtPiece({ artPieceId: artPieceId, artistId: userId });
@@ -129,13 +157,13 @@ const NewArtPieceContent = () => {
 
       <div className="form-control w-full max-w-xs">
         <label className="label">
-          <span className="label-text">파일을 선택해주세요</span>
+          <span className="label-text">파일을 선택해주세요 (jpg,png)</span>
         </label>
         <input
           multiple
           onChange={onFileChangeHandler}
           type="file"
-          accept="image/*"
+          accept=".jpg, .jpeg, .png"
           className="file-input file-input-bordered w-full max-w-xs"
           required
         />
