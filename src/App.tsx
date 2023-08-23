@@ -29,9 +29,9 @@ function App() {
     (e) => {
       if (e.response.status === 403) {
         // console.log("403");
-        sessionStorage.clear();
-        setRecentPage("/");
-        window.location.href = "/login";
+        // sessionStorage.clear();
+        // setRecentPage("/");
+        // window.location.href = "/login";
       }
       if (e.response.status === 400) {
         // console.log("400");
