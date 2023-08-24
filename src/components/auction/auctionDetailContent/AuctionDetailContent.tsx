@@ -27,8 +27,9 @@ const AuctionDetailContent = () => {
     ["auctionDetail" + auctionId],
     fetchAuctionDetail,
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
         hideAnimation();
+        data.auctionInfo?.isFinish && showAnimation("successfulBid");
       },
     }
   );
@@ -52,7 +53,9 @@ const AuctionDetailContent = () => {
             <ArtPieceDescription artPieceInfo={artPieceInfo} />
             <AuctionDescription auctionInfo={auctionInfo} />
             <ArtPieceAIContent artPieceInfo={artPieceInfoWithPhotoPaths} />
-            <BidList auctionInfo={auctionInfo} bidderInfos={bidderInfos} />
+            {!auctionInfo.isFinish && (
+              <BidList auctionInfo={auctionInfo} bidderInfos={bidderInfos} />
+            )}
           </div>
         </>
       )}

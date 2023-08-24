@@ -27,7 +27,10 @@ const ArtPieceAIDocentModal = ({
 
   useEffect(() => {
     let audio = document.getElementById("audio") as HTMLAudioElement;
+    let bgAudio = document.getElementById("bg-audio") as HTMLAudioElement;
     audio.play();
+    bgAudio.play();
+    bgAudio.volume = 0.2;
   }, []);
 
   return (
@@ -46,6 +49,9 @@ const ArtPieceAIDocentModal = ({
               disableClick
               photoPaths={artPieceInfo.photoPaths ?? []}
             />
+            <audio autoPlay id="bg-audio">
+              <source src="/dinner_song.mp3" />
+            </audio>
             <audio autoPlay id="audio">
               <source src={voice} />
             </audio>

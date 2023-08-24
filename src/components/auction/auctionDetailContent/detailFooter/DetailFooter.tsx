@@ -147,6 +147,36 @@ const DetailFooter = () => {
 
   const auctionLikeMemberLength = auctionLikeMemberData?.likeUsers.length;
 
+  if (auctionInfo.isFinish) {
+    return (
+      <motion.footer
+        initial={{
+          y: "12rem",
+        }}
+        animate={{
+          y: "1rem",
+        }}
+        transition={{ duration: 0.4 }}
+        exit={{
+          y: "12rem",
+        }}
+        className="fixed bottom-0 z-50 flex flex-col items-center justify-center w-full  h-48 gap-4 shrink-0 bg-af-brightGray rounded-t-3xl max-w-[450px] "
+      >
+        <p className="font-normal text-black text-md">종료된 경매입니다.</p>
+        <button
+          className={
+            "btn btn-outline w-60 flex justify-center items-center  bg-af-hotPink   border-af-hotPink hover:bg-af-hotPink hover:border-af-hotPink"
+          }
+        >
+          <BsHeartFill size={14} className={"fill-white "} />
+          <div className={twMerge(" h-7 text-lg font-semibold", "text-white")}>
+            {auctionLikeMemberLength}
+          </div>
+        </button>
+      </motion.footer>
+    );
+  }
+
   if (isOwner) {
     return (
       <motion.footer
