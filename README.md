@@ -37,20 +37,27 @@
 <img width="784" alt="image" src="https://github.com/SW-Contest/ArtFolio-FE/assets/101182523/1d04c0bf-e23b-4972-abbe-7d1f7ab7e471">
 
 ## 기능
-### OAuth 로그인
-<img
-  src="https://github.com/SW-Contest/ArtFolio-FE/assets/101182523/aa46af22-1481-4ab3-9e70-6611f80cd9dc"
-  width="400"
-/> 
 
 ### 작품 등록
 <img
-  src="https://i.ibb.co/X884rFT/image.gif"
+  src="https://github.com/SW-Contest/ArtFolio-FE/assets/101182523/4a491a50-4563-4c40-809a-cef1a7e45ac1"
+  width="400"
+/> 
+
+### 경매 정보
+<img
+  src="https://github.com/SW-Contest/ArtFolio-FE/assets/101182523/7fcfcd97-8a2f-49f3-8a23-ae2cf7c1edc5"
   width="400"
 />
 
-### 경매
+### 경매가 차트 갱신
 <img
-  src="https://i.ibb.co/fDR8Mj8/image.gif"
+  src="https://github.com/SW-Contest/ArtFolio-FE/assets/101182523/a4470da3-ff84-4f75-88ad-151ac0a4e95d"
+  width="400"
+/>
+
+### 좋아요 & 낙찰
+<img
+  src="https://github.com/SW-Contest/ArtFolio-FE/assets/101182523/76b0ea68-9717-4a57-8280-cda06085eaa4"
   width="400"
 />
